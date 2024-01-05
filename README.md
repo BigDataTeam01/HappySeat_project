@@ -2,16 +2,16 @@
 Quick seat project 
 <br>
 
-## 프로젝트 설명
+## Project description
 
-1. 프로젝트 이름 : 신속좌석 ( Quick Seat)
-2. 팀장: 박동근 (Forrest D Park, PDG)
-3. 팀원 : 박지환 , 박정민, 원도현, 이천영
+1. Project Title : 신속좌석 (Quick Seat)
+2. team leader: 박동근 (Forrest D Park, PDG)
+3. team members : 박지환 , 박정민, 원도현, 이천영
 <br>
 
 
 
-
+## Member role
 
 <img width="1068" alt="스크린샷 2024-01-05 오전 10 34 39" src="https://github.com/BigDataTeam01/QuickSeat_project/assets/149550771/6cebad1f-0425-4621-9aa1-6027321e9f78">
 
@@ -26,6 +26,6 @@ Quick seat project
 3. TDD, 짝코딩 지향하기!
 <br>
 
+## (teacher advice 참고)
 엑셀 -> mySQL 들어가는  툴이 있음.
-
 jar chart 보여주는 jar 가 있음.
