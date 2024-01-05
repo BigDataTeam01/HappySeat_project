@@ -2,6 +2,7 @@
 Quick seat project 
 <br>
 ##프로젝트 설명
+c
 팀 프로젝트 이름 : 신속좌석 ( Quick Seat) 
 <br>
 팀장: 박동근 (Forrest D Park, PDG)
@@ -20,9 +21,11 @@ Quick seat project
 
 ## Team Rule
 1. 도와달라고 하기!
+<br>
 2. 도움요청 무시하지 않기!
+<br>
 3. TDD, 짝코딩 지향하기!
-
+<br>
 
 엑셀 -> mySQL 들어가는  툴이 있음.
 
