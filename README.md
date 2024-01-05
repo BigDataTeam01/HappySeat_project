@@ -1,7 +1,7 @@
 # QuickSeat_project
 Quick seat project 
 <br>
-
+##프로젝트 설명
 팀 프로젝트 이름 : 신속좌석 ( Quick Seat) 
 <br>
 팀장: 박동근 (Forrest D Park, PDG)
