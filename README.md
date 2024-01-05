@@ -4,10 +4,8 @@ Quick seat project
 
 ## 프로젝트 설명
 
-1. 프로젝트 이름 : 신속좌석 ( Quick Seat) 
-<br>
+1. 프로젝트 이름 : 신속좌석 ( Quick Seat)
 2. 팀장: 박동근 (Forrest D Park, PDG)
-<br>
 3. 팀원 : 박지환 , 박정민, 원도현, 이천영
 <br>
 
