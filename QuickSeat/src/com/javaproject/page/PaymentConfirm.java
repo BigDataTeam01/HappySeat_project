@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class FirstPage extends JDialog {
+public class PaymentConfirm extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -18,7 +18,7 @@ public class FirstPage extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			FirstPage dialog = new FirstPage();
+			PaymentConfirm dialog = new PaymentConfirm();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -29,7 +29,7 @@ public class FirstPage extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public FirstPage() {
+	public PaymentConfirm() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
@@ -52,7 +52,5 @@ public class FirstPage extends JDialog {
 			}
 		}
 	}
-	
-	//개발 시작
 
 }
