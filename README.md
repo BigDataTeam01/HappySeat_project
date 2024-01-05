@@ -1,6 +1,4 @@
-# QuickSeat_project
-Quick seat project 
-<br>
+
 
 ## Project Description
 
