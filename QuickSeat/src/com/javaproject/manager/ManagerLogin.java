@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
 
 public class ManagerLogin extends JDialog {
 	
@@ -26,11 +27,14 @@ public class ManagerLogin extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JLabel lblNewLabel;
-	private JButton btnNewButton;
+	private JLabel lblAdminNumber;
+	private JButton btnLogin;
 	
 	static ManagerLogin loginDialog = new ManagerLogin();
 	static ManagerMain mainDialog = new ManagerMain();
+	private JTextField tfAdminNumber;
+	private JLabel lblAdminNumber_1;
+	private JTextField tfPassword;
 
 	/**
 	 * Launch the application.
@@ -53,29 +57,44 @@ public class ManagerLogin extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		contentPanel.add(getLblNewLabel());
-		contentPanel.add(getBtnNewButton());
+		contentPanel.add(getLblAdminNumber());
+		contentPanel.add(getBtnLogin());
+		
+		tfAdminNumber = new JTextField();
+		tfAdminNumber.setBounds(332, 140, 300, 60);
+		contentPanel.add(tfAdminNumber);
+		tfAdminNumber.setColumns(10);
+		
+		lblAdminNumber_1 = new JLabel("비밀번호  :");
+		lblAdminNumber_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
+		lblAdminNumber_1.setBounds(120, 231, 200, 60);
+		contentPanel.add(lblAdminNumber_1);
+		
+		tfPassword = new JTextField();
+		tfPassword.setColumns(10);
+		tfPassword.setBounds(332, 231, 300, 60);
+		contentPanel.add(tfPassword);
 	}
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("관리자번호  :");
-			lblNewLabel.setFont(new Font("Lucida Grande", Font.BOLD, 17));
-			lblNewLabel.setBounds(72, 140, 153, 57);
+	private JLabel getLblAdminNumber() {
+		if (lblAdminNumber == null) {
+			lblAdminNumber = new JLabel("관리자번호  :");
+			lblAdminNumber.setBounds(120, 140, 200, 60);
+			lblAdminNumber.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
 		}
-		return lblNewLabel;
+		return lblAdminNumber;
 	}
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("접속");
-			btnNewButton.addActionListener(new ActionListener() {
+	private JButton getBtnLogin() {
+		if (btnLogin == null) {
+			btnLogin = new JButton("접속");
+			btnLogin.setBounds(300, 350, 180, 70);
+			btnLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					goToMain();
 				}
 			});
-			btnNewButton.setFont(new Font("Lucida Grande", Font.PLAIN, 17));
-			btnNewButton.setBounds(313, 455, 174, 71);
+			btnLogin.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
 		}
-		return btnNewButton;
+		return btnLogin;
 	}
 	
 	
@@ -86,7 +105,4 @@ public class ManagerLogin extends JDialog {
 		loginDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		mainDialog.setVisible(true);
 	}
-	
-	
-	
 } // End

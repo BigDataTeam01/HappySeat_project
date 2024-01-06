@@ -2,7 +2,10 @@ package com.javaproject.base;
 
 import java.awt.Font;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import com.javaproject.page.MovieInformation;
 
 public class ShareVar {
 	//개발 시작
@@ -65,6 +68,16 @@ public class ShareVar {
 								ShareVar.kiosk_title_width,
 								ShareVar.kiosk_title_hight);
 	 */
+	
+	
+	
+	/////-------포스터 이미지 규격
+	public static int poster_width = 380;
+	public static int poster_hight = 450;
+	
+	/*	포스터 규격 예시	
+		lblPoster.setBounds(34, 101, ShareVar.poster_width, ShareVar.poster_hight);
+	*/
 	
 	
 	

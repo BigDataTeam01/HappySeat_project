@@ -12,6 +12,9 @@ import com.javaproject.base.ShareVar;
 import javax.swing.JLabel;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ImageIcon;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 
 public class ManagerMain extends JDialog {
 
@@ -28,9 +31,9 @@ public class ManagerMain extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private JLabel lblNewLabel;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_2;
+	private JLabel lblMovieControl;
+	private JLabel lblMovieSalesStatus;
+	private JLabel lblMovieUserStatistics;
 	
 	// static인 이유? : 모든 method에서 내가 원하는 특정한 dialog를 .setVisible(false)로 하기 위함.
 	static ManagerMain mainDialog = new ManagerMain();
@@ -59,48 +62,69 @@ public class ManagerMain extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		contentPanel.add(getLblNewLabel());
-		contentPanel.add(getLblNewLabel_1());
-		contentPanel.add(getLblNewLabel_2());
+		contentPanel.add(getLblMovieControl());
+		contentPanel.add(getLblMovieSalesStatus());
+		contentPanel.add(getLblMovieUserStatistics());
+		
+		JLabel lblNewLabel = new JLabel("영화 관리");
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 21));
+		lblNewLabel.setBounds(100, 340, 150, 40);
+		contentPanel.add(lblNewLabel);
+		
+		JLabel lblNewLabel_1 = new JLabel("매출 현황");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 21));
+		lblNewLabel_1.setBounds(325, 340, 150, 40);
+		contentPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("사용자 통계");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_2.setFont(new Font("배달의민족 도현", Font.PLAIN, 21));
+		lblNewLabel_2.setBounds(550, 340, 150, 40);
+		contentPanel.add(lblNewLabel_2);
 	}
-	private JLabel getLblNewLabel() {
-		if (lblNewLabel == null) {
-			lblNewLabel = new JLabel("영화 관리");
-			lblNewLabel.addMouseListener(new MouseAdapter() {
+	private JLabel getLblMovieControl() {
+		if (lblMovieControl == null) {
+			lblMovieControl = new JLabel("");
+			lblMovieControl.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/MovieControl.png")));
+			lblMovieControl.setBounds(100, 180, 150, 150);
+			lblMovieControl.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					goToMovieControl();
 				}
 			});
-			lblNewLabel.setBounds(97, 188, 157, 131);
 		}
-		return lblNewLabel;
+		return lblMovieControl;
 	}
-	private JLabel getLblNewLabel_1() {
-		if (lblNewLabel_1 == null) {
-			lblNewLabel_1 = new JLabel("매출 현황");
-			lblNewLabel_1.addMouseListener(new MouseAdapter() {
+	private JLabel getLblMovieSalesStatus() {
+		if (lblMovieSalesStatus == null) {
+			lblMovieSalesStatus = new JLabel("");
+			lblMovieSalesStatus.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/MovieSalesStatus.png")));
+			lblMovieSalesStatus.setBounds(325, 180, 150, 150);
+			lblMovieSalesStatus.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					goToMovieSalesStatus();
 				}
 			});
-			lblNewLabel_1.setBounds(313, 188, 157, 131);
 		}
-		return lblNewLabel_1;
+		return lblMovieSalesStatus;
 	}
-	private JLabel getLblNewLabel_2() {
-		if (lblNewLabel_2 == null) {
-			lblNewLabel_2 = new JLabel("사용자 통계");
-			lblNewLabel_2.addMouseListener(new MouseAdapter() {
+	private JLabel getLblMovieUserStatistics() {
+		if (lblMovieUserStatistics == null) {
+			lblMovieUserStatistics = new JLabel("");
+			lblMovieUserStatistics.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/MovieUserStatistics.png")));
+			lblMovieUserStatistics.setBounds(550, 180, 150, 150);
+			lblMovieUserStatistics.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					goToMovieUserStatistics();
 				}
 			});
-			lblNewLabel_2.setBounds(555, 188, 157, 131);
 		}
-		return lblNewLabel_2;
+		return lblMovieUserStatistics;
 	}
 	
 	
@@ -117,6 +141,4 @@ public class ManagerMain extends JDialog {
 	private void goToMovieUserStatistics() {
 		statisticsDialog.setVisible(true);
 	}
-	
-	
 } // End
