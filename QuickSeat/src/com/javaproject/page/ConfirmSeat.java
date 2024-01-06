@@ -12,7 +12,15 @@ public class ConfirmSeat extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-
+	/*
+	 * Description : 1. ConfirmSeat에서 이전화면 버튼을 터치했을시 SelectSeat화면으로 이동
+	 * 				 2. ConfirmSeat에서 구매 버튼을 터치했을시  SelectMenu화면으로 이동
+	 * 				 4. ConfirmSeat에서 첫화면 버튼을 터치했을시  SelectMenu화면으로 이동
+	 * Date : 2024.01.06 (토요일)
+	 * Author : 박정민,박지환
+	 * 
+	 */
+	/**
 	/**
 	 * Launch the application.
 	 */
