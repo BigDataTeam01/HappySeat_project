@@ -13,8 +13,6 @@ public class SelectMovie extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	
-	
-	
 	/*
 	 * Description : 1.SelectMovie에서 영화를 버튼을 터치했을시 Movieinformation 화면으로 이동
 	 * 				 2.SelectMovie에서 이전 화면 버튼을 터치했을시  SelectAge 화면으로 이동
@@ -22,10 +20,7 @@ public class SelectMovie extends JDialog {
 	 * Author : 박정민,박지환
 	 * 
 	 */
-	
-	
-	
-	
+
 	/**
 	 * Launch the application.
 	 */

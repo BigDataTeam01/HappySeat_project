@@ -12,7 +12,13 @@ public class Cash extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-
+	/*
+	 * Description : 
+	 * 				 1. Cash화면에서 결제방법 선택으로 가기 버튼을 터치했을시 SelectPayment화면으로 이동
+	 * Date : 2024.01.06 (토요일)
+	 * Author : 박정민,박지환
+	 * 
+	 */
 	/**
 	 * Launch the application.
 	 */

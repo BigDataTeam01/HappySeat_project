@@ -12,6 +12,13 @@ public class PaymentConfirm extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	/*
+	 * Description : 결제완료페이지
+	 * 				 1.5초후 SelectMenu화면으로 이동
+	 * Date : 2024.01.05 (금요일)
+	 * Author : 박정민,박지환
+	 * 
+	 */
 
 	/**
 	 * Launch the application.
