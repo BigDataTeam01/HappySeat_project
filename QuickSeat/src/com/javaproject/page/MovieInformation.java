@@ -15,10 +15,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class MovieInformation extends JDialog {
+
+
+
+public class MovieInformation extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	
+	private static final String VIDEO_URL = "https://youtu.be/bLvqoHBptjg?si=nwLN3uBeu65fFt-q"; // 동영상 URL
 	
 	/*
 	 * Description : 현재 상영중인 영화 목록을 보여주고 고객이 영화를 선택할수 있도록 하는 페이지
@@ -50,9 +55,15 @@ public class MovieInformation extends JDialog {
 	
 	
 	public static void main(String[] args) {
+		
+		
+		
+		
 		try {
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,30 +84,53 @@ public class MovieInformation extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		
+		JLabel lblPoster = new JLabel("");
+		lblPoster.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png")));
+		lblPoster.setBounds(34, 101, ShareVar.poster_width, ShareVar.poster_hight);
+		contentPanel.add(lblPoster);
 
 		
 		//	페이지 타이틀 예시 
-		JLabel lbl_pageTitle = new JLabel("영화 선택");
-		lbl_pageTitle.setFont(new Font(ShareVar.kiosk_title_font,
+		JLabel lblPageTitle = new JLabel("영화 정보");
+		lblPageTitle.setFont(new Font(ShareVar.kiosk_title_font,
 		 								Font.PLAIN, 
 		 								ShareVar.kiosk_title_font_size));
 		 								
-		lbl_pageTitle.setBounds(ShareVar.kiosk_title_loc_x, 
+		lblPageTitle.setBounds(ShareVar.kiosk_title_loc_x, 
 								ShareVar.kiosk_title_loc_y, 
 								ShareVar.kiosk_title_width,
 								ShareVar.kiosk_title_hight);
 		
-		contentPanel.add(lbl_pageTitle);
+		contentPanel.add(lblPageTitle);
 		
 		
 		
 		
 		
-		JLabel lbl_background = new JLabel("",SwingConstants.CENTER);
+		JLabel lblPageBackground = new JLabel("",SwingConstants.CENTER);
 		//lblNewLabel.
 		//Font font = new ("도현체")
-		lbl_background.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
-		lbl_background.setBounds(0, 0, 800, 600);
-		contentPanel.add(lbl_background);
+		lblPageBackground.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+		lblPageBackground.setBounds(0, 0, 800, 600);
+		contentPanel.add(lblPageBackground);
 	}
+	
+	// Tescode 
+	
+	public void testMovieInformation() {
+		
+		
+		// 1. 내가 이전 페이지 에서 선택한 영화의 정보를 DB 에서 불러올수 있는가?
+		System.out.println("1. 내가 이전 페이지 에서 선택한 영화의 정보를 DB 에서 불러올수 있는가? ");
+		String reuslt = "Error!";
+		System.err.println(reuslt);
+		
+
+		
+	}
+
+
+	
+	
 }// END
