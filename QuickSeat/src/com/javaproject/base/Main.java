@@ -1,5 +1,7 @@
 package com.javaproject.base;
 
+import com.javaproject.page.MovieInformation;
+
 public class Main {
 
 	public static void main(String[] args) {
@@ -20,6 +22,12 @@ public class Main {
 		 * 			3. 피그마 이미지 추출 하여 아이콘 준비
 		 * 
 		 */
+		
+		MovieInformation testMovieInfor = new MovieInformation();
+		
+		testMovieInfor.testMovieInformation();
+		
+		
 	}
 
 }
