@@ -7,6 +7,7 @@
 3. team members : 박지환 , 박정민, 원도현, 이천영
 
 
+## Logo design
 <br><img width="170" alt="스크린샷 2024-01-05 오전 11 01 58" src="https://github.com/BigDataTeam01/QuickSeat_project/assets/149550771/508ee701-6e74-4a36-9d99-920be7f70feb">
 
 
