@@ -73,7 +73,6 @@ public class OrderCheck extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-			contentPanel.setLayout(null);
 
 //		페이지 타이틀 
 			JLabel lbl_pageTitle = new JLabel("예매 확인");

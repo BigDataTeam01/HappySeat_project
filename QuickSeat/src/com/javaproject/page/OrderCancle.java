@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -83,18 +84,42 @@ public class OrderCancle extends JDialog {
 			contentPanel.add(lbl_pageTitle);
 			
 			//첫화면으로가기
-			JLabel lbl_pageTitle_1 = new JLabel("첫화면");
-			lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
+			JLabel BtnGoToFirstPage = new JLabel("첫화면");
+			BtnGoToFirstPage.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					goToSelectMenu();
 				}
 			});
-			lbl_pageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
+			BtnGoToFirstPage.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
 
-			lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-			lbl_pageTitle_1.setBounds(12, 30, 46, 68);
-			contentPanel.add(lbl_pageTitle_1);			
+			BtnGoToFirstPage.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+			BtnGoToFirstPage.setBounds(12, 30, 46, 68);
+			contentPanel.add(BtnGoToFirstPage);			
+			
+			JLabel moviePoster = new JLabel("");
+			moviePoster.setLocation(34, 101);
+			moviePoster.setSize(380, 450);
+			moviePoster.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png")));
+
+			contentPanel.add(moviePoster);
+			//구매취소버튼(클릭시 다이얼로그 띄어주고 초기화면으로 이동
+			JLabel BtnOrderCancle = new JLabel("");
+			BtnOrderCancle.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					OrderCancleAction();
+				}
+			});
+			BtnOrderCancle.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 구매취소.png")));
+			BtnOrderCancle.setBounds(504, 359, 200, 100);
+			contentPanel.add(BtnOrderCancle);
+			//이전화면 버튼
+			JLabel BtnGoToPreviousPage = new JLabel("");
+			BtnGoToPreviousPage.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
+
+			BtnGoToPreviousPage.setBounds(504, 249, 200, 100);
+			contentPanel.add(BtnGoToPreviousPage);
 			//배경화면
 			JLabel lbl_background = new JLabel("",SwingConstants.CENTER);
 			lbl_background.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
@@ -116,7 +141,14 @@ public class OrderCancle extends JDialog {
 			OrderCancledialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			selectMenudialog.setVisible(true);
 		}
-	
+		//구매취소 
+		public void OrderCancleAction() {
+			JOptionPane.showMessageDialog(null, "구매취소되었습니다.");
+			OrderCancledialog.setVisible(false);
+			OrderCancledialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			selectMenudialog.setVisible(true);
+
+		}
 	
 	
 	

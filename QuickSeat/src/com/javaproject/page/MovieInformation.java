@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 
 
@@ -44,12 +46,15 @@ public class MovieInformation extends JDialog{
 	 * 			4. diaog -> static 
 	 * 			5. 배경 만듬
 	 * 			6. 배민 도현 추가하여 페이지 타이틀 생성
+	 * 			7.이전화면 영화선택 버튼 추가(임시)
 	 */
 	
 	/**
 	 * Launch the application.
 	 */
 	private static MovieInformation dialog = new MovieInformation();
+	private static SelectCinema SelectCinemadialog = new SelectCinema();
+	private static SelectMovie SelectMoviedialog = new SelectMovie();
 
 	
 	
@@ -89,6 +94,28 @@ public class MovieInformation extends JDialog{
 		lblPoster.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png")));
 		lblPoster.setBounds(34, 101, ShareVar.poster_width, ShareVar.poster_hight);
 		contentPanel.add(lblPoster);
+		
+		JButton btnNewButton = new JButton("영화선택(임시)");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToSelectCinema();
+			}
+		});
+		btnNewButton.setBounds(498, 317, 161, 51);
+		contentPanel.add(btnNewButton);
+		
+		//이전화면 버튼
+		JLabel lblPageTitle_1 = new JLabel("");
+		lblPageTitle_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			goToSelectMovie();
+			}
+		});
+		lblPageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
+		lblPageTitle_1.setBounds(475, 391, 200, 100);
+		contentPanel.add(lblPageTitle_1);
 
 		
 		//	페이지 타이틀 예시 
@@ -129,8 +156,18 @@ public class MovieInformation extends JDialog{
 
 		
 	}
-
-
 	
+	//이전화면으로 가기
+	public void goToSelectMovie() {
+		dialog.setVisible(false);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		SelectMoviedialog.setVisible(true);
+	}
+	
+	public void goToSelectCinema() {
+		dialog.setVisible(false);
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		SelectCinemadialog.setVisible(true);
+	}
 	
 }// END
