@@ -40,6 +40,7 @@ public class ManagerMain extends JDialog {
 	static MovieControl controlDialog = new MovieControl(); // MovieControl Dialog를 controlDialog란 이름으로 함.
 	static MovieSalesStatus statusDialog = new MovieSalesStatus();
 	static MovieUserStatistics statisticsDialog = new MovieUserStatistics();
+	private JLabel lblManagerBackGround;
 
 	/**
 	 * Launch the application.
@@ -67,28 +68,29 @@ public class ManagerMain extends JDialog {
 		contentPanel.add(getLblMovieUserStatistics());
 		
 		JLabel lblNewLabel = new JLabel("영화 관리");
+		lblNewLabel.setBounds(83, 341, 150, 40);
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 21));
-		lblNewLabel.setBounds(100, 340, 150, 40);
 		contentPanel.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("매출 현황");
+		lblNewLabel_1.setBounds(308, 341, 150, 40);
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 21));
-		lblNewLabel_1.setBounds(325, 340, 150, 40);
 		contentPanel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("사용자 통계");
+		lblNewLabel_2.setBounds(533, 341, 150, 40);
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("배달의민족 도현", Font.PLAIN, 21));
-		lblNewLabel_2.setBounds(550, 340, 150, 40);
 		contentPanel.add(lblNewLabel_2);
+		contentPanel.add(getLblManagerBackGround());
 	}
 	private JLabel getLblMovieControl() {
 		if (lblMovieControl == null) {
 			lblMovieControl = new JLabel("");
+			lblMovieControl.setBounds(83, 181, 150, 150);
 			lblMovieControl.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/MovieControl.png")));
-			lblMovieControl.setBounds(100, 180, 150, 150);
 			lblMovieControl.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -101,8 +103,8 @@ public class ManagerMain extends JDialog {
 	private JLabel getLblMovieSalesStatus() {
 		if (lblMovieSalesStatus == null) {
 			lblMovieSalesStatus = new JLabel("");
+			lblMovieSalesStatus.setBounds(308, 181, 150, 150);
 			lblMovieSalesStatus.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/MovieSalesStatus.png")));
-			lblMovieSalesStatus.setBounds(325, 180, 150, 150);
 			lblMovieSalesStatus.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -115,8 +117,8 @@ public class ManagerMain extends JDialog {
 	private JLabel getLblMovieUserStatistics() {
 		if (lblMovieUserStatistics == null) {
 			lblMovieUserStatistics = new JLabel("");
+			lblMovieUserStatistics.setBounds(533, 181, 150, 150);
 			lblMovieUserStatistics.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/MovieUserStatistics.png")));
-			lblMovieUserStatistics.setBounds(550, 180, 150, 150);
 			lblMovieUserStatistics.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
@@ -140,5 +142,13 @@ public class ManagerMain extends JDialog {
 	
 	private void goToMovieUserStatistics() {
 		statisticsDialog.setVisible(true);
+	}
+	private JLabel getLblManagerBackGround() {
+		if (lblManagerBackGround == null) {
+			lblManagerBackGround = new JLabel("");
+			lblManagerBackGround.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/manager_background.png")));
+			lblManagerBackGround.setBounds(0, 0, 784, 561);
+		}
+		return lblManagerBackGround;
 	}
 } // End

@@ -7,6 +7,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 public class MovieUserStatistics extends JDialog {
 	
@@ -42,9 +44,14 @@ public class MovieUserStatistics extends JDialog {
 		setTitle("사용자 통계");
 		setBounds(ShareVar.managerXlocation,ShareVar.managerYlocation,ShareVar.managerXsize,ShareVar.managerYsize);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setLayout(null);
+		
+		JLabel lblManagerBackGround = new JLabel("");
+		lblManagerBackGround.setIcon(new ImageIcon(MovieUserStatistics.class.getResource("/com/javaproject/image/manager_background.png")));
+		lblManagerBackGround.setBounds(0, 0, 784, 561);
+		contentPanel.add(lblManagerBackGround);
 	}
 
 }

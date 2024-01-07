@@ -16,6 +16,7 @@ import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.ImageIcon;
 
 public class MovieControl extends JDialog {
 	
@@ -154,7 +155,7 @@ public class MovieControl extends JDialog {
 		
 		JLabel lblNewLabel_1_7 = new JLabel("영화 설명");
 		lblNewLabel_1_7.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
-		lblNewLabel_1_7.setBounds(12, 351, 86, 22);
+		lblNewLabel_1_7.setBounds(12, 357, 86, 22);
 		getContentPane().add(lblNewLabel_1_7);
 		
 		textField_7 = new JTextField();
@@ -197,5 +198,10 @@ public class MovieControl extends JDialog {
 		btnSelect.setFont(new Font("배달의민족 도현", Font.PLAIN, 12));
 		btnSelect.setBounds(343, 352, 65, 23);
 		getContentPane().add(btnSelect);
+		
+		JLabel lblManagerBackGround = new JLabel("");
+		lblManagerBackGround.setIcon(new ImageIcon(MovieControl.class.getResource("/com/javaproject/image/manager_background.png")));
+		lblManagerBackGround.setBounds(0, 0, 784, 561);
+		getContentPane().add(lblManagerBackGround);
 	}
 } // End
