@@ -62,14 +62,14 @@ public class MovieSalesStatus extends JDialog {
 		cbSelectType.setEditable(false);
 		cbSelectType.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
 		cbSelectType.setModel(new DefaultComboBoxModel(items));
-		cbSelectType.setBounds(195, 31, 150, 63);
+		cbSelectType.setBounds(205, 32, 150, 63);
 		
 		contentPanel.add(cbSelectType);
 		contentPanel.add(getLblNewLabel());
 		
 		JLabel lblManagerBackGround = new JLabel("");
 		lblManagerBackGround.setIcon(new ImageIcon(MovieSalesStatus.class.getResource("/com/javaproject/image/manager_background.png")));
-		lblManagerBackGround.setBounds(0, 0, 784, 561);
+		lblManagerBackGround.setBounds(0, 0, 800, 572);
 		contentPanel.add(lblManagerBackGround);
 		
 	}

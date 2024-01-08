@@ -86,7 +86,7 @@ public class ManagerLogin extends JDialog {
 			if (lblManagerBackGround == null) {
 			lblManagerBackGround = new JLabel("");
 			lblManagerBackGround.setIcon(new ImageIcon(ManagerLogin.class.getResource("/com/javaproject/image/manager_background.png")));
-			lblManagerBackGround.setBounds(0, 0, 784, 561);
+			lblManagerBackGround.setBounds(0, 0, 800, 572);
 		}
 			return lblManagerBackGround;
 	}
