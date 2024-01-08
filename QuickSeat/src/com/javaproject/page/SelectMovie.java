@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 import com.javaproject.base.ShareVar;
 
@@ -60,6 +61,11 @@ public class SelectMovie extends JDialog {
 	 * Create the dialog.
 	 */
 	public SelectMovie() {
+<<<<<<< HEAD
+		setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
+		setTitle("영화 선택");
+		setBounds(100, 100, 800, 600);
+=======
 		//타이틀 설정
 		setTitle("영화 선택");
 		setBounds(ShareVar.kiosk_loc_x, 
@@ -69,6 +75,7 @@ public class SelectMovie extends JDialog {
 		
 		
 		
+>>>>>>> bd753ccab8f421ee5e62c0010a15a321f4ceb6c0
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
