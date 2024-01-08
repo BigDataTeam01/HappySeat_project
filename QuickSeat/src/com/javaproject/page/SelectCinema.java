@@ -100,10 +100,10 @@ public class SelectCinema extends JDialog {
 						goToSelectMenu();
 					}
 				});
-				lbl_pageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
+				lbl_pageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
 				lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-				lbl_pageTitle_1.setBounds(12, 30, 46, 68);
+				lbl_pageTitle_1.setBounds(623, 20, 170, 130);
 				contentPanel.add(lbl_pageTitle_1);
 				
 				//극장선택 배경(총 4개)
@@ -134,7 +134,7 @@ public class SelectCinema extends JDialog {
 				lbl_CinemaBackGround4.setBounds(429, 256, 254, 132);
 				contentPanel.add(lbl_CinemaBackGround4);
 				
-				//이전화면으로 가기
+				//이전으로 버튼
 				JLabel BtnBackToPrevious = new JLabel("");
 				BtnBackToPrevious.addMouseListener(new MouseAdapter() {
 					@Override
@@ -142,8 +142,8 @@ public class SelectCinema extends JDialog {
 						goToMovieInformation();
 					}
 				});
-				BtnBackToPrevious.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
-				BtnBackToPrevious.setBounds(295, 441, 200, 100);
+				BtnBackToPrevious.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+				BtnBackToPrevious.setBounds(6, 21, 170, 130);
 				contentPanel.add(BtnBackToPrevious);
 				
 				//배경화면
