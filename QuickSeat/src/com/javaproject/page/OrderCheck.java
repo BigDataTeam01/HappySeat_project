@@ -86,19 +86,16 @@ public class OrderCheck extends JDialog {
 									100);
 			
 			contentPanel.add(lbl_pageTitle);
-			//첫화면 아이콘
-			JLabel lbl_pageTitle_1 = new JLabel("첫화면");
-			lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					goToSelectMenu();
-				}
-			});
-			lbl_pageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
-
-			lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-			lbl_pageTitle_1.setBounds(12, 30, 46, 68);
-			contentPanel.add(lbl_pageTitle_1);
+			
+			JLabel lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+			lblNewLabel_1.setBounds(628, 38, 172, 130);
+			contentPanel.add(lblNewLabel_1);
+			
+			JLabel lblNewLabel_2 = new JLabel("");
+			lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+			lblNewLabel_2.setBounds(11, 39, 161, 130);
+			contentPanel.add(lblNewLabel_2);
 			
 			//발권번호 텍스트
 			JLabel lbl_pageTitle_2 = new JLabel("발권번호 :");
@@ -208,13 +205,6 @@ public class OrderCheck extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		}
-	}
-//---------------------------Function---------------------
-	//첫화면으로 가기
-	public void goToSelectMenu() {
-		OrderCheckdialog.setVisible(false);
-		OrderCheckdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		selectMenudialog.setVisible(true);
 	}
 	//티켓 취소화면으로 가기
 	public void goToOrderCancle() {

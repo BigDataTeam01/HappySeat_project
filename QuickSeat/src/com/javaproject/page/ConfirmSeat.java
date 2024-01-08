@@ -59,21 +59,6 @@ public class ConfirmSeat extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		// 첫화면 아이콘
-		JLabel lbl_pageTitle_1 = new JLabel("첫화면");
-		lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				goToHome();
-				// 액션 넣기
-			}
-		});
-		lbl_pageTitle_1
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
-
-		lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-		lbl_pageTitle_1.setBounds(12, 30, 46, 68);
-		contentPanel.add(lbl_pageTitle_1);
 		// 페이지 타이틀
 		JLabel lbl_pageTitle = new JLabel("좌석 확정");
 		lbl_pageTitle.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
@@ -96,13 +81,23 @@ public class ConfirmSeat extends JDialog {
 		JButton btnBack = new JButton("이전 화면");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				 goToSelectSeat();
+				goToSelectSeat();
 			}
 		});
 		btnBack.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
 		btnBack.setBackground(Color.WHITE);
 		btnBack.setBounds(144, 405, 200, 100);
 		contentPanel.add(btnBack);
+		// 첫화면으로 이전화면으로 버튼
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setBounds(628, 38, 172, 130);
+		contentPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setBounds(11, 39, 161, 130);
+		contentPanel.add(lblNewLabel_2);
 
 		// 키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
@@ -118,15 +113,11 @@ public class ConfirmSeat extends JDialog {
 		selectpayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectpayment.setVisible(true);
 	}
+
 	private void goToSelectSeat() {
 		dispose();
 		SelectSeatdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectSeatdialog.setVisible(true);
-	}
-	private void goToHome() {
-	    dispose();
-	    selectMenudialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-	    selectMenudialog.setVisible(true);
 	}
 
 }// End

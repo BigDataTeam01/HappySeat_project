@@ -90,11 +90,6 @@ public class MovieInformation extends JDialog{
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-		JLabel lblPoster = new JLabel("");
-		lblPoster.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png")));
-		lblPoster.setBounds(34, 101, ShareVar.poster_width, ShareVar.poster_hight);
-		contentPanel.add(lblPoster);
-		
 		JButton btnNewButton = new JButton("영화선택(임시)");
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
@@ -130,6 +125,15 @@ public class MovieInformation extends JDialog{
 								ShareVar.kiosk_title_hight);
 		
 		contentPanel.add(lblPageTitle);
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setBounds(628, 38, 172, 130);
+		contentPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setBounds(11, 39, 161, 130);
+		contentPanel.add(lblNewLabel_2);
 		
 		
 		

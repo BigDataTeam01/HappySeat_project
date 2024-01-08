@@ -61,11 +61,9 @@ public class SelectMovie extends JDialog {
 	 * Create the dialog.
 	 */
 	public SelectMovie() {
-<<<<<<< HEAD
 		setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 		setTitle("영화 선택");
 		setBounds(100, 100, 800, 600);
-=======
 		//타이틀 설정
 		setTitle("영화 선택");
 		setBounds(ShareVar.kiosk_loc_x, 
@@ -75,7 +73,6 @@ public class SelectMovie extends JDialog {
 		
 		
 		
->>>>>>> bd753ccab8f421ee5e62c0010a15a321f4ceb6c0
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -95,20 +92,6 @@ public class SelectMovie extends JDialog {
 			 								ShareVar.kiosk_title_font_size));
 			
 			contentPanel.add(lbl_pageTitle);
-			
-			//첫화면 아이콘
-			JLabel lbl_pageTitle_1 = new JLabel("첫화면");
-			lbl_pageTitle_1.setBounds(12, 30, 46, 68);
-			lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					goToSelectMenu();
-				}
-			});
-			lbl_pageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
-
-			lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-			contentPanel.add(lbl_pageTitle_1);
 			
 			//영화선택 배경(총 4개)
 			JLabel lbl_MovieBackGround1 = new JLabel("");
@@ -142,18 +125,6 @@ public class SelectMovie extends JDialog {
 			lbl_NextMovie.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
 			contentPanel.add(lbl_NextMovie);
 			
-			//이전화면으로 가기
-			JLabel BtnBackToPrevious = new JLabel("");
-			BtnBackToPrevious.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					goToSelectAge();
-				}
-			});
-			BtnBackToPrevious.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
-			BtnBackToPrevious.setBounds(295, 441, 200, 100);
-			contentPanel.add(BtnBackToPrevious);
-			
 			//배경화면
 			JLabel lbl_background = new JLabel("",SwingConstants.CENTER);
 			lbl_background.setBounds(-16, 0, 800, 600);
@@ -172,19 +143,6 @@ public class SelectMovie extends JDialog {
 			SelectMoviedialog.setVisible(false);
 			SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			MovieInformationdialog.setVisible(true);
-		}
-		//이전화면(연령선택)으로 가기
-				private void goToSelectAge() {
-					SelectMoviedialog.setVisible(false);
-					SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-					SelectAgedialog.setVisible(true);
-				}
-				
-		//첫화면으로 가기
-		private void goToSelectMenu() {
-			SelectMoviedialog.setVisible(false);
-			SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			selectMenudialog.setVisible(true);
 		}
 	
 	

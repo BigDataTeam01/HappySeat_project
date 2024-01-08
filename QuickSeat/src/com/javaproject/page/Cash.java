@@ -62,28 +62,21 @@ public class Cash extends JDialog {
 		lbl_pageTitle.setBounds(297, 13, 250, 100);
 
 		contentPanel.add(lbl_pageTitle);
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setBounds(628, 38, 172, 130);
+		contentPanel.add(lblNewLabel_1);
 		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				goToSelectPayment();
-			}
-		});
-		btnNewButton.setIcon(new ImageIcon(Cash.class.getResource("/com/javaproject/image/결제방법 선택으로가기.png")));
-		btnNewButton.setBounds(65, 449, 660, 100);
-		contentPanel.add(btnNewButton);
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setBounds(11, 39, 161, 130);
+		contentPanel.add(lblNewLabel_2);
 		//키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(
 				new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(6, 6, 800, 600);
 		contentPanel.add(lbl_backGround);
-	}
-	
-	private void goToSelectPayment() {
-		dispose();
-		selectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		selectPayment.setVisible(true);
 	}
 	
 	

@@ -92,20 +92,6 @@ public class SelectCinema extends JDialog {
 				
 				contentPanel.add(lbl_pageTitle);
 				
-				//첫화면 아이콘
-				JLabel lbl_pageTitle_1 = new JLabel("첫화면");
-				lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						goToSelectMenu();
-					}
-				});
-				lbl_pageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
-
-				lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-				lbl_pageTitle_1.setBounds(12, 30, 46, 68);
-				contentPanel.add(lbl_pageTitle_1);
-				
 				//극장선택 배경(총 4개)
 				JLabel lbl_CinemaBackGround1 = new JLabel("");
 				lbl_CinemaBackGround1.addMouseListener(new MouseAdapter() {
@@ -145,11 +131,21 @@ public class SelectCinema extends JDialog {
 				BtnBackToPrevious.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
 				BtnBackToPrevious.setBounds(295, 441, 200, 100);
 				contentPanel.add(BtnBackToPrevious);
+				JLabel lblNewLabel_1 = new JLabel("");
+				lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+				lblNewLabel_1.setBounds(628, 38, 172, 130);
+				contentPanel.add(lblNewLabel_1);
+				
+				JLabel lblNewLabel_2 = new JLabel("");
+				lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+				lblNewLabel_2.setBounds(11, 39, 161, 130);
+				contentPanel.add(lblNewLabel_2);
 				
 				//배경화면
 				JLabel lbl_background = new JLabel("",SwingConstants.CENTER);
 				lbl_background.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 				lbl_background.setBounds(-16, 0, 800, 600);
+				// 첫화면으로 이전으로 가기 버튼
 				contentPanel.add(lbl_background);
 		}
 	}
@@ -166,11 +162,5 @@ public class SelectCinema extends JDialog {
 		SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		MovieInformationdialog.setVisible(true);
 	}
-	//첫화면으로 가기
-		private void goToSelectMenu() {
-			SelectCinemadialog.setVisible(false);
-			SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			selectMenudialog.setVisible(true);
-		}
 	
 }//End

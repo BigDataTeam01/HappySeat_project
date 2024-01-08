@@ -82,27 +82,6 @@ public class OrderCancle extends JDialog {
 									100);
 			
 			contentPanel.add(lbl_pageTitle);
-			
-			//첫화면으로가기
-			JLabel BtnGoToFirstPage = new JLabel("첫화면");
-			BtnGoToFirstPage.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					goToSelectMenu();
-				}
-			});
-			BtnGoToFirstPage.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
-
-			BtnGoToFirstPage.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-			BtnGoToFirstPage.setBounds(12, 30, 46, 68);
-			contentPanel.add(BtnGoToFirstPage);			
-			
-			JLabel moviePoster = new JLabel("");
-			moviePoster.setLocation(34, 101);
-			moviePoster.setSize(380, 450);
-			moviePoster.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png")));
-
-			contentPanel.add(moviePoster);
 			//구매취소버튼(클릭시 다이얼로그 띄어주고 초기화면으로 이동
 			JLabel BtnOrderCancle = new JLabel("");
 			BtnOrderCancle.addMouseListener(new MouseAdapter() {
@@ -120,6 +99,15 @@ public class OrderCancle extends JDialog {
 
 			BtnGoToPreviousPage.setBounds(504, 249, 200, 100);
 			contentPanel.add(BtnGoToPreviousPage);
+			JLabel lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+			lblNewLabel_1.setBounds(628, 38, 172, 130);
+			contentPanel.add(lblNewLabel_1);
+			
+			JLabel lblNewLabel_2 = new JLabel("");
+			lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+			lblNewLabel_2.setBounds(11, 39, 161, 130);
+			contentPanel.add(lblNewLabel_2);
 			//배경화면
 			JLabel lbl_background = new JLabel("",SwingConstants.CENTER);
 			lbl_background.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
@@ -134,13 +122,6 @@ public class OrderCancle extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		}
 	}
-//---------------------------Function---------------------
-		//첫화면으로 가기
-		public void goToSelectMenu() {
-			OrderCancledialog.setVisible(false);
-			OrderCancledialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			selectMenudialog.setVisible(true);
-		}
 		//구매취소 
 		public void OrderCancleAction() {
 			JOptionPane.showMessageDialog(null, "구매취소되었습니다.");

@@ -12,27 +12,28 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Card extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	/*
-	 * Description : 
-	 * 				 1. Card화면에서 결제방법 선택으로 가기 버튼을 터치했을시 SelectPayment화면으로 이동
-	 * Date : 2024.01.06 (토요일)
-	 * Author : 박정민,박지환
+	 * Description : 1. Card화면에서 결제방법 선택으로 가기 버튼을 터치했을시 SelectPayment화면으로 이동 Date :
+	 * 2024.01.06 (토요일) Author : 박정민,박지환
 	 * 
 	 */
+
 	/**
 	 * Launch the application.
 	 */
 	
 	
-	private static SelectPayment selectPayment = new SelectPayment();
-	
-	
-	
+	private static  SelectMenu selectMenu = new SelectMenu();
+	private static SelectPayment selectPayment  = new SelectPayment();
+
+
 	public static void main(String[] args) {
 		try {
 			Card dialog = new Card();
@@ -60,30 +61,49 @@ public class Card extends JDialog {
 		lbl_pageTitle.setBounds(297, 13, 250, 100);
 
 		contentPanel.add(lbl_pageTitle);
-		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				goToSelectPayment();
+		// 첫화면으로 이전화면으로 버튼
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goBack();
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(Card.class.getResource("/com/javaproject/image/결제방법 선택으로가기.png")));
-		btnNewButton.setBounds(83, 442, 650, 100);
-		contentPanel.add(btnNewButton);
-		//키오스크 배경화면
+		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setBounds(628, 38, 172, 130);
+		contentPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToHome();
+			}
+		});
+		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setBounds(11, 39, 161, 130);
+		contentPanel.add(lblNewLabel_2);
+		// 키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(
 				new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_backGround);
 	}
-	//----------Function----------
-	
-	private void goToSelectPayment() {
+	//------Function------
+	private void goToHome() {
+		dispose();
+		selectMenu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectMenu.setVisible(true);
+	}
+	private void goBack() {
 		dispose();
 		selectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectPayment.setVisible(true);
 	}
 	
+	
+	
+	
 
-}//END
+}// END

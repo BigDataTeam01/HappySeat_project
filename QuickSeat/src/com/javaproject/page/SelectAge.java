@@ -68,20 +68,6 @@ public class SelectAge extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 			contentPanel.setLayout(null);
-		
-			//첫화면 아이콘
-			JLabel lbl_pageTitle_1 = new JLabel("첫화면");
-			lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					goToSelectMenu();
-				}
-			});
-			lbl_pageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
-
-			lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-			lbl_pageTitle_1.setBounds(12, 30, 46, 68);
-			contentPanel.add(lbl_pageTitle_1);			
 			//페이지 타이틀 
 			JLabel lbl_pageTitle = new JLabel("연령 선택");
 			lbl_pageTitle.setFont(new Font(ShareVar.kiosk_title_font,
@@ -194,6 +180,15 @@ public class SelectAge extends JDialog {
 			BtnBack.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
 			BtnBack.setBounds(295, 406, 200, 100);
 			contentPanel.add(BtnBack);
+			JLabel lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+			lblNewLabel_1.setBounds(628, 38, 172, 130);
+			contentPanel.add(lblNewLabel_1);
+			
+			JLabel lblNewLabel_2 = new JLabel("");
+			lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+			lblNewLabel_2.setBounds(11, 39, 161, 130);
+			contentPanel.add(lblNewLabel_2);
 			
 			//배경화면
 			JLabel lbl_background = new JLabel("",SwingConstants.CENTER);
@@ -206,14 +201,6 @@ public class SelectAge extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		}
-	}
-	
-	
-	//첫화면으로 가기
-	public void goToSelectMenu() {
-		SelectAgedialog.setVisible(false);
-		SelectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		selectMenudialog.setVisible(true);
 	}
 	//전화면으로 가기
 	public void goToOrderCancle() {
