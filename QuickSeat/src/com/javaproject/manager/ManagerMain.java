@@ -41,6 +41,7 @@ public class ManagerMain extends JDialog {
 	static MovieSalesStatus statusDialog = new MovieSalesStatus();
 	static MovieUserStatistics statisticsDialog = new MovieUserStatistics();
 	private JLabel lblManagerBackGround;
+	private JLabel lblNewLabel_3;
 
 	/**
 	 * Launch the application.
@@ -84,6 +85,7 @@ public class ManagerMain extends JDialog {
 		lblNewLabel_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_2.setFont(new Font("배달의민족 도현", Font.PLAIN, 21));
 		contentPanel.add(lblNewLabel_2);
+		contentPanel.add(getLblNewLabel_3());
 		contentPanel.add(getLblManagerBackGround());
 	}
 	private JLabel getLblMovieControl() {
@@ -103,7 +105,7 @@ public class ManagerMain extends JDialog {
 	private JLabel getLblMovieSalesStatus() {
 		if (lblMovieSalesStatus == null) {
 			lblMovieSalesStatus = new JLabel("");
-			lblMovieSalesStatus.setBounds(308, 181, 150, 150);
+			lblMovieSalesStatus.setBounds(308, 193, 150, 150);
 			lblMovieSalesStatus.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/MovieSalesStatus.png")));
 			lblMovieSalesStatus.addMouseListener(new MouseAdapter() {
 				@Override
@@ -117,7 +119,7 @@ public class ManagerMain extends JDialog {
 	private JLabel getLblMovieUserStatistics() {
 		if (lblMovieUserStatistics == null) {
 			lblMovieUserStatistics = new JLabel("");
-			lblMovieUserStatistics.setBounds(533, 181, 150, 150);
+			lblMovieUserStatistics.setBounds(533, 193, 150, 150);
 			lblMovieUserStatistics.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/MovieUserStatistics.png")));
 			lblMovieUserStatistics.addMouseListener(new MouseAdapter() {
 				@Override
@@ -147,8 +149,15 @@ public class ManagerMain extends JDialog {
 		if (lblManagerBackGround == null) {
 			lblManagerBackGround = new JLabel("");
 			lblManagerBackGround.setIcon(new ImageIcon(ManagerMain.class.getResource("/com/javaproject/image/manager_background.png")));
-			lblManagerBackGround.setBounds(0, 0, 784, 561);
+			lblManagerBackGround.setBounds(0, 0, 800, 572);
 		}
 		return lblManagerBackGround;
+	}
+	private JLabel getLblNewLabel_3() {
+		if (lblNewLabel_3 == null) {
+			lblNewLabel_3 = new JLabel("관리자 ID : ");
+			lblNewLabel_3.setBounds(585, 29, 150, 33);
+		}
+		return lblNewLabel_3;
 	}
 } // End
