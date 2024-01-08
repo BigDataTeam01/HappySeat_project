@@ -71,6 +71,8 @@ public class SelectMovie extends JDialog {
 				  ShareVar.kiosk_width, 
 				  ShareVar.kiosk_hight);
 		
+		
+		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -164,12 +166,14 @@ public class SelectMovie extends JDialog {
 //-----------------------------Function------------
 	//다음화면(정화정보)로 가기
 		private void goToMovieInformation() {
+			dispose();
 			SelectMoviedialog.setVisible(false);
 			SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			MovieInformationdialog.setVisible(true);
 		}
 		//이전화면(연령선택)으로 가기
 				private void goToSelectAge() {
+					dispose();
 					SelectMoviedialog.setVisible(false);
 					SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 					SelectAgedialog.setVisible(true);
@@ -177,6 +181,7 @@ public class SelectMovie extends JDialog {
 				
 		//첫화면으로 가기
 		private void goToSelectMenu() {
+			dispose();
 			SelectMoviedialog.setVisible(false);
 			SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			selectMenudialog.setVisible(true);

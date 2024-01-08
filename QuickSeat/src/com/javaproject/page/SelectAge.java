@@ -211,18 +211,21 @@ public class SelectAge extends JDialog {
 	
 	//첫화면으로 가기
 	public void goToSelectMenu() {
+		dispose();
 		SelectAgedialog.setVisible(false);
 		SelectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
 	}
 	//전화면으로 가기
 	public void goToOrderCancle() {
+		dispose();
 		SelectAgedialog.setVisible(false);
 		SelectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
 	}
 	//영화선택화면으로 가기
 	public void goToSelectMovie() {
+		dispose();
 		SelectAgedialog.setVisible(false);
 		SelectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectMoviedialog.setVisible(true);
