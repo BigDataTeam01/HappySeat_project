@@ -74,11 +74,11 @@ public class ManagerLogin extends JDialog {
 		tfAdminNumber.setColumns(10);
 		
 		lblAdminNumber_1 = new JLabel("비밀번호     :");
-		lblAdminNumber_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
+		lblAdminNumber_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 30));
 		lblAdminNumber_1.setBounds(120, 231, 200, 60);
 		contentPanel.add(lblAdminNumber_1);
-		contentPanel.add(getLblBackGround());
 		contentPanel.add(getPasswordField());
+		contentPanel.add(getLblBackGround());
 	}
 	
 	private JLabel getLblBackGround() {
@@ -94,7 +94,7 @@ public class ManagerLogin extends JDialog {
 		if (lblAdminNumber == null) {
 			lblAdminNumber = new JLabel("관리자번호  :");
 			lblAdminNumber.setBounds(120, 140, 200, 60);
-			lblAdminNumber.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
+			lblAdminNumber.setFont(new Font("BM Dohyeon", Font.PLAIN, 30));
 		}
 		return lblAdminNumber;
 	}
@@ -107,7 +107,7 @@ public class ManagerLogin extends JDialog {
 					goToMain();
 				}
 			});
-			btnLogin.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
+			btnLogin.setFont(new Font("BM Dohyeon", Font.PLAIN, 30));
 		}
 		return btnLogin;
 	}

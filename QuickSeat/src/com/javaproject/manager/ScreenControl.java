@@ -108,8 +108,8 @@ public class ScreenControl extends JDialog {
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("상영관 관리");
-			lblNewLabel.setFont(new Font("Lucida Grande", Font.PLAIN, 30));
-			lblNewLabel.setBounds(322, 20, 151, 53);
+			lblNewLabel.setFont(new Font("BM Dohyeon", Font.PLAIN, 30));
+			lblNewLabel.setBounds(311, 20, 216, 53);
 		}
 		return lblNewLabel;
 	}
@@ -152,6 +152,7 @@ public class ScreenControl extends JDialog {
 	private JComboBox getComboBox() {
 		if (comboBox == null) {
 			comboBox = new JComboBox();
+			comboBox.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			comboBox.setBounds(115, 145, 105, 27);
 		}
 		return comboBox;
@@ -167,6 +168,7 @@ public class ScreenControl extends JDialog {
 	private JComboBox getComboBox_1() {
 		if (comboBox_1 == null) {
 			comboBox_1 = new JComboBox();
+			comboBox_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			comboBox_1.setBounds(115, 192, 105, 27);
 		}
 		return comboBox_1;
@@ -182,6 +184,7 @@ public class ScreenControl extends JDialog {
 	private JComboBox getComboBox_1_1() {
 		if (comboBox_1_1 == null) {
 			comboBox_1_1 = new JComboBox();
+			comboBox_1_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			comboBox_1_1.setModel(new DefaultComboBoxModel(new String[] {"2024"}));
 			comboBox_1_1.setBounds(32, 288, 85, 27);
 		}
@@ -198,6 +201,7 @@ public class ScreenControl extends JDialog {
 	private JComboBox getComboBox_1_1_1() {
 		if (comboBox_1_1_1 == null) {
 			comboBox_1_1_1 = new JComboBox();
+			comboBox_1_1_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			comboBox_1_1_1.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"}));
 			comboBox_1_1_1.setBounds(129, 288, 70, 27);
 		}
@@ -214,6 +218,7 @@ public class ScreenControl extends JDialog {
 	private JComboBox getComboBox_1_1_2() {
 		if (comboBox_1_1_2 == null) {
 			comboBox_1_1_2 = new JComboBox();
+			comboBox_1_1_2.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			comboBox_1_1_2.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 			comboBox_1_1_2.setBounds(222, 288, 70, 27);
 		}
@@ -230,6 +235,7 @@ public class ScreenControl extends JDialog {
 	private JComboBox getComboBox_1_1_3() {
 		if (comboBox_1_1_3 == null) {
 			comboBox_1_1_3 = new JComboBox();
+			comboBox_1_1_3.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			comboBox_1_1_3.setModel(new DefaultComboBoxModel(new String[] {"06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"}));
 			comboBox_1_1_3.setBounds(32, 327, 70, 27);
 		}
@@ -246,6 +252,7 @@ public class ScreenControl extends JDialog {
 	private JComboBox getComboBox_1_1_4() {
 		if (comboBox_1_1_4 == null) {
 			comboBox_1_1_4 = new JComboBox();
+			comboBox_1_1_4.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			comboBox_1_1_4.setModel(new DefaultComboBoxModel(new String[] {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"}));
 			comboBox_1_1_4.setBounds(128, 327, 70, 27);
 		}
@@ -289,6 +296,7 @@ public class ScreenControl extends JDialog {
 	private JTextField getTextField_1() {
 		if (textField_1 == null) {
 			textField_1 = new JTextField();
+			textField_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			textField_1.setText("90");
 			textField_1.setColumns(10);
 			textField_1.setBounds(145, 431, 51, 26);
@@ -322,6 +330,7 @@ public class ScreenControl extends JDialog {
 	private JComboBox getComboBox_2() {
 		if (comboBox_2 == null) {
 			comboBox_2 = new JComboBox();
+			comboBox_2.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"1 상영관", "2 상영관", "3 상영관"}));
 			comboBox_2.setBounds(339, 99, 105, 27);
 		}
