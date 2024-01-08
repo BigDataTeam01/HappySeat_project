@@ -14,6 +14,8 @@ import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
+import javax.swing.ImageIcon;
+import javax.swing.SwingConstants;
 
 public class ManagerLogin extends JDialog {
 	
@@ -22,13 +24,16 @@ public class ManagerLogin extends JDialog {
 	 * 
 	 * Author : Lcy, Wdh
 	 * 
-	 * Date : 2024-01-05 , 16:07
+	 * Date : 2024-01-07 , 22:00
+	 * 
+	 * Changes : Add Background
 	 */
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblAdminNumber;
 	private JButton btnLogin;
+	private JLabel lblManagerBackGround;
 	
 	static ManagerLogin loginDialog = new ManagerLogin();
 	static ManagerMain mainDialog = new ManagerMain();
@@ -74,7 +79,18 @@ public class ManagerLogin extends JDialog {
 		tfPassword.setColumns(10);
 		tfPassword.setBounds(332, 231, 300, 60);
 		contentPanel.add(tfPassword);
+		contentPanel.add(getLblBackGround());
 	}
+	
+	private JLabel getLblBackGround() {
+			if (lblManagerBackGround == null) {
+			lblManagerBackGround = new JLabel("");
+			lblManagerBackGround.setIcon(new ImageIcon(ManagerLogin.class.getResource("/com/javaproject/image/manager_background.png")));
+			lblManagerBackGround.setBounds(0, 0, 784, 561);
+		}
+			return lblManagerBackGround;
+	}
+	
 	private JLabel getLblAdminNumber() {
 		if (lblAdminNumber == null) {
 			lblAdminNumber = new JLabel("관리자번호  :");
