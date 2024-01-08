@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.Font;
 
 public class SelectMovie extends JDialog {
 
@@ -38,7 +39,9 @@ public class SelectMovie extends JDialog {
 	 * Create the dialog.
 	 */
 	public SelectMovie() {
-		setBounds(100, 100, 450, 300);
+		setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
+		setTitle("영화 선택");
+		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
