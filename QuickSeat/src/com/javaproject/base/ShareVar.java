@@ -22,6 +22,9 @@ public class ShareVar {
 	 * 
 	 */
 	
+	public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static String dbUser = "root";
+	public static String dbPass = "qwer1234";
 	
 	//manager page gui siz
 	public static int managerXsize = 800;
