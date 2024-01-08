@@ -71,8 +71,6 @@ public class SelectMovie extends JDialog {
 				  ShareVar.kiosk_width, 
 				  ShareVar.kiosk_hight);
 		
-		
-		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

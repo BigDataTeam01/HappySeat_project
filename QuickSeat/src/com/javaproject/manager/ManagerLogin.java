@@ -16,6 +16,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
+import javax.swing.JPasswordField;
+import java.awt.Color;
 
 public class ManagerLogin extends JDialog {
 	
@@ -39,7 +41,7 @@ public class ManagerLogin extends JDialog {
 	static ManagerMain mainDialog = new ManagerMain();
 	private JTextField tfAdminNumber;
 	private JLabel lblAdminNumber_1;
-	private JTextField tfPassword;
+	private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -66,20 +68,17 @@ public class ManagerLogin extends JDialog {
 		contentPanel.add(getBtnLogin());
 		
 		tfAdminNumber = new JTextField();
+		tfAdminNumber.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
 		tfAdminNumber.setBounds(332, 140, 300, 60);
 		contentPanel.add(tfAdminNumber);
 		tfAdminNumber.setColumns(10);
 		
-		lblAdminNumber_1 = new JLabel("비밀번호  :");
-		lblAdminNumber_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 30));
+		lblAdminNumber_1 = new JLabel("비밀번호     :");
+		lblAdminNumber_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
 		lblAdminNumber_1.setBounds(120, 231, 200, 60);
 		contentPanel.add(lblAdminNumber_1);
-		
-		tfPassword = new JTextField();
-		tfPassword.setColumns(10);
-		tfPassword.setBounds(332, 231, 300, 60);
-		contentPanel.add(tfPassword);
 		contentPanel.add(getLblBackGround());
+		contentPanel.add(getPasswordField());
 	}
 	
 	private JLabel getLblBackGround() {
@@ -95,7 +94,7 @@ public class ManagerLogin extends JDialog {
 		if (lblAdminNumber == null) {
 			lblAdminNumber = new JLabel("관리자번호  :");
 			lblAdminNumber.setBounds(120, 140, 200, 60);
-			lblAdminNumber.setFont(new Font("BM Dohyeon", Font.PLAIN, 30));
+			lblAdminNumber.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
 		}
 		return lblAdminNumber;
 	}
@@ -108,11 +107,20 @@ public class ManagerLogin extends JDialog {
 					goToMain();
 				}
 			});
-			btnLogin.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
+			btnLogin.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
 		}
 		return btnLogin;
 	}
 	
+	private JPasswordField getPasswordField() {
+		if (passwordField == null) {
+			passwordField = new JPasswordField();
+			passwordField.setForeground(new Color(0, 0, 0));
+			passwordField.setFont(new Font("맑은 고딕", Font.PLAIN, 30));
+			passwordField.setBounds(332, 231, 300, 60);
+		}
+		return passwordField;
+	}
 	
 	// ================================================ Functions =========================================================================
 	
