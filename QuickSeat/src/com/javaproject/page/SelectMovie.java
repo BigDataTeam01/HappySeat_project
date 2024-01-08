@@ -140,10 +140,29 @@ public class SelectMovie extends JDialog {
 //-----------------------------Function------------
 	//다음화면(정화정보)로 가기
 		private void goToMovieInformation() {
+			dispose();
 			SelectMoviedialog.setVisible(false);
 			SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			MovieInformationdialog.setVisible(true);
 		}
+<<<<<<< HEAD
+=======
+		//이전화면(연령선택)으로 가기
+				private void goToSelectAge() {
+					dispose();
+					SelectMoviedialog.setVisible(false);
+					SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+					SelectAgedialog.setVisible(true);
+				}
+				
+		//첫화면으로 가기
+		private void goToSelectMenu() {
+			dispose();
+			SelectMoviedialog.setVisible(false);
+			SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			selectMenudialog.setVisible(true);
+		}
+>>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 	
 	
 

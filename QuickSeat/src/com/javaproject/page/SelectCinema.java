@@ -152,15 +152,27 @@ public class SelectCinema extends JDialog {
 //--------------------Function--------------------------
 	//다음화면(시간선택)로 가기
 	private void goToSelectTime() {
+		dispose();
 		SelectCinemadialog.setVisible(false);
 		SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectTimedialog.setVisible(true);
 	}
 	//이전화면(영화정보)으로 가기
 	private void goToMovieInformation() {
+		dispose();
 		SelectCinemadialog.setVisible(false);
 		SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		MovieInformationdialog.setVisible(true);
 	}
+<<<<<<< HEAD
+=======
+	//첫화면으로 가기
+		private void goToSelectMenu() {
+			dispose();
+			SelectCinemadialog.setVisible(false);
+			SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			selectMenudialog.setVisible(true);
+		}
+>>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 	
 }//End

@@ -29,8 +29,17 @@ public class SelectTime extends JDialog {
 	 * Date : 2024.01.05 (금요일) Author : 박정민,박지환
 	 * 
 	 * 
+<<<<<<< HEAD
 	 * * * * Update 2024.01.7 by J.park: 1. descripton 수정 3. kiosk set bound
 	 * sharevar 에서 가져와 지정 4. diaog -> static 5. 배경 추가 5. 첫화면,이전화면, 시간선택 추가
+=======
+	 *  *  *  * Update 2024.01.8 by J.park:
+	 * 			1. descripton 수정
+	 * 			3. kiosk set bound sharevar 에서 가져와 지정
+	 * 			4. diaog -> static 
+	 * 			5. 배경 추가
+	 * 			5. 첫화면,이전화면, 시간선택 추가
+>>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 	 */
 	/**
 	 * Launch the application.
@@ -74,8 +83,28 @@ public class SelectTime extends JDialog {
 		JLabel lbl_pageTitle = new JLabel("시간 선택");
 		lbl_pageTitle.setBounds(295, 10, 250, 100);
 		lbl_pageTitle.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, ShareVar.kiosk_title_font_size));
+<<<<<<< HEAD
 
 		contentPanel.add(lbl_pageTitle);
+=======
+
+		contentPanel.add(lbl_pageTitle);
+
+		// 첫화면 아이콘
+		JLabel lbl_pageTitle_1 = new JLabel("첫화면");
+		lbl_pageTitle_1.setBounds(12, 30, 46, 68);
+		lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToSelectMenu();
+			}
+		});
+		lbl_pageTitle_1
+				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
+
+		lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		contentPanel.add(lbl_pageTitle_1);
+>>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 
 		// 시간선택 배경(총 4개)
 		JLabel lbl_MovieBackGround1 = new JLabel("");
@@ -125,6 +154,7 @@ public class SelectTime extends JDialog {
 				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
 		BtnBackToPrevious.setBounds(295, 441, 200, 100);
 		contentPanel.add(BtnBackToPrevious);
+<<<<<<< HEAD
 		JLabel lblNewLabel_1 = new JLabel("");
 		lblNewLabel_1
 				.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
@@ -135,6 +165,8 @@ public class SelectTime extends JDialog {
 					lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
 					lblNewLabel_2.setBounds(11, 39, 161, 130);
 					contentPanel.add(lblNewLabel_2);
+=======
+>>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
@@ -154,6 +186,10 @@ public class SelectTime extends JDialog {
 //---------------------------Function------------------------
 	// 다음화면(정화정보)로 가기
 	private void goToSelectHeadCount() {
+<<<<<<< HEAD
+=======
+		dispose();
+>>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 		SelectTimedialog.setVisible(false);
 		SelectTimedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectHeadCountdialog.setVisible(true);
@@ -161,9 +197,24 @@ public class SelectTime extends JDialog {
 
 	// 이전화면(극장선택)으로 가기
 	private void SelectCinema() {
+<<<<<<< HEAD
+=======
+		dispose();
+>>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 		SelectTimedialog.setVisible(false);
 		SelectTimedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectCinemadialog.setVisible(true);
 	}
 
+<<<<<<< HEAD
+=======
+	// 첫화면으로 가기
+	private void goToSelectMenu() {
+		dispose();
+		SelectTimedialog.setVisible(false);
+		SelectTimedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectMenudialog.setVisible(true);
+	}
+
+>>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 }// End

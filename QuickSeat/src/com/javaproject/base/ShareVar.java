@@ -5,7 +5,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-import com.javaproject.page.MovieInformation;
+//import com.javaproject.page.MovieInformation;
 
 public class ShareVar {
 	//개발 시작
