@@ -26,7 +26,7 @@ public class SelectMenu extends JDialog {
 	 * Date : 2024.01.06 (토요일)
 	 * Author : 박정민,박지환
 	 * 
-	 *  * Update 2024.01.06 by J.park:
+	 *  * Update 2024.01.07 by J.park:
 	 * 			1. descripton 수정
 	 * 			2. kiosk set bound sharevar 에서 가져와 지정
 	 * 			3. diaog -> static 
@@ -70,32 +70,32 @@ public class SelectMenu extends JDialog {
 		lbl_pageTitle.setBounds(295, 10, 250, 100);
 
 		contentPanel.add(lbl_pageTitle);
-
-		JLabel lbl_pageTitle_1 = new JLabel("");
-		lbl_pageTitle_1
+		//영화예매 아이콘
+		JLabel BtnMoviePurchase = new JLabel("");
+		BtnMoviePurchase
 				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화예매Icon.png")));
-		lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
+		BtnMoviePurchase.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				goToSelectAge();
 			}
 		});
-		lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
-		lbl_pageTitle_1.setBounds(80, 150, 280, 250);
-		contentPanel.add(lbl_pageTitle_1);
-
-		JLabel lbl_pageTitle_1_1 = new JLabel("");
-		lbl_pageTitle_1_1.addMouseListener(new MouseAdapter() {
+		BtnMoviePurchase.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
+		BtnMoviePurchase.setBounds(91, 200, 284, 319);
+		contentPanel.add(BtnMoviePurchase);
+		//예매내역 아이콘
+		JLabel BtnPurchaseList = new JLabel("");
+		BtnPurchaseList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				goToOrderCheck();
 			}
 		});
-		lbl_pageTitle_1_1
+		BtnPurchaseList
 				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/예매내역Icon.png")));
-		lbl_pageTitle_1_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
-		lbl_pageTitle_1_1.setBounds(440, 150, 280, 250);
-		contentPanel.add(lbl_pageTitle_1_1);
+		BtnPurchaseList.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
+		BtnPurchaseList.setBounds(429, 200, 284, 319);
+		contentPanel.add(BtnPurchaseList);
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
