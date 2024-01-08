@@ -31,6 +31,22 @@ public class DtoLCY {
 		this.made_in = made_in;
 		this.rel_state = rel_status;
 	}
+	
+	public DtoLCY(String movie_title, String director, String actor, String dist_company,
+				  String genre, String film_rating, String made_in, String movie_desc,
+				  Date rel_date, Date over_date, String rel_state) {
+		this.movie_title = movie_title;
+		this.director = director;
+		this.actor = actor;
+		this.dist_company = dist_company;
+		this.genre = genre;
+		this.film_rating = film_rating;
+		this.made_in = made_in;
+		this.movie_desc = movie_desc;
+		this.rel_date = rel_date;
+		this.over_date = over_date;
+		this.rel_state = rel_state;
+	}
 
 	public String getMovie_title() {
 		return movie_title;
