@@ -7,6 +7,8 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.xy.XYBarDataset;
+import org.jfree.data.xy.XYSeries;
 
 
 	// 차트에 대한 rnd, 일단은 선그래프만 나오지만 bar그래프로 바꿀 수도 있게 해볼 예정
@@ -26,7 +28,7 @@ public class ChartExample extends JFrame {
     }
 
     private CategoryDataset createDataset() {
-        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset(); // DefaultCategoryDataset이 아닌 다른 Class를 고르면 dataset표현방법을 바꿀 수 있음.
 
         // 데이터 추가
         dataset.addValue(1.0, "Series1", "Category1");
