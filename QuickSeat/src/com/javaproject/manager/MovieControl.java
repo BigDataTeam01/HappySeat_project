@@ -7,8 +7,12 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.managerfunction.DaoMovieControl;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JLabel;
@@ -17,6 +21,8 @@ import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 import javax.swing.ImageIcon;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MovieControl extends JDialog {
 	
@@ -30,7 +36,7 @@ public class MovieControl extends JDialog {
 	 * Date : 2024-01-05 , 16:07
 	 */
 
-
+	private final DefaultTableModel outerTable = new DefaultTableModel();
 	private static final long serialVersionUID = 1L;
 	private JTable innerTable;
 	private JTextField tfMovieTitle;
@@ -59,6 +65,12 @@ public class MovieControl extends JDialog {
 	 * Create the dialog.
 	 */
 	public MovieControl() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				tableInit();
+			}
+		});
 		setTitle("영화 등록 및 수정");
 		setBounds(ShareVar.managerXlocation,ShareVar.managerYlocation,ShareVar.managerXsize,ShareVar.managerYsize);
 		getContentPane().setLayout(null);
@@ -69,6 +81,7 @@ public class MovieControl extends JDialog {
 		
 		innerTable = new JTable();
 		scrollPane.setViewportView(innerTable);
+		innerTable.setModel(outerTable);
 		
 		JLabel lblNewLabel = new JLabel("영화 등록 및 수정");
 		lblNewLabel.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
@@ -204,4 +217,70 @@ public class MovieControl extends JDialog {
 		lblManagerBackGround.setBounds(0, 0, 800, 582);
 		getContentPane().add(lblManagerBackGround);
 	}
+	
+	
+	
+// ====================== Functions =====================================
+	
+	private void tableInit() { // Table 초기화 
+		outerTable.addColumn("영화제목");
+		outerTable.addColumn("배급사");
+		outerTable.addColumn("장르");
+		outerTable.addColumn("개봉일");
+		outerTable.addColumn("상영시간");
+		outerTable.addColumn("제작국가");
+		outerTable.addColumn("개봉상태");
+		outerTable.setColumnCount(7);
+		
+		int colNo = 0;
+		TableColumn col = innerTable.getColumnModel().getColumn(colNo);
+		int width = 60;
+		col.setPreferredWidth(width);
+		
+		colNo = 1;
+		col = innerTable.getColumnModel().getColumn(colNo);
+		width = 60;
+		col.setPreferredWidth(width);
+		
+		colNo = 2;
+		col = innerTable.getColumnModel().getColumn(colNo);
+		width = 40;
+		col.setPreferredWidth(width);
+		
+		colNo = 3;
+		col = innerTable.getColumnModel().getColumn(colNo);
+		width = 70;
+		col.setPreferredWidth(width);
+		
+		colNo = 4;
+		col = innerTable.getColumnModel().getColumn(colNo);
+		width = 50;
+		col.setPreferredWidth(width);
+		
+		colNo = 5;
+		col = innerTable.getColumnModel().getColumn(colNo);
+		width = 55;
+		col.setPreferredWidth(width);
+		
+		colNo = 6;
+		col = innerTable.getColumnModel().getColumn(colNo);
+		width = 60;
+		col.setPreferredWidth(width);
+		
+		innerTable.setAutoResizeMode(innerTable.AUTO_RESIZE_OFF);
+		
+		// Table Row Delete
+		int i = outerTable.getRowCount();
+		for(int j=0; j<i; j++) {
+			outerTable.removeRow(0);
+		}
+	}
+
+//	private void tableClick() {
+//		int i = innerTable.getSelectedRow();
+//		String tkSequence = (String) innerTable.getValueAt(i, 0);
+//		
+//		DaoMovieControl dao = new dao(tkSequence);
+//	}
+	
 } // End
