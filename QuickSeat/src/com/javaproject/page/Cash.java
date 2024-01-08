@@ -14,6 +14,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import java.awt.Color;
 
 public class Cash extends JDialog {
 
@@ -30,8 +32,11 @@ public class Cash extends JDialog {
 	 * Launch the application.
 	 */
 	
-	
+	private static  SelectMenu selectMenu = new SelectMenu();
 	private static SelectPayment selectPayment = new SelectPayment();
+	private JLabel lblNewLabel;
+	private JTextField textField;
+	private JTextField textField_1;
 	
 	
 	
@@ -57,21 +62,62 @@ public class Cash extends JDialog {
 		contentPanel.setLayout(null);
 		// 화면 제목
 		JLabel lbl_pageTitle = new JLabel("현금 결제");
-		lbl_pageTitle.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
+		lbl_pageTitle.setFont(new Font("BM Dohyeon", Font.PLAIN, 50));
 
-		lbl_pageTitle.setBounds(297, 13, 250, 100);
+		lbl_pageTitle.setBounds(275, 43, 250, 100);
 
 		contentPanel.add(lbl_pageTitle);
-		
-		JButton btnNewButton = new JButton("");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				goToSelectPayment();
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToHome();
 			}
 		});
-		btnNewButton.setIcon(new ImageIcon(Cash.class.getResource("/com/javaproject/image/결제방법 선택으로가기.png")));
-		btnNewButton.setBounds(65, 449, 660, 100);
-		contentPanel.add(btnNewButton);
+		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setBounds(628, 38, 172, 130);
+		contentPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToBack();
+			}
+		});
+		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setBounds(11, 39, 161, 130);
+		contentPanel.add(lblNewLabel_2);
+		contentPanel.add(getLblNewLabel());
+		contentPanel.add(getTextField());
+		
+		JLabel lblNewLabel_3 = new JLabel("New label");
+		lblNewLabel_3.setIcon(new ImageIcon(Cash.class.getResource("/com/javaproject/image/CashPayMoney.png")));
+		lblNewLabel_3.setBounds(43, 312, 414, 249);
+		contentPanel.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_4 = new JLabel("투입하신 금액");
+		lblNewLabel_4.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
+		lblNewLabel_4.setBounds(511, 203, 250, 100);
+		contentPanel.add(lblNewLabel_4);
+		
+		textField_1 = new JTextField();
+		textField_1.setBackground(new Color(255, 255, 204));
+		textField_1.setEditable(false);
+		textField_1.setColumns(10);
+		textField_1.setBounds(539, 281, 180, 60);
+		contentPanel.add(textField_1);
+		
+		JLabel lblNewLabel_5 = new JLabel("");
+		lblNewLabel_5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToBack();
+			}
+		});
+		lblNewLabel_5.setIcon(new ImageIcon(Cash.class.getResource("/com/javaproject/image/cashMoneyCancle.png")));
+		lblNewLabel_5.setBounds(490, 456, 285, 115);
+		contentPanel.add(lblNewLabel_5);
 		//키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(
@@ -79,12 +125,35 @@ public class Cash extends JDialog {
 		lbl_backGround.setBounds(6, 6, 800, 600);
 		contentPanel.add(lbl_backGround);
 	}
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("결제 금액");
+			lblNewLabel.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
+			lblNewLabel.setBounds(161, 166, 180, 100);
+		}
+		return lblNewLabel;
+	}
+	private JTextField getTextField() {
+		if (textField == null) {
+			textField = new JTextField();
+			textField.setBackground(new Color(255, 255, 204));
+			textField.setEditable(false);
+			textField.setBounds(161, 245, 180, 60);
+			textField.setColumns(10);
+		}
+		return textField;
+	}
+	//메인 화면으로 돌아가는기능 구현
+	private void goToHome() {
+		dispose();
+		selectMenu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectMenu.setVisible(true);
+	}
 	
-	private void goToSelectPayment() {
+	// 이전 화면으로 돌아가는 기능 구현
+	private void goToBack() {
 		dispose();
 		selectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectPayment.setVisible(true);
 	}
-	
-	
 }//End

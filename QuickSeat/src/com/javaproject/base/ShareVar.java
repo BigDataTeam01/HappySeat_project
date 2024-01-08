@@ -22,6 +22,9 @@ public class ShareVar {
 	 * 
 	 */
 	
+	public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static String dbUser = "root";
+	public static String dbPass = "qwer1234";
 	
 	//manager page gui siz
 	public static int managerXsize = 800;
@@ -71,6 +74,8 @@ public class ShareVar {
 	
 	
 	
+	public static int filename = 0;
+	public static int image = 0;
 	/////-------포스터 이미지 규격
 	public static int poster_width = 380;
 	public static int poster_hight = 450;
