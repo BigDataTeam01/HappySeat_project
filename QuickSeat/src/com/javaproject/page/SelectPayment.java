@@ -31,11 +31,15 @@ public class SelectPayment extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-
-	private static SelectMenu selectMenudialog = new SelectMenu();
+	
+	
+	private static  SelectMenu selectMenu = new SelectMenu();
+	private static SelectPayment selectPayment = new SelectPayment();
+	private static ConfirmSeat confirmSeat = new ConfirmSeat();
 	private static Cash cash = new Cash();
 	private static Card card = new Card();
-	private static ConfirmSeat confirmSeat = new ConfirmSeat();
+	
+
 
 	public static void main(String[] args) {
 		try {
@@ -61,89 +65,97 @@ public class SelectPayment extends JDialog {
 		JLabel lblNewLabel = new JLabel("결제 방법");
 		lblNewLabel.setBounds(297, 13, 250, 100);
 		contentPanel.add(lblNewLabel);
-		// 첫화면 아이콘
 		lblNewLabel.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		JLabel lbl_pageTitle_1 = new JLabel("첫화면");
-		lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
+		
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				goToHome();
-				// 액션 넣기
 			}
 		});
-		lbl_pageTitle_1
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
-
-		lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-		lbl_pageTitle_1.setBounds(12, 30, 46, 68);
-		contentPanel.add(lbl_pageTitle_1);
+		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setBounds(628, 38, 172, 130);
+		contentPanel.add(lblNewLabel_1);
 		
-		JButton btnNewButton = new JButton("현금 결제");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goBack();
+			}
+		});
+		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setBounds(11, 39, 161, 130);
+		contentPanel.add(lblNewLabel_2);
+		
+		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
 				goToCash();
 			}
 		});
-		btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		btnNewButton.setBounds(50, 150, 300, 150);
-		contentPanel.add(btnNewButton);
+		lblNewLabel_3.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/cashPay.png")));
+		lblNewLabel_3.setBounds(57, 249, 310, 110);
+		contentPanel.add(lblNewLabel_3);
 		
-		JButton btnNewButton_1 = new JButton("문화누리카드");
-		btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				goToCard();
+		JLabel lblNewLabel_3_1 = new JLabel("");
+		lblNewLabel_3_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goTocard();
 			}
 		});
-		btnNewButton_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		btnNewButton_1.setBounds(445, 150, 300, 150);
-		contentPanel.add(btnNewButton_1);
+		lblNewLabel_3_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/CultureCard.png")));
+		lblNewLabel_3_1.setBounds(444, 249, 310, 110);
+		contentPanel.add(lblNewLabel_3_1);
 		
-		JButton btnNewButton_2 = new JButton("신용카드");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				goToCard();
+		JLabel lblNewLabel_3_2 = new JLabel("");
+		lblNewLabel_3_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goTocard();
 			}
 		});
-		btnNewButton_2.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		btnNewButton_2.setBounds(50, 346, 300, 150);
-		contentPanel.add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("이전화면");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				goToConfirmSeat();
-			}
-		});
-		btnNewButton_3.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		btnNewButton_3.setBounds(445, 346, 300, 150);
-		contentPanel.add(btnNewButton_3);
+		lblNewLabel_3_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/cardPay.png")));
+		lblNewLabel_3_2.setBounds(248, 419, 310, 110);
+		contentPanel.add(lblNewLabel_3_2);
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(
 				new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_backGround);
 	}
-
-	// ----------Function---------
+	
+	//------Function-------
+	
+	
+	//메인 화면으로 돌아가는기능 구현
 	private void goToHome() {
 		dispose();
-		selectMenudialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		selectMenudialog.setVisible(true);
+		selectMenu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectMenu.setVisible(true);
 	}
-	private void goToConfirmSeat() {
+	
+	// 이전 화면으로 돌아가는 기능 구현
+	private void goBack() {
 		dispose();
 		confirmSeat.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		confirmSeat.setVisible(true);
 	}
+	
 	private void goToCash() {
 		dispose();
 		cash.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		cash.setVisible(true);
 	}
-	private void goToCard() {
+	private void goTocard() {
 		dispose();
 		card.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		card.setVisible(true);
 	}
 	
+	
+
 }// End
