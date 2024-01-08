@@ -38,6 +38,8 @@ public class ConfirmSeat extends JDialog {
 	private static SelectPayment selectpayment = new SelectPayment();
 	private static SelectMenu selectMenudialog = new SelectMenu();
 	private static SelectSeat SelectSeatdialog = new SelectSeat();
+	
+	private JLabel lblNewLabel;
 
 	public static void main(String[] args) {
 		try {
@@ -59,21 +61,6 @@ public class ConfirmSeat extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		// 첫화면 아이콘
-		JLabel lbl_pageTitle_1 = new JLabel("첫화면");
-		lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				goToHome();
-				// 액션 넣기
-			}
-		});
-		lbl_pageTitle_1
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
-
-		lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-		lbl_pageTitle_1.setBounds(12, 30, 46, 68);
-		contentPanel.add(lbl_pageTitle_1);
 		// 페이지 타이틀
 		JLabel lbl_pageTitle = new JLabel("좌석 확정");
 		lbl_pageTitle.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
@@ -81,28 +68,29 @@ public class ConfirmSeat extends JDialog {
 		lbl_pageTitle.setBounds(297, 13, 250, 100);
 
 		contentPanel.add(lbl_pageTitle);
-
-		JButton btnBuy = new JButton("구 매");
-		btnBuy.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				goPaymentConfirm();
+		// 첫화면으로 이전화면으로 버튼
+		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToHome();
 			}
 		});
-		btnBuy.setBackground(Color.WHITE);
-		btnBuy.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		btnBuy.setBounds(456, 405, 200, 100);
-		contentPanel.add(btnBuy);
-
-		JButton btnBack = new JButton("이전 화면");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				 goToSelectSeat();
+		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setBounds(628, 38, 172, 130);
+		contentPanel.add(lblNewLabel_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToBack();
 			}
 		});
-		btnBack.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		btnBack.setBackground(Color.WHITE);
-		btnBack.setBounds(144, 405, 200, 100);
-		contentPanel.add(btnBack);
+		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setBounds(11, 39, 161, 130);
+		contentPanel.add(lblNewLabel_2);
+		contentPanel.add(getLblNewLabel());
 
 		// 키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
@@ -111,22 +99,46 @@ public class ConfirmSeat extends JDialog {
 		lbl_backGround.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_backGround);
 	}
-	// ----------Function------------
-
-	private void goPaymentConfirm() {
+	private JLabel getLblNewLabel() {
+		if (lblNewLabel == null) {
+			lblNewLabel = new JLabel("");
+			lblNewLabel.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					goToSelectPayment();
+				}
+			});
+			lblNewLabel.setIcon(new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/BuyBtn.png")));
+			lblNewLabel.setBounds(149, 449, 510, 100);
+		}
+		return lblNewLabel;
+	}
+	//----Function----
+	// 결제 방법 창으로 넘어 가는 기능 구현
+	private void goToSelectPayment() {
 		dispose();
 		selectpayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectpayment.setVisible(true);
 	}
-	private void goToSelectSeat() {
+	// 처음으로 돌아가는 기능 구현
+	private void goToBack() {
 		dispose();
 		SelectSeatdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectSeatdialog.setVisible(true);
+		
 	}
+	// 이전으로 돌아가는 기능 구현
 	private void goToHome() {
-	    dispose();
-	    selectMenudialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-	    selectMenudialog.setVisible(true);
+		dispose();
+		selectMenudialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectMenudialog.setVisible(true);
+		
 	}
-
+	
+	
+	
+	
+	
+	
+	
 }// End
