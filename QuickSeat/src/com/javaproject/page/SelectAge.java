@@ -202,8 +202,6 @@ public class SelectAge extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 		}
 	}
-<<<<<<< HEAD
-=======
 	
 	
 	//첫화면으로 가기
@@ -213,7 +211,6 @@ public class SelectAge extends JDialog {
 		SelectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
 	}
->>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 	//전화면으로 가기
 	public void goToOrderCancle() {
 		dispose();

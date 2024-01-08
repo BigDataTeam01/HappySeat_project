@@ -78,46 +78,25 @@ public class SelectHeadCount extends JDialog {
 			lbl_pageTitle.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, ShareVar.kiosk_title_font_size));
 
 			contentPanel.add(lbl_pageTitle);
-			// 첫화면 아이콘
-			JLabel lbl_pageTitle_1 = new JLabel("첫화면");
-			lbl_pageTitle_1.setBounds(12, 30, 46, 68);
-			lbl_pageTitle_1.addMouseListener(new MouseAdapter() {
+			JLabel lblNewLabel_1 = new JLabel("");
+			lblNewLabel_1.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					goToSelectMenu();
 				}
 			});
-			lbl_pageTitle_1
-					.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
-
-			lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
-			contentPanel.add(lbl_pageTitle_1);
-			// 이전화면으로 가기
-			JLabel BtnBackToPrevious = new JLabel("");
-			BtnBackToPrevious.addMouseListener(new MouseAdapter() {
+			lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+			lblNewLabel_1.setBounds(628, 38, 172, 130);
+			contentPanel.add(lblNewLabel_1);
+			
+			JLabel lblNewLabel_2 = new JLabel("");
+			lblNewLabel_2.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					goToSelectTime();
 				}
 			});
-
-			BtnBackToPrevious
-					.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
-			BtnBackToPrevious.setBounds(295, 441, 200, 100);
-			contentPanel.add(BtnBackToPrevious);
-			// 영화좌석선택으로 가기
-			JLabel BtnConfirmHeadCount = new JLabel("");
-			BtnConfirmHeadCount.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					goToSelectSeat();
-				}
-			});
-			BtnConfirmHeadCount
-					.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn입력완료.png")));
-
-			BtnConfirmHeadCount.setBounds(295, 318, 227, 100);
-			contentPanel.add(BtnConfirmHeadCount);
+			lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+			lblNewLabel_2.setBounds(11, 39, 161, 130);
+			contentPanel.add(lblNewLabel_2);
 			// 배경화면
 			JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 			lbl_background.setIcon(new ImageIcon(
@@ -126,31 +105,6 @@ public class SelectHeadCount extends JDialog {
 			contentPanel.add(lbl_background);
 
 		}
-	}
-
-//--------------------Function----------------------------
-	// 다음화면(영화좌석선택)로 가기
-	private void goToSelectSeat() {
-		dispose();
-		SelectHeadCountdialog.setVisible(false);
-		SelectHeadCountdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		SelectSeatdialog.setVisible(true);
-	}
-
-	// 이전화면(영화시간선택)으로 가기
-	private void goToSelectTime() {
-		dispose();
-		SelectHeadCountdialog.setVisible(false);
-		SelectHeadCountdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		SelectTimedialog.setVisible(true);
-	}
-
-	// 첫화면으로 가기
-	private void goToSelectMenu() {
-		dispose();
-		SelectHeadCountdialog.setVisible(false);
-		SelectHeadCountdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		selectMenudialog.setVisible(true);
 	}
 
 }// End

@@ -31,11 +31,15 @@ public class SelectPayment extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-
-	private static SelectMenu selectMenudialog = new SelectMenu();
+	
+	
+	private static  SelectMenu selectMenu = new SelectMenu();
+	private static SelectPayment selectPayment = new SelectPayment();
+	private static ConfirmSeat confirmSeat = new ConfirmSeat();
 	private static Cash cash = new Cash();
 	private static Card card = new Card();
-	private static ConfirmSeat confirmSeat = new ConfirmSeat();
+	
+
 
 	public static void main(String[] args) {
 		try {
@@ -64,26 +68,56 @@ public class SelectPayment extends JDialog {
 		lblNewLabel.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
 		
 		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToHome();
+			}
+		});
 		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
 		lblNewLabel_1.setBounds(628, 38, 172, 130);
 		contentPanel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goBack();
+			}
+		});
 		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
 		lblNewLabel_2.setBounds(11, 39, 161, 130);
 		contentPanel.add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
+		lblNewLabel_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToCash();
+			}
+		});
 		lblNewLabel_3.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/cashPay.png")));
 		lblNewLabel_3.setBounds(57, 249, 310, 110);
 		contentPanel.add(lblNewLabel_3);
 		
 		JLabel lblNewLabel_3_1 = new JLabel("");
+		lblNewLabel_3_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goTocard();
+			}
+		});
 		lblNewLabel_3_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/CultureCard.png")));
 		lblNewLabel_3_1.setBounds(444, 249, 310, 110);
 		contentPanel.add(lblNewLabel_3_1);
 		
 		JLabel lblNewLabel_3_2 = new JLabel("");
+		lblNewLabel_3_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goTocard();
+			}
+		});
 		lblNewLabel_3_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/cardPay.png")));
 		lblNewLabel_3_2.setBounds(248, 419, 310, 110);
 		contentPanel.add(lblNewLabel_3_2);
@@ -93,5 +127,35 @@ public class SelectPayment extends JDialog {
 		lbl_backGround.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_backGround);
 	}
+	
+	//------Function-------
+	
+	
+	//메인 화면으로 돌아가는기능 구현
+	private void goToHome() {
+		dispose();
+		selectMenu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectMenu.setVisible(true);
+	}
+	
+	// 이전 화면으로 돌아가는 기능 구현
+	private void goBack() {
+		dispose();
+		confirmSeat.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		confirmSeat.setVisible(true);
+	}
+	
+	private void goToCash() {
+		dispose();
+		cash.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		cash.setVisible(true);
+	}
+	private void goTocard() {
+		dispose();
+		card.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		card.setVisible(true);
+	}
+	
+	
 
 }// End

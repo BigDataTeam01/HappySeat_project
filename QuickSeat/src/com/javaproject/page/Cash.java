@@ -30,7 +30,7 @@ public class Cash extends JDialog {
 	 * Launch the application.
 	 */
 	
-	
+	private static  SelectMenu selectMenu = new SelectMenu();
 	private static SelectPayment selectPayment = new SelectPayment();
 	
 	
@@ -63,11 +63,23 @@ public class Cash extends JDialog {
 
 		contentPanel.add(lbl_pageTitle);
 		JLabel lblNewLabel_1 = new JLabel("");
+		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToHome();
+			}
+		});
 		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
 		lblNewLabel_1.setBounds(628, 38, 172, 130);
 		contentPanel.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goBack();
+			}
+		});
 		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
 		lblNewLabel_2.setBounds(11, 39, 161, 130);
 		contentPanel.add(lblNewLabel_2);
@@ -78,6 +90,21 @@ public class Cash extends JDialog {
 		lbl_backGround.setBounds(6, 6, 800, 600);
 		contentPanel.add(lbl_backGround);
 	}
+	//메인 화면으로 돌아가는기능 구현
+	private void goToHome() {
+		dispose();
+		selectMenu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectMenu.setVisible(true);
+	}
+	
+	// 이전 화면으로 돌아가는 기능 구현
+	private void goBack() {
+		dispose();
+		selectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectPayment.setVisible(true);
+	}
+	
+	
 	
 	
 }//End

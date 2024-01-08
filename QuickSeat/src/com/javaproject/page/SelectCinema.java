@@ -91,46 +91,6 @@ public class SelectCinema extends JDialog {
 										100);
 				
 				contentPanel.add(lbl_pageTitle);
-				
-				//극장선택 배경(총 4개)
-				JLabel lbl_CinemaBackGround1 = new JLabel("");
-				lbl_CinemaBackGround1.addMouseListener(new MouseAdapter() {
-					@Override
-					// 시간선택으로 가기
-					public void mouseClicked(MouseEvent e) {
-						goToSelectTime();
-					}
-				});
-				lbl_CinemaBackGround1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
-				lbl_CinemaBackGround1.setBounds(117, 98, 254, 132);
-				contentPanel.add(lbl_CinemaBackGround1);
-				
-				JLabel lbl_CinemaBackGround2 = new JLabel("");
-				lbl_CinemaBackGround2.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
-				lbl_CinemaBackGround2.setBounds(429, 98, 254, 132);
-				contentPanel.add(lbl_CinemaBackGround2);
-				
-				JLabel lbl_CinemaBackGround3 = new JLabel("");
-				lbl_CinemaBackGround3.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
-				lbl_CinemaBackGround3.setBounds(117, 256, 254, 132);
-				contentPanel.add(lbl_CinemaBackGround3);
-				
-				JLabel lbl_CinemaBackGround4 = new JLabel("");
-				lbl_CinemaBackGround4.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
-				lbl_CinemaBackGround4.setBounds(429, 256, 254, 132);
-				contentPanel.add(lbl_CinemaBackGround4);
-				
-				//이전화면으로 가기
-				JLabel BtnBackToPrevious = new JLabel("");
-				BtnBackToPrevious.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						goToMovieInformation();
-					}
-				});
-				BtnBackToPrevious.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
-				BtnBackToPrevious.setBounds(295, 441, 200, 100);
-				contentPanel.add(BtnBackToPrevious);
 				JLabel lblNewLabel_1 = new JLabel("");
 				lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
 				lblNewLabel_1.setBounds(628, 38, 172, 130);
@@ -149,23 +109,6 @@ public class SelectCinema extends JDialog {
 				contentPanel.add(lbl_background);
 		}
 	}
-//--------------------Function--------------------------
-	//다음화면(시간선택)로 가기
-	private void goToSelectTime() {
-		dispose();
-		SelectCinemadialog.setVisible(false);
-		SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		SelectTimedialog.setVisible(true);
-	}
-	//이전화면(영화정보)으로 가기
-	private void goToMovieInformation() {
-		dispose();
-		SelectCinemadialog.setVisible(false);
-		SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		MovieInformationdialog.setVisible(true);
-	}
-<<<<<<< HEAD
-=======
 	//첫화면으로 가기
 		private void goToSelectMenu() {
 			dispose();
@@ -173,6 +116,5 @@ public class SelectCinema extends JDialog {
 			SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			selectMenudialog.setVisible(true);
 		}
->>>>>>> d4df7ed6a56e40630e34ee9b4f15c8a34760699e
 	
 }//End
