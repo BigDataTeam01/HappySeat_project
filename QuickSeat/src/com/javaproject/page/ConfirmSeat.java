@@ -36,8 +36,8 @@ public class ConfirmSeat extends JDialog {
 	 * Launch the application.
 	 */
 	private static SelectPayment selectpayment = new SelectPayment();
-	private static SelectMenu selectMenudialog = new SelectMenu();
-	private static SelectSeat SelectSeatdialog = new SelectSeat();
+	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
+	private static Page8_SelectSeat SelectSeatdialog = new Page8_SelectSeat();
 	
 	private JLabel lblNewLabel;
 

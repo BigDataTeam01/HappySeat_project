@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 
-public class SelectAge extends JDialog {
+public class Page2_SelectAge extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -38,9 +38,9 @@ public class SelectAge extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static SelectMenu SelectAgedialog = new SelectMenu();
-	private static SelectMenu selectMenudialog = new SelectMenu();
-	private static SelectMovie SelectMoviedialog = new SelectMovie();
+	private static Page1_SelectMenu SelectAgedialog = new Page1_SelectMenu();
+	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
+	private static Page3_SelectMovie SelectMoviedialog = new Page3_SelectMovie();
 
 	public static void main(String[] args) {
 		try {
@@ -54,7 +54,7 @@ public class SelectAge extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SelectAge() {
+	public Page2_SelectAge() {
 		setTitle("연령 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 

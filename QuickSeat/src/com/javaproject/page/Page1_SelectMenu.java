@@ -15,7 +15,7 @@ import com.javaproject.base.ShareVar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class SelectMenu extends JDialog {
+public class Page1_SelectMenu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -38,8 +38,8 @@ public class SelectMenu extends JDialog {
 	 * Launch the application.
 	 */
 	// 페이지 선언
-	private static SelectMenu selectMenudialog = new SelectMenu();
-	private static SelectAge SelectAgedialog = new SelectAge();
+	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
+	private static Page2_SelectAge SelectAgedialog = new Page2_SelectAge();
 	private static OrderCheck OrderCheckdialog = new OrderCheck();
 
 	public static void main(String[] args) {
@@ -54,7 +54,7 @@ public class SelectMenu extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SelectMenu() {
+	public Page1_SelectMenu() {
 		setTitle("메뉴선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 

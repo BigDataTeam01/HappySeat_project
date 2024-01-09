@@ -33,8 +33,8 @@ public class SelectPayment extends JDialog {
 	 */
 	
 	
-	private static  SelectMenu selectMenu = new SelectMenu();
-	private static SelectPayment selectPayment = new SelectPayment();
+	private static  Page1_SelectMenu selectMenu = new Page1_SelectMenu();
+//	private static SelectPayment selectPayment = new SelectPayment();
 	private static ConfirmSeat confirmSeat = new ConfirmSeat();
 	private static Cash cash = new Cash();
 	private static Card card = new Card();
