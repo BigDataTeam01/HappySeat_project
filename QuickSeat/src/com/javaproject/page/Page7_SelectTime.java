@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 
-public class Page6_SelectTime extends JDialog {
+public class Page7_SelectTime extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -42,10 +42,10 @@ public class Page6_SelectTime extends JDialog {
 	 * Launch the application.
 	 */
 
-	private static Page6_SelectTime SelectTimedialog = new Page6_SelectTime();
-	private static Page5_SelectCinema SelectCinemadialog = new Page5_SelectCinema();
-	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
-	private static Page7_SelectHeadCount SelectHeadCountdialog = new Page7_SelectHeadCount();
+	private static Page7_SelectTime SelectTimedialog = new Page7_SelectTime();
+	private static Page6_SelectCinema SelectCinemadialog = new Page6_SelectCinema();
+	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
+	private static Page8_SelectHeadCount SelectHeadCountdialog = new Page8_SelectHeadCount();
 
 	public static void main(String[] args) {
 		try {
@@ -59,7 +59,7 @@ public class Page6_SelectTime extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page6_SelectTime() {
+	public Page7_SelectTime() {
 		// 타이틀 설정
 		setTitle("시간 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
@@ -72,7 +72,7 @@ public class Page6_SelectTime extends JDialog {
 		JLabel lbl_PreviousMovie = new JLabel("");
 		lbl_PreviousMovie.setBounds(103, 503, 260, 50);
 		lbl_PreviousMovie
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
 		contentPanel.add(lbl_PreviousMovie);
 
 //	페이지 타이틀 
@@ -93,7 +93,7 @@ public class Page6_SelectTime extends JDialog {
 			}
 		});
 		lbl_pageTitle_1
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
 		lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
 		contentPanel.add(lbl_pageTitle_1);
@@ -108,7 +108,7 @@ public class Page6_SelectTime extends JDialog {
 			}
 		});
 		lbl_MovieBackGround1
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_MovieBackGround1);
 
 		JLabel lbl_MovieBackGround2 = new JLabel("");
@@ -120,7 +120,7 @@ public class Page6_SelectTime extends JDialog {
 			}
 		});
 		lbl_MovieBackGround2
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_MovieBackGround2);
 
 		JLabel lbl_MovieBackGround3 = new JLabel("");
@@ -132,7 +132,7 @@ public class Page6_SelectTime extends JDialog {
 			}
 		});
 		lbl_MovieBackGround3
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_MovieBackGround3);
 
 		JLabel lbl_MovieBackGround4 = new JLabel("");
@@ -144,12 +144,12 @@ public class Page6_SelectTime extends JDialog {
 			}
 		});
 		lbl_MovieBackGround4
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_MovieBackGround4);
 		// 다음영화버튼
 		JLabel lbl_NextMovie = new JLabel("");
 		lbl_NextMovie.setBounds(561, 503, 198, 57);
-		lbl_NextMovie.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
+		lbl_NextMovie.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
 		contentPanel.add(lbl_NextMovie);
 
 		// 이전화면으로 가기
@@ -161,7 +161,7 @@ public class Page6_SelectTime extends JDialog {
 			}
 		});
 		BtnBackToPrevious
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 		BtnBackToPrevious.setBounds(6, 21, 170, 130);
 		contentPanel.add(BtnBackToPrevious);
 
@@ -169,7 +169,7 @@ public class Page6_SelectTime extends JDialog {
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 		lbl_background.setBounds(-16, 0, 800, 600);
 		lbl_background.setIcon(new ImageIcon(
-				MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		contentPanel.add(lbl_background);
 		{
 			JPanel buttonPane = new JPanel();

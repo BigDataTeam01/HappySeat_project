@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import java.awt.Color;
 
-public class Cash extends JDialog {
+public class Page11_1_Cash extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -32,8 +32,8 @@ public class Cash extends JDialog {
 	 * Launch the application.
 	 */
 	
-	private static  Page1_SelectMenu selectMenu = new Page1_SelectMenu();
-	private static SelectPayment selectPayment = new SelectPayment();
+	private static  Page2_SelectMenu selectMenu = new Page2_SelectMenu();
+	private static Page11_0_SelectPayment page11_0_SelectPayment = new Page11_0_SelectPayment();
 	private JLabel lblNewLabel;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -42,7 +42,7 @@ public class Cash extends JDialog {
 	
 	public static void main(String[] args) {
 		try {
-			Cash dialog = new Cash();
+			Page11_1_Cash dialog = new Page11_1_Cash();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -53,7 +53,7 @@ public class Cash extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Cash() {
+	public Page11_1_Cash() {
 		setTitle("현금 결제");
 		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(new BorderLayout());
@@ -74,7 +74,7 @@ public class Cash extends JDialog {
 				goToHome();
 			}
 		});
-		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
 		lblNewLabel_1.setBounds(628, 38, 172, 130);
 		contentPanel.add(lblNewLabel_1);
 		
@@ -85,14 +85,14 @@ public class Cash extends JDialog {
 				goToBack();
 			}
 		});
-		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
 		lblNewLabel_2.setBounds(11, 39, 161, 130);
 		contentPanel.add(lblNewLabel_2);
 		contentPanel.add(getLblNewLabel());
 		contentPanel.add(getTextField());
 		
 		JLabel lblNewLabel_3 = new JLabel("New label");
-		lblNewLabel_3.setIcon(new ImageIcon(Cash.class.getResource("/com/javaproject/image/CashPayMoney.png")));
+		lblNewLabel_3.setIcon(new ImageIcon(Page11_1_Cash.class.getResource("/com/javaproject/image/CashPayMoney.png")));
 		lblNewLabel_3.setBounds(43, 312, 414, 249);
 		contentPanel.add(lblNewLabel_3);
 		
@@ -115,13 +115,13 @@ public class Cash extends JDialog {
 				goToBack();
 			}
 		});
-		lblNewLabel_5.setIcon(new ImageIcon(Cash.class.getResource("/com/javaproject/image/cashMoneyCancle.png")));
+		lblNewLabel_5.setIcon(new ImageIcon(Page11_1_Cash.class.getResource("/com/javaproject/image/cashMoneyCancle.png")));
 		lblNewLabel_5.setBounds(490, 456, 285, 115);
 		contentPanel.add(lblNewLabel_5);
 		//키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(
-				new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				new ImageIcon(Page10_ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(6, 6, 800, 600);
 		contentPanel.add(lbl_backGround);
 	}
@@ -153,7 +153,7 @@ public class Cash extends JDialog {
 	// 이전 화면으로 돌아가는 기능 구현
 	private void goToBack() {
 		dispose();
-		selectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		selectPayment.setVisible(true);
+		page11_0_SelectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		page11_0_SelectPayment.setVisible(true);
 	}
 }//End

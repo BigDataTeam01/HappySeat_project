@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 
-public class Page2_SelectAge extends JDialog {
+public class Page3_SelectAge extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -38,9 +38,9 @@ public class Page2_SelectAge extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page1_SelectMenu SelectAgedialog = new Page1_SelectMenu();
-	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
-	private static Page3_SelectMovie SelectMoviedialog = new Page3_SelectMovie();
+	private static Page2_SelectMenu SelectAgedialog = new Page2_SelectMenu();
+	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
+	private static Page4_SelectMovie SelectMoviedialog = new Page4_SelectMovie();
 
 	public static void main(String[] args) {
 		try {
@@ -54,7 +54,7 @@ public class Page2_SelectAge extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page2_SelectAge() {
+	public Page3_SelectAge() {
 		setTitle("연령 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 
@@ -73,7 +73,7 @@ public class Page2_SelectAge extends JDialog {
 			}
 		});
 		lbl_pageTitle_1
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
 		lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
 		lbl_pageTitle_1.setBounds(628, 17, 180, 130);
@@ -93,7 +93,7 @@ public class Page2_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		BtnUnder10.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn10대 이하.png")));
+		BtnUnder10.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn10대 이하.png")));
 		BtnUnder10.setBounds(52, 192, 140, 110);
 		contentPanel.add(BtnUnder10);
 
@@ -105,7 +105,7 @@ public class Page2_SelectAge extends JDialog {
 			}
 		});
 
-		Btn20.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn20대.png")));
+		Btn20.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn20대.png")));
 		Btn20.setBounds(240, 192, 140, 110);
 		contentPanel.add(Btn20);
 
@@ -116,7 +116,7 @@ public class Page2_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn30.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn30대.png")));
+		Btn30.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn30대.png")));
 		Btn30.setBounds(427, 192, 140, 110);
 		contentPanel.add(Btn30);
 
@@ -127,7 +127,7 @@ public class Page2_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn40.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn40대.png")));
+		Btn40.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn40대.png")));
 		Btn40.setBounds(609, 192, 140, 110);
 		contentPanel.add(Btn40);
 
@@ -138,7 +138,7 @@ public class Page2_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn50.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn50대.png")));
+		Btn50.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn50대.png")));
 		Btn50.setBounds(52, 365, 140, 110);
 		contentPanel.add(Btn50);
 
@@ -149,7 +149,7 @@ public class Page2_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn60.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn60대.png")));
+		Btn60.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn60대.png")));
 		Btn60.setBounds(240, 365, 140, 110);
 		contentPanel.add(Btn60);
 
@@ -160,7 +160,7 @@ public class Page2_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn70.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn70대.png")));
+		Btn70.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn70대.png")));
 		Btn70.setBounds(427, 365, 140, 110);
 		contentPanel.add(Btn70);
 
@@ -171,7 +171,7 @@ public class Page2_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		BtnOver80.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn80대.png")));
+		BtnOver80.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn80대.png")));
 		BtnOver80.setBounds(615, 365, 140, 110);
 		contentPanel.add(BtnOver80);
 		// 이전으로버튼
@@ -182,14 +182,14 @@ public class Page2_SelectAge extends JDialog {
 				goToOrderCancle();
 			}
 		});
-		BtnBack.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+		BtnBack.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 		BtnBack.setBounds(11, 18, 170, 130);
 		contentPanel.add(BtnBack);
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 		lbl_background.setIcon(new ImageIcon(
-				MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_background.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_background);
 

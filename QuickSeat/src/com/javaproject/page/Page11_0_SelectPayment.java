@@ -15,7 +15,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class SelectPayment extends JDialog {
+public class Page11_0_SelectPayment extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -33,17 +33,17 @@ public class SelectPayment extends JDialog {
 	 */
 	
 	
-	private static  Page1_SelectMenu selectMenu = new Page1_SelectMenu();
-//	private static SelectPayment selectPayment = new SelectPayment();
-	private static ConfirmSeat confirmSeat = new ConfirmSeat();
-	private static Cash cash = new Cash();
-	private static Card card = new Card();
+	private static  Page2_SelectMenu selectMenu = new Page2_SelectMenu();
+//	private static Page11_0_SelectPayment selectPayment = new Page11_0_SelectPayment();
+	private static Page10_ConfirmSeat page10_ConfirmSeat = new Page10_ConfirmSeat();
+	private static Page11_1_Cash page11_1_Cash = new Page11_1_Cash();
+	private static Page11_2_Card page11_2_Card = new Page11_2_Card();
 	
 
 
 	public static void main(String[] args) {
 		try {
-			SelectPayment dialog = new SelectPayment();
+			Page11_0_SelectPayment dialog = new Page11_0_SelectPayment();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class SelectPayment extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SelectPayment() {
+	public Page11_0_SelectPayment() {
 		setTitle("결제 방법");
 		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(new BorderLayout());
@@ -74,7 +74,7 @@ public class SelectPayment extends JDialog {
 				goToHome();
 			}
 		});
-		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
 		lblNewLabel_1.setBounds(628, 38, 172, 130);
 		contentPanel.add(lblNewLabel_1);
 		
@@ -85,7 +85,7 @@ public class SelectPayment extends JDialog {
 				goBack();
 			}
 		});
-		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
 		lblNewLabel_2.setBounds(11, 39, 161, 130);
 		contentPanel.add(lblNewLabel_2);
 		
@@ -96,7 +96,7 @@ public class SelectPayment extends JDialog {
 				goToCash();
 			}
 		});
-		lblNewLabel_3.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/cashPay.png")));
+		lblNewLabel_3.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/cashPay.png")));
 		lblNewLabel_3.setBounds(57, 249, 310, 110);
 		contentPanel.add(lblNewLabel_3);
 		
@@ -107,7 +107,7 @@ public class SelectPayment extends JDialog {
 				goTocard();
 			}
 		});
-		lblNewLabel_3_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/CultureCard.png")));
+		lblNewLabel_3_1.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/CultureCard.png")));
 		lblNewLabel_3_1.setBounds(444, 249, 310, 110);
 		contentPanel.add(lblNewLabel_3_1);
 		
@@ -118,12 +118,12 @@ public class SelectPayment extends JDialog {
 				goTocard();
 			}
 		});
-		lblNewLabel_3_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/cardPay.png")));
+		lblNewLabel_3_2.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/cardPay.png")));
 		lblNewLabel_3_2.setBounds(248, 419, 310, 110);
 		contentPanel.add(lblNewLabel_3_2);
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(
-				new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				new ImageIcon(Page10_ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_backGround);
 	}
@@ -141,19 +141,19 @@ public class SelectPayment extends JDialog {
 	// 이전 화면으로 돌아가는 기능 구현
 	private void goBack() {
 		dispose();
-		confirmSeat.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		confirmSeat.setVisible(true);
+		page10_ConfirmSeat.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		page10_ConfirmSeat.setVisible(true);
 	}
 	
 	private void goToCash() {
 		dispose();
-		cash.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		cash.setVisible(true);
+		page11_1_Cash.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		page11_1_Cash.setVisible(true);
 	}
 	private void goTocard() {
 		dispose();
-		card.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		card.setVisible(true);
+		page11_2_Card.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		page11_2_Card.setVisible(true);
 	}
 	
 	

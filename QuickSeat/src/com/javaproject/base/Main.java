@@ -1,6 +1,6 @@
 package com.javaproject.base;
 
-import com.javaproject.page.MovieInformation;
+import com.javaproject.page.Page5_MovieInformation;
 
 public class Main {
 
@@ -23,10 +23,7 @@ public class Main {
 		 * 
 		 */
 		
-		MovieInformation testMovieInfor = new MovieInformation();
-		
-		testMovieInfor.testMovieInformation();
-		
+	
 		
 	}
 

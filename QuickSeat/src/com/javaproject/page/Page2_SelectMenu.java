@@ -15,14 +15,14 @@ import com.javaproject.base.ShareVar;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Page1_SelectMenu extends JDialog {
+public class Page2_SelectMenu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	/*
 	 * Description : 영화예매,예매내역 을 하기위한 메인페이지 
 	 * 				 1.SelectMenu에서 영화 예매을 터치했을시 SelectAge 화면으로 이동
-	 * 				 2.SelectMenu에서 구매 내역을 터치했을시  OrderCheck 화면으로 이동
+	 * 				 2.SelectMenu에서 구매 내역을 터치했을시  Page2_1_0_OrderCheck 화면으로 이동
 	 * Date : 2024.01.06 (토요일)
 	 * Author : 박정민,박지환
 	 * 
@@ -38,9 +38,9 @@ public class Page1_SelectMenu extends JDialog {
 	 * Launch the application.
 	 */
 	// 페이지 선언
-	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
-	private static Page2_SelectAge SelectAgedialog = new Page2_SelectAge();
-	private static OrderCheck OrderCheckdialog = new OrderCheck();
+	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
+	private static Page3_SelectAge SelectAgedialog = new Page3_SelectAge();
+	private static Page2_1_0_OrderCheck OrderCheckdialog = new Page2_1_0_OrderCheck();
 
 	public static void main(String[] args) {
 		try {
@@ -54,7 +54,7 @@ public class Page1_SelectMenu extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page1_SelectMenu() {
+	public Page2_SelectMenu() {
 		setTitle("메뉴선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 
@@ -73,7 +73,7 @@ public class Page1_SelectMenu extends JDialog {
 		//영화예매 아이콘
 		JLabel BtnMoviePurchase = new JLabel("");
 		BtnMoviePurchase
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화예매Icon.png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화예매Icon.png")));
 		BtnMoviePurchase.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -92,7 +92,7 @@ public class Page1_SelectMenu extends JDialog {
 			}
 		});
 		BtnPurchaseList
-				.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/예매내역Icon.png")));
+				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/예매내역Icon.png")));
 		BtnPurchaseList.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
 		BtnPurchaseList.setBounds(429, 200, 284, 319);
 		contentPanel.add(BtnPurchaseList);
@@ -100,7 +100,7 @@ public class Page1_SelectMenu extends JDialog {
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 		lbl_background.setIcon(new ImageIcon(
-				MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_background.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_background);
 
