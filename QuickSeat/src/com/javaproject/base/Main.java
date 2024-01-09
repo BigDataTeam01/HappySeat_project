@@ -25,7 +25,7 @@ public class Main {
 		
 		MovieInformation testMovieInfor = new MovieInformation();
 		
-		testMovieInfor.testMovieInformation();
+//		testMovieInfor.testMovieInformation();
 		
 		
 	}
