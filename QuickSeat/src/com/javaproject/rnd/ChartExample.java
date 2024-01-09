@@ -32,13 +32,13 @@ public class ChartExample extends JFrame {
 
 		// 그래프를 패널에 추가
 		ChartPanel chartPanel = new ChartPanel(chart);
-		chartPanel.setFont(new Font("배달의민족 도현", Font.PLAIN, 12));
+		chartPanel.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 		chartPanel.setPreferredSize(new java.awt.Dimension(560, 370));
 		setContentPane(chartPanel);
 
-		Font font = new Font("배달의민족 도현", Font.PLAIN, 12); // 원하는 폰트 및 스타일 설정
+		Font font = new Font("BM Dohyeon", Font.PLAIN, 12); // 원하는 폰트 및 스타일 설정
 		TextTitle chartTitle = chart.getTitle(); // 차트 제목 폰트 설정
-		Font titleFont = new Font("배달의민족 도현", Font.PLAIN, 20); // 원하는 폰트 및 스타일 설정
+		Font titleFont = new Font("BM Dohyeon", Font.PLAIN, 20); // 원하는 폰트 및 스타일 설정
 		chartTitle.setFont(titleFont);
 
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
