@@ -95,6 +95,7 @@ public class ManagerMain extends JDialog {
 		contentPanel.add(getLblNewLabel_5());
 		contentPanel.add(getLblManagerBackGround());
 	}
+	
 	private JLabel getLblMovieControl() {
 		if (lblMovieControl == null) {
 			lblMovieControl = new JLabel("");
@@ -109,6 +110,7 @@ public class ManagerMain extends JDialog {
 		}
 		return lblMovieControl;
 	}
+	
 	private JLabel getLblMovieSalesStatus() {
 		if (lblMovieSalesStatus == null) {
 			lblMovieSalesStatus = new JLabel("");
@@ -123,6 +125,7 @@ public class ManagerMain extends JDialog {
 		}
 		return lblMovieSalesStatus;
 	}
+	
 	private JLabel getLblMovieUserStatistics() {
 		if (lblMovieUserStatistics == null) {
 			lblMovieUserStatistics = new JLabel("");
