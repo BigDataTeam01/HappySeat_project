@@ -22,6 +22,7 @@ public class DtoLCY {
 		// TODO Auto-generated constructor stub
 	}
 	
+	// MovieSearchAction Method of DaoMovieControl Class 
 	public DtoLCY(String movie_title, String director, String genre, Date rel_date, String film_rating, String made_in, String rel_status) {
 		this.movie_title = movie_title;
 		this.director = director;
@@ -32,6 +33,7 @@ public class DtoLCY {
 		this.rel_state = rel_status;
 	}
 	
+	// TableClick Method of DaoMovieControl Class 
 	public DtoLCY(String movie_title, String director, String actor, String dist_company,
 				  String genre, String film_rating, String made_in, String movie_desc,
 				  Date rel_date, Date over_date, String rel_state) {
