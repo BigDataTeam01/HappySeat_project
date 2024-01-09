@@ -31,10 +31,8 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JEditorPane;
@@ -248,7 +246,6 @@ public class MovieControl extends JDialog {
 		getContentPane().add(lblNewLabel_1_1_1_1);
 		
 		tfActor = new JTextField();
-		tfActor.setHorizontalAlignment(SwingConstants.RIGHT);
 		tfActor.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 		tfActor.setColumns(10);
 		tfActor.setBounds(106, 130, 159, 21);
@@ -498,15 +495,13 @@ public class MovieControl extends JDialog {
 		
 		try {
 			dao.movieInsertAction();
-			JOptionPane.showMessageDialog(null, "영화 '"+ tfMovieTitle.getText().trim() + "'가 정상적으로 저장되었습니다.");
+			JOptionPane.showMessageDialog(null, "영화 '"+ tfMovieTitle.getText().trim() + "'가 정상적으로 등록되었습니다.");
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "InsertAction Error");
 		}
 	}
 	
 	private void movieUpdateAction() {
-		SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-		
 		String movie_title = tfMovieTitle.getText().trim();
 		String director = tfDirector.getText().trim();
 		String actor = tfActor.getText().trim();
@@ -534,7 +529,7 @@ public class MovieControl extends JDialog {
 		boolean result = dao.movieUpdateAction();
 		
 		if(result == true) {
-			JOptionPane.showMessageDialog(null, "영화 '"+ tfMovieTitle.getText().trim() + "'가 정상적으로 저장되었습니다.");
+			JOptionPane.showMessageDialog(null, "영화 '"+ tfMovieTitle.getText().trim() + "'가 정상적으로 수정되었습니다.");
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "입력 중 문제가 발생하였습니다.");
