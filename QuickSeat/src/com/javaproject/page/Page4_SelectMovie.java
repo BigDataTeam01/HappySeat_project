@@ -17,7 +17,7 @@ import java.awt.Font;
 
 import com.javaproject.base.ShareVar;
 
-public class Page3_SelectMovie extends JDialog {
+public class Page4_SelectMovie extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -42,14 +42,14 @@ public class Page3_SelectMovie extends JDialog {
 	 * Launch the application.
 	 */
 	
-	private static Page3_SelectMovie SelectMoviedialog = new Page3_SelectMovie();
-	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
-	private static MovieInformation MovieInformationdialog = new MovieInformation();
-	private static Page2_SelectAge SelectAgedialog = new Page2_SelectAge();
+	private static Page4_SelectMovie SelectMoviedialog = new Page4_SelectMovie();
+	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
+	private static Page5_MovieInformation MovieInformationdialog = new Page5_MovieInformation();
+	private static Page3_SelectAge SelectAgedialog = new Page3_SelectAge();
 	
 	public static void main(String[] args) {
 		try {
-			Page3_SelectMovie dialog = new Page3_SelectMovie();
+			Page4_SelectMovie dialog = new Page4_SelectMovie();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -60,7 +60,7 @@ public class Page3_SelectMovie extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page3_SelectMovie() {
+	public Page4_SelectMovie() {
 		setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 		setTitle("영화 선택");
 		setBounds(100, 100, 800, 600);
@@ -81,7 +81,7 @@ public class Page3_SelectMovie extends JDialog {
 			//이전화면, 다음화면 버튼
 			JLabel lbl_PreviousMovie = new JLabel("");
 			lbl_PreviousMovie.setBounds(103, 503, 260, 50);
-			lbl_PreviousMovie.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
+			lbl_PreviousMovie.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
 			contentPanel.add(lbl_PreviousMovie);
 		
 //		페이지 타이틀 
@@ -102,7 +102,7 @@ public class Page3_SelectMovie extends JDialog {
 					goToSelectMenu();
 				}
 			});
-			lbl_pageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+			lbl_pageTitle_1.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
 			lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
 			contentPanel.add(lbl_pageTitle_1);
@@ -116,7 +116,7 @@ public class Page3_SelectMovie extends JDialog {
 					goToMovieInformation();
 				}
 			});
-			lbl_MovieBackGround1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+			lbl_MovieBackGround1.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 			contentPanel.add(lbl_MovieBackGround1);
 			
 			JLabel lbl_MovieBackGround2 = new JLabel("");
@@ -128,7 +128,7 @@ public class Page3_SelectMovie extends JDialog {
 				}
 			});
 
-			lbl_MovieBackGround2.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+			lbl_MovieBackGround2.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 			contentPanel.add(lbl_MovieBackGround2);
 			
 			JLabel lbl_MovieBackGround3 = new JLabel("");
@@ -139,7 +139,7 @@ public class Page3_SelectMovie extends JDialog {
 					goToMovieInformation();
 				}
 			});
-			lbl_MovieBackGround3.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+			lbl_MovieBackGround3.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 			contentPanel.add(lbl_MovieBackGround3);
 			
 			JLabel lbl_MovieBackGround4 = new JLabel("");
@@ -150,13 +150,13 @@ public class Page3_SelectMovie extends JDialog {
 				}
 			});
 			lbl_MovieBackGround4.setBounds(425, 341, 254, 132);
-			lbl_MovieBackGround4.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+			lbl_MovieBackGround4.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 			contentPanel.add(lbl_MovieBackGround4);
 			
 			JLabel lbl_NextMovie = new JLabel("");
 			lbl_NextMovie.setBounds(561, 503, 198, 57);
 			
-			lbl_NextMovie.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
+			lbl_NextMovie.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
 			contentPanel.add(lbl_NextMovie);
 			
 			//이전화면으로 가기
@@ -167,14 +167,14 @@ public class Page3_SelectMovie extends JDialog {
 					goToSelectAge();
 				}
 			});
-			BtnBackToPrevious.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+			BtnBackToPrevious.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 			BtnBackToPrevious.setBounds(6, 21, 170, 130);
 			contentPanel.add(BtnBackToPrevious);
 			
 			//배경화면
 			JLabel lbl_background = new JLabel("",SwingConstants.CENTER);
 			lbl_background.setBounds(0, 0, 800, 600);
-			lbl_background.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+			lbl_background.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 			contentPanel.add(lbl_background);
 
 		{

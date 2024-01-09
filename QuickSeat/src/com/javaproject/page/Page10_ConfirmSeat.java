@@ -19,7 +19,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class ConfirmSeat extends JDialog {
+public class Page10_ConfirmSeat extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -35,15 +35,15 @@ public class ConfirmSeat extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static SelectPayment selectpayment = new SelectPayment();
-	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
-	private static Page8_SelectSeat SelectSeatdialog = new Page8_SelectSeat();
+	private static Page11_0_SelectPayment selectpayment = new Page11_0_SelectPayment();
+	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
+	private static Page9_SelectSeat SelectSeatdialog = new Page9_SelectSeat();
 	
 	private JLabel lblNewLabel;
 
 	public static void main(String[] args) {
 		try {
-			ConfirmSeat dialog = new ConfirmSeat();
+			Page10_ConfirmSeat dialog = new Page10_ConfirmSeat();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -54,7 +54,7 @@ public class ConfirmSeat extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ConfirmSeat() {
+	public Page10_ConfirmSeat() {
 		setTitle("좌석 확정");
 		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(new BorderLayout());
@@ -76,7 +76,7 @@ public class ConfirmSeat extends JDialog {
 				goToHome();
 			}
 		});
-		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
 		lblNewLabel_1.setBounds(628, 38, 172, 130);
 		contentPanel.add(lblNewLabel_1);
 		
@@ -87,7 +87,7 @@ public class ConfirmSeat extends JDialog {
 				goToBack();
 			}
 		});
-		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
 		lblNewLabel_2.setBounds(11, 39, 161, 130);
 		contentPanel.add(lblNewLabel_2);
 		contentPanel.add(getLblNewLabel());
@@ -95,7 +95,7 @@ public class ConfirmSeat extends JDialog {
 		// 키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(
-				new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				new ImageIcon(Page10_ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_backGround);
 	}
@@ -108,7 +108,7 @@ public class ConfirmSeat extends JDialog {
 					goToSelectPayment();
 				}
 			});
-			lblNewLabel.setIcon(new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/BuyBtn.png")));
+			lblNewLabel.setIcon(new ImageIcon(Page10_ConfirmSeat.class.getResource("/com/javaproject/image/BuyBtn.png")));
 			lblNewLabel.setBounds(149, 449, 510, 100);
 		}
 		return lblNewLabel;

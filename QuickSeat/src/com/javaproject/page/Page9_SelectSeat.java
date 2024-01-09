@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 
-public class Page8_SelectSeat extends JDialog {
+public class Page9_SelectSeat extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -42,14 +42,14 @@ public class Page8_SelectSeat extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page8_SelectSeat SelectSeatadialog = new Page8_SelectSeat();
-	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
-//	private static ConfirmSeat ConfirmSeatdialog = new ConfirmSeat();
-	private static Page7_SelectHeadCount SelectHeadCountdialog = new Page7_SelectHeadCount();
+	private static Page9_SelectSeat SelectSeatadialog = new Page9_SelectSeat();
+	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
+//	private static Page10_ConfirmSeat ConfirmSeatdialog = new Page10_ConfirmSeat();
+	private static Page8_SelectHeadCount SelectHeadCountdialog = new Page8_SelectHeadCount();
 
 	public static void main(String[] args) {
 		try {
-			Page8_SelectSeat dialog = new Page8_SelectSeat();
+			Page9_SelectSeat dialog = new Page9_SelectSeat();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -60,7 +60,7 @@ public class Page8_SelectSeat extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page8_SelectSeat() {
+	public Page9_SelectSeat() {
 		// 타이틀 설정
 		setTitle("극장 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
@@ -93,7 +93,7 @@ public class Page8_SelectSeat extends JDialog {
 			});
 			// 처음으로 버튼
 			lbl_pageTitle_1
-					.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+					.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
 			lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
 			lbl_pageTitle_1.setBounds(623, 20, 170, 130);
@@ -107,14 +107,14 @@ public class Page8_SelectSeat extends JDialog {
 				}
 			});
 			BtnBackToPrevious
-					.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+					.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 			BtnBackToPrevious.setBounds(6, 21, 170, 130);
 			contentPanel.add(BtnBackToPrevious);
 
 			// 배경화면
 			JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 			lbl_background.setIcon(new ImageIcon(
-					MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+					Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 			lbl_background.setBounds(-16, 0, 800, 600);
 			contentPanel.add(lbl_background);
 		}
