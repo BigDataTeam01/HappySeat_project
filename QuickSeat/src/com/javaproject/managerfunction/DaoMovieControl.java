@@ -1,6 +1,5 @@
 package com.javaproject.managerfunction;
 
-import java.awt.Image;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -8,14 +7,13 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-import javax.security.auth.login.AccountException;
-import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
-//import com.javalec.function.Dto;
 import com.javaproject.base.ShareVar;
 
 public class DaoMovieControl {
@@ -33,8 +31,8 @@ public class DaoMovieControl {
 	String made_in;
 	FileInputStream poster;
 	String movie_desc;
-	Date rel_date;
-	Date over_date;
+	String rel_date;
+	String over_date;
 	String rel_state;
 	
 	public DaoMovieControl() {
@@ -47,7 +45,24 @@ public class DaoMovieControl {
 	}
 	
 	
-	
+	public DaoMovieControl(String movie_title, String director, String actor, String dist_company, String genre,
+			String film_rating, String made_in, FileInputStream poster ,String movie_desc, String rel_date, String over_date, String rel_state) {
+		super();
+		this.movie_title = movie_title;
+		this.director = director;
+		this.actor = actor;
+		this.dist_company = dist_company;
+		this.genre = genre;
+		this.film_rating = film_rating;
+		this.made_in = made_in;
+		this.poster = poster;
+		this.movie_desc = movie_desc;
+		this.rel_date = rel_date;
+		this.over_date = over_date;
+		this.rel_state = rel_state;
+	}
+
+	// Movie Table에서 MovieControl의 innerTable로 목록 전달 
 	public ArrayList<DtoLCY> selectList() {
 		ArrayList<DtoLCY> dtoList = new ArrayList<DtoLCY>();
 		String where1 = "select m.movie_title, m.director, m.genre, m.rel_date, m.film_rating, m.made_in, m.rel_state ";
@@ -118,10 +133,6 @@ public class DaoMovieControl {
 				InputStream input = rs.getBinaryStream(8);
 				byte[] buffer = new byte[1024];
 				
-				ImageIcon icon = new ImageIcon(buffer);
-				Image img = icon.getImage();
-				Image changeImg = img.getScaledInstance(164, 278, Image.SCALE_SMOOTH);
-				
 				while(input.read(buffer) > 0) {
 					output.write(buffer);
 				}
@@ -138,5 +149,99 @@ public class DaoMovieControl {
 		return dto;
 	} 
 	
+	public boolean movieInsertAction() {
+		PreparedStatement ps = null;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			
+			String A = "Insert into movie (movie_title, director, actor, dist_company, genre, film_rating, made_in, poster, movie_desc, rel_date, over_date, rel_state)";
+			String B = " values (?,?,?,?,?,?,?,?,?,?,?,?)";
+			
+			ps = conn_mysql.prepareStatement(A+B);
+			ps.setString(1, movie_title);
+			ps.setString(2, director);
+			ps.setString(3, actor);
+			ps.setString(4, dist_company);
+			ps.setString(5, genre);
+			ps.setString(6, film_rating);
+			ps.setString(7, made_in);
+			ps.setBinaryStream(8, poster);
+			ps.setString(9, movie_desc);
+			ps.setString(10, rel_date);
+			ps.setString(11, over_date);
+			ps.setString(12, rel_state);
+			ps.executeUpdate();
+			
+			conn_mysql.close();
+			
+		}catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
 	
+	public boolean movieUpdateAction() {
+		PreparedStatement ps = null;
+		boolean result;
+		
+		String where1 = "Update movie set movie_title = ?, director = ?, actor = ?, dist_company = ?, genre = ?, film_rating = ?, "
+					  + "made_in = ?, poster = ?, movie_desc = ?, rel_date = ?, over_date = ?, rel_state = ?";
+		String where2 = " where movie_title = ?";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+//			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ps = conn_mysql.prepareStatement(where1+where2);
+			ps.setString(1, movie_title);
+			ps.setString(2, director);
+			ps.setString(3, actor);
+			ps.setString(4, dist_company);
+			ps.setString(5, genre);
+			ps.setString(6, film_rating);
+			ps.setString(7, made_in);
+			ps.setBinaryStream(8, poster);
+			ps.setString(9, movie_desc);
+			ps.setString(10, rel_date);
+			ps.setString(11, over_date);
+			ps.setString(12, rel_state);
+			ps.setString(13, movie_title);
+			ps.executeUpdate();
+			
+			conn_mysql.close();
+			
+		}catch(Exception e) {
+			result = false;
+		}
+		result = true;
+		return result;
+	}
+	
+	public int checkMovieTitle() {
+		int count = 0;
+		
+		String where1 = "select Count(movie_title) from movie ";
+		String where2 = "where movie_title = '" + movie_title + "'";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ResultSet rs = stmt_mysql.executeQuery(where1+where2);
+			
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+			conn_mysql.close();
+			
+		}catch(Exception e) {
+			JOptionPane.showInternalMessageDialog(null, "check Movie_Title Error");
+		}
+		return count;
+	}
 }

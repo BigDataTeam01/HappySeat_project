@@ -84,6 +84,8 @@ public class ShareVar {
 		lblPoster.setBounds(34, 101, ShareVar.poster_width, ShareVar.poster_hight);
 	*/
 	
+	// 관리자 아이디 저장공간
+	public static String managerID = "";
 	
 	
 	// constructor
