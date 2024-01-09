@@ -325,6 +325,8 @@ public class MovieControl extends JDialog {
 			btnInit.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					clearMovieColumn();
+					movieTableInit();
+					movieSearchAction();
 				}
 			});
 			btnInit.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
@@ -333,6 +335,34 @@ public class MovieControl extends JDialog {
 		return btnInit;
 	}
 	
+	private JButton getBtnFilePath() {
+		if (btnFilePath == null) {
+			btnFilePath = new JButton("파일경로");
+			btnFilePath.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					filePath();
+				}
+			});
+			btnFilePath.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
+			btnFilePath.setBounds(352, 364, 86, 23);
+		}
+		return btnFilePath;
+	}
+	private JScrollPane getScrollPane_1() {
+		if (scrollPane_1 == null) {
+			scrollPane_1 = new JScrollPane();
+			scrollPane_1.setBounds(29, 390, 402, 135);
+			scrollPane_1.setViewportView(getEditorPane());
+		}
+		return scrollPane_1;
+	}
+	private JEditorPane getEditorPane() {
+		if (epMovieDesc == null) {
+			epMovieDesc = new JEditorPane();
+			epMovieDesc.setFont(new Font("BM Dohyeon",Font.PLAIN,15));
+		}
+		return epMovieDesc;
+	}
 // ====================== Functions =====================================
 	
 	private void movieTableInit() { // Table 초기화 
@@ -443,13 +473,13 @@ public class MovieControl extends JDialog {
 		lblPosterImage.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		File file = new File(filePath);
-		file.delete();
+//		file.delete();
 		
 		cbFilmRating.removeItem("");
 		cbRelState.removeItem("");
 	}
 	
-	private void clearMovieColumn() {
+	private void clearMovieColumn() { // tf,cb 전부 초기화 
 		tfMovieTitle.setText("");
 		tfDirector.setText("");
 		tfActor.setText("");
@@ -467,7 +497,7 @@ public class MovieControl extends JDialog {
 		tfPosterPath.setText("");
 	}
 	
-	private void movieInsertAction() {
+	private void movieInsertAction() { // movie Table DB에 새로 입력. 
 		String movie_title = tfMovieTitle.getText().trim();
 		String director = tfDirector.getText().trim();
 		String actor = tfActor.getText().trim();
@@ -482,7 +512,7 @@ public class MovieControl extends JDialog {
 		
 		// Image
 		FileInputStream input = null;
-		File file = new File(tfPosterPath.getText());
+		File file = new File(tfPosterPath.getText().trim());
 		try {
 			input = new FileInputStream(file);
 			
@@ -501,7 +531,7 @@ public class MovieControl extends JDialog {
 		}
 	}
 	
-	private void movieUpdateAction() {
+	private void movieUpdateAction() { // Movie Table DB 수정. 
 		String movie_title = tfMovieTitle.getText().trim();
 		String director = tfDirector.getText().trim();
 		String actor = tfActor.getText().trim();
@@ -514,9 +544,8 @@ public class MovieControl extends JDialog {
 		String rel_state = cbRelState.getSelectedItem().toString().trim();
 		String movie_desc = epMovieDesc.getText().trim();
 		
-		// Image
+		// Image 처리
 		FileInputStream input = null;
-		
 		File file = new File(tfPosterPath.getText().trim());
 		try {
 			input = new FileInputStream(file);
@@ -536,12 +565,14 @@ public class MovieControl extends JDialog {
 		}
 	}
 	
-	private void checkMovie_Title() {
+	private void checkMovie_Title() { // 완료 btn을 눌렀을 때,
 		DaoMovieControl dao = new DaoMovieControl(tfMovieTitle.getText().trim());
 		int movieCount = 0;
+		// checkMovieTitle Method를 호출하여 where = 영화 제목으로 DB에서 검색, 있으면 1 없으면 0.
 		movieCount = dao.checkMovieTitle();
 		
 		if(movieCount == 0) {
+			// movieCount가 0이면 DB에 중복되는 영화제목이 없음.
 			movieInsertAction();
 		}
 		if(movieCount == 1) {
@@ -549,7 +580,8 @@ public class MovieControl extends JDialog {
 		}
 	}
 	
-	private void filePath() {
+	
+	private void filePath() { // lblPosterImage에 파일첨부 btn을 눌렀을 때, 실행되는 Method 
 		JFileChooser chooser = new JFileChooser();
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("JPG","PNG","BMP","jpg","png","bmp");
 		chooser.setFileFilter(filter);
@@ -565,33 +597,5 @@ public class MovieControl extends JDialog {
 		tfPosterPath.setText(filePath);
 		lblPosterImage.setIcon(new ImageIcon(filePath));
 		lblPosterImage.setHorizontalAlignment(SwingConstants.CENTER);
-	}
-	private JButton getBtnFilePath() {
-		if (btnFilePath == null) {
-			btnFilePath = new JButton("파일경로");
-			btnFilePath.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					filePath();
-				}
-			});
-			btnFilePath.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
-			btnFilePath.setBounds(352, 364, 86, 23);
-		}
-		return btnFilePath;
-	}
-	private JScrollPane getScrollPane_1() {
-		if (scrollPane_1 == null) {
-			scrollPane_1 = new JScrollPane();
-			scrollPane_1.setBounds(29, 390, 402, 135);
-			scrollPane_1.setViewportView(getEditorPane());
-		}
-		return scrollPane_1;
-	}
-	private JEditorPane getEditorPane() {
-		if (epMovieDesc == null) {
-			epMovieDesc = new JEditorPane();
-			epMovieDesc.setFont(new Font("BM Dohyeon",Font.PLAIN,15));
-		}
-		return epMovieDesc;
 	}
 } // End
