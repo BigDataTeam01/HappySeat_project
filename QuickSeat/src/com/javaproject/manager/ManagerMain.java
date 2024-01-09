@@ -15,6 +15,8 @@ import java.awt.event.MouseEvent;
 import javax.swing.ImageIcon;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ManagerMain extends JDialog {
 
@@ -45,7 +47,7 @@ public class ManagerMain extends JDialog {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_4;
 	private JLabel lblScreenControl;
-	private JLabel lblNewLabel_5;
+	private JLabel lblAdminID;
 
 	/**
 	 * Launch the application.
@@ -62,6 +64,12 @@ public class ManagerMain extends JDialog {
 	 * Create the dialog.
 	 */
 	public ManagerMain() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				lblAdminID.setText(ShareVar.managerID);
+			}
+		});
 		setTitle("관리자 통합화면");
 		setBounds(ShareVar.managerXlocation,ShareVar.managerYlocation,ShareVar.managerXsize,ShareVar.managerYsize);
 		getContentPane().setLayout(new BorderLayout());
@@ -92,9 +100,10 @@ public class ManagerMain extends JDialog {
 		contentPanel.add(getLblNewLabel_3());
 		contentPanel.add(getLblNewLabel_4());
 		contentPanel.add(getLblScreenControl());
-		contentPanel.add(getLblNewLabel_5());
+		contentPanel.add(getLblAdminID());
 		contentPanel.add(getLblManagerBackGround());
 	}
+	
 	private JLabel getLblMovieControl() {
 		if (lblMovieControl == null) {
 			lblMovieControl = new JLabel("");
@@ -109,6 +118,7 @@ public class ManagerMain extends JDialog {
 		}
 		return lblMovieControl;
 	}
+	
 	private JLabel getLblMovieSalesStatus() {
 		if (lblMovieSalesStatus == null) {
 			lblMovieSalesStatus = new JLabel("");
@@ -123,6 +133,7 @@ public class ManagerMain extends JDialog {
 		}
 		return lblMovieSalesStatus;
 	}
+	
 	private JLabel getLblMovieUserStatistics() {
 		if (lblMovieUserStatistics == null) {
 			lblMovieUserStatistics = new JLabel("");
@@ -190,13 +201,13 @@ public class ManagerMain extends JDialog {
 		}
 		return lblScreenControl;
 	}
-	private JLabel getLblNewLabel_5() {
-		if (lblNewLabel_5 == null) {
-			lblNewLabel_5 = new JLabel("New label");
-			lblNewLabel_5.setFont(new Font("BM Dohyeon", Font.PLAIN, 19));
-			lblNewLabel_5.setBounds(601, 25, 140, 40);
+	private JLabel getLblAdminID() {
+		if (lblAdminID == null) {
+			lblAdminID = new JLabel("");
+			lblAdminID.setFont(new Font("BM Dohyeon", Font.PLAIN, 19));
+			lblAdminID.setBounds(601, 25, 140, 40);
 		}
-		return lblNewLabel_5;
+		return lblAdminID;
 	}
 	
 	private void goToScreenControl() {

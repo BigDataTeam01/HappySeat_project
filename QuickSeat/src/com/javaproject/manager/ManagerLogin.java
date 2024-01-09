@@ -9,7 +9,12 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.managerfunction.DaoManagerLogin;
+import com.javaproject.managerfunction.DtoLCY;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -104,7 +109,7 @@ public class ManagerLogin extends JDialog {
 			btnLogin.setBounds(300, 350, 180, 70);
 			btnLogin.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					goToMain();
+					checkId();
 				}
 			});
 			btnLogin.setFont(new Font("BM Dohyeon", Font.PLAIN, 30));
@@ -128,5 +133,24 @@ public class ManagerLogin extends JDialog {
 		loginDialog.setVisible(false);
 		loginDialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		mainDialog.setVisible(true);
+	}
+	
+	private void checkId() {
+		char[] passwordChar = passwordField.getPassword();
+		String password = new String(passwordChar);
+		DaoManagerLogin dao = new DaoManagerLogin(tfAdminNumber.getText(),password);
+		
+		boolean result = dao.checkAdminLogin();
+		
+		if(result == true) {
+			JOptionPane.showMessageDialog(null, tfAdminNumber.getText()+ " 관리자님 환영합니다.");
+			ShareVar.managerID = tfAdminNumber.getText();
+			goToMain();
+		}
+		
+		else {
+			JOptionPane.showMessageDialog(null, "관리자 계정 또는 비밀번호를 확인해주세요.");
+		}
+		
 	}
 } // End
