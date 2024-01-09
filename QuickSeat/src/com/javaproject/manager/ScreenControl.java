@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import javax.swing.JDialog;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.managerfunction.DaoScreenControl;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JRadioButton;
@@ -23,10 +25,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 
 public class ScreenControl extends JDialog {
-	
+
 	private final DefaultTableModel outerTable = new DefaultTableModel(); // OuterTable 선언
 	private static final long serialVersionUID = 1L;
 	private JLabel lblNewLabel;
@@ -35,7 +40,7 @@ public class ScreenControl extends JDialog {
 	private JRadioButton rbDelete;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
 	private JLabel lblNewLabel_1;
-	private JComboBox cbScreenRoom;
+	private JComboBox cbScroom;
 	private JLabel lblNewLabel_1_1;
 	private JComboBox cbMovieTitle;
 	private JLabel lblNewLabel_1_1_1;
@@ -56,7 +61,7 @@ public class ScreenControl extends JDialog {
 	private JLabel lblNewLabel_1_1_2_4_1;
 	private JButton btnNewButton;
 	private JScrollPane scrollPane;
-	private JComboBox cbScreenSelect;
+	private JComboBox cbScroomSelect;
 	private JTable innerTable;
 	private JLabel lblNewLabel_3;
 
@@ -85,11 +90,14 @@ public class ScreenControl extends JDialog {
 			@Override
 			public void windowActivated(WindowEvent e) {
 				cbYearAdd();
+				cbItemAdd();
 				screenTableInit();
+				seatResvCodeSetting();
 			}
+
 			@Override
 			public void windowDeactivated(WindowEvent e) {
-				cbYearClear();
+				cbClear();
 			}
 		});
 		setTitle("상영관 관리");
@@ -100,7 +108,7 @@ public class ScreenControl extends JDialog {
 		getContentPane().add(getRbUpdate());
 		getContentPane().add(getRbDelete());
 		getContentPane().add(getLblNewLabel_1());
-		getContentPane().add(getCbScreenRoom());
+		getContentPane().add(getCbScroom());
 		getContentPane().add(getLblNewLabel_1_1());
 		getContentPane().add(getCbMovieTitle());
 		getContentPane().add(getLblNewLabel_1_1_1());
@@ -121,10 +129,11 @@ public class ScreenControl extends JDialog {
 		getContentPane().add(getLblNewLabel_1_1_2_4_1());
 		getContentPane().add(getBtnNewButton());
 		getContentPane().add(getScrollPane());
-		getContentPane().add(getCbScreenSelect());
+		getContentPane().add(getCbScroomSelect());
 		getContentPane().add(getLblNewLabel_3());
 
 	}
+
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
 			lblNewLabel = new JLabel("상영관 관리");
@@ -133,6 +142,7 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel;
 	}
+
 	private JRadioButton getRbInsert() {
 		if (rbInsert == null) {
 			rbInsert = new JRadioButton("등록");
@@ -143,6 +153,7 @@ public class ScreenControl extends JDialog {
 		}
 		return rbInsert;
 	}
+
 	private JRadioButton getRbUpdate() {
 		if (rbUpdate == null) {
 			rbUpdate = new JRadioButton("수정");
@@ -152,6 +163,7 @@ public class ScreenControl extends JDialog {
 		}
 		return rbUpdate;
 	}
+
 	private JRadioButton getRbDelete() {
 		if (rbDelete == null) {
 			rbDelete = new JRadioButton("삭제");
@@ -161,6 +173,7 @@ public class ScreenControl extends JDialog {
 		}
 		return rbDelete;
 	}
+
 	private JLabel getLblNewLabel_1() {
 		if (lblNewLabel_1 == null) {
 			lblNewLabel_1 = new JLabel("상영관  :");
@@ -169,14 +182,16 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1;
 	}
-	private JComboBox getCbScreenRoom() {
-		if (cbScreenRoom == null) {
-			cbScreenRoom = new JComboBox();
-			cbScreenRoom.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbScreenRoom.setBounds(131, 145, 105, 27);
+
+	private JComboBox getCbScroom() {
+		if (cbScroom == null) {
+			cbScroom = new JComboBox();
+			cbScroom.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
+			cbScroom.setBounds(131, 145, 105, 27);
 		}
-		return cbScreenRoom;
+		return cbScroom;
 	}
+
 	private JLabel getLblNewLabel_1_1() {
 		if (lblNewLabel_1_1 == null) {
 			lblNewLabel_1_1 = new JLabel("영화 제목  :");
@@ -185,6 +200,7 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1_1;
 	}
+
 	private JComboBox getCbMovieTitle() {
 		if (cbMovieTitle == null) {
 			cbMovieTitle = new JComboBox();
@@ -193,6 +209,7 @@ public class ScreenControl extends JDialog {
 		}
 		return cbMovieTitle;
 	}
+
 	private JLabel getLblNewLabel_1_1_1() {
 		if (lblNewLabel_1_1_1 == null) {
 			lblNewLabel_1_1_1 = new JLabel("영화 상영 시작 시간");
@@ -201,14 +218,21 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1_1_1;
 	}
+
 	private JComboBox getCbYear() {
 		if (cbYear == null) {
 			cbYear = new JComboBox();
+			cbYear.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					tfStartTimeSetting();
+				}
+			});
 			cbYear.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			cbYear.setBounds(32, 288, 70, 27);
 		}
 		return cbYear;
 	}
+
 	private JLabel getLblNewLabel_1_1_2() {
 		if (lblNewLabel_1_1_2 == null) {
 			lblNewLabel_1_1_2 = new JLabel("년");
@@ -217,15 +241,23 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1_1_2;
 	}
+
 	private JComboBox getCbMonth() {
 		if (cbMonth == null) {
 			cbMonth = new JComboBox();
+			cbMonth.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					tfStartTimeSetting();
+				}
+			});
 			cbMonth.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbMonth.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"}));
+			cbMonth.setModel(new DefaultComboBoxModel(
+					new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
 			cbMonth.setBounds(129, 288, 70, 27);
 		}
 		return cbMonth;
 	}
+
 	private JLabel getLblNewLabel_1_1_2_1() {
 		if (lblNewLabel_1_1_2_1 == null) {
 			lblNewLabel_1_1_2_1 = new JLabel("월");
@@ -234,15 +266,24 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1_1_2_1;
 	}
+
 	private JComboBox getCbDate() {
 		if (cbDate == null) {
 			cbDate = new JComboBox();
+			cbDate.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					tfStartTimeSetting();
+				}
+			});
 			cbDate.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbDate.setModel(new DefaultComboBoxModel(new String[] {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
+			cbDate.setModel(new DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08",
+					"09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
+					"25", "26", "27", "28", "29", "30", "31" }));
 			cbDate.setBounds(222, 288, 70, 27);
 		}
 		return cbDate;
 	}
+
 	private JLabel getLblNewLabel_1_1_2_2() {
 		if (lblNewLabel_1_1_2_2 == null) {
 			lblNewLabel_1_1_2_2 = new JLabel("일");
@@ -251,15 +292,23 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1_1_2_2;
 	}
+
 	private JComboBox getCbHour() {
 		if (cbHour == null) {
 			cbHour = new JComboBox();
+			cbHour.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					tfStartTimeSetting();
+				}
+			});
 			cbHour.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbHour.setModel(new DefaultComboBoxModel(new String[] {"06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25"}));
+			cbHour.setModel(new DefaultComboBoxModel(new String[] { "06", "07", "08", "09", "10", "11", "12", "13",
+					"14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25" }));
 			cbHour.setBounds(32, 327, 70, 27);
 		}
 		return cbHour;
 	}
+
 	private JLabel getLblNewLabel_1_1_2_3() {
 		if (lblNewLabel_1_1_2_3 == null) {
 			lblNewLabel_1_1_2_3 = new JLabel("시");
@@ -268,15 +317,23 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1_1_2_3;
 	}
+
 	private JComboBox getCbMinute() {
 		if (cbMinute == null) {
 			cbMinute = new JComboBox();
+			cbMinute.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					tfStartTimeSetting();
+				}
+			});
 			cbMinute.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbMinute.setModel(new DefaultComboBoxModel(new String[] {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"}));
+			cbMinute.setModel(new DefaultComboBoxModel(
+					new String[] { "00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" }));
 			cbMinute.setBounds(128, 327, 70, 27);
 		}
 		return cbMinute;
 	}
+
 	private JLabel getLblNewLabel_1_1_2_4() {
 		if (lblNewLabel_1_1_2_4 == null) {
 			lblNewLabel_1_1_2_4 = new JLabel("분");
@@ -285,6 +342,7 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1_1_2_4;
 	}
+
 	private JLabel getLblNewLabel_2() {
 		if (lblNewLabel_2 == null) {
 			lblNewLabel_2 = new JLabel("설정 시각 : ");
@@ -293,6 +351,7 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_2;
 	}
+
 	private JLabel getLblNewLabel_1_1_1_1() {
 		if (lblNewLabel_1_1_1_1 == null) {
 			lblNewLabel_1_1_1_1 = new JLabel("영화 상영 시간  :");
@@ -301,27 +360,29 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1_1_1_1;
 	}
+
 	private JTextField getTfStartTime() {
 		if (tfStartTime == null) {
 			tfStartTime = new JTextField();
 			tfStartTime.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 			tfStartTime.setEditable(false);
-			tfStartTime.setText("2024년 01월 01일 06시 00분");
+			tfStartTime.setText("");
 			tfStartTime.setBounds(111, 366, 192, 26);
 			tfStartTime.setColumns(10);
 		}
 		return tfStartTime;
 	}
+
 	private JTextField getTfRunTime() {
 		if (tfRunTime == null) {
 			tfRunTime = new JTextField();
 			tfRunTime.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			tfRunTime.setText("90");
 			tfRunTime.setColumns(10);
 			tfRunTime.setBounds(145, 431, 51, 26);
 		}
 		return tfRunTime;
 	}
+
 	private JLabel getLblNewLabel_1_1_2_4_1() {
 		if (lblNewLabel_1_1_2_4_1 == null) {
 			lblNewLabel_1_1_2_4_1 = new JLabel("분");
@@ -330,11 +391,13 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_1_1_2_4_1;
 	}
+
 	private JButton getBtnNewButton() {
 		if (btnNewButton == null) {
 			btnNewButton = new JButton("완료");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					insertScreenInformation();
 				}
 			});
 			btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
@@ -342,6 +405,7 @@ public class ScreenControl extends JDialog {
 		}
 		return btnNewButton;
 	}
+
 	private JScrollPane getScrollPane() {
 		if (scrollPane == null) {
 			scrollPane = new JScrollPane();
@@ -350,15 +414,16 @@ public class ScreenControl extends JDialog {
 		}
 		return scrollPane;
 	}
-	private JComboBox getCbScreenSelect() {
-		if (cbScreenSelect == null) {
-			cbScreenSelect = new JComboBox();
-			cbScreenSelect.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbScreenSelect.setModel(new DefaultComboBoxModel(new String[] {"1 상영관", "2 상영관", "3 상영관"}));
-			cbScreenSelect.setBounds(339, 99, 105, 27);
+
+	private JComboBox getCbScroomSelect() {
+		if (cbScroomSelect == null) {
+			cbScroomSelect = new JComboBox();
+			cbScroomSelect.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
+			cbScroomSelect.setBounds(339, 99, 105, 27);
 		}
-		return cbScreenSelect;
+		return cbScroomSelect;
 	}
+
 	private JTable getInnerTable() {
 		if (innerTable == null) {
 			innerTable = new JTable();
@@ -368,97 +433,171 @@ public class ScreenControl extends JDialog {
 		scrollPane.setViewportView(innerTable);
 		return innerTable;
 	}
+
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
 			lblNewLabel_3 = new JLabel("");
-			lblNewLabel_3.setIcon(new ImageIcon(ScreenControl.class.getResource("/com/javaproject/image/manager_background.png")));
+			lblNewLabel_3.setIcon(
+					new ImageIcon(ScreenControl.class.getResource("/com/javaproject/image/manager_background.png")));
 			lblNewLabel_3.setBounds(0, 0, 800, 575);
 		}
 		return lblNewLabel_3;
 	}
 	// --- Function ---
-	
-	
-	private void screenTableInit() { // Table 초기화 
+
+	private void screenTableInit() { // Table 초기화
 		outerTable.addColumn("영화제목");
-		outerTable.addColumn("감독");
-		outerTable.addColumn("장르");
+		outerTable.addColumn("상영관");
+		outerTable.addColumn("상영시작시간");
+		outerTable.addColumn("상영시간");
 		outerTable.addColumn("개봉일");
-		outerTable.addColumn("관람등급");
-		outerTable.addColumn("제작국가");
+		outerTable.addColumn("상영종료일");
 		outerTable.addColumn("개봉상태");
 		outerTable.setColumnCount(7);
-		
+
 		int colNo = 0;
 		TableColumn col = innerTable.getColumnModel().getColumn(colNo);
-		int width = 60;
+		int width = 80;
 		col.setPreferredWidth(width);
-		
+
 		colNo = 1;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 60;
+		width = 80;
 		col.setPreferredWidth(width);
-		
+
 		colNo = 2;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 50;
+		width = 80;
 		col.setPreferredWidth(width);
-		
+
 		colNo = 3;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 70;
+		width = 80;
 		col.setPreferredWidth(width);
-		
+
 		colNo = 4;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 60;
+		width = 80;
 		col.setPreferredWidth(width);
-		
+
 		colNo = 5;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 60;
+		width = 80;
 		col.setPreferredWidth(width);
-		
+
 		colNo = 6;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 60;
+		width = 80;
 		col.setPreferredWidth(width);
-		
+
 		innerTable.setAutoResizeMode(innerTable.AUTO_RESIZE_OFF);
-		
+
 		// Table Row Delete
 		int i = outerTable.getRowCount();
-		for(int j=0; j<i; j++) {
+		for (int j = 0; j < i; j++) {
 			outerTable.removeRow(0);
 		}
 	}
-	
+
 	// cbYear에 현재년도와 다음년도 넣기
 	private void cbYearAdd() {
-        // 현재 날짜 가져오기
-        LocalDate currentDate = LocalDate.now();
-        
-        // 현재 날짜의 연도와 다음년도 cbYear에 넣기
-        cbYear.addItem(currentDate.getYear());
-        cbYear.addItem(currentDate.getYear()+1);
+		// 현재 날짜 가져오기
+		LocalDate currentDate = LocalDate.now();
 
+		// 현재 날짜의 연도와 다음년도 cbYear에 넣기
+		cbYear.addItem(currentDate.getYear());
+		cbYear.addItem(currentDate.getYear() + 1);
 
 	}
-	
-	// 창이 deactivated 되면 cbYear의 항목들을 삭제 (창이 activated 될 때 마다 cbYear의 중복 추가 방지를 위함)
-	private void cbYearClear() {
+
+	// 상영관 콤보박스(cbScroom, cbScroomSelect, cbMovieTitle)에 상영관 이름 넣기
+	private void cbItemAdd() {
+
+		DaoScreenControl daoScreenControl = new DaoScreenControl();
+
+		for (int i = 0; i < daoScreenControl.scroomItem().size(); i++) {
+			cbScroom.addItem(daoScreenControl.scroomItem().get(i));
+		}
+
+		for (int i = 0; i < daoScreenControl.scroomItem().size(); i++) {
+			cbScroomSelect.addItem(daoScreenControl.scroomItem().get(i));
+		}
+
+		for (int i = 0; i < daoScreenControl.moiveTitleItem().size(); i++) {
+			cbMovieTitle.addItem(daoScreenControl.moiveTitleItem().get(i));
+		}
+
+	}
+
+	/*
+	 * 창이 deactivated 되면 콤보박스들의 항목들을 삭제 (창이 activated 될 때 마다 콤보박스의 아이템 중복 추가 방지를 위함)
+	 */
+	private void cbClear() {
 		cbYear.removeAllItems();
+		cbScroom.removeAllItems();
+		cbScroomSelect.removeAllItems();
+		cbMovieTitle.removeAllItems();
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	// DB의 screen Table에 들어갈 정보들 (좌석예약코드)
+	private void insertScreenInformation() {
+//		System.out.println(cbMovieTitle.getSelectedItem()); // 영화 제목
+		String scr_movie_title = cbMovieTitle.getSelectedItem().toString(); // 영화 제목
+//		System.out.println(cbScroom.getSelectedItem()); // 상영관 이름
+		String scr_scroom_name = cbScroom.getSelectedItem().toString(); // 상영관 이름
+//		System.out.println(ShareVar.managerID); // 관리자 ID
+		String admin_admin_id = ShareVar.managerID; // 관리자 ID
+//		System.out.println(seatResvCodeSetting()); // 좌석예약코드
+		String seat_resv_code = seatResvCodeSetting(); // 좌석예약코드
+//		System.out.println(tfStartTime.getText()); // 상영시작시간
+		String scr_start_time = tfStartTime.getText(); // 상영시작시간
+//		System.out.println(tfRunTime.getText()); // 상영시간
+		int run_time = Integer.parseInt(tfRunTime.getText()); // 상영시간
+
+		DaoScreenControl daoScreenControl = new DaoScreenControl(scr_movie_title, scr_scroom_name, admin_admin_id,
+				seat_resv_code, scr_start_time, run_time);
+		try {
+
+			if (tfRunTime.getText().length() == 0) {
+
+			} else {
+				daoScreenControl.screenInsert();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	// DB의 screening_room에서 total_seat을 가져 온 후 0을 total_seat의 개수만큼 적어줌
+	private String seatResvCodeSetting() {
+
+		String scroom_name = cbScroom.getSelectedItem().toString();
+		DaoScreenControl daoScreenControl = new DaoScreenControl(scroom_name);
+
+		String totalSeat = "";
+		for (int i = 0; i < daoScreenControl.totalSeatCount(); i++) {
+			totalSeat += "0";
+		}
+		return totalSeat;
+
+	}
+
+	// 설정 시각 (tfStartTime)을 콤보박스의 시간내용에 따라 바뀌게 만듬
+	private void tfStartTimeSetting() {
+		cbYear.getSelectedItem(); // 년
+		cbMonth.getSelectedItem(); // 월
+		cbDate.getSelectedItem(); // 일
+		cbHour.getSelectedItem(); // 시간
+		cbMinute.getSelectedItem(); // 분 가져오기
+
+//		tfStartTime.setText(cbYear.getSelectedItem() + "년 " + 
+//							cbMonth.getSelectedItem() + "월 " + 
+//							cbDate.getSelectedItem() + "일 " + 
+//							cbHour.getSelectedItem() + "시 " + 
+//							cbMinute.getSelectedItem() + "분" );
+		tfStartTime.setText(cbYear.getSelectedItem() + "-" + cbMonth.getSelectedItem() + "-" + cbDate.getSelectedItem()
+				+ " " + cbHour.getSelectedItem() + ":" + cbMinute.getSelectedItem() + ":00");
+	}
+
 } // End
