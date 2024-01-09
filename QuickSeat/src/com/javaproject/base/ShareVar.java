@@ -5,7 +5,7 @@ import java.awt.Font;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-//import com.javaproject.page.MovieInformation;
+//import com.javaproject.page.Page5_MovieInformation;
 
 public class ShareVar {
 	//개발 시작
@@ -84,6 +84,8 @@ public class ShareVar {
 		lblPoster.setBounds(34, 101, ShareVar.poster_width, ShareVar.poster_hight);
 	*/
 	
+	// 관리자 아이디 저장공간
+	public static String managerID = "";
 	
 	
 	// constructor

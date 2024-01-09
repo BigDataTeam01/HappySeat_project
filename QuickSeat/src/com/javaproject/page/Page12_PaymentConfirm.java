@@ -13,7 +13,7 @@ import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
 
-public class PaymentConfirm extends JDialog {
+public class Page12_PaymentConfirm extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -40,7 +40,7 @@ public class PaymentConfirm extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			PaymentConfirm dialog = new PaymentConfirm();
+			Page12_PaymentConfirm dialog = new Page12_PaymentConfirm();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -51,7 +51,7 @@ public class PaymentConfirm extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public PaymentConfirm() {
+	public Page12_PaymentConfirm() {
 		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -70,7 +70,7 @@ public class PaymentConfirm extends JDialog {
 		// 키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(
-				new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				new ImageIcon(Page10_ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_backGround);
 		

@@ -1,4 +1,4 @@
-package com.javaproject.manager;
+		package com.javaproject.manager;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;

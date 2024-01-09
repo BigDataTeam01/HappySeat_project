@@ -18,7 +18,7 @@ import javax.swing.JTextField;
 import java.awt.Color;
 import javax.swing.UIManager;
 
-public class Card extends JDialog {
+public class Page11_2_Card extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -33,9 +33,10 @@ public class Card extends JDialog {
 	 */
 	
 	
-	private static SelectMenu selectMenu = new SelectMenu();
-	private static SelectPayment selectPayment  = new SelectPayment();
-	private static PaymentConfirm paymentConfirm = new PaymentConfirm(); 
+	private static  Page2_SelectMenu selectMenu = new Page2_SelectMenu();
+	//private static SelectMenu selectMenu = new SelectMenu();
+	private static Page11_0_SelectPayment page11_0_SelectPayment  = new Page11_0_SelectPayment();
+	private static Page12_PaymentConfirm page12_PaymentConfirm = new Page12_PaymentConfirm(); 
 	
 	
 	private JTextField textField;
@@ -43,7 +44,7 @@ public class Card extends JDialog {
 
 	public static void main(String[] args) {
 		try {
-			Card dialog = new Card();
+			Page11_2_Card dialog = new Page11_2_Card();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -54,7 +55,7 @@ public class Card extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Card() {
+	public Page11_2_Card() {
 		setTitle("카드 결제");
 		setBounds(100, 100, 800, 600);
 		getContentPane().setLayout(new BorderLayout());
@@ -76,7 +77,7 @@ public class Card extends JDialog {
 				goToHome();
 			}
 		});
-		lblNewLabel_1.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
 		lblNewLabel_1.setBounds(628, 38, 172, 130);
 		contentPanel.add(lblNewLabel_1);
 		
@@ -87,7 +88,7 @@ public class Card extends JDialog {
 				goBack();
 			}
 		});
-		lblNewLabel_2.setIcon(new ImageIcon(SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
 		lblNewLabel_2.setBounds(11, 39, 161, 130);
 		contentPanel.add(lblNewLabel_2);
 		
@@ -104,7 +105,7 @@ public class Card extends JDialog {
 		textField.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon(Card.class.getResource("/com/javaproject/image/InsertCard.png")));
+		lblNewLabel_3.setIcon(new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/InsertCard.png")));
 		lblNewLabel_3.setBounds(43, 312, 414, 249);
 		contentPanel.add(lblNewLabel_3);
 		
@@ -115,13 +116,13 @@ public class Card extends JDialog {
 				goToPaymentConfirm();
 			}
 		});
-		lblNewLabel_4.setIcon(new ImageIcon(Card.class.getResource("/com/javaproject/image/cardAuthorization.png")));
+		lblNewLabel_4.setIcon(new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/cardAuthorization.png")));
 		lblNewLabel_4.setBounds(490, 456, 285, 115);
 		contentPanel.add(lblNewLabel_4);
 		// 키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(
-				new ImageIcon(ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				new ImageIcon(Page10_ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_backGround);
 		
@@ -135,13 +136,13 @@ public class Card extends JDialog {
 	}
 	private void goBack() {
 		dispose();
-		selectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		selectPayment.setVisible(true);
+		page11_0_SelectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		page11_0_SelectPayment.setVisible(true);
 	}
 	private void goToPaymentConfirm() {
 		dispose();
-		paymentConfirm.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		paymentConfirm.setVisible(true);
+		page12_PaymentConfirm.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		page12_PaymentConfirm.setVisible(true);
 		
 	}
 	

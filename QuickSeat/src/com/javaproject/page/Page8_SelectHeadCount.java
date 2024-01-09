@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 
-public class SelectHeadCount extends JDialog {
+public class Page8_SelectHeadCount extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -40,14 +40,14 @@ public class SelectHeadCount extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static SelectHeadCount SelectHeadCountdialog = new SelectHeadCount();
-	private static SelectMenu selectMenudialog = new SelectMenu();
-	private static SelectTime SelectTimedialog = new SelectTime();
-	private static SelectSeat SelectSeatdialog = new SelectSeat();
+	private static Page8_SelectHeadCount SelectHeadCountdialog = new Page8_SelectHeadCount();
+	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
+	private static Page7_SelectTime SelectTimedialog = new Page7_SelectTime();
+	private static Page9_SelectSeat SelectSeatdialog = new Page9_SelectSeat();
 
 	public static void main(String[] args) {
 		try {
-			SelectHeadCount dialog = new SelectHeadCount();
+			Page8_SelectHeadCount dialog = new Page8_SelectHeadCount();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -58,7 +58,7 @@ public class SelectHeadCount extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SelectHeadCount() {
+	public Page8_SelectHeadCount() {
 		// 타이틀 설정
 		setTitle("인원 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
@@ -88,7 +88,7 @@ public class SelectHeadCount extends JDialog {
 				}
 			});
 			lbl_pageTitle_1
-					.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
+					.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/첫화면Icon.png")));
 
 			lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
 			contentPanel.add(lbl_pageTitle_1);
@@ -102,7 +102,7 @@ public class SelectHeadCount extends JDialog {
 			});
 
 			BtnBackToPrevious
-					.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
+					.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
 			BtnBackToPrevious.setBounds(295, 441, 200, 100);
 			contentPanel.add(BtnBackToPrevious);
 			// 영화좌석선택으로 가기
@@ -114,14 +114,14 @@ public class SelectHeadCount extends JDialog {
 				}
 			});
 			BtnConfirmHeadCount
-					.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn입력완료.png")));
+					.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn입력완료.png")));
 
 			BtnConfirmHeadCount.setBounds(295, 318, 227, 100);
 			contentPanel.add(BtnConfirmHeadCount);
 			// 배경화면
 			JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 			lbl_background.setIcon(new ImageIcon(
-					MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+					Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 			lbl_background.setBounds(-16, 0, 800, 600);
 			contentPanel.add(lbl_background);
 
