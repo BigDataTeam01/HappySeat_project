@@ -33,6 +33,7 @@ public class Page2_SelectMenu extends JDialog {
 	 * 			4. 배경 입력
 	 * 			5. 영화예매,예매내역 사진추가
 	 * 			6. 영화 예매을 터치했을시 SelectAge로,구매 내역을 터치했을시  OrderCheck로 가게 설정
+	 * 			7. Class 이름 변경(숫자
 	 */
 	/**
 	 * Launch the application.
