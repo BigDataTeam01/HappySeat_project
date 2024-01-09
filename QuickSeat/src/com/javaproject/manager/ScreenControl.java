@@ -6,6 +6,7 @@ import javax.swing.JDialog;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.managerfunction.DaoScreenControl;
+import com.javaproject.managerfunction.DtoWDH;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -22,6 +23,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -29,6 +32,9 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import javax.swing.event.PopupMenuListener;
+import javax.swing.event.PopupMenuEvent;
 
 public class ScreenControl extends JDialog {
 
@@ -64,6 +70,7 @@ public class ScreenControl extends JDialog {
 	private JComboBox cbScroomSelect;
 	private JTable innerTable;
 	private JLabel lblNewLabel_3;
+	private JTable table;
 
 	/**
 	 * Launch the application.
@@ -92,6 +99,7 @@ public class ScreenControl extends JDialog {
 				cbYearAdd();
 				cbItemAdd();
 				screenTableInit();
+				screenSearchAction();
 				seatResvCodeSetting();
 			}
 
@@ -146,6 +154,12 @@ public class ScreenControl extends JDialog {
 	private JRadioButton getRbInsert() {
 		if (rbInsert == null) {
 			rbInsert = new JRadioButton("등록");
+			rbInsert.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					screenTableInit();
+					screenSearchAction();
+				}
+			});
 			rbInsert.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 			rbInsert.setSelected(true);
 			buttonGroup.add(rbInsert);
@@ -205,7 +219,7 @@ public class ScreenControl extends JDialog {
 		if (cbMovieTitle == null) {
 			cbMovieTitle = new JComboBox();
 			cbMovieTitle.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbMovieTitle.setBounds(131, 192, 105, 27);
+			cbMovieTitle.setBounds(131, 192, 197, 27);
 		}
 		return cbMovieTitle;
 	}
@@ -397,7 +411,7 @@ public class ScreenControl extends JDialog {
 			btnNewButton = new JButton("완료");
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					insertScreenInformation();
+					rbSelect();
 				}
 			});
 			btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
@@ -418,6 +432,22 @@ public class ScreenControl extends JDialog {
 	private JComboBox getCbScroomSelect() {
 		if (cbScroomSelect == null) {
 			cbScroomSelect = new JComboBox();
+			cbScroomSelect.addPopupMenuListener(new PopupMenuListener() {
+				public void popupMenuCanceled(PopupMenuEvent e) {
+				}
+				public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+					screenTableInit();
+					cbScroomSelectSetting();
+					cbScroomSelectAll();
+				}
+				public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+				}
+			});
+			cbScroomSelect.setModel(new DefaultComboBoxModel(new String[] {"전체"}));
+			cbScroomSelect.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+				}
+			});
 			cbScroomSelect.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			cbScroomSelect.setBounds(339, 99, 105, 27);
 		}
@@ -427,6 +457,14 @@ public class ScreenControl extends JDialog {
 	private JTable getInnerTable() {
 		if (innerTable == null) {
 			innerTable = new JTable();
+			innerTable.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					if(e.getButton()==1){
+						innerTableClick();
+					}
+				}
+			});
 			innerTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			innerTable.setModel(outerTable);
 		}
@@ -457,37 +495,37 @@ public class ScreenControl extends JDialog {
 
 		int colNo = 0;
 		TableColumn col = innerTable.getColumnModel().getColumn(colNo);
-		int width = 80;
+		int width = 100;
 		col.setPreferredWidth(width);
 
 		colNo = 1;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 80;
+		width = 50;
 		col.setPreferredWidth(width);
 
 		colNo = 2;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 80;
+		width = 120;
 		col.setPreferredWidth(width);
 
 		colNo = 3;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 80;
+		width = 55;
 		col.setPreferredWidth(width);
 
 		colNo = 4;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 80;
+		width = 65;
 		col.setPreferredWidth(width);
 
 		colNo = 5;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 80;
+		width = 65;
 		col.setPreferredWidth(width);
 
 		colNo = 6;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 80;
+		width = 55;
 		col.setPreferredWidth(width);
 
 		innerTable.setAutoResizeMode(innerTable.AUTO_RESIZE_OFF);
@@ -599,5 +637,167 @@ public class ScreenControl extends JDialog {
 		tfStartTime.setText(cbYear.getSelectedItem() + "-" + cbMonth.getSelectedItem() + "-" + cbDate.getSelectedItem()
 				+ " " + cbHour.getSelectedItem() + ":" + cbMinute.getSelectedItem() + ":00");
 	}
+	
+	// DaoScreenControl에서 가져온 DB의 값 들을 innerTable에 넣어주기
+	private void screenSearchAction() {
+		DaoScreenControl dao = new DaoScreenControl();
+		ArrayList<DtoWDH> dtoList = dao.innerTable();
+		
+		for(int i=0; i<dtoList.size(); i++) {
+			String[] qTxt = { dtoList.get(i).getScr_movie_title(),
+							  dtoList.get(i).getScr_scroom_name(),
+							  dtoList.get(i).getScr_start_time(),
+							  Integer.toString(dtoList.get(i).getRun_time()) + "분",
+							  dtoList.get(i).getRel_date(),
+							  dtoList.get(i).getOver_date(),
+							  dtoList.get(i).getRel_state() 
+			};
+			outerTable.addRow(qTxt);
+		}
+	}
+	
+	// cbScroomSelect에서 전체 눌렀을 때
+	private void cbScroomSelectAll() {
+		if(cbScroomSelect.getSelectedItem().toString().equals("전체")) {
+			screenTableInit();
+			screenSearchAction();
+		}
+	}
+	
+	// 등록을 클릭 했을 때 깨끗하게 만들기
+	
+	// innerTable의 Row를 click 했을 경우
+	private void innerTableClick() {
+		rbUpdate.setSelected(true);
+		
+		int i = innerTable.getSelectedRow();
+		
+		DaoScreenControl dao = new DaoScreenControl();
+		
+		ArrayList<DtoWDH> dto = dao.innerTable();
+		
+		if(!cbScroomSelect.getSelectedItem().toString().equals("전체")) {
+			
+			String scroom_name = cbScroomSelect.getSelectedItem().toString();
+			
+			dao = new DaoScreenControl(scroom_name);
+			
+			dto = dao.cbInnerTable();
+			
+		}
+		
+		cbScroom.setSelectedItem(dto.get(i).getScr_scroom_name());
+		cbMovieTitle.setSelectedItem(dto.get(i).getScr_movie_title());
+		tfStartTime.setText(dto.get(i).getScr_start_time());
+		tfRunTime.setText(Integer.toString(dto.get(i).getRun_time()));
+		
+		String year = tfStartTime.getText().substring(0, 4);
+		String month = tfStartTime.getText().substring(5, 7);
+		String date = tfStartTime.getText().substring(8, 10);
+		String hour = tfStartTime.getText().substring(11, 13);
+		String minute = tfStartTime.getText().substring(14, 16);
+		
+		cbYear.setSelectedItem(year);
+		cbMonth.setSelectedItem(month);
+		cbDate.setSelectedItem(date);
+		cbHour.setSelectedItem(hour);
+		cbMinute.setSelectedItem(minute);
+
+
+		
+	}
+	
+	
+	// 등록, 수정, 삭제 눌렀을 경우
+	private void rbSelect() {
+		if(rbInsert.isSelected() == true) {
+			insertScreenInformation();
+		}
+		if(rbUpdate.isSelected() == true) {
+			updateScreenInformation();
+		}
+		if(rbDelete.isSelected() == true) {
+			deleteScreenInformation();
+		}
+		screenTableInit();
+		screenSearchAction();
+	}
+	
+	//수정
+	private void updateScreenInformation() {
+		
+		int i = innerTable.getSelectedRow();
+		
+		DaoScreenControl dao = new DaoScreenControl();
+		ArrayList<DtoWDH> dto = dao.innerTable();
+
+		String scr_movie_title = cbMovieTitle.getSelectedItem().toString(); // 영화 제목
+		String scr_scroom_name = cbScroom.getSelectedItem().toString(); // 상영관 이름
+		String admin_admin_id = ShareVar.managerID; // 관리자 ID
+		String seat_resv_code = seatResvCodeSetting(); // 좌석예약코드
+		String scr_start_time = tfStartTime.getText(); // 상영시작시간
+		int run_time = Integer.parseInt(tfRunTime.getText()); // 상영시간
+		int scr_code = dto.get(i).getScr_code();
+		
+		DaoScreenControl daoScreenControl = new DaoScreenControl(scr_movie_title, 
+												scr_scroom_name, admin_admin_id, 
+												seat_resv_code, scr_start_time, 
+												run_time, scr_code);
+		daoScreenControl.screenUpdate();
+
+		
+	}
+
+	//삭제
+	private void deleteScreenInformation() {
+		int i = innerTable.getSelectedRow();
+		
+		DaoScreenControl dao = new DaoScreenControl();
+		ArrayList<DtoWDH> dto = dao.innerTable();
+		
+		int scr_code = dto.get(i).getScr_code();
+		
+		DaoScreenControl daoScreenControl = new DaoScreenControl(scr_code);
+		
+		daoScreenControl.screenDelete();
+
+	}
+	
+	// innerTable위의 cbScreenSelect의 고른 상영관만 보여주기
+	private void cbScroomSelectSetting() {
+		
+		String scroom_name = cbScroomSelect.getSelectedItem().toString();
+		
+		DaoScreenControl dao = new DaoScreenControl(scroom_name);
+		
+		ArrayList<DtoWDH> dtoList = dao.cbInnerTable();
+		
+		for(int i=0; i<dtoList.size(); i++) {
+			String[] qTxt = { dtoList.get(i).getScr_movie_title(),
+							  dtoList.get(i).getScr_scroom_name(),
+							  dtoList.get(i).getScr_start_time(),
+							  Integer.toString(dtoList.get(i).getRun_time()) + "분",
+							  dtoList.get(i).getRel_date(),
+							  dtoList.get(i).getOver_date(),
+							  dtoList.get(i).getRel_state() 
+			};
+			outerTable.addRow(qTxt);
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 } // End

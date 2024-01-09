@@ -2,6 +2,7 @@ package com.javaproject.managerfunction;
 
 public class DtoWDH {
 
+	int scr_code;
 	String scr_movie_title;
 	String scr_scroom_name;
 	int seat_resv_code;
@@ -17,11 +18,9 @@ public class DtoWDH {
 	public DtoWDH() {
 		// TODO Auto-generated constructor stub
 	}
-	
 
-	
 	public DtoWDH(String scr_movie_title, String scr_scroom_name, String scr_start_time, int run_time, String rel_date,
-			String over_date, String rel_state) {
+			String over_date, String rel_state, int scr_code) {
 		super();
 		this.scr_movie_title = scr_movie_title;
 		this.scr_scroom_name = scr_scroom_name;
@@ -30,11 +29,10 @@ public class DtoWDH {
 		this.rel_date = rel_date;
 		this.over_date = over_date;
 		this.rel_state = rel_state;
+		this.scr_code = scr_code;
 	}
 
-
-
-	// getter setter 
+	// getter setter
 	public String getScr_movie_title() {
 		return scr_movie_title;
 	}
@@ -121,6 +119,14 @@ public class DtoWDH {
 
 	public void setTotal_seat(int total_seat) {
 		this.total_seat = total_seat;
+	}
+
+	public int getScr_code() {
+		return scr_code;
+	}
+
+	public void setScr_code(int scr_code) {
+		this.scr_code = scr_code;
 	}
 
 }
