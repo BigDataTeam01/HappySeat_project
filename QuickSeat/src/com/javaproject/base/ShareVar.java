@@ -74,6 +74,8 @@ public class ShareVar {
 	
 	
 	
+	public static int filename = 0;
+	public static int image = 0;
 	/////-------포스터 이미지 규격
 	public static int poster_width = 380;
 	public static int poster_hight = 450;

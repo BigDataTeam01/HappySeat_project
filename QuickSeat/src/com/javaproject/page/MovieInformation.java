@@ -16,7 +16,6 @@ import javax.swing.border.EmptyBorder;
 import com.javaproject.base.ShareVar;
 
 
-
 import javax.swing.JLabel;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -82,13 +81,13 @@ public class MovieInformation extends JDialog{
 	private static Page3_SelectMovie SelectMoviedialog = new Page3_SelectMovie();
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
+	private JLabel lblGoHome;
 	
 
 	
 	//////////////라운드 버튼박스를 만들기 위한 paintComponent 설정
 
 	class mybutton extends JButton{
-		
 		private Color backgroundColor = new Color(183, 216, 107);
 	    public mybutton(String text, Color bgColor) {
 	        super(text);
@@ -99,21 +98,14 @@ public class MovieInformation extends JDialog{
 	        setContentAreaFilled(false);
 	        setOpaque(false);
 	    }
-
-		
-		
 		
 		@Override
 		public void paintComponent(Graphics g) {
-			
 			int width = getWidth();
 			int height = getHeight();
-			
 			Graphics2D graphics = (Graphics2D) g;
-
 		    graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, 
 		    						  RenderingHints.VALUE_ANTIALIAS_ON);
-
 		    if (getModel().isArmed()) {
 		        graphics.setColor(backgroundColor.darker());
 		    } 
@@ -125,34 +117,18 @@ public class MovieInformation extends JDialog{
 		    }
 
 		    graphics.fillRoundRect(0, 0, width, height, 10, 10);
-
 		    FontMetrics fontMetrics = graphics.getFontMetrics();
 		    Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds();
 		    int textX = (width - stringBounds.width) / 2;
 		    int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent();
 		    
-		    
-		    
 		    graphics.setColor(getForeground());
 		    graphics.setFont(getFont());
 		    graphics.drawString(getText(), textX, textY);
 		    graphics.dispose();
-
 		    super.paintComponent(g);
-
-			
-//			Graphics2D button_cust = (Graphics2D) g.create();
-//			button_cust.setColor(backgroundColor);
-//			button_cust.fillRect(0,0,getWidth(), getHeight());
-//			super.paintComponent(button_cust);
-//			button_cust.dispose();
-			
-			
-			//super.paintComponent(g);
-			
 		}
 	}
-	
 	////
 	
 	
@@ -174,9 +150,6 @@ public class MovieInformation extends JDialog{
 	/**
 	 * Create the dialog.
 	 */
-	
-	
-	
 	
 	
 	
@@ -202,28 +175,38 @@ public class MovieInformation extends JDialog{
 			}
 		});
 		contentPanel.add(getBtnNewButton());
-		lblPageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn 이전화면.png")));
-		lblPageTitle_1.setBounds(551, 54, 200, 100);
+		lblPageTitle_1.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+		lblPageTitle_1.setBounds(6, 21, 171, 133);
 		contentPanel.add(lblPageTitle_1);
+		contentPanel.add(getLblGoHome());
 
 
 		
 		//	페이지 타이틀 예시 
-		JLabel lblPageTitle = new JLabel("영화 정보");
-		lblPageTitle.setFont(new Font(ShareVar.kiosk_title_font,
-		 								Font.PLAIN, 
-		 								ShareVar.kiosk_title_font_size));
+		JLabel lblPageTitle = new JLabel("영화정보");
+		lblPageTitle.setFont(new Font("BM Dohyeon", Font.PLAIN, 75));
 		 								
-		lblPageTitle.setBounds(ShareVar.kiosk_title_loc_x, 
-								ShareVar.kiosk_title_loc_y, 
-								ShareVar.kiosk_title_width,
-								ShareVar.kiosk_title_hight);
+		lblPageTitle.setBounds(275, 
+								17, 
+								331,
+								100);
 		
 		contentPanel.add(lblPageTitle);
 		
 		JLabel lblPoster = new JLabel("");
-		lblPoster.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png")));
-		lblPoster.setBounds(34, 101, ShareVar.poster_width, ShareVar.poster_hight);
+		ImageIcon icon = new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png"));
+		// img 에 이미지를 담는다. 
+		Image img = icon.getImage();
+		// 이미지 사이즈 조절
+		Image changeImg = img.getScaledInstance(275, 355,  Image.SCALE_SMOOTH);
+		// 변경된 이미지를 다시 icon 에 담는다. 
+		ImageIcon changeIcon = new ImageIcon(changeImg);
+		lblPoster = new JLabel(changeIcon);
+		
+		
+		//lblPoster.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png")));
+		
+		lblPoster.setBounds(99, 151, 275, 355);
 		contentPanel.add(lblPoster);
 		
 		
@@ -240,19 +223,37 @@ public class MovieInformation extends JDialog{
 	
 	// Tescode 
 	
-	public void testMovieInformation() {
-		
-		
-		// 1. 내가 이전 페이지 에서 선택한 영화의 정보를 DB 에서 불러올수 있는가?
-		System.out.println("1. 내가 이전 페이지 에서 선택한 영화의 정보를 DB 에서 불러올수 있는가? ");
-		String reuslt = "Error!";
-		System.err.println(reuslt);
-		
 
-		
-	}
 	
-	//이전화면으로 가기
+
+	
+	/// Functions
+	
+	private JButton getBtnNewButton() {
+		if (btnNewButton == null) {
+			btnNewButton = new mybutton("영화 선택",new Color(183, 216, 107));
+			btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 68));
+			btnNewButton.setBounds(436	, 458, 292, 110);
+			btnNewButton.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					goSelectCinema();
+				}
+			});
+			
+		}
+		return btnNewButton;
+	}
+	// Go selectCinema
+	public void goSelectCinema() {
+		
+		SelectCinema selectCinema = new SelectCinema();
+		
+		selectCinema.setVisible(true);
+		
+		this.dispose();
+	}
+	// Page back
 	public void goToSelectMovie() {
 		dialog.setVisible(false);
 		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -260,23 +261,42 @@ public class MovieInformation extends JDialog{
 	}
 	
 	
-	/// Functions
-	
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new mybutton("영화 선택",new Color(183, 216, 107));
-			
-			btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 68));
-
-			btnNewButton.setBounds(436	, 458, 292, 110);
-			//btnNewButton.setOpaque(true);
-		}
-		return btnNewButton;
+	private JLabel getLblGoHome() {
 		
+			lblGoHome = new JLabel("");
+			lblGoHome.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					
+					goHomePage();
+				
+				}});
+			lblGoHome.setIcon(new ImageIcon(MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+			lblGoHome.setBounds(618, 6, 171, 133);
 		
-		
-
+		return lblGoHome;
 		
 	}
-
+		
+	
+	private void goHomePage() {
+		SelectMenu selectMenu = new SelectMenu();
+		
+		
+		selectMenu.setVisible(true);
+		
+		
+		
+		this.dispose();
+	}
+	
+		
+		
+	
+		
+		
+		
+		
+		
+		
 }// END
