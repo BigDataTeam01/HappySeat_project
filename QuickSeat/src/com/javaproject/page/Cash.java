@@ -32,7 +32,7 @@ public class Cash extends JDialog {
 	 * Launch the application.
 	 */
 	
-	private static  SelectMenu selectMenu = new SelectMenu();
+	private static  Page1_SelectMenu selectMenu = new Page1_SelectMenu();
 	private static SelectPayment selectPayment = new SelectPayment();
 	private JLabel lblNewLabel;
 	private JTextField textField;

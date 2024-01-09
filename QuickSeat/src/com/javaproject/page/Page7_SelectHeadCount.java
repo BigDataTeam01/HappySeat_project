@@ -16,7 +16,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 
-public class SelectHeadCount extends JDialog {
+public class Page7_SelectHeadCount extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -40,14 +40,14 @@ public class SelectHeadCount extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static SelectHeadCount SelectHeadCountdialog = new SelectHeadCount();
-	private static SelectMenu selectMenudialog = new SelectMenu();
-	private static SelectTime SelectTimedialog = new SelectTime();
-	private static SelectSeat SelectSeatdialog = new SelectSeat();
+	private static Page7_SelectHeadCount SelectHeadCountdialog = new Page7_SelectHeadCount();
+	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
+	private static Page6_SelectTime SelectTimedialog = new Page6_SelectTime();
+	private static Page8_SelectSeat SelectSeatdialog = new Page8_SelectSeat();
 
 	public static void main(String[] args) {
 		try {
-			SelectHeadCount dialog = new SelectHeadCount();
+			Page7_SelectHeadCount dialog = new Page7_SelectHeadCount();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -58,7 +58,7 @@ public class SelectHeadCount extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public SelectHeadCount() {
+	public Page7_SelectHeadCount() {
 		// 타이틀 설정
 		setTitle("인원 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);

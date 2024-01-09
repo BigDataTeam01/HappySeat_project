@@ -77,8 +77,8 @@ public class MovieInformation extends JDialog{
 	 * Launch the application.
 	 */
 	private static MovieInformation dialog = new MovieInformation();
-	private static SelectCinema SelectCinemadialog = new SelectCinema();
-	private static SelectMovie SelectMoviedialog = new SelectMovie();
+	private static Page5_SelectCinema SelectCinemadialog = new Page5_SelectCinema();
+	private static Page3_SelectMovie SelectMoviedialog = new Page3_SelectMovie();
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JLabel lblGoHome;

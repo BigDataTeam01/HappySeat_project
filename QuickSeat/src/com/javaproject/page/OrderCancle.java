@@ -40,7 +40,7 @@ public class OrderCancle extends JDialog {
 	 * Launch the application.
 	 */
 	private static OrderCancle OrderCancledialog = new OrderCancle();
-	private static SelectMenu selectMenudialog = new SelectMenu();
+	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
 
 	public static void main(String[] args) {
 		try {

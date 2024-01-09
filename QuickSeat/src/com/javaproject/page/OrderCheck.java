@@ -43,7 +43,7 @@ public class OrderCheck extends JDialog {
 	 * Launch the application.
 	 */
 	private static OrderCheck OrderCheckdialog = new OrderCheck();
-	private static SelectMenu selectMenudialog = new SelectMenu();
+	private static Page1_SelectMenu selectMenudialog = new Page1_SelectMenu();
 	private static OrderCancle OrderCancledialog = new OrderCancle();
 	private JTextField textField;
 
