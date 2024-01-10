@@ -22,6 +22,9 @@ public class ShareVar {
 	 * 
 	 */
 	
+	
+	
+	
 	public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static String dbUser = "root";
 	public static String dbPass = "qwer1234";
@@ -79,6 +82,17 @@ public class ShareVar {
 	/////-------포스터 이미지 규격
 	public static int poster_width = 380;
 	public static int poster_hight = 450;
+	
+	// 유저가 선택한 정보
+	public static String selectedMovieTitle;
+	
+	// 상영관 좌석 코드 
+	public static int scr_code = 7;
+	
+	//
+	
+	
+	
 	
 	/*	포스터 규격 예시	
 		lblPoster.setBounds(34, 101, ShareVar.poster_width, ShareVar.poster_hight);
