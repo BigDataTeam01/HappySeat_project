@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -194,7 +195,7 @@ public class Page4_SelectMovie extends JDialog {
 		lbl_moviePoster1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToMovieInformation();
+				goToMovieInformation1();
 			}
 		});
 		contentPanel.add(lbl_moviePoster1);
@@ -204,7 +205,8 @@ public class Page4_SelectMovie extends JDialog {
 		lbl_Movie1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToMovieInformation();
+				goToMovieInformation1();
+				
 			}
 		});
 
@@ -230,7 +232,7 @@ public class Page4_SelectMovie extends JDialog {
 		lbl_moviePoster2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToMovieInformation();
+				goToMovieInformation2();
 			}
 		});
 
@@ -251,7 +253,7 @@ public class Page4_SelectMovie extends JDialog {
 		lbl_Movie2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToMovieInformation();
+				goToMovieInformation2();
 			}
 		});
 
@@ -265,7 +267,7 @@ public class Page4_SelectMovie extends JDialog {
 		lbl_moviePoster3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToMovieInformation();
+				goToMovieInformation3();
 			}
 		});
 
@@ -287,7 +289,7 @@ public class Page4_SelectMovie extends JDialog {
 		lbl_Movie3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToMovieInformation();
+				goToMovieInformation3();
 			}
 		});
 		lbl_Movie3.setIcon(
@@ -300,7 +302,7 @@ public class Page4_SelectMovie extends JDialog {
 		lbl_moviePoster4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToMovieInformation();
+				goToMovieInformation4();
 			}
 		});
 
@@ -320,7 +322,7 @@ public class Page4_SelectMovie extends JDialog {
 		lbl_Movie4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToMovieInformation();
+				goToMovieInformation4();
 			}
 		});
 		lbl_Movie4.setBounds(425, 341, 254, 132);
@@ -353,11 +355,40 @@ public class Page4_SelectMovie extends JDialog {
 
 //-----------------------------Function------------
 	// 다음화면(정화정보)로 가기
-	private void goToMovieInformation() {
+	private void goToMovieInformation1() {
 		dispose();
 		SelectMoviedialog.setVisible(false);
 		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		MovieInformationdialog.setVisible(true);
+		String movie1 = lbl_MovieTitle1.getText();
+			ShareVar.selectedMovieTitle = movie1;
+			
+	}
+	private void goToMovieInformation2() {
+		dispose();
+		SelectMoviedialog.setVisible(false);
+		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		MovieInformationdialog.setVisible(true);
+		String movie2 = lbl_MovieTitle2.getText();
+		ShareVar.selectedMovieTitle = movie2;
+		
+	}
+	private void goToMovieInformation3() {
+		dispose();
+		SelectMoviedialog.setVisible(false);
+		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		MovieInformationdialog.setVisible(true);
+		String movie3 = lbl_MovieTitle3.getText();
+		ShareVar.selectedMovieTitle = movie3;
+	}
+	private void goToMovieInformation4() {
+		dispose();
+		SelectMoviedialog.setVisible(false);
+		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		MovieInformationdialog.setVisible(true);
+		String movie4 = lbl_MovieTitle4.getText();
+		ShareVar.selectedMovieTitle = movie4;
+		
 	}
 
 	// 이전화면(연령선택)으로 가기
@@ -401,8 +432,9 @@ public class Page4_SelectMovie extends JDialog {
 		rating.add(lbl_MovieRating2);
 		rating.add(lbl_MovieRating3);
 		rating.add(lbl_MovieRating4);
-
+		
 		ArrayList<Dto_pjm> dtolist = currentMovie.currentScreenMovie();
+	    
 
 		int n = dtolist.size();
 
@@ -420,7 +452,6 @@ public class Page4_SelectMovie extends JDialog {
 				movieInfoInsert(title.get(i - nextPageBtnCount), genre.get(i - nextPageBtnCount),
 						rating.get(i - nextPageBtnCount), i, dtolist);
 
-
 			}
 			lbl_NextMovie.setVisible(true);
 
@@ -434,7 +465,6 @@ public class Page4_SelectMovie extends JDialog {
 				movieInfoInsert(title.get(i - nextPageBtnCount), genre.get(i - nextPageBtnCount),
 						rating.get(i - nextPageBtnCount), i, dtolist);
 
-
 			}
 			// 마지막 페이지에 없는 영화는 안보여주기
 			for (int i = 3; i > r - 1; i--) {
@@ -443,6 +473,9 @@ public class Page4_SelectMovie extends JDialog {
 				genre.get(i).setVisible(false);
 				rating.get(i).setVisible(false);
 			}
+			
+			
+			
 
 			lbl_NextMovie.setVisible(false);
 
@@ -460,9 +493,9 @@ public class Page4_SelectMovie extends JDialog {
 		genre.setVisible(true);
 		rating.setVisible(true);
 	}
-
+	
 	private void imageInsert(JLabel poster, int filename) {
-
+		
 		// Image 처리 : filename이 달라야 보여주기가 가능
 		String filePath = Integer.toString(filename);
 		poster.setIcon(new ImageIcon(filePath));
@@ -483,4 +516,6 @@ public class Page4_SelectMovie extends JDialog {
 //		file.delete();
 
 	}
+	
+	
 }// End
