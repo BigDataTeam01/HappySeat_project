@@ -130,7 +130,7 @@ public class MovieControl extends JDialog {
 		tfDistCompany.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 		tfDistCompany.setHorizontalAlignment(SwingConstants.CENTER);
 		tfDistCompany.setColumns(10);
-		tfDistCompany.setBounds(106, 155, 93, 21);
+		tfDistCompany.setBounds(106, 155, 159, 21);
 		getContentPane().add(tfDistCompany);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("장르  : ");
@@ -159,7 +159,7 @@ public class MovieControl extends JDialog {
 		tfOverDate.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 		tfOverDate.setHorizontalAlignment(SwingConstants.CENTER);
 		tfOverDate.setColumns(10);
-		tfOverDate.setBounds(106, 280, 93, 21);
+		tfOverDate.setBounds(106, 280, 116, 21);
 		getContentPane().add(tfOverDate);
 		
 		JLabel lblNewLabel_1_5 = new JLabel("개봉일 : ");
@@ -171,7 +171,7 @@ public class MovieControl extends JDialog {
 		tfRelDate.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 		tfRelDate.setHorizontalAlignment(SwingConstants.CENTER);
 		tfRelDate.setColumns(10);
-		tfRelDate.setBounds(106, 255, 93, 21);
+		tfRelDate.setBounds(106, 255, 116, 21);
 		getContentPane().add(tfRelDate);
 		
 		JLabel lblNewLabel_1_6 = new JLabel("제작 국가 : ");
@@ -429,7 +429,17 @@ public class MovieControl extends JDialog {
 		tfOverDate.setText(dateFormat.format(dto.getOver_date()));
 		cbRelState.setSelectedItem(dto.getRel_state()); 
 		epMovieDesc.setText(dto.getMovie_desc());
-
+		
+		// 텍스트를 맨 앞부터 보여주게 하기
+		tfMovieTitle.setCaretPosition(0);
+		tfDirector.setCaretPosition(0);
+		tfActor.setCaretPosition(0);
+		tfDistCompany.setCaretPosition(0);
+		tfGenre.setCaretPosition(0);
+		tfMadeIn.setCaretPosition(0);
+		tfRelDate.setCaretPosition(0);
+		tfOverDate.setCaretPosition(0);
+		epMovieDesc.setCaretPosition(0);
 		
 		// Image 처리 : filename이 달라야 보여주기가 가능
 		String filePath = Integer.toString(ShareVar.filename);
@@ -590,7 +600,7 @@ public class MovieControl extends JDialog {
 	private JEditorPane getEditorPane() {
 		if (epMovieDesc == null) {
 			epMovieDesc = new JEditorPane();
-			epMovieDesc.setFont(new Font("BM Dohyeon",Font.PLAIN,15));
+			epMovieDesc.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 		}
 		return epMovieDesc;
 	}

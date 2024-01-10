@@ -88,6 +88,39 @@ public class ShareVar {
 	public static String managerID = "";
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public static String year = "";
+	public static String month = "";
+	
+	
 	// constructor
 	public ShareVar() {
 		// TODO Auto-generated constructor stub
