@@ -111,7 +111,7 @@ public class AgeStatisticsChart extends JFrame {
 
 		// 데이터 추가
 		DaoUserStatistics dao = new DaoUserStatistics();
-		ArrayList<DtoWDH> dto = dao.pricePerMonth();
+		ArrayList<DtoWDH> dto = dao.ageTypePerMonth();
 		// 1주일 단위로 표 만들기
 		for (int i = 1; i <= 12; i++) {
 			String month = String.format("%02d", i);

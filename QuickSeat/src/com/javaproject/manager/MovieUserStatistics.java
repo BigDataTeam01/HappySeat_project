@@ -148,7 +148,7 @@ public class MovieUserStatistics extends JDialog {
 	private JComboBox getCbTypeStatistics() {
 		if (cbTypeStatistics == null) {
 			cbTypeStatistics = new JComboBox();
-			cbTypeStatistics.setModel(new DefaultComboBoxModel(new String[] { "2024년 7월 통계" }));
+			cbTypeStatistics.setModel(new DefaultComboBoxModel(new String[] {"2024년 07월 통계"}));
 			cbTypeStatistics.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
 			cbTypeStatistics.setBounds(480, 390, 210, 40);
 		}

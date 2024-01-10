@@ -110,7 +110,7 @@ public class TypeStatistics extends JFrame {
 
 		// 데이터 추가
 		DaoUserStatistics dao = new DaoUserStatistics();
-		ArrayList<DtoWDH> dto = dao.agePerMonth();
+		ArrayList<DtoWDH> dto = dao.ageTypePerMonth();
 		// 1주일 단위로 표 만들기
 		for (int i = 1; i <= 12; i++) {
 			String month = String.format("%02d", i);
@@ -120,7 +120,7 @@ public class TypeStatistics extends JFrame {
 			for (int j = 0; j < dto.size(); j++) {
 				String day1 = dto.get(j).getResv_date().substring(3, 5);
 				if (day1.equals(month)) {
-					sumPrice += dto.get(j).getCust_age();
+					sumPrice += dto.get(j).getCount_cust_type();
 				}
 			}
 			dataset.addValue(sumPrice, "이번년도", month + "월");

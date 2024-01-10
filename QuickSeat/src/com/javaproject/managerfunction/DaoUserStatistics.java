@@ -91,11 +91,11 @@ public class DaoUserStatistics {
 		return dataList;
 	}
 
-	public ArrayList<DtoWDH> agePerMonth() {
+	public ArrayList<DtoWDH> ageTypePerMonth() {
 		ArrayList<DtoWDH> dataList = new ArrayList<DtoWDH>();
 		String where1 = "select date_format(r.resv_date, '%y-%m') as month , count(c.cust_age), count(c.cust_type)";
 		String where2 = " from reserve as r, customer as c";
-		String where3 = " where r.resv_cust_seq = c.cust_seq and date_format(resv_date, '%y') = '" + 24 + "'";
+		String where3 = " where r.resv_cust_seq = c.cust_seq and date_format(resv_date, '%y') = '" + ShareVar.year + "'";
 		String where4 = " group by month";
 		
 		try {
