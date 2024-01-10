@@ -56,7 +56,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	 */
 	public Page10_ConfirmSeat() {
 		setTitle("좌석 확정");
-		setBounds(100, 100, 800, 600);
+		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);

@@ -85,7 +85,6 @@ public class Dao_pjm {
 						+ " from movie as m "
 						+ " where rel_state ="
 						+ " '" + "상영중" + "'"; 
-//		System.out.println(fetchQuery);
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
