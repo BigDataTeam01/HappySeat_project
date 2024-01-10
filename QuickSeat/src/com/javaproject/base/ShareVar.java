@@ -82,7 +82,7 @@ public class ShareVar {
 	public static String selectedMovieTitle = "";
 
 	// 상영하다 테이블 프라이머리 키 
-	public static String scr_code ;
+	public static int scr_code = 7;
 
 	// 관리자 페이지 차트 연도와 달 저장하기
 	public static String year = "";
