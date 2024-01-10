@@ -5,7 +5,7 @@ public class DtoWDH {
 	int scr_code;
 	String scr_movie_title;
 	String scr_scroom_name;
-	int seat_resv_code;
+	String seat_resv_code;
 	String scr_start_time;
 	int run_time;
 	String movie_title;
@@ -14,6 +14,13 @@ public class DtoWDH {
 	String rel_state;
 	String scroom_name;
 	int total_seat;
+	String resv_date;
+	int ticket_price;
+	int cust_age;
+	String cust_type;
+	int count_cust_age;
+	int count_cust_type;
+
 
 	public DtoWDH() {
 		// TODO Auto-generated constructor stub
@@ -30,6 +37,52 @@ public class DtoWDH {
 		this.over_date = over_date;
 		this.rel_state = rel_state;
 		this.scr_code = scr_code;
+	}
+
+	public DtoWDH(String resv_date, int ticket_price) {
+		super();
+		this.resv_date = resv_date;
+		this.ticket_price = ticket_price;
+	}
+
+
+	public DtoWDH(String resv_date, int count_cust_age, int count_cust_type) {
+		super();
+		this.resv_date = resv_date;
+		this.count_cust_age = count_cust_age;
+		this.count_cust_type = count_cust_type;
+	}
+
+	public String getResv_date() {
+		return resv_date;
+	}
+
+	public void setResv_date(String resv_date) {
+		this.resv_date = resv_date;
+	}
+
+	public int getTicket_price() {
+		return ticket_price;
+	}
+
+	public void setTicket_price(int ticket_price) {
+		this.ticket_price = ticket_price;
+	}
+
+	public int getCust_age() {
+		return cust_age;
+	}
+
+	public void setCust_age(int cust_age) {
+		this.cust_age = cust_age;
+	}
+
+	public String getCust_type() {
+		return cust_type;
+	}
+
+	public void setCust_type(String cust_type) {
+		this.cust_type = cust_type;
 	}
 
 	// getter setter
@@ -49,11 +102,11 @@ public class DtoWDH {
 		this.scr_scroom_name = scr_scroom_name;
 	}
 
-	public int getSeat_resv_code() {
+	public String getSeat_resv_code() {
 		return seat_resv_code;
 	}
 
-	public void setSeat_resv_code(int seat_resv_code) {
+	public void setSeat_resv_code(String seat_resv_code) {
 		this.seat_resv_code = seat_resv_code;
 	}
 
@@ -127,6 +180,22 @@ public class DtoWDH {
 
 	public void setScr_code(int scr_code) {
 		this.scr_code = scr_code;
+	}
+
+	public int getCount_cust_age() {
+		return count_cust_age;
+	}
+
+	public void setCount_cust_age(int count_cust_age) {
+		this.count_cust_age = count_cust_age;
+	}
+
+	public int getCount_cust_type() {
+		return count_cust_type;
+	}
+
+	public void setCount_cust_type(int count_cust_type) {
+		this.count_cust_type = count_cust_type;
 	}
 
 }

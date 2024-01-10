@@ -27,18 +27,20 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import com.javaproject.base.ShareVar;
 import com.javaproject.managerfunction.DaoUserStatistics;
 import com.javaproject.managerfunction.DtoWDH;
-import com.javaproject.rnd.stringformat;
 
-// 차트에 대한 rnd, 일단은 선그래프만 나오지만 bar그래프로 바꿀 수도 있게 해볼 예정
-public class MovieMonthSalesStatus extends JFrame {
+public class AgeStatisticsChart extends JFrame {
+
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
+	/**
+	 * Launch the application.
+	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MovieMonthSalesStatus frame = new MovieMonthSalesStatus();
+					AgeStatisticsChart frame = new AgeStatisticsChart();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -47,15 +49,17 @@ public class MovieMonthSalesStatus extends JFrame {
 		});
 	}
 
-	public MovieMonthSalesStatus() {
-
+	/**
+	 * Create the frame.
+	 */
+	public AgeStatisticsChart() {
+		
 		setBounds(ShareVar.managerXlocation, ShareVar.managerYlocation, ShareVar.managerXsize, ShareVar.managerYsize);
-
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
-
+		
 		// 그래프 생성
 		JFreeChart chart = createChart(createDataset());
 
@@ -106,31 +110,30 @@ public class MovieMonthSalesStatus extends JFrame {
 																		// dataset 표현방법을 바꿀 수 있음.
 
 		// 데이터 추가
-
 		DaoUserStatistics dao = new DaoUserStatistics();
-		ArrayList<DtoWDH> dto = dao.pricePerMonth();
+		ArrayList<DtoWDH> dto = dao.ageTypePerMonth();
 		// 1주일 단위로 표 만들기
 		for (int i = 1; i <= 12; i++) {
 			String month = String.format("%02d", i);
-			int sumPrice = 0;
+			int sumPeople = 0;
 
 			// 가져온 month와 현재 month가 일치할 경우 sumPrice에 가격 추가
 			for (int j = 0; j < dto.size(); j++) {
 				String day1 = dto.get(j).getResv_date().substring(3, 5);
 				if (day1.equals(month)) {
-					sumPrice += dto.get(j).getTicket_price();
+					sumPeople += dto.get(j).getCount_cust_age();
 				}
 			}
-			dataset.addValue(sumPrice, "이번년도", month + "월");
+			dataset.addValue(sumPeople, "이번년도", month + "월");
 		}
 
 		return dataset;
 	}
 
 	private JFreeChart createChart(CategoryDataset dataset) {
-		return ChartFactory.createBarChart("월별 매출 현황", // 차트 제목
+		return ChartFactory.createBarChart("연령별 사용자 통계", // 차트 제목
 				"", // X 축 레이블
-				"만원", // Y 축 레이블
+				"명", // Y 축 레이블
 				dataset // 데이터셋
 		);
 	}
