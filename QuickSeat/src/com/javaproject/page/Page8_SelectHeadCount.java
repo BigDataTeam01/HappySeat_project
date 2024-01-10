@@ -50,7 +50,7 @@ public class Page8_SelectHeadCount extends JDialog {
 	private static Page8_SelectHeadCount SelectHeadCountdialog = new Page8_SelectHeadCount();
 	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
 	private static Page7_SelectTime SelectTimedialog = new Page7_SelectTime();
-	private static Page9_SelectSeat SelectSeatdialog = new Page9_SelectSeat();
+	private static Page9_SelectSeat_ver2 SelectSeatdialog = new Page9_SelectSeat_ver2();
 	private mybutton btnNewButton;
 
 	public static void main(String[] args) {
