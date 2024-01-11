@@ -15,6 +15,8 @@ import com.javaproject.base.ShareVar;
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Page12_PaymentConfirm extends JDialog {
 
@@ -35,6 +37,13 @@ public class Page12_PaymentConfirm extends JDialog {
 	 * 				 1.5초후 SelectMenu화면으로 이동
 	 * Date : 2024.01.05 (금요일)
 	 * Author : 박정민,박지환
+	 * 
+	 * 
+	 * 
+	 * 
+	 * Update 2024.01.11 by pdg
+	 * 		1. 화면 누르면 스플레시로 돌아가는 기능 추가 
+	 * 
 	 * 
 	 */
 
@@ -72,6 +81,13 @@ public class Page12_PaymentConfirm extends JDialog {
 		contentPanel.add(getLblNewLabel_2_2());
 		// 키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
+		lbl_backGround.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+				goSplashAction();
+			}
+		});
 		lbl_backGround.setIcon(
 				new ImageIcon(Page10_ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(0, 0, 800, 600);
@@ -162,4 +178,17 @@ public class Page12_PaymentConfirm extends JDialog {
 		}
 		return lblNewLabel_2_2;
 	}
-}
+	
+	private void goSplashAction() {
+		
+		Page01_Splash splash = new Page01_Splash();
+		this.setVisible(false);
+		this.dispose();
+		splash.setVisible(true);
+		
+		
+		
+		
+	}
+	
+}// ENd
