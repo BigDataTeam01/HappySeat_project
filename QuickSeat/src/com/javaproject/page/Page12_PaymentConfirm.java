@@ -185,7 +185,8 @@ public class Page12_PaymentConfirm extends JDialog {
 		this.setVisible(false);
 		this.dispose();
 		splash.setVisible(true);
-		
+		ShareVar sharevar = new ShareVar();
+		sharevar.shareVarInint();
 		
 		
 		
