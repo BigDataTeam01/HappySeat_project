@@ -20,6 +20,7 @@ public class DtoWDH {
 	String cust_type;
 	int count_cust_age;
 	int count_cust_type;
+	String admin_admin_id;
 
 
 	public DtoWDH() {
@@ -51,6 +52,27 @@ public class DtoWDH {
 		this.resv_date = resv_date;
 		this.count_cust_age = count_cust_age;
 		this.count_cust_type = count_cust_type;
+	}
+
+
+	public DtoWDH(int scr_code, String scr_movie_title, String scr_scroom_name, String seat_resv_code,
+			String scr_start_time, int run_time, String admin_admin_id) {
+		super();
+		this.scr_code = scr_code;
+		this.scr_movie_title = scr_movie_title;
+		this.scr_scroom_name = scr_scroom_name;
+		this.seat_resv_code = seat_resv_code;
+		this.scr_start_time = scr_start_time;
+		this.run_time = run_time;
+		this.admin_admin_id = admin_admin_id;
+	}
+
+	public String getAdmin_admin_id() {
+		return admin_admin_id;
+	}
+
+	public void setAdmin_admin_id(String admin_admin_id) {
+		this.admin_admin_id = admin_admin_id;
 	}
 
 	public String getResv_date() {

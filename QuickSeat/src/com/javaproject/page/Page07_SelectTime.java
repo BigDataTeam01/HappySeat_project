@@ -3,8 +3,10 @@ package com.javaproject.page;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -15,6 +17,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.Dao_SelectTime;
+import com.javaproject.kioskFunction.Dao_pjm;
+import com.javaproject.managerfunction.DtoWDH;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
 
 public class Page07_SelectTime extends JDialog {
 
@@ -46,6 +54,11 @@ public class Page07_SelectTime extends JDialog {
 	private static Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
 	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 	private static Page08_SelectHeadCount SelectHeadCountdialog = new Page08_SelectHeadCount();
+	private JLabel lblScreenRoom;
+	private JLabel lblScr_Start_Time;
+	private JLabel lblscreenPoster;
+	private JLabel lblremainSeat;
+	
 
 	public static void main(String[] args) {
 		try {
@@ -60,7 +73,14 @@ public class Page07_SelectTime extends JDialog {
 	 * Create the dialog.
 	 */
 	public Page07_SelectTime() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+//				showCurrentScreen();
+			}
+		});
 		// 타이틀 설정
+		showCurrentScreen();
 		setTitle("시간 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		getContentPane().setLayout(new BorderLayout());
@@ -75,7 +95,7 @@ public class Page07_SelectTime extends JDialog {
 				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
 		contentPanel.add(lbl_PreviousMovie);
 
-//	페이지 타이틀 
+		//	페이지 타이틀 
 		JLabel lbl_pageTitle = new JLabel("시간 선택");
 		lbl_pageTitle.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, ShareVar.kiosk_title_font_size));
 
@@ -107,6 +127,24 @@ public class Page07_SelectTime extends JDialog {
 				goToSelectHeadCount();
 			}
 		});
+		
+		
+		JLabel lblNewLabel_1 = new JLabel("상영관");
+		lblNewLabel_1.setBounds(248, 179, 115, 16);
+		contentPanel.add(lblNewLabel_1);
+		
+		
+		JLabel lblNewLabel_1_3 = new JLabel("상영 시작시간");
+		lblNewLabel_1_3.setBounds(248, 253, 115, 16);
+		contentPanel.add(lblNewLabel_1_3);
+		
+		
+		contentPanel.add(getLblScreenRoom());
+		contentPanel.add(getLblScr_Start_Time());
+		contentPanel.add(getLblscreenPoster());
+		contentPanel.add(getLblRemainSeat());
+
+		
 		lbl_MovieBackGround1
 				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_MovieBackGround1);
@@ -167,17 +205,49 @@ public class Page07_SelectTime extends JDialog {
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
-		lbl_background.setBounds(-16, 0, 800, 600);
+		lbl_background.setBounds(0, 0, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		lbl_background.setIcon(new ImageIcon(
 				Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
-		contentPanel.add(lbl_background);
-		{
-			JPanel buttonPane = new JPanel();
-			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
-			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+//		contentPanel.add(lbl_background);
+	}
+	
+	private JLabel getLblScreenRoom() {
+		if(lblScreenRoom == null) {
+			this.lblScreenRoom = new JLabel("상영관 텍스트");
+			lblScreenRoom.setBounds(248, 197, 115, 16);
 		}
+		return lblScreenRoom;
+	}
+	
+	private JLabel getLblScr_Start_Time() {
+		if (lblScr_Start_Time == null) {
+
+			this.lblScr_Start_Time = new JLabel("상영시간 써줄거");
+			lblScr_Start_Time.setBounds(248, 270, 115, 16);
+			
+			
+		}
+		return lblScr_Start_Time;
+	}
+	private JLabel getLblscreenPoster() {
+		if (lblscreenPoster == null) {
+			
+			this.lblscreenPoster = new JLabel("");
+			lblscreenPoster.setBounds(133, 179, 80, 110);
+
+			
+		}
+		return lblscreenPoster;
 	}
 
+	private JLabel getLblRemainSeat() {
+		if (lblremainSeat == null) {
+			
+			this.lblremainSeat = new JLabel("");
+			lblremainSeat.setBounds(248, 234, 115, 16);
+		}
+		return lblremainSeat;
+	}
 //---------------------------Function------------------------
 	// 다음화면(정화정보)로 가기
 	private void goToSelectHeadCount() {
@@ -201,6 +271,72 @@ public class Page07_SelectTime extends JDialog {
 		selectTimedialog.setVisible(false);
 		selectTimedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
+	}
+	
+	private void showCurrentScreen() {
+		JLabel[] lblscr_scroom_nameArray = makeLabel();  
+		JLabel[] lblstart_timeArray = makeLabel(); 
+		JLabel[] lblremainSeatCountArray = makeLabel(); 
+		JLabel[] lblscrPosterArray = makeLabel(); 
+		
+		for(int j = 0; j < 4; j++) {
+			
+			int remainSeatCount = 0;
+			Dao_SelectTime dao = new Dao_SelectTime();
+			ArrayList<DtoWDH> dtolist = dao.showScreen();
+			String scr_scroom_name = dtolist.get(j).getScr_scroom_name();
+			dtolist.get(j).getScr_start_time();
+			String start_time = dtolist.get(j).getScr_start_time().substring(2,16);
+			String remainSeat = dtolist.get(j).getSeat_resv_code();
+			
+			for(int i = 0; i < remainSeat.length(); i++) {
+				if(remainSeat.charAt(i) == '0') {
+					remainSeatCount++;
+				}
+			}
+			System.out.println(0);
+			lblscr_scroom_nameArray[j].setText(scr_scroom_name);
+			lblstart_timeArray[j].setText(start_time);
+			lblremainSeatCountArray[j].setText("남은좌석 : " + Integer.toString(remainSeatCount) + "석");
+			System.out.println(1);
+			
+			// Image 처리
+			String filePath = Integer.toString(dao.screenPoster1);
+			
+			ImageIcon icon = new ImageIcon(filePath);
+			Image changeImg = icon.getImage().getScaledInstance(80, 110, Image.SCALE_SMOOTH);
+			
+			lblscreenPoster.setIcon(new ImageIcon(changeImg));
+			lblscreenPoster.setHorizontalAlignment(SwingConstants.CENTER);
+			
+			File file = new File(filePath);
+			file.delete();
+			
+			}
+			
+	}
+
+	private JLabel[] makeLabel() {
+//		ArrayList<JLabel> makeLabel = new ArrayList<JLabel>();
+		JLabel[] makeLabel = new JLabel[4];
+
+		for (int i = 0; i < 4; i++) {
+			JLabel temp = new JLabel("아무거나");
+			temp.setVisible(true);
+			System.out.println(2);
+			makeLabel[i] = temp;
+			if (i > 2) {
+				int y = 120;
+
+				makeLabel[i].setBounds(133, 179 + y, 80, 110);
+			} else {
+				makeLabel[i].setBounds(133 + i * 90, 179, 80, 110);
+			}
+			makeLabel[i].setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, ShareVar.kiosk_title_font_size));
+			contentPanel.add(makeLabel[i]);
+			
+		}
+		return makeLabel;
 	}
 
 }// End
