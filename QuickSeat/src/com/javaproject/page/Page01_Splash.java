@@ -50,7 +50,7 @@ public class Page01_Splash extends JDialog {
 			goMainAction();
 			}
 		});
-		lblNewLabel.setIcon(new ImageIcon(Page01_Splash.class.getResource("/com/javaproject/image/1. 스플레쉬(Page1_Splash).png")));
+//		lblNewLabel.setIcon(new ImageIcon(Page01_Splash.class.getResource("/com/javaproject/image/1. 스플레쉬(Page1_Splash).png")));
 		lblNewLabel.setBounds(0, -28, 800, 600);
 		contentPanel.add(lblNewLabel);
 	}

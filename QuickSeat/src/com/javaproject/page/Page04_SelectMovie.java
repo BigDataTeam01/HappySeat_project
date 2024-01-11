@@ -441,21 +441,23 @@ public class Page04_SelectMovie extends JDialog {
 		int r = n % 4;
 
 		int m = n / 4 + ((n % 4) / 4 + 1); // 맨 마지막 페이지
-
+		
+		
+		
 		if (moviePageCount != m && moviePageCount < m) {
 
 			for (int i = nextPageBtnCount; i <= nextPageBtnCount + 3 /* dtolist.size() */ ; i++) {
-
+				
 				imageInsert(posters.get(i - nextPageBtnCount), i);
 				posters.get(i - nextPageBtnCount).setVisible(true);
-
+				
 				movieInfoInsert(title.get(i - nextPageBtnCount), genre.get(i - nextPageBtnCount),
 						rating.get(i - nextPageBtnCount), i, dtolist);
-
+						
 			}
 			lbl_NextMovie.setVisible(true);
 			
-
+			
 		} else {
 
 			//// 마지막 페이지에서의 활동!
@@ -467,7 +469,7 @@ public class Page04_SelectMovie extends JDialog {
 						rating.get(i - nextPageBtnCount), i, dtolist);
 
 			}
-			// 마지막 페이지에 없는 영화는 안보여주기
+			 //마지막 페이지에 없는 영화는 안보여주기
 			for (int i = 3; i > r - 1; i--) {
 				posters.get(i).setVisible(false);
 				title.get(i).setVisible(false);
@@ -477,7 +479,7 @@ public class Page04_SelectMovie extends JDialog {
 			
 			
 			
-
+			
 			lbl_NextMovie.setVisible(false);
 
 		}
@@ -517,6 +519,7 @@ public class Page04_SelectMovie extends JDialog {
 //		file.delete();
 
 	}
+		
 	
 	
 }// End
