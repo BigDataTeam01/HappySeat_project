@@ -232,38 +232,50 @@ public class MovieUserStatistics extends JDialog {
 	}
 
 	// --- Field ---
+	// 월별 매출 현황에서 연도를 선택 후 차트보기를 눌르면 차트를 띄움
 	private void showMonthlyRevenue() {
 		
+		// 콤보박스에서 연도만 따와서 ShareVar.year에 넣어줌
 		ShareVar.year = cbMonthlyRevenue.getSelectedItem().toString().substring(2, 4);
 		
+		// 월별 매출 현황 차트를 띄워줌
 		MovieMonthSalesStatus movieMonthSalesStatus = new MovieMonthSalesStatus();
 		movieMonthSalesStatus.setVisible(true);
 
 	}
 
+	// 일별 매출 현황에서 연도와 달을 선택 후 차트보기를 누르면 차트를 띄움
 	private void showDailyRevenue() {
 		
+		// 콤보박스에서 연도와 달만 따와서 ShareVar.year와 ShareVar.month를 넣어줌
 		ShareVar.year = cbDailyRevenue.getSelectedItem().toString().substring(2, 4);
 		ShareVar.month = cbDailyRevenue.getSelectedItem().toString().substring(6, 8);
 		
+		// 일별 매출 현황 차트를 띄워줌
 		MovieDaySalesStatus movieDaySalesStatus = new MovieDaySalesStatus();
 		movieDaySalesStatus.setVisible(true);
 		
 	}
 	
+	// 연령별 사용자 통계에서 연도를 선택 후 차트보기를 누르면 차트를 띄움
 	private void showAgeStatistics() {
 		
+		// 콤보박스에서 연도만 따와서 ShareVar.year에 넣어줌
 		ShareVar.year = cbAgeStatistics.getSelectedItem().toString().substring(2, 4);
 		
+		// 연령별 사용자 통계를 띄워줌
 		AgeStatisticsChart movieMonthSalesStatus = new AgeStatisticsChart();
 		movieMonthSalesStatus.setVisible(true);
 
 	}
 	
+	// 유형별 사용자 통계에서 연도를 선택 후 차트보기를 누르면 차트를 띄움
 	private void showTypeStatistics() {
 		
+		// 콤보박스에서 연도만 따와서 ShareVar.year에 넣어줌
 		ShareVar.year = cbTypeStatistics.getSelectedItem().toString().substring(2, 4);
 		
+		// 유형별 사용자 통계를 띄워줌
 		TypeStatistics movieMonthSalesStatus = new TypeStatistics();
 		movieMonthSalesStatus.setVisible(true);
 

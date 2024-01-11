@@ -76,7 +76,7 @@ public class AgeStatisticsChart extends JFrame {
 
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
 
-		// 차트 렌더러(Renderer)를 가져와서 값 표시 설정
+		// 차트 렌더러(Renderer)를 가져와서 값 표시 설정, 바 위에 숫자를 추가해주기 위해 필요
 		BarRenderer renderer = (BarRenderer) plot.getRenderer();
 
 		renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
@@ -106,21 +106,23 @@ public class AgeStatisticsChart extends JFrame {
 	}
 
 	private CategoryDataset createDataset() {
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset(); // DefaultCategoryDataset이 아닌 다른 Class를 고르면
-																		// dataset 표현방법을 바꿀 수 있음.
+		
+		// DefaultCategoryDataset이 아닌 다른 Class를 고르면 dataset 표현방법을 바꿀 수 있음.
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		// 데이터 추가
 		DaoUserStatistics dao = new DaoUserStatistics();
 		ArrayList<DtoWDH> dto = dao.ageTypePerMonth();
-		// 1주일 단위로 표 만들기
+		
+		// 1월부터 12월 까지 dataset 추가
 		for (int i = 1; i <= 12; i++) {
 			String month = String.format("%02d", i);
 			int sumPeople = 0;
 
-			// 가져온 month와 현재 month가 일치할 경우 sumPrice에 가격 추가
+			// 가져온 month와 현재 month가 일치할 경우 sumPeople에 인원 추가
 			for (int j = 0; j < dto.size(); j++) {
-				String day1 = dto.get(j).getResv_date().substring(3, 5);
-				if (day1.equals(month)) {
+				String month1 = dto.get(j).getResv_date().substring(3, 5);
+				if (month1.equals(month)) {
 					sumPeople += dto.get(j).getCount_cust_age();
 				}
 			}

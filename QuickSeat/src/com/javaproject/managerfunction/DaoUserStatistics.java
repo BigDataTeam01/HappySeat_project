@@ -91,6 +91,7 @@ public class DaoUserStatistics {
 		return dataList;
 	}
 
+	// 연령별, 유형별 매출 현황
 	public ArrayList<DtoWDH> ageTypePerMonth() {
 		ArrayList<DtoWDH> dataList = new ArrayList<DtoWDH>();
 		String where1 = "select date_format(r.resv_date, '%y-%m') as month , count(c.cust_age), count(c.cust_type)";
