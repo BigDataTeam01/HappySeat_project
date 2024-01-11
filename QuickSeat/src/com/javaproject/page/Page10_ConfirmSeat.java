@@ -36,8 +36,8 @@ public class Page10_ConfirmSeat extends JDialog {
 	 * Launch the application.
 	 */
 	private static Page11_0_SelectPayment selectpayment = new Page11_0_SelectPayment();
-	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
-	private static Page9_SelectSeat SelectSeatdialog = new Page9_SelectSeat();
+	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
+	private static Page09_SelectSeat_ver2 SelectSeatdialog = new Page09_SelectSeat_ver2();
 	
 	private JLabel lblNewLabel;
 
