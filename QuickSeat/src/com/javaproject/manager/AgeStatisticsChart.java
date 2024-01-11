@@ -112,21 +112,21 @@ public class AgeStatisticsChart extends JFrame {
 
 		// 데이터 추가
 		DaoUserStatistics dao = new DaoUserStatistics();
-		ArrayList<DtoWDH> dto = dao.ageTypePerMonth();
+		ArrayList<DtoWDH> dto = dao.ageUserStatistics();
 		
-		// 1월부터 12월 까지 dataset 추가
-		for (int i = 1; i <= 12; i++) {
-			String month = String.format("%02d", i);
+		// 00부터 80까지
+		for (int i = 0; i <= 80; i+=10) {
+			String age = String.format("%02d", i);
 			int sumPeople = 0;
 
 			// 가져온 month와 현재 month가 일치할 경우 sumPeople에 인원 추가
 			for (int j = 0; j < dto.size(); j++) {
-				String month1 = dto.get(j).getResv_date().substring(3, 5);
-				if (month1.equals(month)) {
-					sumPeople += dto.get(j).getCount_cust_age();
+				String ageDB = String.format("%02d", dto.get(j).getCust_age());
+				if (ageDB.equals(age)) {
+					sumPeople += dto.get(j).getAge_count();
 				}
 			}
-			dataset.addValue(sumPeople, "이번년도", month + "월");
+			dataset.addValue(sumPeople, ShareVar.year + "년 " + ShareVar.month + "월", age);
 		}
 
 		return dataset;

@@ -91,13 +91,13 @@ public class DaoUserStatistics {
 		return dataList;
 	}
 
-	// 연령별, 유형별 매출 현황
-	public ArrayList<DtoWDH> ageTypePerMonth() {
+	// 연령별 사용자 통계
+	public ArrayList<DtoWDH> ageUserStatistics() {
 		ArrayList<DtoWDH> dataList = new ArrayList<DtoWDH>();
-		String where1 = "select date_format(r.resv_date, '%y-%m') as month , count(c.cust_age), count(c.cust_type)";
-		String where2 = " from reserve as r, customer as c";
-		String where3 = " where r.resv_cust_seq = c.cust_seq and date_format(resv_date, '%y') = '" + ShareVar.year + "'";
-		String where4 = " group by month";
+		String where1 = "SELECT DATE_FORMAT(r.resv_date, '%y-%m') AS month, c.cust_age, COUNT(*) AS age_count";
+		String where2 = " FROM reserve AS r JOIN customer AS c ON r.resv_cust_seq = c.cust_seq";
+		String where3 = " WHERE DATE_FORMAT(r.resv_date, '%y-%m') = '" + ShareVar.year + "-" + ShareVar.month + "'";
+		String where4 = " GROUP BY month, c.cust_age order by c.cust_age asc";
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -108,10 +108,44 @@ public class DaoUserStatistics {
 			
 			while (rs.next()) {
 				String wkResv_date = rs.getString(1);
-				int wkCount_cust_age = rs.getInt(2);
-				int wkCount_cust_type = rs.getInt(3);
+				int wkCust_age = rs.getInt(2);
+				int wkAge_count = rs.getInt(3);
 				
-				DtoWDH dto = new DtoWDH(wkResv_date, wkCount_cust_age, wkCount_cust_type);
+				DtoWDH dto = new DtoWDH(wkResv_date, wkCust_age, wkAge_count);
+				
+				dataList.add(dto);
+			}
+			
+			conn_mysql.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return dataList;
+	}
+
+	// 유형별 사용자 통계
+	public ArrayList<DtoWDH> typeUserStatistics() {
+		ArrayList<DtoWDH> dataList = new ArrayList<DtoWDH>();
+		String where1 = "SELECT DATE_FORMAT(r.resv_date, '%y-%m') AS month, c.cust_type, COUNT(*) AS type_count";
+		String where2 = " FROM reserve AS r JOIN customer AS c ON r.resv_cust_seq = c.cust_seq";
+		String where3 = " WHERE DATE_FORMAT(r.resv_date, '%y-%m') = '" + ShareVar.year + "-" + ShareVar.month + "'";
+		String where4 = " GROUP BY month, c.cust_type";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ResultSet rs = stmt_mysql.executeQuery(where1 + where2 + where3 + where4);
+			
+			while (rs.next()) {
+				String wkResv_date = rs.getString(1);
+				String wkCust_type = rs.getString(2);
+				int wkType_count = rs.getInt(3);
+				
+				DtoWDH dto = new DtoWDH(wkResv_date, wkCust_type, wkType_count);
 				
 				dataList.add(dto);
 			}
