@@ -70,7 +70,7 @@ public class Page04_SelectMovie extends JDialog {
 	private JLabel lbl_moviePoster4;
 	private static int nextPageBtnCount = 1;
 	private JLabel lbl_PreviousMovie;
-	private static JLabel lbl_NextMovie;
+	private JLabel lbl_NextMovie;
 
 	private static int moviePageCount = 1;
 	private JLabel lbl_MovieTitle1;
@@ -123,31 +123,7 @@ public class Page04_SelectMovie extends JDialog {
 
 		
 		contentPanel.add(getLblpreviousButton());
-
-		////////////// 다음 영화로 버튼
-		lbl_NextMovie = new JLabel("");
-		lbl_NextMovie.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				nextPageBtnCount += 4;
-				moviePageCount += 1;
-				lbl_PreviousMovie.setVisible(true);
-				getCurrentScreenMovies();
-
-			}
-		});
-		
-		lbl_NextMovie.setBounds(561, 503, 198, 57);
-
-		lbl_NextMovie
-				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
-		contentPanel.add(lbl_NextMovie);
-		
-		
-		
-		
-		
-		
+		contentPanel.add(getLblNextButton());
 		
 		
 		
@@ -338,39 +314,60 @@ public class Page04_SelectMovie extends JDialog {
 		contentPanel.add(lbl_background);
 
 	}
+	
+	private JLabel getLblNextButton() {
+		if(lbl_NextMovie == null) {
+		//////////////다음 영화로 버튼
+		lbl_NextMovie = new JLabel("");
+		lbl_NextMovie.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				nextPageBtnCount += 4;
+				moviePageCount += 1;
+				lbl_PreviousMovie.setVisible(true);
+				getCurrentScreenMovies();
+
+			}
+		});
+		
+		lbl_NextMovie.setBounds(561, 503, 198, 57);
+
+		lbl_NextMovie
+				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
+		}
+		return lbl_NextMovie;
+	}
 		
 	
 	private JLabel getLblpreviousButton() {
-		if(lbl_PreviousMovie == null) {
+		if (lbl_PreviousMovie == null) {
 			this.lbl_PreviousMovie = new JLabel();
 			// 이전화면
 			lbl_PreviousMovie = new JLabel("");
 			lbl_PreviousMovie.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					
+
 					moviePageCount = moviePageCount - 1;
 					nextPageBtnCount -= 4;
-					
+
 					if (moviePageCount == 1) {
-						
+
 						getCurrentScreenMovies();
 						lbl_PreviousMovie.setVisible(false);
-						
+
 					} else {
 						moviePageCount = moviePageCount - 1;
 						getCurrentScreenMovies();
 					}
-					
+
 				}
 			});
 			lbl_PreviousMovie.setBounds(103, 503, 260, 50);
-			lbl_PreviousMovie
-			.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
+			lbl_PreviousMovie.setIcon(
+					new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
 		}
-		
 		return lbl_PreviousMovie;
-		
 	}
 	
 	
