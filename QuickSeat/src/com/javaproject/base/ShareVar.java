@@ -22,7 +22,10 @@ public class ShareVar {
 
 	public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static String dbUser = "root";
-	public static String dbPass = "qwer1234";
+	public static String dbPass = "qwer1234";	
+//	public static String dbName = "jdbc:mysql://127.0.0.1:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+//	public static String dbUser = "root";
+//	public static String dbPass = "gkdldua12!@";
 
 	// manager page gui siz
 	public static int managerXsize = 800;
@@ -87,6 +90,8 @@ public class ShareVar {
 	// 관리자 페이지 차트 연도와 달 저장하기
 	public static String year = "";
 	public static String month = "";
+	
+	public static int selectedCustage;
 
 	// constructor
 	public ShareVar() {
