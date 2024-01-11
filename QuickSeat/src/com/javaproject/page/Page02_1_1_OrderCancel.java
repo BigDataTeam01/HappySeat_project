@@ -22,9 +22,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
-import com.javaproject.page.Page2_1_0_OrderCheck.mybutton;
+import com.javaproject.page.Page02_1_0_OrderCheck.mybutton;
 
-public class Page2_1_1_OrderCancel extends JDialog {
+public class Page02_1_1_OrderCancel extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -32,7 +32,7 @@ public class Page2_1_1_OrderCancel extends JDialog {
 	 * Description : 영화티켓 취소 
 	 * 				 1. OrderCancle에서 을 첫화면 버튼을 터치했을시 MenuSelect 화면으로 이동
 	 * 				 2. OrderCancle에서 을 구매취소 버튼을 터치했을시 "구매취소 되었습니다." ShowMessageDialog 화면을 띄운다(추후의 변경예정)
-	 * 				 3. OrderCancle에서 을 이전화면 버튼을 터치했을시 Page2_1_0_OrderCheck 화면으로 이동
+	 * 				 3. OrderCancle에서 을 이전화면 버튼을 터치했을시 Page02_1_0_OrderCheck 화면으로 이동
 	 * Date : 2024.01.06 (토요일)
 	 * Author : 박정민,박지환
 	 * 
@@ -46,10 +46,10 @@ public class Page2_1_1_OrderCancel extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page2_1_1_OrderCancel OrderCancledialog = new Page2_1_1_OrderCancel();
-//	private static Page2_1_1_OrderCancel_Dialog OrderCancledialogdialog = new Page2_1_1_OrderCancel_Dialog();
-	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
-	private static Page2_1_0_OrderCheck OrderCheckdialog = new Page2_1_0_OrderCheck();
+	private static Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
+//	private static Page02_1_1_OrderCancel_Dialog OrderCancledialogdialog = new Page02_1_1_OrderCancel_Dialog();
+	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
+	private static Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
 	private mybutton btnNewButton;
 	
 	public static void main(String[] args) {
@@ -62,51 +62,51 @@ public class Page2_1_1_OrderCancel extends JDialog {
 	}
 
 //////////////라운드 버튼박스를 만들기 위한 paintComponent 설정
-
-class mybutton extends JButton {
-private Color backgroundColor = new Color(183, 216, 107);
-
-public mybutton(String text, Color bgColor) {
-	super(text);
-	this.backgroundColor = bgColor;
-	init();
-}
-private void init() {
-	setContentAreaFilled(false);
-	setOpaque(false);
-}
-
-@Override
-public void paintComponent(Graphics g) {
-	int width = getWidth();
-	int height = getHeight();
-	Graphics2D graphics = (Graphics2D) g;
-	graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-	if (getModel().isArmed()) {
-		graphics.setColor(backgroundColor.darker());
-	} else if (getModel().isRollover()) {
-		graphics.setColor(backgroundColor.brighter());
-	} else {
-		graphics.setColor(backgroundColor);
+	
+	class mybutton extends JButton {
+	private Color backgroundColor = new Color(183, 216, 107);
+	
+	public mybutton(String text, Color bgColor) {
+		super(text);
+		this.backgroundColor = bgColor;
+		init();
 	}
-
-	graphics.fillRoundRect(0, 0, width, height, 10, 10);
-	FontMetrics fontMetrics = graphics.getFontMetrics();
-	Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds();
-	int textX = (width - stringBounds.width) / 2;
-	int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent();
-
-	graphics.setColor(getForeground());
-	graphics.setFont(getFont());
-	graphics.drawString(getText(), textX, textY);
-	graphics.dispose();
-	super.paintComponent(g);
-}
-}
-	/**
-	 * Create the dialog.
+	private void init() {
+		setContentAreaFilled(false);
+		setOpaque(false);
+	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		int width = getWidth();
+		int height = getHeight();
+		Graphics2D graphics = (Graphics2D) g;
+		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		if (getModel().isArmed()) {
+			graphics.setColor(backgroundColor.darker());
+		} else if (getModel().isRollover()) {
+			graphics.setColor(backgroundColor.brighter());
+		} else {
+			graphics.setColor(backgroundColor);
+		}
+	
+		graphics.fillRoundRect(0, 0, width, height, 10, 10);
+		FontMetrics fontMetrics = graphics.getFontMetrics();
+		Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds();
+		int textX = (width - stringBounds.width) / 2;
+		int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent();
+	
+		graphics.setColor(getForeground());
+		graphics.setFont(getFont());
+		graphics.drawString(getText(), textX, textY);
+		graphics.dispose();
+		super.paintComponent(g);
+	}
+	}
+		/**
+		 * Create the dialog.
 	 */
-	public Page2_1_1_OrderCancel() {
+	public Page02_1_1_OrderCancel() {
 		setTitle("예매 확인");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 
@@ -134,7 +134,7 @@ public void paintComponent(Graphics g) {
 						goToOredrCheck();
 					}
 				});
-				BtnBack.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+				BtnBack.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 				BtnBack.setBounds(11, 18, 170, 130);
 				contentPanel.add(BtnBack);
 				
@@ -147,9 +147,9 @@ public void paintComponent(Graphics g) {
 			}
 		});
 		BtnGoToFirstPage
-				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
-		BtnGoToFirstPage.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		BtnGoToFirstPage.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		BtnGoToFirstPage.setBounds(628, 17, 180, 130);
 		contentPanel.add(BtnGoToFirstPage);
 		
@@ -163,7 +163,7 @@ public void paintComponent(Graphics g) {
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 		lbl_background.setIcon(new ImageIcon(
-				Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_background.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_background);
 	}
@@ -196,7 +196,7 @@ public void paintComponent(Graphics g) {
 		OrderCancledialog.setVisible(false);
 		OrderCancledialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		
-//		Page2_1_1_OrderCancel_Dialog OrderCancledialogdialog= new Page2_1_1_OrderCancel_Dialog();
+//		Page02_1_1_OrderCancel_Dialog OrderCancledialogdialog= new Page02_1_1_OrderCancel_Dialog();
 //		OrderCancledialogdialog.setVisible(true);
 		selectMenudialog.setVisible(true);
 		
