@@ -1,6 +1,7 @@
 package com.javaproject.rnd;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -74,39 +75,57 @@ public class ChartExample extends JFrame {
 
 	private CategoryDataset createDataset() {
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset(); // DefaultCategoryDataset이 아닌 다른 Class를 고르면
-																		// dataset표현방법을 바꿀 수 있음.
+																		// dataset 표현방법을 바꿀 수 있음.
 
 		// 데이터 추가
-		dataset.addValue(3.0, "전년도", "1월");
-		dataset.addValue(13.0, "이번년도", "1월");
-		dataset.addValue(33.0, "전년도", "2월");
-		dataset.addValue(23.0, "이번년도", "2월");
-		dataset.addValue(13.0, "전년도", "3월");
-		dataset.addValue(43.0, "이번년도", "3월");
-		dataset.addValue(33.0, "전년도", "4월");
-		dataset.addValue(53.0, "이번년도", "4월");
-		dataset.addValue(73.0, "전년도", "5월");
-		dataset.addValue(63.0, "이번년도", "5월");
-		dataset.addValue(93.0, "전년도", "6월");
-		dataset.addValue(83.0, "이번년도", "6월");
-		dataset.addValue(23.0, "전년도", "7월");
-		dataset.addValue(43.0, "이번년도", "7월");
-		dataset.addValue(13.0, "전년도", "8월");
-		dataset.addValue(53.0, "이번년도", "8월");
-		dataset.addValue(3.0, "전년도", "9월");
-		dataset.addValue(63.0, "이번년도", "9월");
-		dataset.addValue(43.0, "전년도", "10월");
-		dataset.addValue(33.0, "이번년도", "10월");
-		dataset.addValue(23.0, "전년도", "11월");
-		dataset.addValue(33.0, "이번년도", "11월");
-		dataset.addValue(53.0, "전년도", "12월");
-		dataset.addValue(23.0, "이번년도", "12월");
+		
+//		dataset.addValue(3.0, "전년도", "1월");
+//		dataset.addValue(13.0, "이번년도", "1월");
+//		dataset.addValue(33.0, "전년도", "2월");
+//		dataset.addValue(23.0, "이번년도", "2월");
+//		dataset.addValue(13.0, "전년도", "3월");
+//		dataset.addValue(43.0, "이번년도", "3월");
+//		dataset.addValue(33.0, "전년도", "4월");
+//		dataset.addValue(53.0, "이번년도", "4월");
+//		dataset.addValue(73.0, "전년도", "5월");
+//		dataset.addValue(63.0, "이번년도", "5월");
+//		dataset.addValue(93.0, "전년도", "6월");
+//		dataset.addValue(83.0, "이번년도", "6월");
+//		dataset.addValue(23.0, "전년도", "7월");
+//		dataset.addValue(43.0, "이번년도", "7월");
+//		dataset.addValue(13.0, "전년도", "8월");
+//		dataset.addValue(53.0, "이번년도", "8월");
+//		dataset.addValue(3.0, "전년도", "9월");
+//		dataset.addValue(63.0, "이번년도", "9월");
+//		dataset.addValue(43.0, "전년도", "10월");
+//		dataset.addValue(33.0, "이번년도", "10월");
+//		dataset.addValue(23.0, "전년도", "11월");
+//		dataset.addValue(33.0, "이번년도", "11월");
+//		dataset.addValue(53.0, "전년도", "12월");
+//		dataset.addValue(23.0, "이번년도", "12월");
+		DaoChartExample dao = new DaoChartExample();
+		ArrayList<DtoChartExample> dto = dao.pricePerDay();
+		// 1주일 단위로 표 만들기
+		for(int i = 6; i >= 0; i--) {
+			int date = 17-i;
+			String day = "07" + "-" + Integer.toString(date);
+			int sumPrice = 0;
+			
+			// 가져온 day와 현재 day가 일치할 경우 sumPrice에 가격 추가
+			for(int j = 0; j < dto.size(); j++) {
+				String day1 = dto.get(j).getResv_date().substring(3,8);
+				if(day1.equals(day)) {
+					sumPrice += dto.get(j).getTicket_price();
+				}
+			}
+			dataset.addValue(sumPrice, "이번년도", day);
+		}
 
 		return dataset;
 	}
 
 	private JFreeChart createChart(CategoryDataset dataset) {
-		return ChartFactory.createBarChart("월별 매출 현황", // 차트 제목
+		return ChartFactory.createBarChart("일별 매출 현황", // 차트 제목
 				"", // X 축 레이블
 				"만원", // Y 축 레이블
 				dataset // 데이터셋
@@ -120,7 +139,7 @@ public class ChartExample extends JFrame {
 	}
 
 	private static void createAndShowGUI() {
-		ChartExample frame = new ChartExample("월별 매출 현황");
+		ChartExample frame = new ChartExample("일별 매출 현황");
 		frame.setSize(800, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
