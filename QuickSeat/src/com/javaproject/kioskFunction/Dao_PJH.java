@@ -225,7 +225,64 @@ public class Dao_PJH {
 		return dtoList;
 	}
 	
-	
+	public ArrayList<Dto_PJH> cinema_Info() {
+		ArrayList<Dto_PJH> dtoList = new ArrayList<Dto_PJH>();
+		String fetchQuery = "select "
+						+ " cinema_branch," //1
+						+ "	get_here,"	//2
+						+ " location_map "		//3
+						+ " from screening_room "
+						+ " where scroom_name in"
+						+ " (select scr_scroom_name"
+						+ " from screen"
+						+ " where scr_movie_title ="
+						+ " '" + movie_title + "'"; 
+//		System.out.println(movie_title);
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			
+			ResultSet rs = stmt_mysql.executeQuery(fetchQuery);
+			
+			while(rs.next()) {
+				String wkcinema_branch	= rs.getString(1);
+				String wkget_here 	 	= rs.getString(2);
+				String wklocation_map 	= rs.getString(3);
+				// image file
+				ShareVar.filename = ShareVar.filename + 1;
+//				System.out.println(ShareVar.filename);
+				File posterImageFile = new File(Integer.toString(ShareVar.filename));
+				FileOutputStream output = new FileOutputStream(posterImageFile);
+				InputStream input = rs.getBinaryStream(8);
+				byte[] buffer = new byte[1024];
+				//System.out.println(wkActor);
+				//System.out.println(wkMovie_Title);
+				
+				if (input != null) {
+				    while(input.read(buffer) > 0) {
+				        output.write(buffer);
+				    }
+				} else {
+				    System.out.println("이 레코드에 대한 포스터가 null입니다.");
+				}
+				
+				
+				Dto_PJH dto = new Dto_PJH(wkDirector, wkMovie_Title, wkActor, wkDist_Company, wkGenre, wkFilm_Rating, wkMade_In, wkMovie_Desc, wkRel_Date, wkOver_Date, wkRel_State, wkmovie_run_time);
+						
+						
+				dtoList.add(dto);
+			}
+			
+			conn_mysql.close();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return dtoList;
+	}
 	
 }
 

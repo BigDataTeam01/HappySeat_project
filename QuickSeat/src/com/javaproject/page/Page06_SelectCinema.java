@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 import com.javaproject.base.ShareVar;
 import java.awt.Color;
 
-public class Page6_SelectCinema extends JDialog {
+public class Page06_SelectCinema extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -41,15 +41,15 @@ public class Page6_SelectCinema extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page6_SelectCinema SelectCinemadialog = new Page6_SelectCinema();
+	private static Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
 	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
-	private static Page5_MovieInformation MovieInformationdialog = new Page5_MovieInformation();
-	private static Page7_SelectTime SelectTimedialog = new Page7_SelectTime();
+	private static Page5_MovieInformation movieInformationdialog = new Page5_MovieInformation();
+	private static Page7_SelectTime selectTimedialog = new Page7_SelectTime();
 
 	public static void main(String[] args) {
 		try {
-			SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			SelectCinemadialog.setVisible(true);
+			selectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			selectCinemadialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,7 +58,7 @@ public class Page6_SelectCinema extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page6_SelectCinema() {
+	public Page06_SelectCinema() {
 		// 타이틀 설정
 		setTitle("극장 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
@@ -182,24 +182,24 @@ public class Page6_SelectCinema extends JDialog {
 	// 다음화면(시간선택)로 가기
 	private void goToSelectTime() {
 		dispose();
-		SelectCinemadialog.setVisible(false);
-		SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		SelectTimedialog.setVisible(true);
+		selectCinemadialog.setVisible(false);
+		selectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectTimedialog.setVisible(true);
 	}
 
 	// 이전화면(영화정보)으로 가기
 	private void goToMovieInformation() {
 		dispose();
-		SelectCinemadialog.setVisible(false);
-		SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		MovieInformationdialog.setVisible(true);
+		selectCinemadialog.setVisible(false);
+		selectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		movieInformationdialog.setVisible(true);
 	}
 
 	// 첫화면으로 가기
 	private void goToSelectMenu() {
 		dispose();
-		SelectCinemadialog.setVisible(false);
-		SelectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectCinemadialog.setVisible(false);
+		selectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
 	}
 
