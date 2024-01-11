@@ -32,7 +32,9 @@ public class Dao_PJH {
 	Date over_date;
 	String rel_state;
 	int  movie_run_time;
-	
+	String cinema_branch;
+	String get_here;
+	FileInputStream location_map;
 	
 	
 	
@@ -54,6 +56,14 @@ public class Dao_PJH {
 
 
 
+
+	//극장선택에 사용하는 Dao
+	public Dao_PJH(String cinema_branch, String get_here, FileInputStream location_map) {
+		super();
+		this.cinema_branch = cinema_branch;
+		this.get_here = get_here;
+		this.location_map = location_map;
+	}
 
 
 	// 영화정보 Page에서 사용할 Dao
@@ -210,7 +220,9 @@ public class Dao_PJH {
 				}
 				
 				
-				Dto_PJH dto = new Dto_PJH(wkDirector, wkMovie_Title, wkActor, wkDist_Company, wkGenre, wkFilm_Rating, wkMade_In, wkMovie_Desc, wkRel_Date, wkOver_Date, wkRel_State, wkmovie_run_time);
+				Dto_PJH dto = new Dto_PJH(wkDirector, wkMovie_Title, wkActor, wkDist_Company,
+										  wkGenre, wkFilm_Rating, wkMade_In, wkMovie_Desc, 
+										  wkRel_Date, wkOver_Date, wkRel_State, wkmovie_run_time);
 						
 						
 				dtoList.add(dto);
@@ -228,15 +240,17 @@ public class Dao_PJH {
 	public ArrayList<Dto_PJH> cinema_Info() {
 		ArrayList<Dto_PJH> dtoList = new ArrayList<Dto_PJH>();
 		String fetchQuery = "select "
-						+ " cinema_branch," //1
-						+ "	get_here,"	//2
-						+ " location_map "		//3
-						+ " from screening_room "
-						+ " where scroom_name in"
-						+ " (select scr_scroom_name"
+						+ " cinema_branch, " 		//1
+						+ "	get_here, "				//2
+						+ " location_map "			//3
+						+ " from screening_room "	
+						+ " where scroom_name "	
+						+ " in (select scr_scroom_name"
 						+ " from screen"
 						+ " where scr_movie_title ="
-						+ " '" + movie_title + "'"; 
+						+ " '위시')"; 
+						
+//						+ " '" + movie_title + "')"; 
 //		System.out.println(movie_title);
 		
 		try {
@@ -249,13 +263,12 @@ public class Dao_PJH {
 			while(rs.next()) {
 				String wkcinema_branch	= rs.getString(1);
 				String wkget_here 	 	= rs.getString(2);
-				String wklocation_map 	= rs.getString(3);
 				// image file
 				ShareVar.filename = ShareVar.filename + 1;
 //				System.out.println(ShareVar.filename);
-				File posterImageFile = new File(Integer.toString(ShareVar.filename));
-				FileOutputStream output = new FileOutputStream(posterImageFile);
-				InputStream input = rs.getBinaryStream(8);
+				File location_mapImageFile = new File(Integer.toString(ShareVar.filename));
+				FileOutputStream output = new FileOutputStream(location_mapImageFile);
+				InputStream input = rs.getBinaryStream(3);
 				byte[] buffer = new byte[1024];
 				//System.out.println(wkActor);
 				//System.out.println(wkMovie_Title);
@@ -269,8 +282,7 @@ public class Dao_PJH {
 				}
 				
 				
-				Dto_PJH dto = new Dto_PJH(wkDirector, wkMovie_Title, wkActor, wkDist_Company, wkGenre, wkFilm_Rating, wkMade_In, wkMovie_Desc, wkRel_Date, wkOver_Date, wkRel_State, wkmovie_run_time);
-						
+				Dto_PJH dto = new Dto_PJH(wkcinema_branch, wkget_here);				
 						
 				dtoList.add(dto);
 			}
