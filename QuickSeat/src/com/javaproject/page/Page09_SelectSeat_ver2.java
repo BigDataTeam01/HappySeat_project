@@ -119,18 +119,18 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		SwingUtilities.invokeLater(() -> {
 			dialog.setVisible(true);
 		});
-
+		// timer thread 를 생성 
 		TimerTask task = new TimerTask() {
 			@Override
-			public void run() {
+			public void run() { // 위에있는 run 을 오버라이드로 수정하는 코드 
 				// getCurrentSeatCode 메소드를 백그라운드에서 실행
-				Thread backgroundThread = new Thread(new SeatUpdateRunnable(dialog));
-				backgroundThread.start();
+				Thread backgroundThread = new Thread(new SeatUpdateRunnable(dialog)); // dialog 는 이페이지 전체임. 
+				backgroundThread.start(); // 스레드 시작!
 			}
 		};
 
 		java.util.Timer timer = new java.util.Timer(true);
-		timer.scheduleAtFixedRate(task, 0, 1000); // 2초마다 실행 (예시)
+		timer.scheduleAtFixedRate(task, 0, 2000); // 2초마다 실행 (예시)
 
 	}
 
@@ -274,8 +274,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 			// ContentArea에 배경색 설정
 			if (seatStatus[row][col]) {
-//            	seatArray[row][col].setContentAreaFilled(true);
-//            	seatArray[row][col].setBackground(Color.red);
+
 				seatArray[row][col].setIcon(
 						new ImageIcon(Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/SelectedSeat.png")));
 
@@ -285,8 +284,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				System.out.println(selectSeatCode);
 
 			} else {
-//            	seatArray[row][col].setContentAreaFilled(false);
-//            	seatArray[row][col].setBackground(null);
+
 				selectSeatCode.setCharAt(row * columnsOfSeats + col, '0');
 				seatArray[row][col].setIcon(new ImageIcon(
 						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotselectedSeat.png")));
@@ -326,7 +324,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				seatArray[rowSeat][colSeat] = new JButton();
 				seatArray[rowSeat][colSeat].addActionListener(new SeatButtonListener(rowSeat, colSeat));
 
-//               loadSeat(rowSeat, colSeat, rowsOfSeat, totalSeats);
+
 
 				if (seatCode.charAt(rowSeat * columnsOfSeats + colSeat) == '0') {
 					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(
@@ -349,22 +347,20 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 	private void loadSeat() {
 		int totalSeats = seatCode.length();
-    	int residueSeatRow = totalSeats%columnsOfSeats;
-    	int rowsOfSeat = totalSeats/columnsOfSeats + residueSeatRow; // row number
+    		int residueSeatRow = totalSeats%columnsOfSeats;
+    		int rowsOfSeat = totalSeats/columnsOfSeats + residueSeatRow; // row number
     	
 		for(int rowSeat = 0 ; rowSeat < rowsOfSeat; rowSeat++) {
-         	for (int colSeat = 0; (colSeat < columnsOfSeats) && (rowSeat*columnsOfSeats+colSeat < totalSeats); colSeat++) {
+         		for (int colSeat = 0; (colSeat < columnsOfSeats) && (rowSeat*columnsOfSeats+colSeat < totalSeats); colSeat++) {
          		
-         		if(seatCode.charAt(rowSeat*columnsOfSeats + colSeat) == '0') {
-         			seatArray[rowSeat][colSeat].setIcon(new ImageIcon(
-         					Page09_SelectSeat_ver2.class.getResource(
-         							"/com/javaproject/image/NotSelectedSeat.png")));
-         			seatArray[rowSeat][colSeat].setEnabled(true);
+         			if(seatCode.charAt(rowSeat*columnsOfSeats + colSeat) == '0') {
+         				seatArray[rowSeat][colSeat].setIcon(new ImageIcon( 
+						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotSelectedSeat.png")));					
+         				seatArray[rowSeat][colSeat].setEnabled(true);
          			try {
          				if(selectSeatCode.charAt(rowSeat*columnsOfSeats + colSeat) == '1') {
          					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(
-         							Page09_SelectSeat_ver2.class.getResource(
-         									"/com/javaproject/image/SelectedSeat.png")));
+         							Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/SelectedSeat.png")));
          					seatArray[rowSeat][colSeat].setEnabled(true);
          				}
          			}catch(Exception e) {
