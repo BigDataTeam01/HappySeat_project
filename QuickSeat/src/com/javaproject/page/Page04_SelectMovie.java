@@ -27,7 +27,7 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import javax.swing.JTextField;
 
-public class Page4_SelectMovie extends JDialog {
+public class Page04_SelectMovie extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -58,10 +58,10 @@ public class Page4_SelectMovie extends JDialog {
 	 * Launch the application.
 	 */
 	private static JLabel lbl_Movie1;
-	private static Page4_SelectMovie SelectMoviedialog = new Page4_SelectMovie();
-	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
-	private static Page5_MovieInformation MovieInformationdialog = new Page5_MovieInformation();
-	private static Page3_SelectAge SelectAgedialog = new Page3_SelectAge();
+	private static Page04_SelectMovie SelectMoviedialog = new Page04_SelectMovie();
+	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
+	private static Page05_MovieInformation MovieInformationdialog = new Page05_MovieInformation();
+	private static Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
 //	private JLabel lbl_moviePoster1_bg;
 
 	private JLabel lbl_moviePoster1;
@@ -88,7 +88,7 @@ public class Page4_SelectMovie extends JDialog {
 
 	public static void main(String[] args) {
 		try {
-			Page4_SelectMovie dialog = new Page4_SelectMovie();
+			Page04_SelectMovie dialog = new Page04_SelectMovie();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -99,7 +99,7 @@ public class Page4_SelectMovie extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page4_SelectMovie() {
+	public Page04_SelectMovie() {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -144,7 +144,7 @@ public class Page4_SelectMovie extends JDialog {
 		});
 		lbl_PreviousMovie.setBounds(103, 503, 260, 50);
 		lbl_PreviousMovie
-				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
+				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
 		contentPanel.add(lbl_PreviousMovie);
 
 		////////////// 다음 영화로 버튼
@@ -162,7 +162,7 @@ public class Page4_SelectMovie extends JDialog {
 		lbl_NextMovie.setBounds(561, 503, 198, 57);
 
 		lbl_NextMovie
-				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
+				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
 		contentPanel.add(lbl_NextMovie);
 
 		////////////////////////////// ---------------------poster-----------------------------/////////////////
@@ -184,9 +184,9 @@ public class Page4_SelectMovie extends JDialog {
 			}
 		});
 		lbl_pageTitle_1
-				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
-		lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		lbl_pageTitle_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		contentPanel.add(lbl_pageTitle_1);
 
 		// 영화 포스터1 위치및 폭,높이 설정.
@@ -223,7 +223,7 @@ public class Page4_SelectMovie extends JDialog {
 		contentPanel.add(lbl_MovieRating1);
 
 		lbl_Movie1.setIcon(
-				new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_Movie1);
 
 		// 영화 포스터2 위치및 폭,높이 설정.
@@ -258,7 +258,7 @@ public class Page4_SelectMovie extends JDialog {
 		});
 
 		lbl_Movie2.setIcon(
-				new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_Movie2);
 
 		// 영화 포스터3 위치및 폭,높이 설정.
@@ -293,7 +293,7 @@ public class Page4_SelectMovie extends JDialog {
 			}
 		});
 		lbl_Movie3.setIcon(
-				new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_Movie3);
 
 		// 영화 포스터4 위치및 폭,높이 설정.
@@ -327,7 +327,7 @@ public class Page4_SelectMovie extends JDialog {
 		});
 		lbl_Movie4.setBounds(425, 341, 254, 132);
 		lbl_Movie4.setIcon(
-				new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
+				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_Movie4);
 
 		//
@@ -340,7 +340,7 @@ public class Page4_SelectMovie extends JDialog {
 			}
 		});
 		BtnBackToPrevious
-				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 		BtnBackToPrevious.setBounds(6, 21, 170, 130);
 		contentPanel.add(BtnBackToPrevious);
 
@@ -348,7 +348,7 @@ public class Page4_SelectMovie extends JDialog {
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 		lbl_background.setBounds(0, 0, 800, 600);
 		lbl_background.setIcon(new ImageIcon(
-				Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		contentPanel.add(lbl_background);
 
 	}

@@ -42,7 +42,7 @@ import java.awt.event.WindowEvent;
 
 
 
-public class Page5_MovieInformation extends JDialog{
+public class Page05_MovieInformation extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -77,9 +77,9 @@ public class Page5_MovieInformation extends JDialog{
 	/**
 	 * Launch the application.
 	 */
-	private static Page5_MovieInformation dialog = new Page5_MovieInformation();
-	private static Page6_SelectCinema SelectCinemadialog = new Page6_SelectCinema();
-	private static Page4_SelectMovie SelectMoviedialog = new Page4_SelectMovie();
+	private static Page05_MovieInformation dialog = new Page05_MovieInformation();
+	private static Page06_SelectCinema SelectCinemadialog = new Page06_SelectCinema();
+	private static Page04_SelectMovie SelectMoviedialog = new Page04_SelectMovie();
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JLabel lblGoHome;
@@ -162,7 +162,7 @@ public class Page5_MovieInformation extends JDialog{
 	
 	
 	
-	public Page5_MovieInformation() {
+	public Page05_MovieInformation() {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -220,7 +220,7 @@ public class Page5_MovieInformation extends JDialog{
 		lblMovieDesc.setFont(new Font("Lucida Grande", Font.PLAIN, 19));
 		lblMovieDesc.setBounds(403, 324, 60, 20);
 		contentPanel.add(lblMovieDesc);
-		lblPageTitle_1.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+		lblPageTitle_1.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 		lblPageTitle_1.setBounds(6, 21, 171, 133);
 		contentPanel.add(lblPageTitle_1);
 		contentPanel.add(getLblGoHome());
@@ -239,7 +239,7 @@ public class Page5_MovieInformation extends JDialog{
 		contentPanel.add(lblPageTitle);
 		
 		lblPoster = new JLabel("");
-//		ImageIcon icon = new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png"));
+//		ImageIcon icon = new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png"));
 //		// img 에 이미지를 담는다. 
 //		Image img = icon.getImage();
 //		// 이미지 사이즈 조절
@@ -249,7 +249,7 @@ public class Page5_MovieInformation extends JDialog{
 //		lblPoster = new JLabel(changeIcon);
 //		
 //		
-//		//lblPoster.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png")));
+//		//lblPoster.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]포스터_포레스트검프.png")));
 //		
 		lblPoster.setBounds(54, 165, 319, 390);
 		contentPanel.add(lblPoster);
@@ -291,7 +291,7 @@ public class Page5_MovieInformation extends JDialog{
 		JLabel lblPageBackground = new JLabel("",SwingConstants.CENTER);
 		//lblNewLabel.
 		//Font font = new ("도현체")
-		lblPageBackground.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+		lblPageBackground.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lblPageBackground.setBounds(0, 0, 800, 600);
 		contentPanel.add(lblPageBackground);
 		 	    
@@ -324,7 +324,7 @@ public class Page5_MovieInformation extends JDialog{
 	// Go selectCinema
 	public void goSelectCinema() {
 		
-		Page6_SelectCinema selectCinema = new Page6_SelectCinema();
+		Page06_SelectCinema selectCinema = new Page06_SelectCinema();
 		
 		selectCinema.setVisible(true);
 		
@@ -347,7 +347,7 @@ public class Page5_MovieInformation extends JDialog{
 					goHomePage();
 				
 				}});
-			lblGoHome.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+			lblGoHome.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 			lblGoHome.setBounds(618, 6, 171, 133);
 		
 		return lblGoHome;
@@ -356,7 +356,7 @@ public class Page5_MovieInformation extends JDialog{
 		
 	
 	private void goHomePage() {
-		Page2_SelectMenu selectMenu = new Page2_SelectMenu();
+		Page02_SelectMenu selectMenu = new Page02_SelectMenu();
 		
 		
 		selectMenu.setVisible(true);

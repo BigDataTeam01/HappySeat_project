@@ -19,13 +19,13 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
-import com.javaproject.page.Page8_SelectHeadCount.mybutton;
+import com.javaproject.page.Page08_SelectHeadCount.mybutton;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
 
-public class Page2_1_0_OrderCheck extends JDialog {
+public class Page02_1_0_OrderCheck extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -51,9 +51,9 @@ public class Page2_1_0_OrderCheck extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page2_1_0_OrderCheck OrderCheckdialog = new Page2_1_0_OrderCheck();
-	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
-	private static Page2_1_1_OrderCancel OrderCancledialog = new Page2_1_1_OrderCancel();
+	private static Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
+	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
+	private static Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
 	private JTextField tfTicketNum;
 	private mybutton btnNewButton;
 
@@ -114,7 +114,7 @@ public class Page2_1_0_OrderCheck extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page2_1_0_OrderCheck() {
+	public Page02_1_0_OrderCheck() {
 		setTitle("예매 확인");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 
@@ -141,15 +141,15 @@ public class Page2_1_0_OrderCheck extends JDialog {
 			}
 		});
 		lbl_pageTitle_1
-				.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
-		lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		lbl_pageTitle_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		lbl_pageTitle_1.setBounds(628, 17, 180, 130);
 		contentPanel.add(lbl_pageTitle_1);
 
 		// 발권번호 텍스트
 		JLabel lblTicketNum = new JLabel("발권 번호 :");
-		lblTicketNum.setFont(new Font("배달의민족 도현", Font.PLAIN, 50));
+		lblTicketNum.setFont(new Font("BM Dohyeon", Font.PLAIN, 50));
 		lblTicketNum.setBounds(42, 196, 240, 70);
 		contentPanel.add(lblTicketNum);
 
@@ -161,7 +161,7 @@ public class Page2_1_0_OrderCheck extends JDialog {
 				goToSelectMenu();
 			}
 		});
-		BtnBack.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+		BtnBack.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 		BtnBack.setBounds(11, 18, 170, 130);
 		contentPanel.add(BtnBack);
 
@@ -173,83 +173,83 @@ public class Page2_1_0_OrderCheck extends JDialog {
 
 		// 숫자버튼부분
 		JLabel Btn1 = new JLabel("");
-		Btn1.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn1.png")));
-		Btn1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn1.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn1.png")));
+		Btn1.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn1.setBounds(42, 322, 70, 70);
 		contentPanel.add(Btn1);
 
 		JLabel Btn2 = new JLabel("\"\"");
-		Btn2.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn2.png")));
-		Btn2.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn2.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn2.png")));
+		Btn2.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn2.setBounds(132, 322, 70, 70);
 		contentPanel.add(Btn2);
 
 		JLabel Btn3 = new JLabel("\"\"");
-		Btn3.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn3.png")));
-		Btn3.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn3.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn3.png")));
+		Btn3.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn3.setBounds(222, 322, 70, 70);
 		contentPanel.add(Btn3);
 
 		JLabel Btn5 = new JLabel("\"\"");
-		Btn5.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn5.png")));
-		Btn5.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn5.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn5.png")));
+		Btn5.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn5.setBounds(402, 322, 70, 70);
 		contentPanel.add(Btn5);
 
 		JLabel Btn6 = new JLabel("\"\"");
-		Btn6.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn6.png")));
-		Btn6.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn6.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn6.png")));
+		Btn6.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn6.setBounds(45, 403, 70, 70);
 		contentPanel.add(Btn6);
 
 		JLabel Btn4 = new JLabel("\"\"");
-		Btn4.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn4.png")));
-		Btn4.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn4.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn4.png")));
+		Btn4.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn4.setBounds(312, 322, 70, 70);
 		contentPanel.add(Btn4);
 
 		JLabel Btn8 = new JLabel("\"\"");
-		Btn8.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn8.png")));
-		Btn8.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn8.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn8.png")));
+		Btn8.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn8.setBounds(225, 403, 70, 70);
 		contentPanel.add(Btn8);
 
 		JLabel Btn9 = new JLabel("\"\"");
-		Btn9.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn9.png")));
-		Btn9.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn9.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn9.png")));
+		Btn9.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn9.setBounds(315, 403, 70, 70);
 		contentPanel.add(Btn9);
 
 		JLabel BtnClear = new JLabel("\"\"");
 		BtnClear.setIcon(
-				new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/BtnClear.png")));
-		BtnClear.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/BtnClear.png")));
+		BtnClear.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		BtnClear.setBounds(484, 322, 70, 70);
 		contentPanel.add(BtnClear);
 
 		JLabel Btn0 = new JLabel("\"\"");
-		Btn0.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn0.png")));
-		Btn0.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn0.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn0.png")));
+		Btn0.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn0.setBounds(405, 403, 70, 70);
 		contentPanel.add(Btn0);
 
 		JLabel Btn1Delete = new JLabel("\"\"");
 		Btn1Delete.setIcon(
-				new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn1Delete.png")));
-		Btn1Delete.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn1Delete.png")));
+		Btn1Delete.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn1Delete.setBounds(484, 403, 70, 70);
 		contentPanel.add(Btn1Delete);
 
 		JLabel Btn7 = new JLabel("\"\"");
-		Btn7.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn7.png")));
-		Btn7.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+		Btn7.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn7.png")));
+		Btn7.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn7.setBounds(135, 403, 70, 70);
 		contentPanel.add(Btn7);
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 		lbl_background.setIcon(new ImageIcon(
-				Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+				Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_background.setBounds(-16, 0, 800, 600);
 		contentPanel.add(lbl_background);
 	}
