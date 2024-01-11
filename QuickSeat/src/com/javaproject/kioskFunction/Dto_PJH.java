@@ -60,11 +60,11 @@ public class Dto_PJH {
 	}
 	
 	//영화 상영관정보를 위해 모두 가져오는dto
-	public Dto_PJH(String cinema_branch, String get_here) {
-		super();
-		this.cinema_branch = cinema_branch;
-		this.get_here = get_here;
-	}
+//	public Dto_PJH(String cinema_branch, String get_here) {
+//		super();
+//		this.cinema_branch = cinema_branch;
+//		this.get_here = get_here;
+//	}
 	
 	
 // getter&setter

@@ -4,7 +4,7 @@ import javax.swing.*;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.Dao_pdg;
-import com.javaproject.page.Page5_MovieInformation.mybutton;
+import com.javaproject.page.Page05_MovieInformation.mybutton;
 import com.mysql.cj.result.Row;
 
 import java.awt.*;
@@ -244,14 +244,14 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 
 	private void goPreviousPage() {
-		Page8_SelectHeadCount prev = new Page8_SelectHeadCount();
+		Page08_SelectHeadCount prev = new Page08_SelectHeadCount();
 		this.setVisible(false);
 		prev.setVisible(true);
 		this.dispose();
 	}
 
 	private void gohomeAction() {
-		Page2_SelectMenu prev = new Page2_SelectMenu();
+		Page02_SelectMenu prev = new Page02_SelectMenu();
 		this.setVisible(false);
 		prev.setVisible(true);
 		this.dispose();
