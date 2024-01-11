@@ -41,6 +41,8 @@ public class Page3_SelectAge extends JDialog {
 	private static Page2_SelectMenu SelectAgedialog = new Page2_SelectMenu();
 	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
 	private static Page4_SelectMovie SelectMoviedialog = new Page4_SelectMovie();
+	
+	
 
 	public static void main(String[] args) {
 		try {
@@ -86,21 +88,23 @@ public class Page3_SelectAge extends JDialog {
 
 		contentPanel.add(lbl_pageTitle);
 		// 나이 버튼
-		JLabel BtnUnder10 = new JLabel("");
-		BtnUnder10.addMouseListener(new MouseAdapter() {
+		JLabel BtnUnder20 = new JLabel("");
+		BtnUnder20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ShareVar.selectedCustage=10;
 				goToSelectMovie();
 			}
 		});
-		BtnUnder10.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn10대 이하.png")));
-		BtnUnder10.setBounds(52, 192, 140, 110);
-		contentPanel.add(BtnUnder10);
+		BtnUnder20.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/BtnUnder20.png")));
+		BtnUnder20.setBounds(52, 192, 140, 110);
+		contentPanel.add(BtnUnder20);
 
 		JLabel Btn20 = new JLabel("");
 		Btn20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ShareVar.selectedCustage=20;
 				goToSelectMovie();
 			}
 		});
@@ -113,6 +117,7 @@ public class Page3_SelectAge extends JDialog {
 		Btn30.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ShareVar.selectedCustage=30;
 				goToSelectMovie();
 			}
 		});
@@ -124,6 +129,7 @@ public class Page3_SelectAge extends JDialog {
 		Btn40.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ShareVar.selectedCustage=40;
 				goToSelectMovie();
 			}
 		});
@@ -135,6 +141,7 @@ public class Page3_SelectAge extends JDialog {
 		Btn50.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ShareVar.selectedCustage=50;
 				goToSelectMovie();
 			}
 		});
@@ -146,6 +153,7 @@ public class Page3_SelectAge extends JDialog {
 		Btn60.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ShareVar.selectedCustage=60;
 				goToSelectMovie();
 			}
 		});
@@ -157,6 +165,7 @@ public class Page3_SelectAge extends JDialog {
 		Btn70.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ShareVar.selectedCustage=70;
 				goToSelectMovie();
 			}
 		});
@@ -168,6 +177,7 @@ public class Page3_SelectAge extends JDialog {
 		BtnOver80.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				ShareVar.selectedCustage=80;
 				goToSelectMovie();
 			}
 		});
@@ -218,6 +228,8 @@ public class Page3_SelectAge extends JDialog {
 
 	// 영화선택화면으로 가기
 	public void goToSelectMovie() {
+		int cust_age = ShareVar.selectedCustage;
+		System.out.println(cust_age);
 		dispose();
 		SelectAgedialog.setVisible(false);
 		SelectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

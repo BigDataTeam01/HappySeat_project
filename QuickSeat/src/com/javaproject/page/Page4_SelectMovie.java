@@ -105,8 +105,8 @@ public class Page4_SelectMovie extends JDialog {
 			public void windowActivated(WindowEvent e) {
 
 				lbl_PreviousMovie.setVisible(false);
+				System.out.println("없어져볼께");
 				getCurrentScreenMovies();
-
 			}
 		});
 		setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
@@ -454,6 +454,7 @@ public class Page4_SelectMovie extends JDialog {
 
 			}
 			lbl_NextMovie.setVisible(true);
+			
 
 		} else {
 
