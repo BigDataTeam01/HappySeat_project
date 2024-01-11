@@ -21,9 +21,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
-import com.javaproject.page.Page5_MovieInformation.mybutton;
+import com.javaproject.page.Page05_MovieInformation.mybutton;
 
-public class Page8_SelectHeadCount extends JDialog {
+public class Page08_SelectHeadCount extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -47,15 +47,15 @@ public class Page8_SelectHeadCount extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page8_SelectHeadCount SelectHeadCountdialog = new Page8_SelectHeadCount();
-	private static Page2_SelectMenu selectMenudialog = new Page2_SelectMenu();
-	private static Page7_SelectTime SelectTimedialog = new Page7_SelectTime();
+	private static Page08_SelectHeadCount SelectHeadCountdialog = new Page08_SelectHeadCount();
+	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
+	private static Page07_SelectTime SelectTimedialog = new Page07_SelectTime();
 	private static Page09_SelectSeat_ver2 SelectSeatdialog = new Page09_SelectSeat_ver2();
 	private mybutton btnNewButton;
 
 	public static void main(String[] args) {
 		try {
-			Page8_SelectHeadCount dialog = new Page8_SelectHeadCount();
+			Page08_SelectHeadCount dialog = new Page08_SelectHeadCount();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -110,7 +110,7 @@ public class Page8_SelectHeadCount extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page8_SelectHeadCount() {
+	public Page08_SelectHeadCount() {
 		contentPanel.add(getBtnNewButton());
 		// 타이틀 설정
 		setTitle("인원 선택");
@@ -136,9 +136,9 @@ public class Page8_SelectHeadCount extends JDialog {
 			lblPersonClassification1.setBounds(47, 217, 57, 15);
 			contentPanel.add(lblPersonClassification1);
 			JLabel PersonNumBackground1 = new JLabel("   일반");
-			PersonNumBackground1.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
+			PersonNumBackground1.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
 			PersonNumBackground1
-			.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
+			.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
 			PersonNumBackground1.setBounds(21, 181, 360, 80);
 			contentPanel.add(PersonNumBackground1);
 			
@@ -147,9 +147,9 @@ public class Page8_SelectHeadCount extends JDialog {
 			contentPanel.add(lblPersonClassification2);
 			
 			JLabel PersonNumBackground2 = new JLabel("   경로");
-			PersonNumBackground2.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
+			PersonNumBackground2.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
 			PersonNumBackground2
-			.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
+			.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
 			PersonNumBackground2.setBounds(416, 181, 360, 80);
 			contentPanel.add(PersonNumBackground2);
 			
@@ -158,9 +158,9 @@ public class Page8_SelectHeadCount extends JDialog {
 			contentPanel.add(lblPersonClassification3);
 			
 			JLabel PersonNumBackground3 = new JLabel("   우대");
-			PersonNumBackground3.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
+			PersonNumBackground3.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
 			PersonNumBackground3
-			.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
+			.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
 			PersonNumBackground3.setBounds(21, 272, 360, 80);
 			contentPanel.add(PersonNumBackground3);
 			
@@ -169,9 +169,9 @@ public class Page8_SelectHeadCount extends JDialog {
 			contentPanel.add(lblPersonClassification4);
 			
 			JLabel PersonNumBackground4 = new JLabel("   청소년");
-			PersonNumBackground4.setFont(new Font("배달의민족 도현", Font.PLAIN, 40));
+			PersonNumBackground4.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
 			PersonNumBackground4
-			.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
+			.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
 			PersonNumBackground4.setBounds(416, 272, 360, 80);
 			contentPanel.add(PersonNumBackground4);
 			
@@ -189,9 +189,9 @@ public class Page8_SelectHeadCount extends JDialog {
 			
 			
 			lbl_pageTitle_1
-					.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+					.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
-			lbl_pageTitle_1.setFont(new Font("배달의민족 도현", Font.PLAIN, 15));
+			lbl_pageTitle_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 			contentPanel.add(lbl_pageTitle_1);
 			// 이전화면으로 가기
 			JLabel BtnBackToPrevious = new JLabel("");
@@ -203,14 +203,14 @@ public class Page8_SelectHeadCount extends JDialog {
 			});
 
 			BtnBackToPrevious
-					.setIcon(new ImageIcon(Page5_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+					.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 			BtnBackToPrevious.setBounds(6, 21, 170, 130);
 			contentPanel.add(BtnBackToPrevious);
 
 			// 배경화면
 			JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
 			lbl_background.setIcon(new ImageIcon(
-					Page5_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+					Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 			lbl_background.setBounds(-16, 0, 800, 600);
 			contentPanel.add(lbl_background);
 			
