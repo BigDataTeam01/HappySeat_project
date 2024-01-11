@@ -52,7 +52,7 @@ public class ShareVar {
 	public static int kiosk_title_loc_x = 295;
 	public static int kiosk_title_loc_y = 10;
 	public static int kiosk_title_font_size = 40;
-	public static String kiosk_title_font = "배달의민족 도현";
+	public static String kiosk_title_font = "BM Dohyeon";
 
 	/*
 	 * 페이지 타이틀 예시 JLabel lbl_pageTitle = new JLabel("영화 선택");
@@ -80,6 +80,9 @@ public class ShareVar {
 
 	// 선택된 영화 정보
 	public static String selectedMovieTitle = "";
+
+	// 상영하다 테이블 프라이머리 키 
+	public static int scr_code = 7;
 
 	// 관리자 페이지 차트 연도와 달 저장하기
 	public static String year = "";

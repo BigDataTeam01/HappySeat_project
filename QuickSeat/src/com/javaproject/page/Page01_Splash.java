@@ -8,7 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class Page1_Splash extends JDialog {
+public class Page01_Splash extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
@@ -18,7 +18,7 @@ public class Page1_Splash extends JDialog {
 	 */
 	public static void main(String[] args) {
 		try {
-			Page1_Splash dialog = new Page1_Splash();
+			Page01_Splash dialog = new Page01_Splash();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -29,7 +29,7 @@ public class Page1_Splash extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public Page1_Splash() {
+	public Page01_Splash() {
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setLayout(new FlowLayout());
