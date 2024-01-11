@@ -35,7 +35,7 @@ public class Page11_1_Cash extends JDialog {
 	 * Launch the application.
 	 */
 	
-	private static  Page2_SelectMenu selectMenu = new Page2_SelectMenu();
+	private static  Page02_SelectMenu selectMenu = new Page02_SelectMenu();
 	private static Page11_0_SelectPayment page11_0_SelectPayment = new Page11_0_SelectPayment();
 	private JLabel lblNewLabel;
 	private JTextField textField;
