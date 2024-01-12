@@ -1,13 +1,9 @@
 package com.javaproject.page;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
 import com.javaproject.kioskFunction.Dao_pdg;
-//import com.javaproject.page.Page5_MovieInformation.mybutton;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,7 +11,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.lang.reflect.Array;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -46,10 +41,10 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	
 	public static void main(String[] args) {
 		try {
-		Page09_SelectSeat_ver2 dialog = new Page09_SelectSeat_ver2();
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		dialog.setVisible(true);
-		}catch(Exception e) {
+			Page09_SelectSeat_ver2 dialog = new Page09_SelectSeat_ver2();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 //		dialog.timer = new Timer();
@@ -75,8 +70,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		System.out.println("1");
 		createSeat();
 		// setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		// 예시로 10개의 좌석을 만듭니다.
-
 		this.setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		this.setTitle("좌석선택");
 		this.getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -87,8 +80,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		contentPanel.add(getLbl_previousPage_1());
 		contentPanel.add(getLbl_background());
 		
-//		timer.cancel(); // Terminate the timer thread
-	
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
@@ -162,22 +153,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		}
 	}
 	////
-
-//	static class SeatUpdateRunnable implements Runnable {
-//		private Page09_SelectSeat_ver2 outerInstance;
-//
-//		public SeatUpdateRunnable(Page09_SelectSeat_ver2 outerInstance) {
-//			this.outerInstance = outerInstance;
-//		}
-//
-//		@Override
-//		public void run() {
-//			// 백그라운드에서 수행되어야 할 작업
-//			outerInstance.getCurrentSeatCode();
-//			outerInstance.loadSeat();
-//			System.out.println("새로고침 ");
-//		}
-//	}
 	
 	private class SeatButtonListener implements ActionListener {
 		// Field
@@ -200,8 +175,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
 				// changeCount : 사용자가 선택을 한 좌석 갯수 
 				int changeCount = countSelecteSeat(eorSeatCode);
-				if (3 /* 전체인원 ShareVar */ < changeCount + 1 ) {
-					JOptionPane.showMessageDialog(null, "3" /* 전체인원 ShareVar */ + "명을 초과할 수 없습니다.");
+				if (ShareVar.sumOfPersonNumbers < changeCount + 1 ) {
+					JOptionPane.showMessageDialog(null, ShareVar.sumOfPersonNumbers + "명을 초과할 수 없습니다.");
 					return;
 				}
 
@@ -406,7 +381,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 					seatArray[rowSeat][colSeat].setEnabled(false);
 				}
 			}
-
 		}
 	}
 	
