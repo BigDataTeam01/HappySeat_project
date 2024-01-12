@@ -22,7 +22,10 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.BackSplashTimer;
 import com.javaproject.page.Page02_1_0_OrderCheck.mybutton;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Page02_1_1_OrderCancel extends JDialog {
 
@@ -107,6 +110,12 @@ public class Page02_1_1_OrderCancel extends JDialog {
 		 * Create the dialog.
 	 */
 	public Page02_1_1_OrderCancel() {
+			addWindowListener(new WindowAdapter() {
+				@Override
+				public void windowActivated(WindowEvent e) {
+					backSplashTimeEnd();
+				}
+			});
 		setTitle("예매 확인");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 
@@ -218,5 +227,11 @@ public class Page02_1_1_OrderCancel extends JDialog {
 			}
 			return btnNewButton;
 		}
+		
+		// splash Class로 돌아가기
+		public void backSplashTimeEnd() {
+			BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+		}
+
 		
 }

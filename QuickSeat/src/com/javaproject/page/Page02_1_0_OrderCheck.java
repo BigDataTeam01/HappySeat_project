@@ -2,7 +2,6 @@ package com.javaproject.page;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -19,14 +18,16 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
-import com.javaproject.page.Page08_SelectHeadCount.mybutton;
+import com.javaproject.kioskFunction.BackSplashTimer;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JTextField;
+import java.awt.event.*;
+
+
 
 public class Page02_1_0_OrderCheck extends JDialog {
-
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	/*
@@ -56,6 +57,7 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	private static Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
 	private JTextField tfTicketNum;
 	private mybutton btnNewButton;
+	
 
 	public static void main(String[] args) {
 		try {
@@ -115,6 +117,12 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	 * Create the dialog.
 	 */
 	public Page02_1_0_OrderCheck() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				backSplashTimeEnd();
+			}
+		});
 		setTitle("예매 확인");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 
@@ -289,5 +297,11 @@ public class Page02_1_0_OrderCheck extends JDialog {
 		}
 		return btnNewButton;
 	}
+	
+	// splash Class로 돌아가기
+	public void backSplashTimeEnd() {
+		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+	}
+	
 
 }// End
