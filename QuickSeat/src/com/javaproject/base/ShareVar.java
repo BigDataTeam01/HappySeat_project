@@ -98,6 +98,10 @@ public class ShareVar {
 	
 	// 선택된 나이
 	public static int selectedCustage = 0;
+
+	
+	// 선택된 인원수
+	public static int sumOfPersonNumbers = 0;
 	
 	
 	
@@ -132,7 +136,8 @@ public class ShareVar {
 		// 선택된 나이
 		selectedCustage = 0;
 		
-		
+		// 선택된 인원수
+		sumOfPersonNumbers = 0;
 	}
 	
 	

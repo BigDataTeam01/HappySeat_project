@@ -1,8 +1,10 @@
 package com.javaproject.page;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.BackSplashTimer;
 import com.javaproject.kioskFunction.Dao_pdg;
 //import com.javaproject.page.Page5_MovieInformation.mybutton;
 
@@ -38,8 +40,36 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	private JButton btnSeatConfirm;
 	private static StringBuilder seatCode = new StringBuilder("");
 	private static StringBuilder selectSeatCode = new StringBuilder("");
+	private static int eorSeatCode = 0;
 
 	int columnsOfSeats = 4; // column number
+	
+	public static void main(String[] args) {
+		try {
+		Page09_SelectSeat_ver2 dialog = new Page09_SelectSeat_ver2();
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+//		dialog.timer = new Timer();
+
+		// timer thread 를 생성
+//		TimerTask task = new TimerTask() {
+//			@Override
+//			public void run() { // 위에있는 run 을 오버라이드로 수정하는 코드
+//				// getCurrentSeatCode 메소드를 백그라운드에서 실행
+//				Thread backgroundThread = new Thread(new SeatUpdateRunnable(dialog)); // dialog 는 이페이지 전체임.
+//				backgroundThread.start(); // 스레드 시작
+//			}
+//		};
+		
+//		SwingUtilities.invokeLater(() -> {
+//		});
+		
+//		dialog.timer.scheduleAtFixedRate(task,0,2000); // 2초마다 실행 (예시)
+	}
+
 
 	public Page09_SelectSeat_ver2() {
 		createSeat();
@@ -51,14 +81,37 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		this.getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		contentPanel.add(getBtnSeatConfirm());
-
-
-		// 좌석 버튼을 다이얼로그에 추가 (여기로 이동했습니다.)
 		contentPanel.add(getLbl_previousPage());
 		contentPanel.add(getLbl_screen());
 		contentPanel.add(getLbl_previousPage_1());
 		contentPanel.add(getLbl_background());
+		
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new RemindTask(), 0, 1000);
+//		timer.cancel(); // Terminate the timer thread
+	
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				backSplashTimeEnd();
+			}
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				timer.cancel();
+			}
+		});
+
 	}
+	
+	// TimerTask를 쓰기 위한 class
+	class RemindTask extends TimerTask {
+		public void run() {
+			getCurrentSeatCode();
+			loadSeat();
+			System.out.println("새로고침");
+		}
+	}
+
 
 	///////////// 라운드 버튼박스를 만들기 위한 paintComponent 설정
 	class mybutton extends JButton {
@@ -107,23 +160,21 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 	////
 
-	static class SeatUpdateRunnable implements Runnable {
-		private Page09_SelectSeat_ver2 outerInstance;
-
-		public SeatUpdateRunnable(Page09_SelectSeat_ver2 outerInstance) {
-			this.outerInstance = outerInstance;
-		}
-
-		@Override
-		public void run() {
-			// 백그라운드에서 수행되어야 할 작업
-			System.out.println("새로고침 시작");
-			outerInstance.getCurrentSeatCode();
-			outerInstance.loadSeat();
-			
-			// outerInstance.autoCreateSeat();
-		}
-	}
+//	static class SeatUpdateRunnable implements Runnable {
+//		private Page09_SelectSeat_ver2 outerInstance;
+//
+//		public SeatUpdateRunnable(Page09_SelectSeat_ver2 outerInstance) {
+//			this.outerInstance = outerInstance;
+//		}
+//
+//		@Override
+//		public void run() {
+//			// 백그라운드에서 수행되어야 할 작업
+//			outerInstance.getCurrentSeatCode();
+//			outerInstance.loadSeat();
+//			System.out.println("새로고침 ");
+//		}
+//	}
 	
 	private class SeatButtonListener implements ActionListener {
 		// Field
@@ -136,57 +187,46 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		}
 
 		@Override
-		public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e) { // 좌석을 눌렀을 때 그에 맞게 좌석 코드를 바꾸는 기능 
 			// 좌석 상태 토글
 			seatStatus[row][col] = !seatStatus[row][col];
 
-			// ContentArea에 배경색 설정
+			// 0 -> 1 , 즉 선택가능한 좌석을 선택을 하였을 때,
 			if (seatStatus[row][col]) {
+				// DB에서 불러온 코드와 사용자가 선택한 코드를 EOR, 변화 된 좌석은 1, 변화하지 않으면 0 
+				eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
+				// changeCount : 사용자가 선택을 한 좌석 갯수 
+				int changeCount = countSelecteSeat(eorSeatCode);
+				if (3 /* 전체인원 ShareVar */ < changeCount + 1 ) {
+					JOptionPane.showMessageDialog(null, "3" /* 전체인원 ShareVar */ + "명을 초과할 수 없습니다.");
+					return;
+				}
 
-				seatArray[row][col].setIcon(
-						new ImageIcon(Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/SelectedSeat.png")));
+				seatArray[row][col].setIcon(new ImageIcon(
+						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/SelectedSeat.png")));
 
 				selectSeatCode.setCharAt(row * columnsOfSeats + col, '1');
-				System.out.println(seatCode);
-				System.out.println(selectSeatCode);
 
-			} else {
-
+			}
+			
+			// 1 -> 0, 내가 선택 한 좌석을 선택취소 하였을때 
+			else {
 				selectSeatCode.setCharAt(row * columnsOfSeats + col, '0');
 				seatArray[row][col].setIcon(new ImageIcon(
 						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotselectedSeat.png")));
 			}
 		}
+
 	}
+
 	
-	public static void main(String[] args) {
-		Page09_SelectSeat_ver2 dialog = new Page09_SelectSeat_ver2();
-		dialog.timer = new Timer();
-
-		Thread seatSelectionThread = new Thread();
-		seatSelectionThread.start();
-
-		SwingUtilities.invokeLater(() -> {
-			dialog.setVisible(true);
-		});
-		// timer thread 를 생성 
-		TimerTask task = new TimerTask() {
-			@Override
-			public void run() { // 위에있는 run 을 오버라이드로 수정하는 코드 
-				// getCurrentSeatCode 메소드를 백그라운드에서 실행
-				Thread backgroundThread = new Thread(new SeatUpdateRunnable(dialog)); // dialog 는 이페이지 전체임. 
-				backgroundThread.start(); // 스레드 시작!
-			}
-		};
-		dialog.timer.scheduleAtFixedRate(task, 0, 2000); // 2초마다 실행 (예시)
-	}
 	
 	// 페이지 구성요소
 	private JLabel getLbl_background() {
 		if (lbl_background == null) {
 			lbl_background = new JLabel("");
-			lbl_background.setIcon(new ImageIcon(
-					Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
+			lbl_background.setIcon(new ImageIcon(Page09_SelectSeat_ver2.class
+					.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 			lbl_background.setBounds(0, 0, 800, 600);
 		}
 		return lbl_background;
@@ -201,8 +241,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 					goPreviousPage();
 				}
 			});
-			lbl_previousPage
-					.setIcon(new ImageIcon(Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/Btn이전으로.png")));
+			lbl_previousPage.setIcon(
+					new ImageIcon(Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/Btn이전으로.png")));
 			lbl_previousPage.setBounds(15, 20, 170, 130);
 		}
 		return lbl_previousPage;
@@ -218,8 +258,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				}
 			});
 			lbl_previousPage_1.setBounds(623, 20, 170, 130);
-			lbl_previousPage_1
-					.setIcon(new ImageIcon(Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+			lbl_previousPage_1.setIcon(
+					new ImageIcon(Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 		}
 		return lbl_previousPage_1;
 	}
@@ -241,6 +281,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 			btnSeatConfirm.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					checkSelecte();
 					System.out.println("Db 업데이트 코드 : " + selectSeatCode);
 					updateSeatCodeAction();
 					goConfirmSeat();
@@ -250,7 +291,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		}
 		return btnSeatConfirm;
 	}
-
+	
 	// Functions
 	private void getCurrentSeatCode() {
 		Dao_pdg currentSeatCode = new Dao_pdg(ShareVar.scr_code);
@@ -265,7 +306,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 
 	private void goConfirmSeat() {
-		timer.cancel();
 		Page10_ConfirmSeat confirmSeat = new Page10_ConfirmSeat();
 		this.setVisible(false);
 		confirmSeat.setVisible(true);
@@ -286,7 +326,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		this.dispose();
 	}
 
-	private void createSeat() {
+	private void createSeat() { // 좌석 버튼 만드는 Method 
 		if (seatArray != null) {
 			for (int i = 0; i < seatArray.length; i++) {
 				for (int j = 0; j < seatArray[i].length; j++) {
@@ -318,13 +358,13 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				seatArray[rowSeat][colSeat] = new JButton();
 				seatArray[rowSeat][colSeat].addActionListener(new SeatButtonListener(rowSeat, colSeat));
 
-
-
 				if (seatCode.charAt(rowSeat * columnsOfSeats + colSeat) == '0') {
 					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(
 							Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotSelectedSeat.png")));
 
-				} else {
+				}
+
+				else {
 					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(Page09_SelectSeat_ver2.class
 							.getResource("/com/javaproject/image/alreadySelectedSeat70by70.png")));
 					seatArray[rowSeat][colSeat].setEnabled(false);
@@ -339,38 +379,61 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		}
 	}
 
-	private void loadSeat() {
+	private void loadSeat() { // DB에서 특정 상영관에 대한 좌석 현황을 불러와서 그에 맞는 Image 보여주기
 		int totalSeats = seatCode.length();
-    		int residueSeatRow = totalSeats%columnsOfSeats;
-    		int rowsOfSeat = totalSeats/columnsOfSeats + residueSeatRow; // row number
-    	
-		for(int rowSeat = 0 ; rowSeat < rowsOfSeat; rowSeat++) {
-         		for (int colSeat = 0; (colSeat < columnsOfSeats) && (rowSeat*columnsOfSeats+colSeat < totalSeats); colSeat++) {
-         		
-         			if(seatCode.charAt(rowSeat*columnsOfSeats + colSeat) == '0') {
-         				seatArray[rowSeat][colSeat].setIcon(new ImageIcon( 
-						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotSelectedSeat.png")));					
-         				seatArray[rowSeat][colSeat].setEnabled(true);
-         			try {
-         				if(selectSeatCode.charAt(rowSeat*columnsOfSeats + colSeat) == '1') {
-         					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(
-         							Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/SelectedSeat.png")));
-         					seatArray[rowSeat][colSeat].setEnabled(true);
-         				}
-         			}catch(Exception e) {
-         				System.out.println("에러");
-         			}
-         		}
-         			
-         		else {
-         			seatArray[rowSeat][colSeat].setIcon(new ImageIcon(
-         					Page09_SelectSeat_ver2.class.getResource(
-         							"/com/javaproject/image/alreadySelectedSeat70by70.png")));
-         			seatArray[rowSeat][colSeat].setEnabled(false);
-         		}
-         	}
-		
+		int residueSeatRow = totalSeats % columnsOfSeats;
+		int rowsOfSeat = totalSeats / columnsOfSeats + residueSeatRow; // row number
+
+		for (int rowSeat = 0; rowSeat < rowsOfSeat; rowSeat++) {
+			for (int colSeat = 0; (colSeat < columnsOfSeats)
+					&& (rowSeat * columnsOfSeats + colSeat < totalSeats); colSeat++) {
+
+				if (seatCode.charAt(rowSeat * columnsOfSeats + colSeat) == '0') {
+					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(
+							Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotSelectedSeat.png")));
+					seatArray[rowSeat][colSeat].setEnabled(true);
+					try {
+						if (selectSeatCode.charAt(rowSeat * columnsOfSeats + colSeat) == '1') {
+							seatArray[rowSeat][colSeat].setIcon(new ImageIcon(Page09_SelectSeat_ver2.class
+									.getResource("/com/javaproject/image/SelectedSeat.png")));
+							seatArray[rowSeat][colSeat].setEnabled(true);
+						}
+					} catch (Exception e) {
+						JOptionPane.showMessageDialog(null, "다시 시도해주세요. error : loadSeat");
+					}
+				}
+
+				else {
+					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(Page09_SelectSeat_ver2.class
+							.getResource("/com/javaproject/image/alreadySelectedSeat70by70.png")));
+					seatArray[rowSeat][colSeat].setEnabled(false);
+				}
 			}
+
 		}
+	}
+	
+	private int countSelecteSeat(int EORseat) { // 좌석상태가 몇 개 변하였는지 세는 Method  
+		int count = 0;
+		while (EORseat > 0) {
+			count += (EORseat & 1);
+			EORseat = EORseat >> 1;
+		}
+		return count;
+	}
+	
+	private void checkSelecte() {
+		if(seatCode == selectSeatCode) {
+			JOptionPane.showMessageDialog(null, "좌석을 선택해주세요.");
+			
+			return;
+		}
+		
+	}
+	
+	private void backSplashTimeEnd() {
+		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+	}
+
 
 }// End
