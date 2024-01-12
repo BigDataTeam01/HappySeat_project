@@ -73,13 +73,13 @@ public class MovieDaySalesStatus extends JFrame {
 
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
 
-		// 차트 렌더러(Renderer)를 가져와서 값 표시 설정
+		// 차트 렌더러(Renderer)를 가져와서 값 표시 설정, 바 위에 숫자를 추가해주기 위해 필요
 		BarRenderer renderer = (BarRenderer) plot.getRenderer();
 
 		renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
 		renderer.setDefaultItemLabelsVisible(true);
 
-		// 값 표시 위치 설정
+		//바 위의 값 표시 위치 설정
 		renderer.setDefaultPositiveItemLabelPosition(
 				new ItemLabelPosition(ItemLabelAnchor.OUTSIDE12, TextAnchor.BOTTOM_CENTER));
 		renderer.setDefaultNegativeItemLabelPosition(
@@ -88,11 +88,13 @@ public class MovieDaySalesStatus extends JFrame {
 		// 값 표시 폰트 설정
 		renderer.setDefaultItemLabelFont(font);
 
-		NumberAxis yAxis = (NumberAxis) plot.getRangeAxis(); // Y축 폰트 설정
-		yAxis.setTickLabelFont(font); // Y축 폰트 설정
+		 // Y축 폰트 설정
+		NumberAxis yAxis = (NumberAxis) plot.getRangeAxis();
+		yAxis.setTickLabelFont(font);
 		yAxis.setLabelFont(font);
 
-		CategoryAxis xAxis = plot.getDomainAxis(); // X축 폰트 설정
+		 // X축 폰트 설정
+		CategoryAxis xAxis = plot.getDomainAxis();
 		xAxis.setLabelFont(font);
 		xAxis.setTickLabelFont(font);
 
@@ -103,13 +105,14 @@ public class MovieDaySalesStatus extends JFrame {
 	}
 
 	private CategoryDataset createDataset() {
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset(); // DefaultCategoryDataset이 아닌 다른 Class를 고르면
-																		// dataset 표현방법을 바꿀 수 있음.
+		
+		// DefaultCategoryDataset이 아닌 다른 Class를 고르면 dataset 표현방법을 바꿀 수 있음.
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		// 데이터 추가
-		
 		DaoUserStatistics dao = new DaoUserStatistics();
 		ArrayList<DtoWDH> dto = dao.pricePerDay();
+		
 		// 1주일 단위로 표 만들기
 		for(int i = 6; i >= 0; i--) {
 			int date = 17-i;

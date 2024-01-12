@@ -6,8 +6,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import com.javaproject.base.ShareVar;
 import com.javaproject.managerfunction.DaoUserStatistics;
+import com.javaproject.managerfunction.DtoWDH;
 
 import javax.swing.JLabel;
 import javax.swing.ImageIcon;
@@ -17,6 +20,7 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class MovieUserStatistics extends JDialog {
@@ -232,38 +236,75 @@ public class MovieUserStatistics extends JDialog {
 	}
 
 	// --- Field ---
+	// 월별 매출 현황에서 연도를 선택 후 차트보기를 눌르면 차트를 띄움
 	private void showMonthlyRevenue() {
 		
+		// 콤보박스에서 연도만 따와서 ShareVar.year에 넣어줌
 		ShareVar.year = cbMonthlyRevenue.getSelectedItem().toString().substring(2, 4);
 		
+		// 월별 매출 현황 차트를 띄워줌
 		MovieMonthSalesStatus movieMonthSalesStatus = new MovieMonthSalesStatus();
 		movieMonthSalesStatus.setVisible(true);
 
 	}
 
+	// 일별 매출 현황에서 연도와 달을 선택 후 차트보기를 누르면 차트를 띄움
 	private void showDailyRevenue() {
 		
+		// 콤보박스에서 연도와 달만 따와서 ShareVar.year와 ShareVar.month를 넣어줌
 		ShareVar.year = cbDailyRevenue.getSelectedItem().toString().substring(2, 4);
 		ShareVar.month = cbDailyRevenue.getSelectedItem().toString().substring(6, 8);
 		
+		// 일별 매출 현황 차트를 띄워줌
 		MovieDaySalesStatus movieDaySalesStatus = new MovieDaySalesStatus();
 		movieDaySalesStatus.setVisible(true);
 		
 	}
 	
+	// 연령별 사용자 통계에서 연도와 달을 선택 후 차트보기를 누르면 차트를 띄움
 	private void showAgeStatistics() {
 		
+		// 콤보박스에서 연도만 따와서 ShareVar.year에 넣어줌
 		ShareVar.year = cbAgeStatistics.getSelectedItem().toString().substring(2, 4);
+		ShareVar.month = cbAgeStatistics.getSelectedItem().toString().substring(6, 8);
 		
+		// 연령별 사용자 통계를 띄워줌
 		AgeStatisticsChart movieMonthSalesStatus = new AgeStatisticsChart();
 		movieMonthSalesStatus.setVisible(true);
+		
+
+		// 통계 알고리즘 잘 나오는지 실험 완료
+//		DaoUserStatistics dao = new DaoUserStatistics();
+//		ArrayList<DtoWDH> dto = dao.ageTypePerMonth();
+//		
+//
+//		String ageDB = String.format("%02d", dto.get(0).getCust_age());
+//		System.out.println(dto.get(0).getCust_age());
+//		for (int i = 0; i <= 80; i+=10) {
+//			String age = String.format("%02d", i);
+//			int sumPeople = 0;
+//
+//			// 가져온 month와 현재 month가 일치할 경우 sumPeople에 인원 추가
+//			for (int j = 0; j < dto.size(); j++) {
+//				String ageDB = String.format("%02d", dto.get(j).getCust_age());
+//				if (ageDB.equals(age)) {
+//					sumPeople += dto.get(j).getAge_count();
+//					System.out.println(sumPeople);
+//				}
+//			}
+//		}
+
 
 	}
 	
+	// 유형별 사용자 통계에서 연도와 달을 선택 후 차트보기를 누르면 차트를 띄움
 	private void showTypeStatistics() {
 		
+		// 콤보박스에서 연도만 따와서 ShareVar.year에 넣어줌
 		ShareVar.year = cbTypeStatistics.getSelectedItem().toString().substring(2, 4);
+		ShareVar.month = cbDailyRevenue.getSelectedItem().toString().substring(6, 8);
 		
+		// 유형별 사용자 통계를 띄워줌
 		TypeStatistics movieMonthSalesStatus = new TypeStatistics();
 		movieMonthSalesStatus.setVisible(true);
 
