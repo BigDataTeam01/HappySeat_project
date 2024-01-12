@@ -23,6 +23,7 @@ import com.javaproject.managerfunction.DtoWDH;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.FileInputStream;
 
 public class Page07_SelectTime extends JDialog {
 
@@ -46,6 +47,8 @@ public class Page07_SelectTime extends JDialog {
 	 * 			5. 배경 추가
 	 * 			5. 첫화면,이전화면, 시간선택 추가
 	 */
+	
+	
 	/**
 	 * Launch the application.
 	 */
@@ -86,13 +89,14 @@ public class Page07_SelectTime extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+//		setUndecorated(true);
 
-		// 이전화면, 다음화면 버튼
+		// 이전상영관 시간 버튼
 		JLabel lbl_PreviousMovie = new JLabel("");
 		lbl_PreviousMovie.setBounds(103, 503, 260, 50);
 		lbl_PreviousMovie
 				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn이전버튼.png")));
-		contentPanel.add(lbl_PreviousMovie);
+//		contentPanel.add(lbl_PreviousMovie);
 
 		//	페이지 타이틀 
 		JLabel lbl_pageTitle = new JLabel("시간 선택");
@@ -118,8 +122,10 @@ public class Page07_SelectTime extends JDialog {
 		contentPanel.add(lbl_pageTitle_1);
 
 		// 시간선택 배경(총 4개)
+		
+		
 		JLabel lbl_MovieBackGround1 = new JLabel("");
-		lbl_MovieBackGround1.setBounds(122, 167, 254, 132);
+		lbl_MovieBackGround1.setBounds(122, 170, 254, 132);
 		lbl_MovieBackGround1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -141,15 +147,16 @@ public class Page07_SelectTime extends JDialog {
 //		contentPanel.add(getLblScreenRoom());
 //		contentPanel.add(getLblScr_Start_Time());
 		contentPanel.add(getLblscreenPoster());
+		showCurrentScreen();
 //		contentPanel.add(getLblRemainSeat());
-
 		
 		lbl_MovieBackGround1
 				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_MovieBackGround1);
+		
 
 		JLabel lbl_MovieBackGround2 = new JLabel("");
-		lbl_MovieBackGround2.setBounds(425, 167, 254, 132);
+		lbl_MovieBackGround2.setBounds(425, 170, 254, 132);
 		lbl_MovieBackGround2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -159,9 +166,10 @@ public class Page07_SelectTime extends JDialog {
 		lbl_MovieBackGround2
 				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_MovieBackGround2);
+		
 
 		JLabel lbl_MovieBackGround3 = new JLabel("");
-		lbl_MovieBackGround3.setBounds(122, 341, 254, 132);
+		lbl_MovieBackGround3.setBounds(122, 340, 254, 132);
 		lbl_MovieBackGround3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -173,7 +181,7 @@ public class Page07_SelectTime extends JDialog {
 		contentPanel.add(lbl_MovieBackGround3);
 
 		JLabel lbl_MovieBackGround4 = new JLabel("");
-		lbl_MovieBackGround4.setBounds(425, 341, 254, 132);
+		lbl_MovieBackGround4.setBounds(425, 340, 254, 132);
 		lbl_MovieBackGround4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -183,12 +191,13 @@ public class Page07_SelectTime extends JDialog {
 		lbl_MovieBackGround4
 				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_MovieBackGround4);
+		
 	
-		// 다음영화버튼
+		// 다음상영관버튼
 		JLabel lbl_NextMovie = new JLabel("");
 		lbl_NextMovie.setBounds(561, 503, 198, 57);
 		lbl_NextMovie.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn다음버튼.png")));
-		contentPanel.add(lbl_NextMovie);
+//		contentPanel.add(lbl_NextMovie);
 
 		// 이전화면으로 가기
 		JLabel BtnBackToPrevious = new JLabel("");
@@ -276,47 +285,67 @@ public class Page07_SelectTime extends JDialog {
 	}
 	
 	private void showCurrentScreen() {
-		JLabel[] lblscr_scroom_nameArray = makeLabel();  
-		JLabel[] lblstart_timeArray = makeLabel(); 
-		JLabel[] lblremainSeatCountArray = makeLabel(); 
-		JLabel[] lblscrPosterArray = makeLabel(); 
+		JLabel[] lblscr_scroom_nameArray = makeLabel();
+		JLabel[] lblstart_timeArray = makeLabel();
+		JLabel[] lblremainSeatCountArray = makeLabel();
+		JLabel[] lblscrPosterArray = makeLabel();
 		
-		for(int j = 0; j < 4; j++) {
+		int boxNum = 4;
+		for(int boxj = 0; boxj < boxNum; boxj++) {
 			
 			int remainSeatCount = 0;
 			Dao_SelectTime dao = new Dao_SelectTime();
 			ArrayList<DtoWDH> dtolist = dao.showScreen();
-			String scr_scroom_name = dtolist.get(j).getScr_scroom_name();
-			dtolist.get(j).getScr_start_time();
-			String start_time = dtolist.get(j).getScr_start_time().substring(2,16);
-			String remainSeat = dtolist.get(j).getSeat_resv_code();
+			String scr_scroom_name = dtolist.get(boxj).getScr_scroom_name();
+			dtolist.get(boxj).getScr_start_time();
+			String start_time = dtolist.get(boxj).getScr_start_time().substring(2,16);
+			String remainSeat = dtolist.get(boxj).getSeat_resv_code();
 			
 			
-			for(int i = 0; i < remainSeat.length(); i++) {
-				if(remainSeat.charAt(i) == '0') {
+			
+			for(int ri = 0; ri < remainSeat.length(); ri++) {
+				if(remainSeat.charAt(ri) == '0') {
 					remainSeatCount++;
 				}
 			}
 			
-			int y = 120;
-			if (j < 2) {
-				lblscr_scroom_nameArray[j].setBounds(130 + j * 450, 160, 80, 110);
-				lblstart_timeArray[j].setBounds(130 + j * 450, 180, 80, 110);
-				lblremainSeatCountArray[j].setBounds(130 + j * 450, 200, 80, 110);
-			} else if (j == 2) {
-				lblscr_scroom_nameArray[j].setBounds(130 , 209 + y, 80, 110);
-				lblstart_timeArray[j].setBounds(130 , 239 + y, 80, 110);
-				lblremainSeatCountArray[j].setBounds(130 , 269 + y, 80, 110);
+			int gapVertName = 20;
+			int gapVertTime = 40;
+			int gapVertRemain = 60;
+			int gapLineVert1 = 20;
+			int gapLineVert2 = 40;
+			int gapLineVert3 = 60;
+			int boxyPos_01 = 95;
+			int boxyPos_02 = 265;
+			
+			
+			int line_01 = boxyPos_01 + gapVertName;
+			int line_02 = boxyPos_02 + gapVertName;
+			// 첫번째행 
+			if (boxj < 2) {	//							       pos_x			      pos_y		  			 			 width	   height
+				lblscrPosterArray[boxj].setBounds		(133 + boxj * 300, 			179, 80, 110);
+				lblscr_scroom_nameArray[boxj].setBounds	(220 + boxj * 300, 	 	line_01 + gapVertName  ,	  			   250, 	110);
+				lblremainSeatCountArray[boxj].setBounds	(220 + boxj * 300,	 	line_01 + gapVertTime + gapLineVert1 , 	   250, 	110);
+				lblstart_timeArray[boxj].setBounds		(220 + boxj * 300, 	 	line_01 + gapVertRemain + gapLineVert2 ,   250, 	110);
+				
+				
+			//두번째행 1열
+			} else if (boxj == 2) {
+				lblscrPosterArray[boxj].setBounds		(133,						 349, 									80, 	110);
+				lblscr_scroom_nameArray[boxj].setBounds	(220 ,			 	 	line_02 + gapVertName , 	   			   250,	    110);
+				lblremainSeatCountArray[boxj].setBounds	(220 , 				  	line_02 + gapVertTime + gapLineVert1,	   250, 	110);
+				lblstart_timeArray[boxj].setBounds		(220 , 				 	line_02 + gapVertRemain + gapLineVert2,    250, 	110);
 			}
-
+			//세번째행 2열
 			else {
-				lblscr_scroom_nameArray[j].setBounds(130 + j * 450 / 3, 209 + y, 80, 110);
-				lblstart_timeArray[j].setBounds(130 + j * 450 / 3, 239 + y, 80, 110);
-				lblremainSeatCountArray[j].setBounds(130 + j * 450 / 3, 269 + y, 80, 110);
+				lblscrPosterArray[boxj].setBounds		(133 + boxj * 300 / 3, 		 349, 									80, 	110);
+				lblscr_scroom_nameArray[boxj].setBounds	(220 + boxj * 300 / 3, line_02 + gapVertName , 	  				   250,	    110);
+				lblremainSeatCountArray[boxj].setBounds	(220 + boxj * 300 / 3, line_02 + gapVertTime + gapLineVert1 , 	   250, 	110);
+				lblstart_timeArray[boxj].setBounds		(220 + boxj * 300 / 3, line_02 + gapVertRemain + gapLineVert2,	   250, 	110);
 			}
-			lblscr_scroom_nameArray[j].setText(scr_scroom_name);
-			lblstart_timeArray[j].setText(start_time);
-			lblremainSeatCountArray[j].setText("남은좌석 : " + Integer.toString(remainSeatCount) + "석");
+			lblscr_scroom_nameArray[boxj].setText(scr_scroom_name);
+			lblstart_timeArray[boxj].setText(start_time);
+			lblremainSeatCountArray[boxj].setText("남은좌석 : " + Integer.toString(remainSeatCount) + "석");
 			
 			// Image 처리
 			String filePath = Integer.toString(dao.screenPoster1);
@@ -324,13 +353,14 @@ public class Page07_SelectTime extends JDialog {
 			ImageIcon icon = new ImageIcon(filePath);
 			Image changeImg = icon.getImage().getScaledInstance(80, 110, Image.SCALE_SMOOTH);
 			
-			lblscreenPoster.setIcon(new ImageIcon(changeImg));
-			lblscreenPoster.setHorizontalAlignment(SwingConstants.CENTER);
+			lblscrPosterArray[boxj].setIcon(new ImageIcon(changeImg));
+			lblscrPosterArray[boxj].setHorizontalAlignment(SwingConstants.CENTER);
 			
 			File file = new File(filePath);
 			file.delete();
 			
 			}
+		
 				
 	}
 
