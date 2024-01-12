@@ -114,18 +114,18 @@ public class TypeStatistics extends JFrame {
 		ArrayList<DtoWDH> dto = dao.typeUserStatistics();
 		
 		// Type별 dateset 추가
-		for (int i = 0; i < dao.typeArray().size(); i++) {
-			String type = dao.typeArray().get(i);
+		for (int i = 1; i <= 12; i++) {
+			String month = String.format("%02d", i);
 			int sumType = 0;
 
 			// 가져온 month와 현재 month가 일치할 경우 sumPeople에 인원 추가
 			for (int j = 0; j < dto.size(); j++) {
-				String typeDB = dto.get(j).getCust_type();
-				if (typeDB.equals(type)) {
+				String day1 = dto.get(j).getResv_date().substring(3, 5);
+				if (day1.equals(month)) {
 					sumType += dto.get(j).getType_count();
 				}
 			}
-			dataset.addValue(sumType, ShareVar.year + "년 " + ShareVar.month + "월", type);
+			dataset.addValue(sumType, ShareVar.year + "년 " + ShareVar.month + "월", month);
 		}
 
 		return dataset;
