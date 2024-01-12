@@ -54,10 +54,7 @@ public class Page08_SelectHeadCount extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page08_SelectHeadCount SelectHeadCountdialog = new Page08_SelectHeadCount();
-	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-	private static Page07_SelectTime SelectTimedialog = new Page07_SelectTime();
-	private static Page09_SelectSeat_ver2 SelectSeatdialog = new Page09_SelectSeat_ver2();
+
 	private mybutton btnNewButton;
 	private JTextField tfPersonNum1;
 	private JTextField tfPersonNum2;
@@ -435,6 +432,9 @@ public class Page08_SelectHeadCount extends JDialog {
 //--------------------Function----------------------------
 	// 다음화면(영화좌석선택)로 가기
 	private void goToSelectSeat() {
+		Page08_SelectHeadCount SelectHeadCountdialog = new Page08_SelectHeadCount();
+		Page09_SelectSeat_ver2 SelectSeatdialog = new Page09_SelectSeat_ver2();
+
 		dispose();
 		SelectHeadCountdialog.setVisible(false);
 		SelectHeadCountdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -443,6 +443,9 @@ public class Page08_SelectHeadCount extends JDialog {
 
 	// 이전화면(영화시간선택)으로 가기
 	private void goToSelectTime() {
+		Page08_SelectHeadCount SelectHeadCountdialog = new Page08_SelectHeadCount();
+		Page07_SelectTime SelectTimedialog = new Page07_SelectTime();
+
 		dispose();
 		SelectHeadCountdialog.setVisible(false);
 		SelectHeadCountdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -451,6 +454,8 @@ public class Page08_SelectHeadCount extends JDialog {
 
 	// 첫화면으로 가기
 	private void goToSelectMenu() {
+		Page08_SelectHeadCount SelectHeadCountdialog = new Page08_SelectHeadCount();
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
 		SelectHeadCountdialog.setVisible(false);
 		SelectHeadCountdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -490,6 +495,14 @@ public class Page08_SelectHeadCount extends JDialog {
 	            ShareVar.sumOfPersonNumbers = sum;
 	   
 	    }
-	
+	// +버튼 눌렀을때 텍스트필드에 1더하는 액션
+	 private void addAction() {
+		 int currentValue = Integer.parseInt(tfPersonNum5.getText());
+
+			currentValue++;
+
+			tfPersonNum5.setText(String.valueOf(currentValue));
+		 
+	 }
 	
 }// End

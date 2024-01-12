@@ -181,12 +181,24 @@ public class Page02_1_0_OrderCheck extends JDialog {
 
 		// 숫자버튼부분
 		JLabel Btn1 = new JLabel("");
+		Btn1.addMouseListener(new MouseAdapter() {
+			 @Override
+	            public void mouseClicked(MouseEvent e) {
+	                tfTicketNum.setText(tfTicketNum.getText() + "1");
+	            }
+	        });
 		Btn1.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn1.png")));
 		Btn1.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn1.setBounds(42, 322, 70, 70);
 		contentPanel.add(Btn1);
 
 		JLabel Btn2 = new JLabel("\"\"");
+		Btn2.addMouseListener(new MouseAdapter() {
+			 @Override
+	            public void mouseClicked(MouseEvent e) {
+	                tfTicketNum.setText(tfTicketNum.getText() + "2");
+	            }
+	        });
 		Btn2.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn2.png")));
 		Btn2.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn2.setBounds(132, 322, 70, 70);
@@ -216,6 +228,12 @@ public class Page02_1_0_OrderCheck extends JDialog {
 		Btn4.setBounds(312, 322, 70, 70);
 		contentPanel.add(Btn4);
 
+		JLabel Btn7 = new JLabel("\"\"");
+		Btn7.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn7.png")));
+		Btn7.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
+		Btn7.setBounds(135, 403, 70, 70);
+		contentPanel.add(Btn7);
+		
 		JLabel Btn8 = new JLabel("\"\"");
 		Btn8.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn8.png")));
 		Btn8.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
@@ -228,31 +246,27 @@ public class Page02_1_0_OrderCheck extends JDialog {
 		Btn9.setBounds(315, 403, 70, 70);
 		contentPanel.add(Btn9);
 
-		JLabel BtnClear = new JLabel("\"\"");
-		BtnClear.setIcon(
-				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/BtnClear.png")));
-		BtnClear.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
-		BtnClear.setBounds(484, 322, 70, 70);
-		contentPanel.add(BtnClear);
-
 		JLabel Btn0 = new JLabel("\"\"");
 		Btn0.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn0.png")));
 		Btn0.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn0.setBounds(405, 403, 70, 70);
 		contentPanel.add(Btn0);
 
-		JLabel Btn1Delete = new JLabel("\"\"");
-		Btn1Delete.setIcon(
-				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn1Delete.png")));
-		Btn1Delete.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
-		Btn1Delete.setBounds(484, 403, 70, 70);
-		contentPanel.add(Btn1Delete);
+		JLabel BtnClear = new JLabel("\"\"");
+		BtnClear.setIcon(
+		new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/BtnClear.png")));
+		BtnClear.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
+		BtnClear.setBounds(484, 322, 70, 70);
+		contentPanel.add(BtnClear);
 
-		JLabel Btn7 = new JLabel("\"\"");
-		Btn7.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn7.png")));
-		Btn7.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
-		Btn7.setBounds(135, 403, 70, 70);
-		contentPanel.add(Btn7);
+
+		JLabel BtnDelete = new JLabel("\"\"");
+		BtnDelete.setIcon(
+		new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn1Delete.png")));
+		BtnDelete.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
+		BtnDelete.setBounds(484, 403, 70, 70);
+		contentPanel.add(BtnDelete);
+
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
