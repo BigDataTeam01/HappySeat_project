@@ -269,6 +269,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 			btnSeatConfirm.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					checkSelecte();
 					System.out.println("Db 업데이트 코드 : " + selectSeatCode);
 					updateSeatCodeAction();
 					goConfirmSeat();
@@ -409,5 +410,13 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		return count;
 	}
 	
+	private void checkSelecte() {
+		if(seatCode == selectSeatCode) {
+			JOptionPane.showMessageDialog(null, "좌석을 선택해주세요.");
+			
+			return;
+		}
+		
+	}
 
 }// End
