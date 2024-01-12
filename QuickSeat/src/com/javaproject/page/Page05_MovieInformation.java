@@ -77,9 +77,6 @@ public class Page05_MovieInformation extends JDialog{
 	/**
 	 * Launch the application.
 	 */
-	private static Page05_MovieInformation dialog = new Page05_MovieInformation();
-	private static Page06_SelectCinema SelectCinemadialog = new Page06_SelectCinema();
-	private static Page04_SelectMovie SelectMoviedialog = new Page04_SelectMovie();
 	private JButton btnNewButton;
 	private JButton btnNewButton_1;
 	private JLabel lblGoHome;
@@ -143,10 +140,8 @@ public class Page05_MovieInformation extends JDialog{
 	
 	public static void main(String[] args) {
 		
-		
-		
-		
 		try {
+			Page05_MovieInformation dialog = new Page05_MovieInformation();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 
@@ -332,8 +327,9 @@ public class Page05_MovieInformation extends JDialog{
 	}
 	// Page back
 	public void goToSelectMovie() {
-		dialog.setVisible(false);
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		Page04_SelectMovie SelectMoviedialog = new Page04_SelectMovie();
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectMoviedialog.setVisible(true);
 	}
 	
