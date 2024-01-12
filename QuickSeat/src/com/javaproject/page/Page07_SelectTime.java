@@ -76,11 +76,10 @@ public class Page07_SelectTime extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-//				showCurrentScreen();
+				showCurrentScreen();
 			}
 		});
 		// 타이틀 설정
-		showCurrentScreen();
 		setTitle("시간 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		getContentPane().setLayout(new BorderLayout());
@@ -131,18 +130,18 @@ public class Page07_SelectTime extends JDialog {
 		
 		JLabel lblNewLabel_1 = new JLabel("상영관");
 		lblNewLabel_1.setBounds(248, 179, 115, 16);
-		contentPanel.add(lblNewLabel_1);
+//		contentPanel.add(lblNewLabel_1);
 		
 		
 		JLabel lblNewLabel_1_3 = new JLabel("상영 시작시간");
 		lblNewLabel_1_3.setBounds(248, 253, 115, 16);
-		contentPanel.add(lblNewLabel_1_3);
+//		contentPanel.add(lblNewLabel_1_3);
 		
 		
-		contentPanel.add(getLblScreenRoom());
-		contentPanel.add(getLblScr_Start_Time());
+//		contentPanel.add(getLblScreenRoom());
+//		contentPanel.add(getLblScr_Start_Time());
 		contentPanel.add(getLblscreenPoster());
-		contentPanel.add(getLblRemainSeat());
+//		contentPanel.add(getLblRemainSeat());
 
 		
 		lbl_MovieBackGround1
@@ -184,6 +183,7 @@ public class Page07_SelectTime extends JDialog {
 		lbl_MovieBackGround4
 				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화배경(영화선택).png")));
 		contentPanel.add(lbl_MovieBackGround4);
+	
 		// 다음영화버튼
 		JLabel lbl_NextMovie = new JLabel("");
 		lbl_NextMovie.setBounds(561, 503, 198, 57);
@@ -208,7 +208,8 @@ public class Page07_SelectTime extends JDialog {
 		lbl_background.setBounds(0, 0, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		lbl_background.setIcon(new ImageIcon(
 				Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
-//		contentPanel.add(lbl_background);
+		contentPanel.add(lbl_background);
+		
 	}
 	
 	private JLabel getLblScreenRoom() {
@@ -248,6 +249,7 @@ public class Page07_SelectTime extends JDialog {
 		}
 		return lblremainSeat;
 	}
+	
 //---------------------------Function------------------------
 	// 다음화면(정화정보)로 가기
 	private void goToSelectHeadCount() {
@@ -289,16 +291,32 @@ public class Page07_SelectTime extends JDialog {
 			String start_time = dtolist.get(j).getScr_start_time().substring(2,16);
 			String remainSeat = dtolist.get(j).getSeat_resv_code();
 			
+			
 			for(int i = 0; i < remainSeat.length(); i++) {
 				if(remainSeat.charAt(i) == '0') {
 					remainSeatCount++;
 				}
 			}
-			System.out.println(0);
+			
+			int y = 120;
+			if (j < 2) {
+				lblscr_scroom_nameArray[j].setBounds(130 + j * 450, 160, 80, 110);
+				lblstart_timeArray[j].setBounds(130 + j * 450, 180, 80, 110);
+				lblremainSeatCountArray[j].setBounds(130 + j * 450, 200, 80, 110);
+			} else if (j == 2) {
+				lblscr_scroom_nameArray[j].setBounds(130 , 209 + y, 80, 110);
+				lblstart_timeArray[j].setBounds(130 , 239 + y, 80, 110);
+				lblremainSeatCountArray[j].setBounds(130 , 269 + y, 80, 110);
+			}
+
+			else {
+				lblscr_scroom_nameArray[j].setBounds(130 + j * 450 / 3, 209 + y, 80, 110);
+				lblstart_timeArray[j].setBounds(130 + j * 450 / 3, 239 + y, 80, 110);
+				lblremainSeatCountArray[j].setBounds(130 + j * 450 / 3, 269 + y, 80, 110);
+			}
 			lblscr_scroom_nameArray[j].setText(scr_scroom_name);
 			lblstart_timeArray[j].setText(start_time);
 			lblremainSeatCountArray[j].setText("남은좌석 : " + Integer.toString(remainSeatCount) + "석");
-			System.out.println(1);
 			
 			// Image 처리
 			String filePath = Integer.toString(dao.screenPoster1);
@@ -313,7 +331,7 @@ public class Page07_SelectTime extends JDialog {
 			file.delete();
 			
 			}
-			
+				
 	}
 
 	private JLabel[] makeLabel() {
@@ -321,18 +339,17 @@ public class Page07_SelectTime extends JDialog {
 		JLabel[] makeLabel = new JLabel[4];
 
 		for (int i = 0; i < 4; i++) {
-			JLabel temp = new JLabel("아무거나");
+			JLabel temp = new JLabel();
 			temp.setVisible(true);
-			System.out.println(2);
 			makeLabel[i] = temp;
-			if (i > 2) {
-				int y = 120;
-
-				makeLabel[i].setBounds(133, 179 + y, 80, 110);
-			} else {
-				makeLabel[i].setBounds(133 + i * 90, 179, 80, 110);
-			}
-			makeLabel[i].setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, ShareVar.kiosk_title_font_size));
+//			int y = 200;
+//			if (i > 2) {
+//				
+//				makeLabel[i].setBounds(133, 179 + y, 80, 110);
+//			} else {
+//				makeLabel[i].setBounds( 130 + i * 90, 179, 80, 110);
+//			}
+			makeLabel[i].setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			contentPanel.add(makeLabel[i]);
 			
 		}
