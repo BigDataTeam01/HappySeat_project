@@ -15,6 +15,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.BackSplashTimer;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Page03_SelectAge extends JDialog {
 
@@ -60,6 +63,12 @@ public class Page03_SelectAge extends JDialog {
 	 * Create the dialog.
 	 */
 	public Page03_SelectAge() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				backSplashTimeEnd();
+			}
+		});
 		setTitle("연령 선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 
@@ -241,4 +250,10 @@ public class Page03_SelectAge extends JDialog {
 		selectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMoviedialog.setVisible(true);
 	}
+	
+	// splash Class로 돌아가기
+	public void backSplashTimeEnd() {
+		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+	}
+
 }
