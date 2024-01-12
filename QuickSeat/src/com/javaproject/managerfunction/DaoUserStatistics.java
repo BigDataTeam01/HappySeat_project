@@ -158,5 +158,30 @@ public class DaoUserStatistics {
 		
 		return dataList;
 	}
+	
+	// 유형들을 DB에서 가져오기
+	public ArrayList<String> typeArray() {
+		ArrayList<String> typeList = new ArrayList<String>();
+		String select = "select cust_type from customer group by cust_type";
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(select);
+
+			while (rs.next()) {
+				String wkCust_type = rs.getString(1);
+
+				typeList.add(wkCust_type);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return typeList;
+	}
 
 }
