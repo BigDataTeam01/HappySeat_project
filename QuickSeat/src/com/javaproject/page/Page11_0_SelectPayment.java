@@ -36,11 +36,7 @@ public class Page11_0_SelectPayment extends JDialog {
 	 */
 	
 	
-	private Page02_SelectMenu selectMenu = new Page02_SelectMenu();
 //	private static Page11_0_SelectPayment selectPayment = new Page11_0_SelectPayment();
-	private Page10_ConfirmSeat page10_ConfirmSeat = new Page10_ConfirmSeat();
-	private Page11_1_Cash page11_1_Cash = new Page11_1_Cash();
-	private Page11_2_Card page11_2_Card = new Page11_2_Card();
 	
 
 
@@ -136,6 +132,7 @@ public class Page11_0_SelectPayment extends JDialog {
 	
 	//메인 화면으로 돌아가는기능 구현
 	private void goToHome() {
+		Page02_SelectMenu selectMenu = new Page02_SelectMenu();
 		dispose();
 		selectMenu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenu.setVisible(true);
@@ -143,17 +140,20 @@ public class Page11_0_SelectPayment extends JDialog {
 	
 	// 이전 화면으로 돌아가는 기능 구현
 	private void goBack() {
+		Page10_ConfirmSeat page10_ConfirmSeat = new Page10_ConfirmSeat();
 		dispose();
 		page10_ConfirmSeat.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		page10_ConfirmSeat.setVisible(true);
 	}
 	
 	private void goToCash() {
+		Page11_1_Cash page11_1_Cash = new Page11_1_Cash();
 		dispose();
 		page11_1_Cash.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		page11_1_Cash.setVisible(true);
 	}
 	private void goTocard() {
+		Page11_2_Card page11_2_Card = new Page11_2_Card();
 		dispose();
 		page11_2_Card.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		page11_2_Card.setVisible(true);

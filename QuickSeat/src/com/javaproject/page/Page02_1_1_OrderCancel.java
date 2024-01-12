@@ -49,14 +49,11 @@ public class Page02_1_1_OrderCancel extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
-//	private static Page02_1_1_OrderCancel_Dialog OrderCancledialogdialog = new Page02_1_1_OrderCancel_Dialog();
-	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-	private static Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
 	private mybutton btnNewButton;
 	
 	public static void main(String[] args) {
 		try {
+			Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
 			OrderCancledialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			OrderCancledialog.setVisible(true);
 		} catch (Exception e) {
@@ -180,6 +177,8 @@ public class Page02_1_1_OrderCancel extends JDialog {
 //---------------------------Function---------------------
 	// 첫화면으로 가기
 	public void goToSelectMenu() {
+		Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
 		OrderCancledialog.setVisible(false);
 		OrderCancledialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -188,6 +187,9 @@ public class Page02_1_1_OrderCancel extends JDialog {
 	
 	// 이전화면(예매확인)으로 가기
 		public void goToOredrCheck() {
+			Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
+			Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
+
 			dispose();
 			OrderCancledialog.setVisible(false);
 			OrderCancledialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -198,12 +200,13 @@ public class Page02_1_1_OrderCancel extends JDialog {
 	public void OrderCancleAction() {
 		//JOptionPane에 배경화면 지정 불가... 따라서 새로운 클래스 생성하고 그 클래스의 매소드르
 		JOptionPane.showMessageDialog(null, "구매취소되었습니다.");
-		
-		
-		
-		
+		Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
+
+
 		OrderCancledialog.setVisible(false);
 		OrderCancledialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		
 		
 //		Page02_1_1_OrderCancel_Dialog OrderCancledialogdialog= new Page02_1_1_OrderCancel_Dialog();
 //		OrderCancledialogdialog.setVisible(true);

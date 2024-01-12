@@ -43,9 +43,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page11_0_SelectPayment selectpayment = new Page11_0_SelectPayment();
-	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-	private static Page09_SelectSeat_ver2 SelectSeatdialog = new Page09_SelectSeat_ver2();
+	
 	
 	private JLabel lblNewLabel;
 	private JLabel lbl_movie_poster;
@@ -229,12 +227,15 @@ public class Page10_ConfirmSeat extends JDialog {
 	//----Function----
 	// 결제 방법 창으로 넘어 가는 기능 구현
 	private void goToSelectPayment() {
+		Page11_0_SelectPayment SelectPaymentdialog = new Page11_0_SelectPayment();
 		dispose();
-		selectpayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		selectpayment.setVisible(true);
+		SelectPaymentdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		SelectPaymentdialog.setVisible(true);
 	}
 	// 처음으로 돌아가는 기능 구현
 	private void goToBack() {
+		Page09_SelectSeat_ver2 SelectSeatdialog = new Page09_SelectSeat_ver2();
+
 		dispose();
 		SelectSeatdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectSeatdialog.setVisible(true);
@@ -242,6 +243,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	}
 	// 이전으로 돌아가는 기능 구현
 	private void goToHome() {
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
 		selectMenudialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
