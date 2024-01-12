@@ -39,7 +39,7 @@ public class Page06_SelectCinema extends JDialog {
 	 * Date : 2024.01.05 (금요일)
 	 * Author : 박정민,박지환
 	 * 
-	 *   *  *  * Update 2024.01.07 by J.park:
+	 *   *  *  * Update 2024.01.07 by PJH:
 	 * 			1. descripton 수정
 	 * 			3. kiosk set bound sharevar 에서 가져와 지정
 	 * 			4. diaog -> static 
@@ -49,7 +49,8 @@ public class Page06_SelectCinema extends JDialog {
 	 * 			1. 쉐어바에 있는 영화이름으로 그 영화가 상영되는 극장이름 db에서 가져와서 보여주기
 	 * 			2. 극장 교통정보 사진 추가
 	 * 			3. 극장 교통정보 사진 추가
-	 * 
+	 *  *  *  * Update 2024.01.12 by PJH:
+	 * 			1. 극장 사진,설명,오는길 ui변경
 	 */
 	/**
 	 * Launch the application.
@@ -113,59 +114,59 @@ public class Page06_SelectCinema extends JDialog {
 		//극장 위치 설명 
 
 		lblget_here1 = new JLabel("");
-		lblget_here1.setFont(new Font("BM Dohyeon", Font.PLAIN, 18));
-		lblget_here1.setBounds(249, 207, 100, 67);
+		lblget_here1.setFont(new Font("BM Dohyeon", Font.PLAIN, 10));
+		lblget_here1.setBounds(248, 252, 124, 21);
 		contentPanel.add(lblget_here1);
 
 		lblget_here2 = new JLabel("");
-		lblget_here2.setFont(new Font("BM Dohyeon", Font.PLAIN, 18));
-		lblget_here2.setBounds(561, 215, 100, 21);
+		lblget_here2.setFont(new Font("BM Dohyeon", Font.PLAIN, 10));
+		lblget_here2.setBounds(555, 252, 124, 21);
 		contentPanel.add(lblget_here2);
 
 		lblget_here3 = new JLabel("");
-		lblget_here3.setFont(new Font("BM Dohyeon", Font.PLAIN, 18));
-		lblget_here3.setBounds(263, 375, 100, 21);
+		lblget_here3.setFont(new Font("BM Dohyeon", Font.PLAIN, 10));
+		lblget_here3.setBounds(248, 426, 124, 21);
 		contentPanel.add(lblget_here3);
 
 		lblget_here4 = new JLabel("");
-		lblget_here4.setFont(new Font("BM Dohyeon", Font.PLAIN, 18));
-		lblget_here4.setBounds(559, 375, 100, 21);
+		lblget_here4.setFont(new Font("BM Dohyeon", Font.PLAIN, 10));
+		lblget_here4.setBounds(555, 426, 124, 21);
 		contentPanel.add(lblget_here4);
 
 		lbllocation_map1 = new JLabel("");
-		lbllocation_map1.setBounds(134, 176, 102, 115);
+		lbllocation_map1.setBounds(122, 175, 102, 115);
 		contentPanel.add(lbllocation_map1);
 
 		lbllocation_map2 = new JLabel("");
-		lbllocation_map2.setBounds(437, 178, 102, 115);
+		lbllocation_map2.setBounds(425, 175, 102, 115);
 		contentPanel.add(lbllocation_map2);
 
 		lbllocation_map3 = new JLabel("");
-		lbllocation_map3.setBounds(148, 344, 102, 115);
+		lbllocation_map3.setBounds(122, 349, 102, 115);
 		contentPanel.add(lbllocation_map3);
 
 		lbllocation_map4 = new JLabel("");
-		lbllocation_map4.setBounds(444, 344, 102, 115);
+		lbllocation_map4.setBounds(425, 349, 102, 115);
 		contentPanel.add(lbllocation_map4);
 
 		lblcinema_branch1 = new JLabel("");
 		lblcinema_branch1.setFont(new Font("BM Dohyeon", Font.PLAIN, 18));
-		lblcinema_branch1.setBounds(249, 173, 100, 21);
+		lblcinema_branch1.setBounds(263, 184, 100, 21);
 		contentPanel.add(lblcinema_branch1);
 
 		lblcinema_branch2 = new JLabel("");
 		lblcinema_branch2.setFont(new Font("BM Dohyeon", Font.PLAIN, 18));
-		lblcinema_branch2.setBounds(561, 184, 100, 21);
+		lblcinema_branch2.setBounds(566, 184, 100, 21);
 		contentPanel.add(lblcinema_branch2);
 
 		lblcinema_branch3 = new JLabel("");
 		lblcinema_branch3.setFont(new Font("BM Dohyeon", Font.PLAIN, 18));
-		lblcinema_branch3.setBounds(263, 341, 100, 21);
+		lblcinema_branch3.setBounds(263, 358, 100, 21);
 		contentPanel.add(lblcinema_branch3);
 
 		lblcinema_branch4 = new JLabel("");
 		lblcinema_branch4.setFont(new Font("BM Dohyeon", Font.PLAIN, 18));
-		lblcinema_branch4.setBounds(559, 341, 100, 21);
+		lblcinema_branch4.setBounds(566, 358, 100, 21);
 		contentPanel.add(lblcinema_branch4);
 		
 
