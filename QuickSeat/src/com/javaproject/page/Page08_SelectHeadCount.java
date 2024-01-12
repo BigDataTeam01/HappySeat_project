@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.page.Page05_MovieInformation.mybutton;
+import javax.swing.JTextField;
 
 public class Page08_SelectHeadCount extends JDialog {
 
@@ -42,6 +43,12 @@ public class Page08_SelectHeadCount extends JDialog {
 	 * 			5. 배경 추가
 	 * 			5. 첫화면,이전화면, 입력완료(임시) 추가
 	 * 			6.버튼 UI변경
+	 * 
+	 *   *  *  *  * Update 2024.01.12 by J.park:
+	 * 			1. +,-버튼 클리시, 텍스트 필드에 숫자 증,감구현(음수값 안되게 설정) 
+	 * 			2. - 버튼 클릭시 텍스트 필드에 음수값 안되게 설정
+	 * 			3. 인원확정 버튼 클릭시 sharevar.sumOfPersonNumbers에 선택한 총 인원 저장
+	 * 			
 	 */
 
 	/**
@@ -52,6 +59,11 @@ public class Page08_SelectHeadCount extends JDialog {
 	private static Page07_SelectTime SelectTimedialog = new Page07_SelectTime();
 	private static Page09_SelectSeat_ver2 SelectSeatdialog = new Page09_SelectSeat_ver2();
 	private mybutton btnNewButton;
+	private JTextField tfPersonNum1;
+	private JTextField tfPersonNum2;
+	private JTextField tfPersonNum3;
+	private JTextField tfPersonNum4;
+	private JTextField tfPersonNum5;
 
 	public static void main(String[] args) {
 		try {
@@ -131,50 +143,251 @@ public class Page08_SelectHeadCount extends JDialog {
 			contentPanel.add(lbl_pageTitle);
 			
 			
-			//일반 배경(총 4개), 사람 분류(총 4개)
-			JLabel lblPersonClassification1 = new JLabel("일반");
-			lblPersonClassification1.setBounds(47, 217, 57, 15);
+			//사람분류 라벨(총 5개)
+			JLabel lblPersonClassification1 = new JLabel("일 반");
+			lblPersonClassification1.setFont(new Font("BM Dohyeon", Font.PLAIN, 25));
+			lblPersonClassification1.setBounds(47, 195, 80, 50);
 			contentPanel.add(lblPersonClassification1);
+			
+			JLabel lblPersonClassification2 = new JLabel("청소년");
+			lblPersonClassification2.setFont(new Font("BM Dohyeon", Font.PLAIN, 25));
+			lblPersonClassification2.setBounds(436, 195, 80, 50);
+			contentPanel.add(lblPersonClassification2);
+			
+			JLabel lblPersonClassification3 = new JLabel("경 로");
+			lblPersonClassification3.setFont(new Font("BM Dohyeon", Font.PLAIN, 25));
+			lblPersonClassification3.setBounds(47, 285, 80, 50);
+			contentPanel.add(lblPersonClassification3);
+			
+			JLabel lblPersonClassification4 = new JLabel("유공자");
+			lblPersonClassification4.setFont(new Font("BM Dohyeon", Font.PLAIN, 25));
+			lblPersonClassification4.setBounds(436, 285, 80, 50);
+			contentPanel.add(lblPersonClassification4);
+			
+			JLabel lblPersonClassification5 = new JLabel("장애인");
+			lblPersonClassification5.setFont(new Font("BM Dohyeon", Font.PLAIN, 25));
+			lblPersonClassification5.setBounds(47, 376, 80, 50);
+			contentPanel.add(lblPersonClassification5);
+			
+			//마이너스 라벨(총 5개)
+			JLabel lblPersonMinus1 = new JLabel("-");
+			lblPersonMinus1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum1.getText());
+					if(currentValue>0) {
+						currentValue--;
+						tfPersonNum1.setText(String.valueOf(currentValue));
+					}
+				}
+			});
+			lblPersonMinus1.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus1.setBounds(185, 210, 20, 20);
+			contentPanel.add(lblPersonMinus1);
+
+			JLabel lblPersonMinus2 = new JLabel("-");
+			lblPersonMinus2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum2.getText());
+					if (currentValue > 0) {
+						currentValue--;
+						tfPersonNum2.setText(String.valueOf(currentValue));
+					}
+				}
+			});
+			lblPersonMinus2.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus2.setBounds(574, 210, 20, 20);
+			contentPanel.add(lblPersonMinus2);
+
+			JLabel lblPersonMinus3 = new JLabel("-");
+			lblPersonMinus3.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum3.getText());
+					if (currentValue > 0) {
+						currentValue--;
+						tfPersonNum3.setText(String.valueOf(currentValue));
+					}
+				}
+			});
+			lblPersonMinus3.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus3.setBounds(185, 300, 20, 20);
+			contentPanel.add(lblPersonMinus3);
+
+			JLabel lblPersonMinus4 = new JLabel("-");
+			lblPersonMinus4.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum4.getText());
+					if (currentValue > 0) {
+						currentValue--;
+						tfPersonNum4.setText(String.valueOf(currentValue));
+					}
+				}
+			});
+			lblPersonMinus4.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus4.setBounds(574, 300, 20, 20);
+			contentPanel.add(lblPersonMinus4);
+
+			JLabel lblPersonMinus5 = new JLabel("-");
+			lblPersonMinus5.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum5.getText());
+					if (currentValue > 0) {
+						currentValue--;
+						tfPersonNum5.setText(String.valueOf(currentValue));
+					}
+				}
+			});
+			lblPersonMinus5.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus5.setBounds(185, 400, 20, 20);
+			contentPanel.add(lblPersonMinus5);
+
+			// 플러스 라벨(총5개)
+			JLabel lblPersonPlus1 = new JLabel("+");
+			lblPersonPlus1.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum1.getText());
+
+					currentValue++;
+
+					tfPersonNum1.setText(String.valueOf(currentValue));
+				}
+			});
+			lblPersonPlus1.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus1.setBounds(305, 210, 20, 20);
+			contentPanel.add(lblPersonPlus1);
+			
+			JLabel lblPersonPlus2 = new JLabel("+");
+			lblPersonPlus2.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum2.getText());
+
+					currentValue++;
+
+					tfPersonNum2.setText(String.valueOf(currentValue));
+				}
+			});
+			lblPersonPlus2.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus2.setBounds(694, 210, 20, 20);
+			contentPanel.add(lblPersonPlus2);
+			
+			JLabel lblPersonPlus3 = new JLabel("+");
+			lblPersonPlus3.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum3.getText());
+
+					currentValue++;
+
+					tfPersonNum3.setText(String.valueOf(currentValue));
+				}
+			});
+			lblPersonPlus3.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus3.setBounds(305, 300, 20, 20);
+			contentPanel.add(lblPersonPlus3);
+			
+			JLabel lblPersonPlus4 = new JLabel("+");
+			lblPersonPlus4.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum4.getText());
+
+					currentValue++;
+
+					tfPersonNum4.setText(String.valueOf(currentValue));
+				}
+			});
+			lblPersonPlus4.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus4.setBounds(694, 300, 20, 20);
+			contentPanel.add(lblPersonPlus4);
+			
+			JLabel lblPersonPlus5 = new JLabel("+");
+			lblPersonPlus5.addMouseListener(new MouseAdapter() {
+				@Override
+				public void mouseClicked(MouseEvent e) {
+					int currentValue = Integer.parseInt(tfPersonNum5.getText());
+
+					currentValue++;
+
+					tfPersonNum5.setText(String.valueOf(currentValue));
+				}
+			});
+			lblPersonPlus5.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus5.setBounds(305, 400, 20, 20);
+			contentPanel.add(lblPersonPlus5);
+			
+			//인원수 텍스트필드
+			tfPersonNum1 = new JTextField();
+			tfPersonNum1.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonNum1.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			tfPersonNum1.setBounds(225, 200, 60, 40);
+			contentPanel.add(tfPersonNum1);
+			tfPersonNum1.setColumns(10);
+			tfPersonNum1.setText("0");
+			
+			tfPersonNum2 = new JTextField();
+			tfPersonNum2.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonNum2.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			tfPersonNum2.setColumns(10);
+			tfPersonNum2.setBounds(614, 200, 60, 40);
+			contentPanel.add(tfPersonNum2);
+			tfPersonNum2.setText("0");
+			
+			tfPersonNum3 = new JTextField();
+			tfPersonNum3.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonNum3.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			tfPersonNum3.setColumns(10);
+			tfPersonNum3.setBounds(225, 290, 60, 40);
+			contentPanel.add(tfPersonNum3);
+			tfPersonNum3.setText("0");
+			
+			tfPersonNum4 = new JTextField();
+			tfPersonNum4.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonNum4.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			tfPersonNum4.setColumns(10);
+			tfPersonNum4.setBounds(614, 290, 60, 40);
+			contentPanel.add(tfPersonNum4);
+			tfPersonNum4.setText("0");
+			
+			tfPersonNum5 = new JTextField();
+			tfPersonNum5.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonNum5.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			tfPersonNum5.setColumns(10);
+			tfPersonNum5.setBounds(225, 390, 60, 40);
+			contentPanel.add(tfPersonNum5);
+			tfPersonNum5.setText("0");
+			
+			//백그라운드 (총 5개)
 			JLabel PersonNumBackground1 = new JLabel("   일반");
-			PersonNumBackground1.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-			PersonNumBackground1
-			.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
+			PersonNumBackground1.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
 			PersonNumBackground1.setBounds(21, 181, 360, 80);
 			contentPanel.add(PersonNumBackground1);
 			
-			JLabel lblPersonClassification2 = new JLabel("경로");
-			lblPersonClassification2.setBounds(433, 217, 57, 15);
-			contentPanel.add(lblPersonClassification2);
-			
 			JLabel PersonNumBackground2 = new JLabel("   경로");
-			PersonNumBackground2.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-			PersonNumBackground2
-			.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
+			PersonNumBackground2.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
 			PersonNumBackground2.setBounds(416, 181, 360, 80);
 			contentPanel.add(PersonNumBackground2);
 			
-			JLabel lblPersonClassification3 = new JLabel("우대");
-			lblPersonClassification3.setBounds(47, 308, 57, 15);
-			contentPanel.add(lblPersonClassification3);
-			
 			JLabel PersonNumBackground3 = new JLabel("   우대");
-			PersonNumBackground3.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-			PersonNumBackground3
-			.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
+			PersonNumBackground3.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
 			PersonNumBackground3.setBounds(21, 272, 360, 80);
 			contentPanel.add(PersonNumBackground3);
 			
-			JLabel lblPersonClassification4 = new JLabel("청소년");
-			lblPersonClassification4.setBounds(436, 308, 57, 15);
-			contentPanel.add(lblPersonClassification4);
-			
 			JLabel PersonNumBackground4 = new JLabel("   청소년");
-			PersonNumBackground4.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-			PersonNumBackground4
-			.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
+			PersonNumBackground4.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
 			PersonNumBackground4.setBounds(416, 272, 360, 80);
 			contentPanel.add(PersonNumBackground4);
 			
+			JLabel PersonNumBackground5 = new JLabel("");
+			PersonNumBackground5.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/인원선택박스.png")));
+			PersonNumBackground5.setBounds(21, 362, 360, 80);
+			contentPanel.add(PersonNumBackground5);
+
 			// 첫화면 아이콘
 			JLabel lbl_pageTitle_1 = new JLabel("첫화면");
 			lbl_pageTitle_1.setBounds(623, 20, 170, 130);
@@ -184,6 +397,7 @@ public class Page08_SelectHeadCount extends JDialog {
 					goToSelectMenu();
 				}
 			});
+			
 			
 			
 			
@@ -249,15 +463,33 @@ public class Page08_SelectHeadCount extends JDialog {
 
 			btnNewButton =new mybutton("인원확정",new Color(183,216,107) );  
 			btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 68));
-			btnNewButton.setBounds(150	, 428, 500, 100);
+			btnNewButton.setBounds(150	, 455, 500, 90);
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					calculateAndStoreSum();
 					goToSelectSeat();
+					//쉐어바에 들어갔는지 확인
+//					 System.out.println(ShareVar.sumOfPersonNumbers);
 				}
 			});
 			
 		}
 		return btnNewButton;
 	}
+	
+	//선택한 숫자 더하기
+	 private void calculateAndStoreSum() {
+	            int sum = Integer.parseInt(tfPersonNum1.getText()) +
+	                      Integer.parseInt(tfPersonNum2.getText()) +
+	                      Integer.parseInt(tfPersonNum3.getText()) +
+	                      Integer.parseInt(tfPersonNum4.getText()) +
+	                      Integer.parseInt(tfPersonNum5.getText());
+
+	            // 텍스트필드에 들어간 인원수 합을 ShareVar에 저장
+	            ShareVar.sumOfPersonNumbers = sum;
+	   
+	    }
+	
+	
 }// End
