@@ -96,6 +96,9 @@ public class ShareVar {
 	// 선택된 영화관
 	public static String selectedCienma = "입력이 안되었습니다";
 	
+	// 선택된 나이
+	public static int selectedCustage = 0;
+	
 	
 	
 	// constructor
@@ -126,6 +129,8 @@ public class ShareVar {
 		// 선택된 영화관
 		selectedCienma = "선택된 영화관 입력이 안되었습니다";
 		
+		// 선택된 나이
+		selectedCustage = 0;
 		
 		
 	}
