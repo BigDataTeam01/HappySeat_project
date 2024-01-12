@@ -72,6 +72,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 
 	public Page09_SelectSeat_ver2() {
+		System.out.println("1");
 		createSeat();
 		// setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		// 예시로 10개의 좌석을 만듭니다.
@@ -86,13 +87,13 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		contentPanel.add(getLbl_previousPage_1());
 		contentPanel.add(getLbl_background());
 		
-		timer = new Timer();
-		timer.scheduleAtFixedRate(new RemindTask(), 0, 1000);
 //		timer.cancel(); // Terminate the timer thread
 	
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
+				timer = new Timer();
+				timer.scheduleAtFixedRate(new RemindTask(), 0, 1000);
 				backSplashTimeEnd();
 			}
 			@Override
@@ -108,6 +109,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		public void run() {
 			getCurrentSeatCode();
 			loadSeat();
+			System.out.println(selectSeatCode);
+			System.out.println(seatCode);
 			System.out.println("새로고침");
 		}
 	}
@@ -281,13 +284,11 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 			btnSeatConfirm.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					checkSelecte();
-					System.out.println("Db 업데이트 코드 : " + selectSeatCode);
-					updateSeatCodeAction();
-					goConfirmSeat();
-				}
-			});
-
+					if(checkSelecte() == true) {
+						System.out.println("Db 업데이트 코드 : " + selectSeatCode);
+						updateSeatCodeAction();
+						goConfirmSeat();
+					}}});
 		}
 		return btnSeatConfirm;
 	}
@@ -334,7 +335,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				}
 			}
 		}
-
 		getCurrentSeatCode();
 		selectSeatCode = seatCode;
 		int totalSeats = seatCode.length();
@@ -361,9 +361,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				if (seatCode.charAt(rowSeat * columnsOfSeats + colSeat) == '0') {
 					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(
 							Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotSelectedSeat.png")));
-
 				}
-
 				else {
 					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(Page09_SelectSeat_ver2.class
 							.getResource("/com/javaproject/image/alreadySelectedSeat70by70.png")));
@@ -374,7 +372,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 						seatHeight);
 
 				contentPanel.add(seatArray[rowSeat][colSeat]);
-
 			}
 		}
 	}
@@ -422,17 +419,21 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		return count;
 	}
 	
-	private void checkSelecte() {
-		if(seatCode == selectSeatCode) {
+	private boolean checkSelecte() {
+		boolean result = false;
+		if(seatCode.toString().equals(selectSeatCode.toString())) {
 			JOptionPane.showMessageDialog(null, "좌석을 선택해주세요.");
-			
-			return;
+			result = false;
 		}
+		else {
+			result = true;
+		}
+		return result;
 		
 	}
 	
 	private void backSplashTimeEnd() {
-		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+		BackSplashTimer backSplashTimer = new BackSplashTimer(300, this);
 	}
 
 

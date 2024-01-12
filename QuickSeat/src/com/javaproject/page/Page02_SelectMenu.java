@@ -43,12 +43,10 @@ public class Page02_SelectMenu extends JDialog {
 	 * Launch the application.
 	 */
 	// 페이지 선언
-	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-	private static Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
-	private static Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
-
 	public static void main(String[] args) {
+		
 		try {
+			Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 			selectMenudialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			selectMenudialog.setVisible(true);
 		} catch (Exception e) {
@@ -123,17 +121,22 @@ public class Page02_SelectMenu extends JDialog {
 //--------------------------------Function------------------------------------
 	// 나이선택화면으로 가기
 	private void goToSelectAge() {
+//		private Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
+//		private Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
+//		private Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
+		Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
 		dispose();
-		selectMenudialog.setVisible(false);
-		selectMenudialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectAgedialog.setVisible(true);
 	}
 
 	// 예매,주문내역 확인페이지로 가기
 	private void goToOrderCheck() {
+		Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
 		dispose();
-		selectMenudialog.setVisible(false);
-		selectMenudialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		OrderCheckdialog.setVisible(true);
 	}
 	

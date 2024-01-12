@@ -59,12 +59,6 @@ public class Page04_SelectMovie extends JDialog {
 	 * Launch the application.
 	 */
 	private static JLabel lbl_Movie1;
-	private static Page04_SelectMovie SelectMoviedialog = new Page04_SelectMovie();
-	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-	private static Page05_MovieInformation MovieInformationdialog = new Page05_MovieInformation();
-	private static Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
-//	private JLabel lbl_moviePoster1_bg;
-
 	private JLabel lbl_moviePoster1;
 	private JLabel lbl_moviePoster2;
 	private JLabel lbl_moviePoster3;
@@ -382,35 +376,39 @@ public class Page04_SelectMovie extends JDialog {
 //-----------------------------Function------------
 	// 다음화면(정화정보)로 가기
 	private void goToMovieInformation1() {
+		Page05_MovieInformation MovieInformationdialog = new Page05_MovieInformation();
 		dispose();
-		SelectMoviedialog.setVisible(false);
-		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		MovieInformationdialog.setVisible(true);
 		String movie1 = lbl_MovieTitle1.getText();
 			ShareVar.selectedMovieTitle = movie1;
 			
 	}
 	private void goToMovieInformation2() {
+		Page05_MovieInformation MovieInformationdialog = new Page05_MovieInformation();
 		dispose();
-		SelectMoviedialog.setVisible(false);
-		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		MovieInformationdialog.setVisible(true);
 		String movie2 = lbl_MovieTitle2.getText();
 		ShareVar.selectedMovieTitle = movie2;
 		
 	}
 	private void goToMovieInformation3() {
+		Page05_MovieInformation MovieInformationdialog = new Page05_MovieInformation();
 		dispose();
-		SelectMoviedialog.setVisible(false);
-		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		MovieInformationdialog.setVisible(true);
 		String movie3 = lbl_MovieTitle3.getText();
 		ShareVar.selectedMovieTitle = movie3;
 	}
 	private void goToMovieInformation4() {
+		Page05_MovieInformation MovieInformationdialog = new Page05_MovieInformation();
 		dispose();
-		SelectMoviedialog.setVisible(false);
-		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		MovieInformationdialog.setVisible(true);
 		String movie4 = lbl_MovieTitle4.getText();
 		ShareVar.selectedMovieTitle = movie4;
@@ -419,17 +417,19 @@ public class Page04_SelectMovie extends JDialog {
 
 	// 이전화면(연령선택)으로 가기
 	private void goToSelectAge() {
+		Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
 		dispose();
-		SelectMoviedialog.setVisible(false);
-		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectAgedialog.setVisible(true);
 	}
 
 	// 첫화면으로 가기
 	private void goToSelectMenu() {
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
-		SelectMoviedialog.setVisible(false);
-		SelectMoviedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
 	}
 

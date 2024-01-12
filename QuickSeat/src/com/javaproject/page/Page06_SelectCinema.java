@@ -56,10 +56,6 @@ public class Page06_SelectCinema extends JDialog {
 	 * Launch the application.
 	 */
 
-	
-	
-	
-	
 	private static int screenPageCount = 1;
 	private static int nextPageBtnCount = 1;
 
@@ -84,8 +80,8 @@ public class Page06_SelectCinema extends JDialog {
 	JLabel here = new JLabel();
 	
 	public static void main(String[] args) {
+		Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
 		try {
-			Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
 			selectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			selectCinemadialog.setVisible(true);
 		} catch (Exception e) {
@@ -273,7 +269,7 @@ public class Page06_SelectCinema extends JDialog {
 		Page07_SelectTime selectTimedialog = new Page07_SelectTime();
 		System.out.println(ShareVar.selectedCienma);
 		dispose();
-		selectCinemadialog.setVisible(false);
+		this.setVisible(false);
 		selectTimedialog.setVisible(true);
 	}
 
@@ -282,7 +278,7 @@ public class Page06_SelectCinema extends JDialog {
 		Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
 		Page05_MovieInformation movieInformationdialog = new Page05_MovieInformation();
 		dispose();
-		selectCinemadialog.setVisible(false);
+		this.setVisible(false);
 		movieInformationdialog.setVisible(true);
 	}
 
@@ -291,7 +287,7 @@ public class Page06_SelectCinema extends JDialog {
 		Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
 		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
-		selectCinemadialog.setVisible(false);
+		this.setVisible(false);
 		selectMenudialog.setVisible(true);
 	}
 
