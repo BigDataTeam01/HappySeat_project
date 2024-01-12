@@ -12,8 +12,12 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.BackSplashTimer;
+
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Page02_SelectMenu extends JDialog {
 
@@ -56,6 +60,12 @@ public class Page02_SelectMenu extends JDialog {
 	 * Create the dialog.
 	 */
 	public Page02_SelectMenu() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				backSplashTimeEnd();
+			}
+		});
 		setTitle("메뉴선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 
@@ -71,6 +81,9 @@ public class Page02_SelectMenu extends JDialog {
 		lbl_pageTitle.setBounds(295, 10, 250, 100);
 
 		contentPanel.add(lbl_pageTitle);
+		// ********************타이틀 바 없애기**********************
+		//		setUndecorated(true);
+		//******************************************************
 		//영화예매 아이콘
 		JLabel BtnMoviePurchase = new JLabel("");
 		BtnMoviePurchase
@@ -123,5 +136,11 @@ public class Page02_SelectMenu extends JDialog {
 		selectMenudialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		OrderCheckdialog.setVisible(true);
 	}
+	
+	// splash Class로 돌아가기
+	public void backSplashTimeEnd() {
+		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+	}
+
 
 }// End
