@@ -18,10 +18,9 @@ public class DtoWDH {
 	int ticket_price;
 	int cust_age;
 	String cust_type;
-	int count_cust_age;
-	int count_cust_type;
 	String admin_admin_id;
-
+	int age_count;
+	int type_count;
 
 	public DtoWDH() {
 		// TODO Auto-generated constructor stub
@@ -46,14 +45,19 @@ public class DtoWDH {
 		this.ticket_price = ticket_price;
 	}
 
-
-	public DtoWDH(String resv_date, int count_cust_age, int count_cust_type) {
+	public DtoWDH(String resv_date, int cust_age, int age_count) {
 		super();
 		this.resv_date = resv_date;
-		this.count_cust_age = count_cust_age;
-		this.count_cust_type = count_cust_type;
+		this.cust_age = cust_age;
+		this.age_count = age_count;
 	}
 
+	public DtoWDH(String resv_date, String cust_type, int type_count) {
+		super();
+		this.resv_date = resv_date;
+		this.cust_type = cust_type;
+		this.type_count = type_count;
+	}
 
 	public DtoWDH(int scr_code, String scr_movie_title, String scr_scroom_name, String seat_resv_code,
 			String scr_start_time, int run_time, String admin_admin_id) {
@@ -65,6 +69,22 @@ public class DtoWDH {
 		this.scr_start_time = scr_start_time;
 		this.run_time = run_time;
 		this.admin_admin_id = admin_admin_id;
+	}
+
+	public int getAge_count() {
+		return age_count;
+	}
+
+	public void setAge_count(int age_count) {
+		this.age_count = age_count;
+	}
+
+	public int getType_count() {
+		return type_count;
+	}
+
+	public void setType_count(int type_count) {
+		this.type_count = type_count;
 	}
 
 	public String getAdmin_admin_id() {
@@ -202,22 +222,6 @@ public class DtoWDH {
 
 	public void setScr_code(int scr_code) {
 		this.scr_code = scr_code;
-	}
-
-	public int getCount_cust_age() {
-		return count_cust_age;
-	}
-
-	public void setCount_cust_age(int count_cust_age) {
-		this.count_cust_age = count_cust_age;
-	}
-
-	public int getCount_cust_type() {
-		return count_cust_type;
-	}
-
-	public void setCount_cust_type(int count_cust_type) {
-		this.count_cust_type = count_cust_type;
 	}
 
 }
