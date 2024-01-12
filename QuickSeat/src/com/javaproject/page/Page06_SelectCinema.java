@@ -56,10 +56,9 @@ public class Page06_SelectCinema extends JDialog {
 	 * Launch the application.
 	 */
 
-	private static Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
-	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-	private static Page05_MovieInformation movieInformationdialog = new Page05_MovieInformation();
-	private static Page07_SelectTime selectTimedialog = new Page07_SelectTime();
+	
+	
+	
 	
 	private static int screenPageCount = 1;
 	private static int nextPageBtnCount = 1;
@@ -86,6 +85,7 @@ public class Page06_SelectCinema extends JDialog {
 	
 	public static void main(String[] args) {
 		try {
+			Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
 			selectCinemadialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			selectCinemadialog.setVisible(true);
 		} catch (Exception e) {
@@ -269,6 +269,8 @@ public class Page06_SelectCinema extends JDialog {
 
 	// 다음화면(시간선택)로 가기
 	private void goToSelectTime() {
+		Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
+		Page07_SelectTime selectTimedialog = new Page07_SelectTime();
 		System.out.println(ShareVar.selectedCienma);
 		dispose();
 		selectCinemadialog.setVisible(false);
@@ -277,6 +279,8 @@ public class Page06_SelectCinema extends JDialog {
 
 	// 이전화면(영화정보)으로 가기
 	private void goToMovieInformation() {
+		Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
+		Page05_MovieInformation movieInformationdialog = new Page05_MovieInformation();
 		dispose();
 		selectCinemadialog.setVisible(false);
 		movieInformationdialog.setVisible(true);
@@ -284,6 +288,8 @@ public class Page06_SelectCinema extends JDialog {
 
 	// 첫화면으로 가기
 	private void goToSelectMenu() {
+		Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
 		selectCinemadialog.setVisible(false);
 		selectMenudialog.setVisible(true);

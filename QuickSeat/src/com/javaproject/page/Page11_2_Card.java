@@ -34,16 +34,10 @@ public class Page11_2_Card extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	
-	
-	private static  Page02_SelectMenu selectMenu = new Page02_SelectMenu();
-	//private static SelectMenu selectMenu = new SelectMenu();
-	private static Page11_0_SelectPayment page11_0_SelectPayment  = new Page11_0_SelectPayment();
-	private static Page12_PaymentConfirm page12_PaymentConfirm = new Page12_PaymentConfirm(); 
-	
-	
-	private JTextField textField;
 
+	// private static SelectMenu selectMenu = new SelectMenu();
+
+	private JTextField textField;
 
 	public static void main(String[] args) {
 		try {
@@ -80,10 +74,11 @@ public class Page11_2_Card extends JDialog {
 				goToHome();
 			}
 		});
-		lblNewLabel_1.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
+		lblNewLabel_1.setIcon(
+				new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
 		lblNewLabel_1.setBounds(628, 38, 172, 130);
 		contentPanel.add(lblNewLabel_1);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("");
 		lblNewLabel_2.addMouseListener(new MouseAdapter() {
 			@Override
@@ -91,10 +86,11 @@ public class Page11_2_Card extends JDialog {
 				goBack();
 			}
 		});
-		lblNewLabel_2.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
+		lblNewLabel_2
+				.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
 		lblNewLabel_2.setBounds(11, 39, 161, 130);
 		contentPanel.add(lblNewLabel_2);
-		
+
 		JLabel lblNewLabel = new JLabel("결제 금액");
 		lblNewLabel.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
 		lblNewLabel.setBounds(161, 166, 180, 100);
@@ -133,21 +129,27 @@ public class Page11_2_Card extends JDialog {
 	
 	//------Function------
 	private void goToHome() {
+		Page02_SelectMenu selectMenu = new Page02_SelectMenu();
 		dispose();
 		selectMenu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenu.setVisible(true);
 	}
+	
 	private void goBack() {
+		Page11_0_SelectPayment page11_0_SelectPayment  = new Page11_0_SelectPayment();
 		dispose();
 		page11_0_SelectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		page11_0_SelectPayment.setVisible(true);
 	}
+	
 	private void goToPaymentConfirm() {
+		Page12_PaymentConfirm page12_PaymentConfirm = new Page12_PaymentConfirm(); 
 		dispose();
 		page12_PaymentConfirm.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		page12_PaymentConfirm.setVisible(true);
 		
 	}
+	
 	
 	
 	
