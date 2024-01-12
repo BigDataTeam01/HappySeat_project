@@ -77,7 +77,7 @@ public class ShareVar {
 	 */
 
 	// 관리자 아이디 저장공간
-	public static String managerID = "admin";
+	public static String managerID = "";
 
 	// 선택된 영화 정보
 	public static String selectedMovieTitle = "";
