@@ -27,6 +27,8 @@ public class Page01_Splash extends JDialog {
 			Page01_Splash dialog = new Page01_Splash();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
+			ShareVar sharevar = new ShareVar();
+			sharevar.shareVarInint();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

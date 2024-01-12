@@ -75,7 +75,7 @@ public class TypeStatistics extends JFrame {
 
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
 
-		// 차트 렌더러(Renderer)를 가져와서 값 표시 설정
+		// 차트 렌더러(Renderer)를 가져와서 값 표시 설정, 바 위에 숫자를 추가해주기 위해 필요
 		BarRenderer renderer = (BarRenderer) plot.getRenderer();
 
 		renderer.setDefaultItemLabelGenerator(new StandardCategoryItemLabelGenerator());
@@ -105,25 +105,27 @@ public class TypeStatistics extends JFrame {
 	}
 
 	private CategoryDataset createDataset() {
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset(); // DefaultCategoryDataset이 아닌 다른 Class를 고르면
-																		// dataset 표현방법을 바꿀 수 있음.
+		
+		// DefaultCategoryDataset이 아닌 다른 Class를 고르면 dataset 표현방법을 바꿀 수 있음.
+		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 
 		// 데이터 추가
 		DaoUserStatistics dao = new DaoUserStatistics();
-		ArrayList<DtoWDH> dto = dao.ageTypePerMonth();
-		// 1주일 단위로 표 만들기
-		for (int i = 1; i <= 12; i++) {
-			String month = String.format("%02d", i);
-			int sumPrice = 0;
+		ArrayList<DtoWDH> dto = dao.typeUserStatistics();
+		
+		// Type별 dateset 추가
+		for (int i = 0; i < dao.typeArray().size(); i++) {
+			String type = dao.typeArray().get(i);
+			int sumType = 0;
 
-			// 가져온 month와 현재 month가 일치할 경우 sumPrice에 가격 추가
+			// 가져온 month와 현재 month가 일치할 경우 sumPeople에 인원 추가
 			for (int j = 0; j < dto.size(); j++) {
-				String day1 = dto.get(j).getResv_date().substring(3, 5);
-				if (day1.equals(month)) {
-					sumPrice += dto.get(j).getCount_cust_type();
+				String typeDB = dto.get(j).getCust_type();
+				if (typeDB.equals(type)) {
+					sumType += dto.get(j).getType_count();
 				}
 			}
-			dataset.addValue(sumPrice, "이번년도", month + "월");
+			dataset.addValue(sumType, ShareVar.year + "년 " + ShareVar.month + "월", type);
 		}
 
 		return dataset;
