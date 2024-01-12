@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.BackSplashTimer;
 import com.javaproject.kioskFunction.Dao_pdg;
 //import com.javaproject.page.Page5_MovieInformation.mybutton;
 
@@ -42,13 +43,35 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	private static int eorSeatCode = 0;
 
 	int columnsOfSeats = 4; // column number
+	
+	public static void main(String[] args) {
+		try {
+		Page09_SelectSeat_ver2 dialog = new Page09_SelectSeat_ver2();
+		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		dialog.setVisible(true);
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+//		dialog.timer = new Timer();
+
+		// timer thread 를 생성
+//		TimerTask task = new TimerTask() {
+//			@Override
+//			public void run() { // 위에있는 run 을 오버라이드로 수정하는 코드
+//				// getCurrentSeatCode 메소드를 백그라운드에서 실행
+//				Thread backgroundThread = new Thread(new SeatUpdateRunnable(dialog)); // dialog 는 이페이지 전체임.
+//				backgroundThread.start(); // 스레드 시작
+//			}
+//		};
+		
+//		SwingUtilities.invokeLater(() -> {
+//		});
+		
+//		dialog.timer.scheduleAtFixedRate(task,0,2000); // 2초마다 실행 (예시)
+	}
+
 
 	public Page09_SelectSeat_ver2() {
-		addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowActivated(WindowEvent e) {
-			}
-		});
 		createSeat();
 		// setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		// 예시로 10개의 좌석을 만듭니다.
@@ -62,7 +85,33 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		contentPanel.add(getLbl_screen());
 		contentPanel.add(getLbl_previousPage_1());
 		contentPanel.add(getLbl_background());
+		
+		timer = new Timer();
+		timer.scheduleAtFixedRate(new RemindTask(), 0, 1000);
+//		timer.cancel(); // Terminate the timer thread
+	
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				backSplashTimeEnd();
+			}
+			@Override
+			public void windowDeactivated(WindowEvent e) {
+				timer.cancel();
+			}
+		});
+
 	}
+	
+	// TimerTask를 쓰기 위한 class
+	class RemindTask extends TimerTask {
+		public void run() {
+			getCurrentSeatCode();
+			loadSeat();
+			System.out.println("새로고침");
+		}
+	}
+
 
 	///////////// 라운드 버튼박스를 만들기 위한 paintComponent 설정
 	class mybutton extends JButton {
@@ -111,38 +160,22 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 	////
 
-	static class SeatUpdateRunnable implements Runnable {
-		private Page09_SelectSeat_ver2 outerInstance;
-
-		public SeatUpdateRunnable(Page09_SelectSeat_ver2 outerInstance) {
-			this.outerInstance = outerInstance;
-		}
-
-		@Override
-		public void run() {
-			// 백그라운드에서 수행되어야 할 작업
-			outerInstance.getCurrentSeatCode();
-			outerInstance.loadSeat();
-			System.out.println("새로고침 ");
-		}
-	}
-	
-//	static class SeatUpdateRunnable1 implements Runnable {
+//	static class SeatUpdateRunnable implements Runnable {
 //		private Page09_SelectSeat_ver2 outerInstance;
 //
-//		public SeatUpdateRunnable1(Page09_SelectSeat_ver2 outerInstance) {
+//		public SeatUpdateRunnable(Page09_SelectSeat_ver2 outerInstance) {
 //			this.outerInstance = outerInstance;
 //		}
 //
 //		@Override
 //		public void run() {
 //			// 백그라운드에서 수행되어야 할 작업
-//			outerInstance.gohomeAction();
-//			this.outerInstance.setVisible(false);
-//			System.out.println("스플래쉬로 ");
+//			outerInstance.getCurrentSeatCode();
+//			outerInstance.loadSeat();
+//			System.out.println("새로고침 ");
 //		}
 //	}
-
+	
 	private class SeatButtonListener implements ActionListener {
 		// Field
 		int row;
@@ -186,28 +219,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 	}
 
-	public static void main(String[] args) {
-		Page09_SelectSeat_ver2 dialog = new Page09_SelectSeat_ver2();
-		dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		
-		dialog.timer = new Timer();
-
-		// timer thread 를 생성
-		TimerTask task = new TimerTask() {
-			@Override
-			public void run() { // 위에있는 run 을 오버라이드로 수정하는 코드
-				// getCurrentSeatCode 메소드를 백그라운드에서 실행
-				Thread backgroundThread = new Thread(new SeatUpdateRunnable(dialog)); // dialog 는 이페이지 전체임.
-				backgroundThread.start(); // 스레드 시작
-			}
-		};
-		
-		SwingUtilities.invokeLater(() -> {
-			dialog.setVisible(true);
-		});
-		
-		dialog.timer.scheduleAtFixedRate(task,0,2000); // 2초마다 실행 (예시)
-	}
+	
 	
 	// 페이지 구성요소
 	private JLabel getLbl_background() {
@@ -418,5 +430,10 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		}
 		
 	}
+	
+	private void backSplashTimeEnd() {
+		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+	}
+
 
 }// End
