@@ -307,7 +307,11 @@ public class MovieUserStatistics extends JDialog {
 		// 유형별 사용자 통계를 띄워줌
 		TypeStatistics movieMonthSalesStatus = new TypeStatistics();
 		movieMonthSalesStatus.setVisible(true);
-
+		
+		// typeArrayList 잘 가져오는지 실험
+//		DaoUserStatistics dao = new DaoUserStatistics();
+//		String type = dao.typeArray().get(0);
+//		System.out.println(type);
 		
 	}
 
