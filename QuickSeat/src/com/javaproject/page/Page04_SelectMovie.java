@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Font;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.BackSplashTimer;
 import com.javaproject.kioskFunction.Dao_pjm;
 import com.javaproject.kioskFunction.Dto_pjm;
 import com.javaproject.kioskFunction.dao;
@@ -107,6 +108,7 @@ public class Page04_SelectMovie extends JDialog {
 				System.out.println("없어져볼께");
 				lbl_PreviousMovie.setVisible(false);
 				getCurrentScreenMovies();
+				backSplashTimeEnd();
 			}
 		});
 		setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
@@ -543,6 +545,12 @@ public class Page04_SelectMovie extends JDialog {
 //		file.delete();
 
 	}
+	
+	// splash Class로 돌아가기
+	public void backSplashTimeEnd() {
+		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+	}
+
 		
 	
 	
