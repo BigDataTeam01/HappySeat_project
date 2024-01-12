@@ -36,11 +36,11 @@ public class Page11_0_SelectPayment extends JDialog {
 	 */
 	
 	
-	private static  Page02_SelectMenu selectMenu = new Page02_SelectMenu();
+	private Page02_SelectMenu selectMenu = new Page02_SelectMenu();
 //	private static Page11_0_SelectPayment selectPayment = new Page11_0_SelectPayment();
-	private static Page10_ConfirmSeat page10_ConfirmSeat = new Page10_ConfirmSeat();
-	private static Page11_1_Cash page11_1_Cash = new Page11_1_Cash();
-	private static Page11_2_Card page11_2_Card = new Page11_2_Card();
+	private Page10_ConfirmSeat page10_ConfirmSeat = new Page10_ConfirmSeat();
+	private Page11_1_Cash page11_1_Cash = new Page11_1_Cash();
+	private Page11_2_Card page11_2_Card = new Page11_2_Card();
 	
 
 
