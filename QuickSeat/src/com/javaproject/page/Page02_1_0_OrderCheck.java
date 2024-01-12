@@ -52,15 +52,13 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	private static Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
-	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-	private static Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
 	private JTextField tfTicketNum;
 	private mybutton btnNewButton;
 	
 
 	public static void main(String[] args) {
 		try {
+			Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
 			OrderCheckdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			OrderCheckdialog.setVisible(true);
 		} catch (Exception e) {
@@ -279,6 +277,8 @@ public class Page02_1_0_OrderCheck extends JDialog {
 //---------------------------Function---------------------
 	// 첫화면으로 가기
 	public void goToSelectMenu() {
+		Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
 		OrderCheckdialog.setVisible(false);
 		OrderCheckdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -287,6 +287,8 @@ public class Page02_1_0_OrderCheck extends JDialog {
 
 	// 티켓 취소화면으로 가기
 	public void goToOrderCancle() {
+		Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
+		Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
 		dispose();
 		OrderCheckdialog.setVisible(false);
 		OrderCheckdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
