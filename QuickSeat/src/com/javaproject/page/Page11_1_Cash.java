@@ -35,8 +35,6 @@ public class Page11_1_Cash extends JDialog {
 	 * Launch the application.
 	 */
 	
-	private static  Page02_SelectMenu selectMenu = new Page02_SelectMenu();
-	private static Page11_0_SelectPayment page11_0_SelectPayment = new Page11_0_SelectPayment();
 	private JLabel lblNewLabel;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -148,6 +146,7 @@ public class Page11_1_Cash extends JDialog {
 	}
 	//메인 화면으로 돌아가는기능 구현
 	private void goToHome() {
+		Page02_SelectMenu selectMenu = new Page02_SelectMenu();
 		dispose();
 		selectMenu.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenu.setVisible(true);
@@ -155,6 +154,7 @@ public class Page11_1_Cash extends JDialog {
 	
 	// 이전 화면으로 돌아가는 기능 구현
 	private void goToBack() {
+		Page11_0_SelectPayment page11_0_SelectPayment = new Page11_0_SelectPayment();
 		dispose();
 		page11_0_SelectPayment.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		page11_0_SelectPayment.setVisible(true);

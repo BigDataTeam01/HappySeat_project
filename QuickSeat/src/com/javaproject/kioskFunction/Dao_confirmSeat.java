@@ -58,7 +58,7 @@ public class Dao_confirmSeat {
 		ArrayList<Dto_confirmSeat> dto = new ArrayList<Dto_confirmSeat>();
 
 		String where1 = "select m.movie_title , m.poster , s.scr_start_time , s.scr_scroom_name , s.wkcinema_branch ";
-		String where2 = " from screen as s, movie as m where m.movie_title = s.scr_movie_title and scr_movie_title = '조커'";
+		String where2 = " from screen as s, movie as m where m.movie_title = s.scr_movie_title and scr_movie_title = '" + ShareVar.selectedMovieTitle + "'";
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
