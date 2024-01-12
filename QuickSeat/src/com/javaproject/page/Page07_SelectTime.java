@@ -53,10 +53,6 @@ public class Page07_SelectTime extends JDialog {
 	 * Launch the application.
 	 */
 
-	private static Page07_SelectTime selectTimedialog = new Page07_SelectTime();
-	private static Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
-	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-	private static Page08_SelectHeadCount SelectHeadCountdialog = new Page08_SelectHeadCount();
 	private JLabel lblScreenRoom;
 	private JLabel lblScr_Start_Time;
 	private JLabel lblscreenPoster;
@@ -64,7 +60,9 @@ public class Page07_SelectTime extends JDialog {
 	
 
 	public static void main(String[] args) {
+		
 		try {
+			Page07_SelectTime selectTimedialog = new Page07_SelectTime();
 			selectTimedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			selectTimedialog.setVisible(true);
 		} catch (Exception e) {
@@ -262,25 +260,28 @@ public class Page07_SelectTime extends JDialog {
 //---------------------------Function------------------------
 	// 다음화면(정화정보)로 가기
 	private void goToSelectHeadCount() {
+		Page08_SelectHeadCount selectHeadCountdialog = new Page08_SelectHeadCount();
 		dispose();
-		selectTimedialog.setVisible(false);
-		selectTimedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		SelectHeadCountdialog.setVisible(true);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		selectHeadCountdialog.setVisible(true);
 	}
 
 	// 이전화면(극장선택)으로 가기
 	private void SelectCinema() {
 		dispose();
-		selectTimedialog.setVisible(false);
-		selectTimedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		Page06_SelectCinema selectCinemadialog = new Page06_SelectCinema();
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectCinemadialog.setVisible(true);
 	}
 
 	// 첫화면으로 가기
 	private void goToSelectMenu() {
 		dispose();
-		selectTimedialog.setVisible(false);
-		selectTimedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
 	}
 	
