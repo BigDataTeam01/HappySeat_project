@@ -32,7 +32,9 @@ public class Dao_PJH {
 	Date over_date;
 	String rel_state;
 	int  movie_run_time;
-	
+	String cinema_branch;
+	String get_here;
+	FileInputStream location_map;
 	
 	
 	
@@ -54,6 +56,14 @@ public class Dao_PJH {
 
 
 
+
+	//극장선택에 사용하는 Dao
+	public Dao_PJH(String cinema_branch, String get_here, FileInputStream location_map) {
+		super();
+		this.cinema_branch = cinema_branch;
+		this.get_here = get_here;
+		this.location_map = location_map;
+	}
 
 
 	// 영화정보 Page에서 사용할 Dao
@@ -150,6 +160,7 @@ public class Dao_PJH {
 		}
 		return dtoList;
 	}
+	
 	public ArrayList<Dto_PJH> movie_Info() {
 		ArrayList<Dto_PJH> dtoList = new ArrayList<Dto_PJH>();
 		String fetchQuery = "select "
@@ -210,7 +221,9 @@ public class Dao_PJH {
 				}
 				
 				
-				Dto_PJH dto = new Dto_PJH(wkDirector, wkMovie_Title, wkActor, wkDist_Company, wkGenre, wkFilm_Rating, wkMade_In, wkMovie_Desc, wkRel_Date, wkOver_Date, wkRel_State, wkmovie_run_time);
+				Dto_PJH dto = new Dto_PJH(wkDirector, wkMovie_Title, wkActor, wkDist_Company,
+										  wkGenre, wkFilm_Rating, wkMade_In, wkMovie_Desc, 
+										  wkRel_Date, wkOver_Date, wkRel_State, wkmovie_run_time);
 						
 						
 				dtoList.add(dto);
@@ -225,7 +238,69 @@ public class Dao_PJH {
 		return dtoList;
 	}
 	
-	
+	//상영관 정보 불러옴. 
+	public ArrayList<Dto_PJH> cinema_Info() {
+		ArrayList<Dto_PJH> dtoList = new ArrayList<Dto_PJH>();
+		String fetchQuery = 
+						  "select "
+						+ " cinema_branch, " 		//1
+						+ "	get_here, "				//2
+						+ " location_map "			//3
+						+ " from screening_room "	
+						+ " where scroom_name "	
+						+ " in (select scr_scroom_name"
+						+ " from screen"
+						+ " where scr_movie_title ="
+						+ "'"+ ShareVar.selectedMovieTitle+"')"; 
+		System.out.println("asjdhiauhfiuahsfiuhasifuhaisu");
+						System.out.println(ShareVar.selectedMovieTitle);
+		System.out.println(fetchQuery);
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+			ResultSet rs = stmt_mysql.executeQuery(fetchQuery);
+			
+			while(rs.next()) {
+				String cinema_branch	= rs.getString(1);
+				String get_here 	 	= rs.getString(2);
+				// image file
+				ShareVar.cinemaMapImageFileName = cinema_branch+ "_"+"MapImage";
+				
+				System.out.println(ShareVar.cinemaMapImageFileName);
+				System.out.println("--------------------8998989");
+				File location_mapImageFile = new File(ShareVar.cinemaMapImageFileName);
+				FileOutputStream output = new FileOutputStream(location_mapImageFile);
+				InputStream input = rs.getBinaryStream(3);
+				byte[] buffer = new byte[1024];
+				//System.out.println(wkActor);
+				//System.out.println(wkMovie_Title);
+				
+				if (input != null) {
+				    while(input.read(buffer) > 0) {
+				        output.write(buffer);
+				    }
+				} else {
+				    System.out.println("이 레코드에 대한 포스터가 null입니다.");
+				}
+				
+			
+				Dto_PJH dto = new Dto_PJH(cinema_branch, get_here);				
+				dtoList.add(dto);
+				
+			}
+			
+//			System.out.println(ShareVar.cinemaMapImageFileName);
+//			System.out.println("어쩔티비");
+			conn_mysql.close();
+			
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return dtoList;
+	}
 	
 }
 

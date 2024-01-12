@@ -18,6 +18,10 @@ public class Dto_PJH {
 	Date over_date;
 	String rel_state;
 	String movie_run_time;
+	String cinema_branch;
+	String get_here;
+	FileInputStream location_map;
+	
 	
 	public Dto_PJH() {
 		// TODO Auto-generated constructor stub
@@ -54,10 +58,20 @@ public class Dto_PJH {
 		this.rel_state = rel_state;
 		this.movie_run_time = movie_run_time;
 	}
-
+	
+	//영화 상영관정보를 위해 모두 가져오는dto
+//	public Dto_PJH(String cinema_branch, String get_here) {
+//		super();
+//		this.cinema_branch = cinema_branch;
+//		this.get_here = get_here;
+//	}
+	
+	
+// getter&setter
 	public String getMovie_title() {
 		return movie_title;
 	}
+
 
 	public void setMovie_title(String movie_title) {
 		this.movie_title = movie_title;
@@ -157,6 +171,30 @@ public class Dto_PJH {
 
 	public void setMovie_run_time(String movie_run_time) {
 		this.movie_run_time = movie_run_time;
+	}
+
+	public String getCinema_branch() {
+		return cinema_branch;
+	}
+
+	public void setCinema_branch(String cinema_branch) {
+		this.cinema_branch = cinema_branch;
+	}
+
+	public String getGet_here() {
+		return get_here;
+	}
+
+	public void setGet_here(String get_here) {
+		this.get_here = get_here;
+	}
+
+	public FileInputStream getLocation_map() {
+		return location_map;
+	}
+
+	public void setLocation_map(FileInputStream location_map) {
+		this.location_map = location_map;
 	}
 
 	

@@ -66,6 +66,7 @@ public class ShareVar {
 
 	public static int filename = 0;
 	public static int image = 0;
+
 	///// -------포스터 이미지 규격
 	public static int poster_width = 380;
 	public static int poster_hight = 450;
@@ -87,10 +88,47 @@ public class ShareVar {
 	// 관리자 페이지 차트 연도와 달 저장하기
 	public static String year = "";
 	public static String month = "";
+	
+	// 영화관 지도 이미지
+	public static String cinemaMapImageFileName = "";
+	
 
+	// 선택된 영화관
+	public static String selectedCienma = "입력이 안되었습니다";
+	
+	
+	
 	// constructor
 	public ShareVar() {
 		// TODO Auto-generated constructor stub
 	}
 
+	//Method
+	
+	public void shareVarInint() {
+		System.out.println(" 초기화 됨 ");
+		// 관리자 아이디 저장공간
+		managerID = "메니저 아이디가 입력이 안되었습니다";
+
+		// 선택된 영화 정보
+		selectedMovieTitle = "선택된 영화 정보 입력이 안되었습니다";
+
+		// 상영하다 테이블 프라이머리 키
+		scr_code = 7;
+
+		// 관리자 페이지 차트 연도와 달 저장하기
+		year = "";
+		month = "";
+
+		// 영화관 지도 이미지
+		cinemaMapImageFileName = "영화관 지도 이미지 입력이 안되었습니다";
+
+		// 선택된 영화관
+		selectedCienma = "선택된 영화관 입력이 안되었습니다";
+		
+		
+		
+	}
+	
+	
 }
