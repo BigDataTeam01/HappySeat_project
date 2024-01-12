@@ -17,6 +17,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.Dao_PJH;
 import com.javaproject.kioskFunction.Dao_SelectTime;
 import com.javaproject.kioskFunction.Dao_pjm;
 import com.javaproject.managerfunction.DtoWDH;
@@ -57,6 +58,7 @@ public class Page07_SelectTime extends JDialog {
 	private JLabel lblScr_Start_Time;
 	private JLabel lblscreenPoster;
 	private JLabel lblremainSeat;
+	private ArrayList<JLabel[]> jlabelArrayofArray ;
 	
 
 	public static void main(String[] args) {
@@ -77,7 +79,7 @@ public class Page07_SelectTime extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-				showCurrentScreen();
+				ArrayList<JLabel[]> jlabelArrayofArray =showCurrentScreen();
 			}
 		});
 		// 타이틀 설정
@@ -127,7 +129,7 @@ public class Page07_SelectTime extends JDialog {
 		lbl_MovieBackGround1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToSelectHeadCount();
+				goToSelectHeadCount(1);
 			}
 		});
 		
@@ -158,7 +160,7 @@ public class Page07_SelectTime extends JDialog {
 		lbl_MovieBackGround2.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToSelectHeadCount();
+				goToSelectHeadCount(2);
 			}
 		});
 		lbl_MovieBackGround2
@@ -171,7 +173,7 @@ public class Page07_SelectTime extends JDialog {
 		lbl_MovieBackGround3.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToSelectHeadCount();
+				goToSelectHeadCount(3);
 			}
 		});
 		lbl_MovieBackGround3
@@ -183,7 +185,7 @@ public class Page07_SelectTime extends JDialog {
 		lbl_MovieBackGround4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				goToSelectHeadCount();
+				goToSelectHeadCount(4);
 			}
 		});
 		lbl_MovieBackGround4
@@ -258,9 +260,29 @@ public class Page07_SelectTime extends JDialog {
 	}
 	
 //---------------------------Function------------------------
-	// 다음화면(정화정보)로 가기
-	private void goToSelectHeadCount() {
+	// 인원 선택으로 가기
+	private void goToSelectHeadCount(int movieSelectdBoxIndex) {
 		Page08_SelectHeadCount selectHeadCountdialog = new Page08_SelectHeadCount();
+		JLabel[] scroom_name = jlabelArrayofArray.get(0);
+		JLabel[] start_time = jlabelArrayofArray.get(1);
+	
+		
+		for(int j=0; j<4; j++) {
+			if(movieSelectdBoxIndex==j+1) {
+				ShareVar.selectedScroomName  = scroom_name[j].getText().toString();
+				ShareVar.selectedScrStarttime= start_time[j].getText().toString();
+			}
+			
+		}
+		System.out.println("+++++++++++++++++++");
+		System.out.println(ShareVar.selectedScroomName);
+		System.out.println("------------------------");
+		System.out.println(ShareVar.selectedScrStarttime);
+		System.out.println("+++++++++++++++++++");
+		Dao_PJH dao = new Dao_PJH();
+		ShareVar.scr_code = dao.scr_code_fetch();
+		
+		
 		dispose();
 		this.setVisible(false);
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -285,18 +307,20 @@ public class Page07_SelectTime extends JDialog {
 		selectMenudialog.setVisible(true);
 	}
 	
-	private void showCurrentScreen() {
+	private ArrayList<JLabel[]>  showCurrentScreen() {
+		jlabelArrayofArray = new ArrayList<JLabel[]>();
 		JLabel[] lblscr_scroom_nameArray = makeLabel();
-		JLabel[] lblstart_timeArray = makeLabel();
+		JLabel[] lblstart_timeArray 	 = makeLabel();
 		JLabel[] lblremainSeatCountArray = makeLabel();
-		JLabel[] lblscrPosterArray = makeLabel();
+		JLabel[] lblscrPosterArray		 = makeLabel();
+		Dao_SelectTime dao = new Dao_SelectTime();
+		ArrayList<DtoWDH> dtolist = dao.showScreen();
 		
-		int boxNum = 4;
+		int boxNum = dtolist.size();
+		System.out.println(dtolist.size());
 		for(int boxj = 0; boxj < boxNum; boxj++) {
 			
 			int remainSeatCount = 0;
-			Dao_SelectTime dao = new Dao_SelectTime();
-			ArrayList<DtoWDH> dtolist = dao.showScreen();
 			String scr_scroom_name = dtolist.get(boxj).getScr_scroom_name();
 			dtolist.get(boxj).getScr_start_time();
 			String start_time = dtolist.get(boxj).getScr_start_time().substring(2,16);
@@ -307,6 +331,7 @@ public class Page07_SelectTime extends JDialog {
 			for(int ri = 0; ri < remainSeat.length(); ri++) {
 				if(remainSeat.charAt(ri) == '0') {
 					remainSeatCount++;
+				
 				}
 			}
 			
@@ -348,8 +373,12 @@ public class Page07_SelectTime extends JDialog {
 			lblstart_timeArray[boxj].setText(start_time);
 			lblremainSeatCountArray[boxj].setText("남은좌석 : " + Integer.toString(remainSeatCount) + "석");
 			
+			
+
+		
+			
 			// Image 처리
-			String filePath = Integer.toString(dao.screenPoster1);
+			String filePath = ShareVar.posterFile;
 			
 			ImageIcon icon = new ImageIcon(filePath);
 			Image changeImg = icon.getImage().getScaledInstance(80, 110, Image.SCALE_SMOOTH);
@@ -358,11 +387,11 @@ public class Page07_SelectTime extends JDialog {
 			lblscrPosterArray[boxj].setHorizontalAlignment(SwingConstants.CENTER);
 			
 			File file = new File(filePath);
-			file.delete();
 			
 			}
-		
-				
+			jlabelArrayofArray.add(lblscr_scroom_nameArray);
+			jlabelArrayofArray.add(lblstart_timeArray);
+			return jlabelArrayofArray;
 	}
 
 	private JLabel[] makeLabel() {

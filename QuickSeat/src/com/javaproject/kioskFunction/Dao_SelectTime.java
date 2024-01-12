@@ -19,8 +19,6 @@ public class Dao_SelectTime {
 	private final String url_mysql = ShareVar.dbName;
 	private final String id_mysql = ShareVar.dbUser;
 	private final String pw_mysql = ShareVar.dbPass;
-	
-	public static int screenPoster1 = 0;
 
 	// Field
 	int scr_code;
@@ -40,7 +38,8 @@ public class Dao_SelectTime {
 		ArrayList<DtoWDH> dto = new ArrayList<DtoWDH>();
 
 		String where1 = "select s.scr_code, s.scr_movie_title, s.scr_scroom_name, s.admin_admin_id, s.seat_resv_code, s.scr_start_time, s.run_time, m.poster";
-		String where2 = " from screen as s, movie as m where m.movie_title = s.scr_movie_title and scr_movie_title = '" +ShareVar.selectedMovieTitle+"'";
+		String where2 = " from screen as s, movie as m where m.movie_title = s.scr_movie_title and scr_movie_title = '" + ShareVar.selectedMovieTitle +"'";
+		System.out.println(where1 + where2);
 		// 조커를 ShareVar에서 가져온 영화타이틀로 바꿔야 함
 		
 		try {
@@ -61,8 +60,8 @@ public class Dao_SelectTime {
 				
 				
 				// file
-				screenPoster1 = screenPoster1 + 1;
-				File file = new File(Integer.toString(screenPoster1));
+				ShareVar.posterFile = ShareVar.selectedMovieTitle + "_image";
+				File file = new File(ShareVar.posterFile);
 				FileOutputStream output = new FileOutputStream(file);
 				InputStream input = rs.getBinaryStream(8);
 				byte[] buffer = new byte[1024];
