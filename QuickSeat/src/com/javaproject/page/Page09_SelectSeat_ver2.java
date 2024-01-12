@@ -47,7 +47,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-				timer = new Timer();
 			}
 		});
 		createSeat();
@@ -128,21 +127,21 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		}
 	}
 	
-	static class SeatUpdateRunnable1 implements Runnable {
-		private Page09_SelectSeat_ver2 outerInstance;
-
-		public SeatUpdateRunnable1(Page09_SelectSeat_ver2 outerInstance) {
-			this.outerInstance = outerInstance;
-		}
-
-		@Override
-		public void run() {
-			// 백그라운드에서 수행되어야 할 작업
-			outerInstance.gohomeAction();
-			this.outerInstance.setVisible(false);
-			System.out.println("스플래쉬로 ");
-		}
-	}
+//	static class SeatUpdateRunnable1 implements Runnable {
+//		private Page09_SelectSeat_ver2 outerInstance;
+//
+//		public SeatUpdateRunnable1(Page09_SelectSeat_ver2 outerInstance) {
+//			this.outerInstance = outerInstance;
+//		}
+//
+//		@Override
+//		public void run() {
+//			// 백그라운드에서 수행되어야 할 작업
+//			outerInstance.gohomeAction();
+//			this.outerInstance.setVisible(false);
+//			System.out.println("스플래쉬로 ");
+//		}
+//	}
 
 	private class SeatButtonListener implements ActionListener {
 		// Field
@@ -203,26 +202,11 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 			}
 		};
 		
-		TimerTask task1 = new TimerTask() {
-			@Override
-			public void run() { // 위에있는 run 을 오버라이드로 수정하는 코드
-				// getCurrentSeatCode 메소드를 백그라운드에서 실행
-				Thread backgroundThread1 = new Thread(new SeatUpdateRunnable1(dialog)); // dialog 는 이페이지 전체임.
-				backgroundThread1.start(); // 스레드 시작
-			}
-		};
-		
 		SwingUtilities.invokeLater(() -> {
 			dialog.setVisible(true);
 		});
 		
-//		if (dialog.timer != null) {
-//            dialog.timer.scheduleAtFixedRate(task, 0, 2000);
-//            dialog.timer.schedule(task1, 10000);
-//        }
-//		
 		dialog.timer.scheduleAtFixedRate(task,0,2000); // 2초마다 실행 (예시)
-		dialog.timer.schedule(task1, 10000); // 15초 후 한번만 실행 (예시)
 	}
 	
 	// 페이지 구성요소
@@ -295,7 +279,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		return btnSeatConfirm;
 	}
 	
-	
 	// Functions
 	private void getCurrentSeatCode() {
 		Dao_pdg currentSeatCode = new Dao_pdg(ShareVar.scr_code);
@@ -310,7 +293,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 
 	private void goConfirmSeat() {
-		timer.cancel();
 		Page10_ConfirmSeat confirmSeat = new Page10_ConfirmSeat();
 		this.setVisible(false);
 		confirmSeat.setVisible(true);
@@ -318,7 +300,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 
 	private void goPreviousPage() {
-		timer.cancel();
 		Page08_SelectHeadCount prev = new Page08_SelectHeadCount();
 		this.setVisible(false);
 		prev.setVisible(true);
@@ -326,7 +307,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 
 	private void gohomeAction() {
-		timer.cancel();
 		Page02_SelectMenu prev = new Page02_SelectMenu();
 		this.setVisible(false);
 		prev.setVisible(true);
