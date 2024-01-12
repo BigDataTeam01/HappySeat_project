@@ -40,7 +40,7 @@ public class Dao_SelectTime {
 		ArrayList<DtoWDH> dto = new ArrayList<DtoWDH>();
 
 		String where1 = "select s.scr_code, s.scr_movie_title, s.scr_scroom_name, s.admin_admin_id, s.seat_resv_code, s.scr_start_time, s.run_time, m.poster";
-		String where2 = " from screen as s, movie as m where m.movie_title = s.scr_movie_title and scr_movie_title = '조커'";
+		String where2 = " from screen as s, movie as m where m.movie_title = s.scr_movie_title and scr_movie_title = '" +ShareVar.selectedMovieTitle+"'";
 		// 조커를 ShareVar에서 가져온 영화타이틀로 바꿔야 함
 		
 		try {
