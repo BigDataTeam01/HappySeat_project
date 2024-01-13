@@ -111,7 +111,15 @@ public class ShareVar {
 	// 선택된 상영 영화 시작시간 
 	public static String selectedScrStarttime="";
 	
-	
+
+	// 입력된 발권번호
+	public static String insertedOrderNum = "";
+
+	//인원선택 분류 어레이 
+	public static int[] personNumbers = new int[5];
+
+	// 입력된 발권번호
+	public static String pay_method = "";
 	
 	// constructor
 	public ShareVar() {
