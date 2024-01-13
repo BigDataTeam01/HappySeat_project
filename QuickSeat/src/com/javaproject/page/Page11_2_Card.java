@@ -30,6 +30,16 @@ public class Page11_2_Card extends JDialog {
 	 * Description : 1. Card화면에서 결제방법 선택으로 가기 버튼을 터치했을시 SelectPayment화면으로 이동 Date :
 	 * 2024.01.06 (토요일) Author : 박정민,박지환
 	 * 
+	 * *  *  * Update 2024.01.13 by J.park:
+	 * 			1. 인원선택에서 받아온 어레이값으로  
+	 * 			3. kiosk set bound sharevar 에서 가져와 지정
+	 * 			4. diaog -> static 
+	 * 			5. 배경 추가
+	 * 			6. 첫화면Icon 추가
+	 * 			7. 숫자입력 버튼 추가
+	 * 			8. 입력완료 버튼 추가******************************** 화면 크기 바뀌면서 UI다시 바꿔야함(나중에 다시 만들기)******************************************
+	 * 			9.  입력완료,숫자패드,이전,처음으로 아이콘,위치 변경
+	 * 
 	 */
 
 	/**
@@ -125,6 +135,7 @@ public class Page11_2_Card extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				goToPaymentConfirm();
+				ShareVar.totalPrice= Integer.toString(discountedPrice);
 			}
 		});
 		lblNewLabel_4.setIcon(new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/cardAuthorization.png")));
@@ -159,10 +170,11 @@ public class Page11_2_Card extends JDialog {
 		dispose();
 		page12_PaymentConfirm.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		page12_PaymentConfirm.setVisible(true);
+		ShareVar.pay_method="카드";
 		
 	}
 
-	//
+	//할인가격계산해서 전체 가격 내보내기
 	private int calculateDiscountedPrice(int[] personNumbers, int[] discountRates, int moviePriceBeforeDiscount) {
 		// 할인된 가격을 초기화(안하면 포문에서 오류남)
 		int discountedPrice = 0;
