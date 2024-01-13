@@ -11,6 +11,7 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -49,6 +50,9 @@ public class Page08_SelectHeadCount extends JDialog {
 	 * 			2. - 버튼 클릭시 텍스트 필드에 음수값 안되게 설정
 	 * 			3. 인원확정 버튼 클릭시 sharevar.sumOfPersonNumbers에 선택한 총 인원 저장
 	 * 			
+	 *   *  *  *  * Update 2024.01.13 by J.park:
+	 * 			1. 쉐어바에 선택한 사람분류 어레이로 들어가게 설정
+	 * 			
 	 */
 
 	/**
@@ -61,6 +65,11 @@ public class Page08_SelectHeadCount extends JDialog {
 	private JTextField tfPersonNum3;
 	private JTextField tfPersonNum4;
 	private JTextField tfPersonNum5;
+	//인원선택 어레이에 저장
+	private JTextField[] tfPersonNumArray = new JTextField[5];
+	private ArrayList<Integer> personNums = new ArrayList<>(); // 어레이리스트 추가
+
+	
 
 	public static void main(String[] args) {
 		try {
@@ -342,7 +351,7 @@ public class Page08_SelectHeadCount extends JDialog {
 			tfPersonNum3.setBounds(225, 290, 60, 40);
 			contentPanel.add(tfPersonNum3);
 			tfPersonNum3.setText("0");
-			
+
 			tfPersonNum4 = new JTextField();
 			tfPersonNum4.setHorizontalAlignment(SwingConstants.CENTER);
 			tfPersonNum4.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
@@ -472,10 +481,20 @@ public class Page08_SelectHeadCount extends JDialog {
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
+					//인원선택 합 구하기 
 					calculateAndStoreSum();
+					//인원선택 어레이로 쉐어바에 저장하기
+					storeValuesInShareVar();
+					//좌석선택으로 가기
 					goToSelectSeat();
 					//쉐어바에 들어갔는지 확인
-//					 System.out.println(ShareVar.sumOfPersonNumbers);
+					 System.out.println(ShareVar.sumOfPersonNumbers);
+					 System.out.println("Stored values in ShareVar: " +
+		                        ShareVar.personNumbers[0] + ", " +
+		                        ShareVar.personNumbers[1] + ", " +
+		                        ShareVar.personNumbers[2] + ", " +
+		                        ShareVar.personNumbers[3] + ", " +
+		                        ShareVar.personNumbers[4]);
 				}
 			});
 			
@@ -504,5 +523,13 @@ public class Page08_SelectHeadCount extends JDialog {
 			tfPersonNum5.setText(String.valueOf(currentValue));
 		 
 	 }
-	
+	// 각 값들을 ShareVar에 저장
+	 private void storeValuesInShareVar() {
+	     ShareVar.personNumbers[0] = Integer.parseInt(tfPersonNum1.getText());
+	     ShareVar.personNumbers[1] = Integer.parseInt(tfPersonNum2.getText());
+	     ShareVar.personNumbers[2] = Integer.parseInt(tfPersonNum3.getText());
+	     ShareVar.personNumbers[3] = Integer.parseInt(tfPersonNum4.getText());
+	     ShareVar.personNumbers[4] = Integer.parseInt(tfPersonNum5.getText());
+	 }
+	 
 }// End

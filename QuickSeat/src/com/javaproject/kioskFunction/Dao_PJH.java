@@ -334,6 +334,30 @@ public class Dao_PJH {
 	}
 	
 	
+	//선택된 영화 초기가격 불러옴. 
+	public int MoviePriceBeforeDiscount() {
+	    int moviePriceBeforeDiscount = 0;
+
+	    String fetchQuery = "SELECT movie_price_beforediscount FROM movie WHERE movie_title = '" + ShareVar.selectedMovieTitle + "'";
+
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+	        Statement stmt_mysql = conn_mysql.createStatement();
+	        ResultSet rs = stmt_mysql.executeQuery(fetchQuery);
+
+	        if (rs.next()) {
+	            moviePriceBeforeDiscount = rs.getInt("movie_price_beforediscount");
+	        }
+
+	        conn_mysql.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return moviePriceBeforeDiscount;
+	}
+	
 }
 
 	

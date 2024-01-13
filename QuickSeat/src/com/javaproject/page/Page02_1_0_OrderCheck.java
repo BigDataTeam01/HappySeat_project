@@ -40,15 +40,18 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	 * 
 	  *  *  * Update 2024.01.06 by J.park:
 	 * 			1. descripton 수정
-	 * 			3. kiosk set bound sharevar 에서 가져와 지정
-	 * 			4. diaog -> static 
-	 * 			5. 배경 추가
-	 * 			6. 첫화면Icon 추가
-	 * 			7. 숫자입력 버튼 추가
-	 * 			8. 입력완료 버튼 추가******************************** 화면 크기 바뀌면서 UI다시 바꿔야함(나중에 다시 만들기)******************************************
-	 * 			9.  입력완료,숫자패드,이전,처음으로 아이콘,위치 변경
+	 * 			2. kiosk set bound sharevar 에서 가져와 지정
+	 * 			3. diaog -> static 
+	 * 			4. 배경 추가
+	 * 			5. 첫화면Icon 추가
+	 * 			6. 숫자입력 버튼 추가
+	 * 			7. 입력완료 버튼 추가******************************** 화면 크기 바뀌면서 UI다시 바꿔야함(나중에 다시 만들기)******************************************
+	 * 			8.  입력완료,숫자패드,이전,처음으로 아이콘,위치 변경
 	 * 
-	 */
+	 *  *  *  * Update 2024.01.06 by J.park:
+	 * 			1. 버튼숫자입력 기능 구현
+	 * 			2.입력된 숫자 쉐어바에 저장
+	 * 			
 	/**
 	 * Launch the application.
 	 */
@@ -129,7 +132,7 @@ public class Page02_1_0_OrderCheck extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 
-		//입력완료 버튼 넣기
+		// 입력완료 버튼 넣기
 		contentPanel.add(getBtnNewButton());
 //		페이지 타이틀 
 		JLabel lbl_pageTitle = new JLabel("예매 확인");
@@ -146,8 +149,8 @@ public class Page02_1_0_OrderCheck extends JDialog {
 				goToSelectMenu();
 			}
 		});
-		lbl_pageTitle_1
-				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
+		lbl_pageTitle_1.setIcon(
+				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn처음으로.png")));
 
 		lbl_pageTitle_1.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		lbl_pageTitle_1.setBounds(628, 17, 180, 130);
@@ -180,11 +183,11 @@ public class Page02_1_0_OrderCheck extends JDialog {
 		// 숫자버튼부분
 		JLabel Btn1 = new JLabel("");
 		Btn1.addMouseListener(new MouseAdapter() {
-			 @Override
-	            public void mouseClicked(MouseEvent e) {
-	                tfTicketNum.setText(tfTicketNum.getText() + "1");
-	            }
-	        });
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "1");// 1번 버튼 눌렀을때 1번 입력
+			}
+		});
 		Btn1.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn1.png")));
 		Btn1.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn1.setBounds(42, 322, 70, 70);
@@ -192,79 +195,141 @@ public class Page02_1_0_OrderCheck extends JDialog {
 
 		JLabel Btn2 = new JLabel("\"\"");
 		Btn2.addMouseListener(new MouseAdapter() {
-			 @Override
-	            public void mouseClicked(MouseEvent e) {
-	                tfTicketNum.setText(tfTicketNum.getText() + "2");
-	            }
-	        });
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "2");
+			}
+		});
 		Btn2.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn2.png")));
 		Btn2.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn2.setBounds(132, 322, 70, 70);
 		contentPanel.add(Btn2);
 
 		JLabel Btn3 = new JLabel("\"\"");
+		Btn3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "3");
+			}
+		});
 		Btn3.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn3.png")));
 		Btn3.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn3.setBounds(222, 322, 70, 70);
 		contentPanel.add(Btn3);
 
+		JLabel Btn4 = new JLabel("\"\"");
+		Btn4.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "4");
+			}
+		});
+		Btn4.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn4.png")));
+		Btn4.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
+		Btn4.setBounds(312, 322, 70, 70);
+		contentPanel.add(Btn4);
+
 		JLabel Btn5 = new JLabel("\"\"");
+		Btn5.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "5");
+			}
+		});
 		Btn5.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn5.png")));
 		Btn5.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn5.setBounds(402, 322, 70, 70);
 		contentPanel.add(Btn5);
 
 		JLabel Btn6 = new JLabel("\"\"");
+		Btn6.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "6");
+			}
+		});
 		Btn6.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn6.png")));
 		Btn6.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn6.setBounds(45, 403, 70, 70);
 		contentPanel.add(Btn6);
 
-		JLabel Btn4 = new JLabel("\"\"");
-		Btn4.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn4.png")));
-		Btn4.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
-		Btn4.setBounds(312, 322, 70, 70);
-		contentPanel.add(Btn4);
-
 		JLabel Btn7 = new JLabel("\"\"");
+		Btn7.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "7");
+			}
+		});
 		Btn7.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn7.png")));
 		Btn7.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn7.setBounds(135, 403, 70, 70);
 		contentPanel.add(Btn7);
-		
+
 		JLabel Btn8 = new JLabel("\"\"");
+		Btn8.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "8");
+			}
+		});
 		Btn8.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn8.png")));
 		Btn8.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn8.setBounds(225, 403, 70, 70);
 		contentPanel.add(Btn8);
 
 		JLabel Btn9 = new JLabel("\"\"");
+		Btn9.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "9");
+			}
+		});
 		Btn9.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn9.png")));
 		Btn9.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn9.setBounds(315, 403, 70, 70);
 		contentPanel.add(Btn9);
 
 		JLabel Btn0 = new JLabel("\"\"");
+		Btn0.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(tfTicketNum.getText() + "0");
+			}
+		});
 		Btn0.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn0.png")));
 		Btn0.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		Btn0.setBounds(405, 403, 70, 70);
 		contentPanel.add(Btn0);
 
 		JLabel BtnClear = new JLabel("\"\"");
+		BtnClear.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tfTicketNum.setText(""); // 발권번호 모두 지우기
+			}
+		});
 		BtnClear.setIcon(
-		new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/BtnClear.png")));
+				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/BtnClear.png")));
 		BtnClear.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		BtnClear.setBounds(484, 322, 70, 70);
 		contentPanel.add(BtnClear);
 
-
 		JLabel BtnDelete = new JLabel("\"\"");
+		BtnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String currentText = tfTicketNum.getText();
+				if (!currentText.isEmpty()) {
+					// 현재 텍스트가 비어있지 않으면 마지막 문자를 제거
+					tfTicketNum.setText(currentText.substring(0, currentText.length() - 1));
+				}
+			}
+		});
 		BtnDelete.setIcon(
-		new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn1Delete.png")));
+				new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn1Delete.png")));
 		BtnDelete.setFont(new Font("BM Dohyeon", Font.PLAIN, 15));
 		BtnDelete.setBounds(484, 403, 70, 70);
 		contentPanel.add(BtnDelete);
-
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
@@ -307,17 +372,18 @@ public class Page02_1_0_OrderCheck extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					goToOrderCancle();
+					ShareVar.insertedOrderNum = tfTicketNum.getText();
+					System.out.println(ShareVar.insertedOrderNum);
 				}
 			});
 
 		}
 		return btnNewButton;
 	}
-	
+
 	// splash Class로 돌아가기
 	public void backSplashTimeEnd() {
-		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+		BackSplashTimer backSplashTimer = new BackSplashTimer(100, this);
 	}
-	
 
 }// End
