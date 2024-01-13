@@ -9,7 +9,7 @@
 
 ## Logo Design
 <br>
-![행복좌석_로고](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/5088a1ab-4fe0-46fb-9fbf-0478e834c097)
+![image](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/117d5fec-64db-453a-a02d-f60cd800ade3)
 
 
 <br><img width="170" alt="스크린샷 2024-01-05 오전 11 01 58" src="https://github.com/BigDataTeam01/QuickSeat_project/assets/149550771/508ee701-6e74-4a36-9d99-920be7f70feb">
