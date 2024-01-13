@@ -88,23 +88,28 @@ public class ShareVar {
 	// 관리자 페이지 차트 연도와 달 저장하기
 	public static String year = "";
 	public static String month = "";
-	
+
 	// 영화관 지도 이미지
 	public static String cinemaMapImageFileName = "";
-	
 
 	// 선택된 영화관
 	public static String selectedCienma = "입력이 안되었습니다";
-	
+
 	// 선택된 나이
 	public static int selectedCustage = 0;
 
-	
 	// 선택된 인원수
 	public static int sumOfPersonNumbers = 0;
-	
-	
-	
+
+	// 입력된 발권번호
+	public static String insertedOrderNum = "";
+
+	//인원선택 분류 어레이 
+	public static int[] personNumbers = new int[5];
+
+	// 입력된 발권번호
+	public static String pay_method = "";
+
 	// constructor
 	public ShareVar() {
 		// TODO Auto-generated constructor stub
@@ -138,6 +143,16 @@ public class ShareVar {
 		
 		// 선택된 인원수
 		sumOfPersonNumbers = 0;
+		
+		//입력된 발권번호숫자
+		insertedOrderNum = "";
+		
+		// 인원선택 분류 어레이 (어레이라 다 지우려고 for문 사용)
+        for (int i = 0; i < personNumbers.length; i++) {
+        	personNumbers[i] = 0;        	
+        }
+    	// 입력된 발권번호
+    	pay_method = "";
 	}
 	
 	

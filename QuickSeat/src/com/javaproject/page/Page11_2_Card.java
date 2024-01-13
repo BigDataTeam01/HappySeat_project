@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.Dao_PJH;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -36,8 +37,10 @@ public class Page11_2_Card extends JDialog {
 	 */
 
 	// private static SelectMenu selectMenu = new SelectMenu();
-
-	private JTextField textField;
+	//인원수 배열을 쉐어바에서 가져온다
+	  private Dao_PJH dao;	
+	  private JTextField textField;
+	
 
 	public static void main(String[] args) {
 		try {
@@ -53,6 +56,14 @@ public class Page11_2_Card extends JDialog {
 	 * Create the dialog.
 	 */
 	public Page11_2_Card() {
+		dao = new Dao_PJH();
+		// 인원선택에서 선택한 어레이로 각각의 할인율을 설정
+		int[] discountRates = { 10, 30, 30, 50, 30 }; // 각 할인율을 설정
+		int[] personNumbers = ShareVar.personNumbers;
+		// 다오에서  할인 전 영화 가격 가져오기
+		int moviePriceBeforeDiscount = dao.MoviePriceBeforeDiscount();
+		int discountedPrice = calculateDiscountedPrice(personNumbers, discountRates, moviePriceBeforeDiscount);
+
 		setTitle("카드 결제");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		getContentPane().setLayout(new BorderLayout());
@@ -102,6 +113,7 @@ public class Page11_2_Card extends JDialog {
 		textField.setBounds(161, 245, 180, 60);
 		contentPanel.add(textField);
 		textField.setColumns(10);
+		textField.setText(Integer.toString(discountedPrice));
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/InsertCard.png")));
@@ -149,10 +161,18 @@ public class Page11_2_Card extends JDialog {
 		page12_PaymentConfirm.setVisible(true);
 		
 	}
-	
-	
-	
-	
+
+	//
+	private int calculateDiscountedPrice(int[] personNumbers, int[] discountRates, int moviePriceBeforeDiscount) {
+		// 할인된 가격을 초기화(안하면 포문에서 오류남)
+		int discountedPrice = 0;
+		for (int i = 0; i < personNumbers.length; i++) {
+			// 할인율계산(예:30프로할인-> 인원분류숫자*0.7)
+			discountedPrice += (1 - (double) discountRates[i] / 100) * personNumbers[i] * moviePriceBeforeDiscount;
+		}
+
+		return discountedPrice;
+	}
 	
 
 }// END
