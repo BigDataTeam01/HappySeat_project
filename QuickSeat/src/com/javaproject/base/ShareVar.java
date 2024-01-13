@@ -20,7 +20,7 @@ public class ShareVar {
 	 * 
 	 */
 
-	public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static String dbName = "jdbc:mysql://127.0.0.1:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static String dbUser = "root";
 	public static String dbPass = "qwer1234";
 
@@ -118,8 +118,11 @@ public class ShareVar {
 	//인원선택 분류 어레이 
 	public static int[] personNumbers = new int[5];
 
-	// 입력된 발권번호
+	// 구매방법(현금,카드 구분)
 	public static String pay_method = "";
+	
+	// 발권가격(할인된 티켓가격의 총 가격)
+	public static String totalPrice = "";
 	
 	// constructor
 	public ShareVar() {
@@ -162,8 +165,12 @@ public class ShareVar {
         for (int i = 0; i < personNumbers.length; i++) {
         	personNumbers[i] = 0;        	
         }
-    	// 입력된 발권번호
+        
+     // 구매방법(현금,카드 구분)
     	pay_method = "";
+    	
+    	// 발권가격(할인된 티켓가격의 총 가격)
+    	totalPrice = "";
 	}
 	
 	
