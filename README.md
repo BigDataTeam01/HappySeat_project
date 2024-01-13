@@ -2,30 +2,34 @@
 
 ## Project Description
 
-1. Project Title : 신속좌석 (Quick Seat)
-2. team leader: 박동근 
-3. team members : 박지환 , 박정민, 원도현, 이천영
+1. Project Title : 행복좌석 (Happy Seat) <= 신속좌석 (Quick Seat) 
+2. Project Manager: 박동근 
+3. Team Member : 박지환 , 박정민, 원도현, 이천영
 
 
 ## Logo Design
+<br>
+![행복좌석_로고](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/5088a1ab-4fe0-46fb-9fbf-0478e834c097)
+
+
 <br><img width="170" alt="스크린샷 2024-01-05 오전 11 01 58" src="https://github.com/BigDataTeam01/QuickSeat_project/assets/149550771/508ee701-6e74-4a36-9d99-920be7f70feb">
 
 ## Goal of Developement
 
-<img width="1420" alt="스크린샷 2024-01-12 오후 5 21 45" src="https://github.com/BigDataTeam01/QuickSeat_project/assets/149550771/b272851c-89da-4915-8444-f9ecba3f8831">
+![개발목적](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/9c09a7a4-6e6e-44c8-b646-e9221a5c81a4)
+
 
 ## Schedule and Gantt chart
 
-<img width="1466" alt="스크린샷 2024-01-12 오후 5 18 50" src="https://github.com/BigDataTeam01/QuickSeat_project/assets/149550771/beb6ef21-2c02-49cb-a17f-73077ef38266">
+https://app.asana.com/0/1206334215923724/1206334215923724
 
 
 ## Member Role
-
-<img width="1351" alt="스크린샷 2024-01-12 오후 5 19 20" src="https://github.com/BigDataTeam01/QuickSeat_project/assets/149550771/57f78333-8fa1-4fb2-85e4-c50db988c353">
+![image](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/de3beab7-547a-495a-98e1-82f11c39953e)
 
 
 ## ERD 
-<img width="1420" alt="스크린샷 2024-01-12 오후 5 20 09" src="https://github.com/BigDataTeam01/QuickSeat_project/assets/149550771/4331051d-0847-4e76-b634-31d3df34bfa5">
+![image](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/050a7988-3d59-4cc4-b25c-0452ec3d7d4a)
 
 <br>
 
