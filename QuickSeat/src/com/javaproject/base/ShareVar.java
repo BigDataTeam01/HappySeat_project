@@ -83,7 +83,7 @@ public class ShareVar {
 	public static String selectedMovieTitle = "";
 
 	// 상영하다 테이블 프라이머리 키 
-	public static int scr_code = 7;
+	public static int scr_code = 0;
 
 	// 관리자 페이지 차트 연도와 달 저장하기
 	public static String year = "";
@@ -100,16 +100,19 @@ public class ShareVar {
 
 	// 선택된 인원수
 	public static int sumOfPersonNumbers = 0;
-
-	// 입력된 발권번호
-	public static String insertedOrderNum = "";
-
-	//인원선택 분류 어레이 
-	public static int[] personNumbers = new int[5];
-
-	// 입력된 발권번호
-	public static String pay_method = "";
-
+	
+	// 선택된 영화포스터
+	public static String posterFile = "";
+	
+	// 선택된 상영관 이륾
+	
+	public static String selectedScroomName ="";
+	
+	// 선택된 상영 영화 시작시간 
+	public static String selectedScrStarttime="";
+	
+	
+	
 	// constructor
 	public ShareVar() {
 		// TODO Auto-generated constructor stub
@@ -126,7 +129,7 @@ public class ShareVar {
 		selectedMovieTitle = "선택된 영화 정보 입력이 안되었습니다";
 
 		// 상영하다 테이블 프라이머리 키
-		scr_code = 7;
+		scr_code = 0;
 
 		// 관리자 페이지 차트 연도와 달 저장하기
 		year = "";

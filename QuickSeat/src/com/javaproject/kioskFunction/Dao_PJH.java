@@ -12,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.managerfunction.DtoWDH;
 
 public class Dao_PJH {
 	//Filed
@@ -252,9 +253,6 @@ public class Dao_PJH {
 						+ " from screen"
 						+ " where scr_movie_title ="
 						+ "'"+ ShareVar.selectedMovieTitle+"')"; 
-		System.out.println("asjdhiauhfiuahsfiuhasifuhaisu");
-						System.out.println(ShareVar.selectedMovieTitle);
-		System.out.println(fetchQuery);
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -301,6 +299,40 @@ public class Dao_PJH {
 		}
 		return dtoList;
 	}
+	// 상영코드 불러오기
+	public int scr_code_fetch() {
+		
+		int scr_code_fetch = 0; 
+		
+		String whereA = "select s.scr_code";
+		String whereB = " from screen as s, movie as m";
+		String whereC = " where s.scr_movie_title = m.movie_title and s.scr_movie_title = '" + ShareVar.selectedMovieTitle + "'"
+				+ " and s.scr_scroom_name = '"+ ShareVar.selectedScroomName + "'" + " and s.scr_start_time = '"+ ShareVar.selectedScrStarttime+"'"  ;
+		
+		System.out.println(whereA + whereB + whereC);
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereA + whereB + whereC);
+
+			while (rs.next()) {
+				scr_code_fetch = rs.getInt(1);
+
+
+			}
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return scr_code_fetch;
+	}
+	
 	
 	//선택된 영화 초기가격 불러옴. 
 	public int MoviePriceBeforeDiscount() {
