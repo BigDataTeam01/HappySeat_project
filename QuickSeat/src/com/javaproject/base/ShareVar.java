@@ -28,8 +28,8 @@ public class ShareVar {
 	// Field
 	///////////////0-------------------------------- DB 정보 ------------------/////////////
 	//
-	//public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
-	public static String dbName = "jdbc:mysql://127.0.0.1:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	//public static String dbName = "jdbc:mysql://127.0.0.1:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static String dbUser = "root";
 	public static String dbPass = "qwer1234";
 	///////////////0---------------------------------스플레시 타임 정보------------------/////////////
