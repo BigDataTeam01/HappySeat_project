@@ -27,18 +27,15 @@ public class Page11_2_Card extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	/*
-	 * Description : 1. Card화면에서 결제방법 선택으로 가기 버튼을 터치했을시 SelectPayment화면으로 이동 Date :
-	 * 2024.01.06 (토요일) Author : 박정민,박지환
+	 * Description : 가드결제 화면 
+	 * 				1. Card화면에서 결제방법 선택으로 가기 버튼을 터치했을시 SelectPayment화면으로 이동 
 	 * 
-	 * *  *  * Update 2024.01.13 by J.park:
-	 * 			1. 인원선택에서 받아온 어레이값으로  
-	 * 			3. kiosk set bound sharevar 에서 가져와 지정
-	 * 			4. diaog -> static 
-	 * 			5. 배경 추가
-	 * 			6. 첫화면Icon 추가
-	 * 			7. 숫자입력 버튼 추가
-	 * 			8. 입력완료 버튼 추가******************************** 화면 크기 바뀌면서 UI다시 바꿔야함(나중에 다시 만들기)******************************************
-	 * 			9.  입력완료,숫자패드,이전,처음으로 아이콘,위치 변경
+	 * Date :2024.01.06 (토요일) Author : 박정민,박지환
+	 * 
+	 * *  *  * Update 2024.01.13 by PJH:
+	 * 			1. Description 수정
+	 * 			2. 인원선택에서 받아온 어레이값으로  각 할인율 어레이를 활용해 각각의 금액을 만들고 그 값을 더해 총 구매금액 확인 구현
+	 * 			3. 앞에서 받아온 쉐어바의 값들은 db에 입력(구현중)
 	 * 
 	 */
 

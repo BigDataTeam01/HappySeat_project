@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
+import com.javaproject.kioskFunction.Dao_PJH;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -48,9 +49,12 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	 * 			7. 입력완료 버튼 추가******************************** 화면 크기 바뀌면서 UI다시 바꿔야함(나중에 다시 만들기)******************************************
 	 * 			8.  입력완료,숫자패드,이전,처음으로 아이콘,위치 변경
 	 * 
-	 *  *  *  * Update 2024.01.06 by J.park:
+	 *  *  *  * Update 2024.01.13 by J.park:
 	 * 			1. 버튼숫자입력 기능 구현
 	 * 			2.입력된 숫자 쉐어바에 저장
+	 * 			
+	 * 	 *  *  *  * Update 2024.01.14 by J.park:
+	 * 			1. 입력된 발권번호와 db의 발권번호를 비교해 번호가 같으면 쉐어바에 insertedOrderNum에 발권번호 저장
 	 * 			
 	/**
 	 * Launch the application.
@@ -371,9 +375,8 @@ public class Page02_1_0_OrderCheck extends JDialog {
 			btnNewButton.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					goToOrderCancle();
-					ShareVar.insertedOrderNum = tfTicketNum.getText();
 					System.out.println(ShareVar.insertedOrderNum);
+					checkTicketNumberAndProceed();
 				}
 			});
 
@@ -381,6 +384,52 @@ public class Page02_1_0_OrderCheck extends JDialog {
 		return btnNewButton;
 	}
 
+	// 티켓 번호 확인 및 처리
+	private void checkTicketNumberAndProceed() {
+	    String inputTicketNum = tfTicketNum.getText();
+	    if (inputTicketNum != null && !inputTicketNum.isEmpty()) {
+	        // 데이터베이스에서 ticket_number와 일치하는 레코드 조회
+	        boolean ticketNumberExists = checkTicketNumberInDatabase(inputTicketNum);
+
+	        if (ticketNumberExists) {
+	            // 일치하는 경우 ShareVar에 저장하고 다음 화면으로 이동
+	            ShareVar.insertedOrderNum = inputTicketNum;
+	            System.out.println(ShareVar.insertedOrderNum);
+	            System.out.println("티켓 번호 확인 및 저장: " + ShareVar.insertedOrderNum);
+	            goToOrderCancle();
+	        } else {
+	            // 일치하지 않는 경우 메시지 또는 처리
+	            System.out.println("일치하지 않는 티켓 번호입니다.");
+	            // 일치하지 않을 때의 추가적인 처리를 여기에 추가할 수 있습니다.
+	        }
+	    } else {
+	        // 입력된 티켓 번호가 없을 경우 메시지 또는 처리
+	        System.out.println("티켓 번호를 입력하세요.");
+	        // 입력이 없을 때의 추가적인 처리를 여기에 추가할 수 있습니다.
+	    }
+	}
+
+	// 데이터베이스에서 ticket_number 확인
+	private boolean checkTicketNumberInDatabase(String ticketNumber) {
+	    boolean result = false;
+
+	    try {
+	        // ReserveDAO 객체 생성
+	        Dao_PJH dao_PJH = new Dao_PJH();
+	        // 데이터베이스에서 가져온 티켓 번호
+	        String dbTicketNumber = dao_PJH.confirmReservedTicket();
+
+	        // 티켓 번호가 일치하는지 확인
+	        result = ticketNumber.equals(dbTicketNumber);
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return result;
+	}
+	
+	
+	
 	// splash Class로 돌아가기
 	public void backSplashTimeEnd() {
 		BackSplashTimer backSplashTimer = new BackSplashTimer(100, this);
