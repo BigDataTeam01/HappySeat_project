@@ -4,15 +4,16 @@
 </p>
 
 
-
-
-
 ## Project Description
-
 1. Project Title : 행복좌석 (Happy Seat) <= 신속좌석 (Quick Seat) 
 2. Project Manager: 박동근 
 3. Team Member : 박지환 , 박정민, 원도현, 이천영
-
+<br>
+## Team Rule
+1. 자주 도와달라고 하기!
+2. 도움요청 무시하지 않기!
+3. 짝코딩 지향하기!
+<br>
 
 ## Develop Tool and Framework
 <p align='center'>
@@ -54,11 +55,6 @@ https://app.asana.com/0/1206334215923724/1206334215923724
 <br>
 
 
-## Team Rule
-1. 자주 도와달라고 하기!
-2. 도움요청 무시하지 않기!
-3. 짝코딩 지향하기!
-<br>
 
 ## Teacher's Advice
 1. 엑셀 -> mySQL 들어가는  툴이 있음.
