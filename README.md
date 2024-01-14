@@ -9,15 +9,22 @@
 3. [Develop Tool and Framework](#Develop-Tool-and-Framework)
 4. [Logo Design](#Logo-Design)
 5. [Goal of Developement](#Goal-of-Developement)
-6. [Reversal](#reversal)
+6. [Schedule and Gantt chart](#Schedule-and-Gantt-chart)
+7. [Member Role](#Member-Role)
+8. [ERD](#ERD)
+9. [팀원 깃 활동](#팀원-깃-활동)
 
 
+   
 # Project Description
+
 1. Project Title : 행복좌석 (Happy Seat) <= 신속좌석 (Quick Seat) 
 2. Project Manager: 박동근 
 3. Team Member : 박지환 , 박정민, 원도현, 이천영
 <br>
+
 # Team Rule
+
 1. 자주 도와달라고 하기!
 2. 도움요청 무시하지 않기!
 3. 짝코딩 지향하기!
