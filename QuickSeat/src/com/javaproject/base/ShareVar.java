@@ -126,7 +126,7 @@ public class ShareVar {
 	public static String totalPrice = "";
 	
 	// 좌석 순번(어떤 좌석을 선택했는지에 대한 배열)
-	public static ArrayList<Integer> selectedSeatSeq;
+	public static ArrayList<Integer> selectedSeatSeq = new ArrayList<Integer>();
 	
 	// constructor
 	public ShareVar() {
@@ -175,6 +175,9 @@ public class ShareVar {
     	
     	// 발권가격(할인된 티켓가격의 총 가격)
     	totalPrice = "";
+    	
+    	// 좌석선택순번 초기화
+    	selectedSeatSeq.removeAll(selectedSeatSeq);
 	}
 	
 	

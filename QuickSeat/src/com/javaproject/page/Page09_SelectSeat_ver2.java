@@ -68,6 +68,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				timer = new Timer();
 				timer.scheduleAtFixedRate(new RemindTask(), 0, 1000);
 				backSplashTimeEnd();
+				ShareVar shareVar = new ShareVar();
+				shareVar.shareVarInint();
 			}
 			@Override
 			public void windowDeactivated(WindowEvent e) {
