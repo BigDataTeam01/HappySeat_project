@@ -56,17 +56,21 @@ https://app.asana.com/0/1206334215923724/1206334215923724
 1. 엑셀 -> mySQL 들어가는  툴이 있음.
 2. jar chart 보여주는 jar 가 있음.
 
-HnG8N
-팀원 깃 활동
 
+##팀원 깃 활동
+박동근
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ForrestDPark&show_icons=true&theme=radical)
 <br>
+원도현
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=HnG8N&show_icons=true&theme=radical)
 <br>
+이천영
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=lcy0512&show_icons=true&theme=radical)
 <br>
+박정민
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=tom3017&show_icons=true&theme=radical)
 <br>
+박지환
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=zlzlwn&show_icons=true&theme=radical)
 
 
