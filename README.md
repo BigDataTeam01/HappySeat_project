@@ -65,7 +65,9 @@ https://app.asana.com/0/1206334215923724/1206334215923724
 
 
 # ERD 
-![image](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/050a7988-3d59-4cc4-b25c-0452ec3d7d4a)
+
+![image](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/660ab945-ef99-45b9-8627-9f98bb598939)
+
 
 
 <br>
