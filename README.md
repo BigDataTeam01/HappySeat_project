@@ -14,7 +14,7 @@
 3. Team Member : 박지환 , 박정민, 원도현, 이천영
 
 
-## Programs
+## Develop Tool and Framework
 <p align='center'>
   <a href="https://github.com/ForrestDPark/QuickSeat_project/tree/main">
     <img src="https://img.shields.io/badge/Java%20-%23F7DF1E.svg?&style=for-the-badge&&logoColor=white"/>
