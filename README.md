@@ -16,7 +16,7 @@
 
 ## Programs
 <p align='center'>
-  <a href="https://github.com/kyechan99/capsule-render/labels/Idea">
+  <a href="https://github.com/ForrestDPark/QuickSeat_project/tree/main">
     <img src="https://img.shields.io/badge/Java%20-%23F7DF1E.svg?&style=for-the-badge&&logoColor=white"/>
   </a>
 
