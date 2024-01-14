@@ -53,7 +53,7 @@ public class TypeStatistics extends JFrame {
 	 * Create the frame.
 	 */
 	public TypeStatistics() {
-		setBounds(ShareVar.managerXlocation, ShareVar.managerYlocation, ShareVar.managerXsize, ShareVar.managerYsize);
+		setBounds(ShareVar.managerXlocation+200, ShareVar.managerYlocation+100, ShareVar.managerXsize, ShareVar.managerYsize);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
