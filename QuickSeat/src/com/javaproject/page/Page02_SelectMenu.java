@@ -26,6 +26,7 @@ public class Page02_SelectMenu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	BackSplashTimer backSplashTimer;
 	/*
 	 * Description : 영화예매,예매내역 을 하기위한 메인페이지 
 	 * 				 1.SelectMenu에서 영화 예매을 터치했을시 SelectAge 화면으로 이동
@@ -51,6 +52,7 @@ public class Page02_SelectMenu extends JDialog {
 	 * 			2. 영화 예매 버튼 만듬. 
 	 * 			3. 예매 내역 버튼 만듬
 	 * 			4. 라벨도 만들고 클릭시 이동가능하게 끔 만듬. 
+	 *  		5. 페이지 종료후 타이머 돌지 않게 함. 
 	 * 
 	 */
 	/**
@@ -77,6 +79,12 @@ public class Page02_SelectMenu extends JDialog {
 			public void windowActivated(WindowEvent e) {
 				backSplashTimeEnd();
 			}
+			@Override
+			public void windowClosed(WindowEvent e) {
+				stopTimer();
+			}
+			
+			
 		});
 		setTitle("메뉴선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
@@ -193,6 +201,13 @@ public class Page02_SelectMenu extends JDialog {
 	
 	// splash Class로 돌아가기
 	public void backSplashTimeEnd() {
-		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+		backSplashTimer = new BackSplashTimer(30, this);
 	}
+	// 만약에 내가 타이머가 다 돌아가기 전에 페이지를 종료한다면 이것이 실행 되지 말아야한다. 
+	public void stopTimer() {
+		 
+		backSplashTimer.stop();
+		
+	}
+
 }// End

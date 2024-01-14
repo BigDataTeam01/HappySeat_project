@@ -11,13 +11,19 @@ public class BackSplashTimer extends JDialog {
 	private static final long serialVersionUID = 1L;
 	Timer timer;
 	JDialog jDialog;
+	boolean OnOffState;
 
 	// 몇초가 지나면 돌아가게 만들지 정하는 constructor
 	public BackSplashTimer(int seconds, JDialog jDialog) {
 		super();
 		this.jDialog = jDialog;
+		this.OnOffState= OnOffState; // false 가 들어온다면 타이머는 돌아가지 않을 것이다. 
+		
+
 		timer = new Timer();
 		timer.schedule(new RemindTask(), seconds * 1000);
+
+
 	}
 
 	// TimerTask를 쓰기 위한 class
@@ -39,6 +45,13 @@ public class BackSplashTimer extends JDialog {
 	public void dispose() {
 		jDialog.setVisible(false);
 		jDialog.dispose();
+	}
+	
+	// 멈추기
+	
+	public void stop() {
+		timer.cancel(); // Terminate the timer thread
+		
 	}
 
 }

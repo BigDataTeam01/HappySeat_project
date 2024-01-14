@@ -61,13 +61,14 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	 *  Update 2024.1.14 by PDG
 	 *  
 	 *  		1. button 을 클래스페이지에서 받아서 생성하도록 바꿧어요.
+	 *  		2. 페이지 종료후 타이머 돌지 않게 함. 
 	 * 			
 	/**
 	 * Launch the application.
 	 */
 	private JTextField tfTicketNum; //?
 
-	
+	BackSplashTimer backSplashTimer ;
 
 	public static void main(String[] args) {
 		try {
@@ -88,6 +89,12 @@ public class Page02_1_0_OrderCheck extends JDialog {
 			public void windowActivated(WindowEvent e) {
 				backSplashTimeEnd();
 			}
+			@Override
+			public void windowClosed(WindowEvent e) {
+				stopTimer();
+			}
+			
+			
 		});
 		setTitle("예매 확인");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
@@ -390,6 +397,12 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	
 	// splash Class로 돌아가기
 	public void backSplashTimeEnd() {
-		BackSplashTimer backSplashTimer = new BackSplashTimer(100, this);
+		backSplashTimer = new BackSplashTimer(100, this);
 	}
+	// 만약에 내가 타이머가 다 돌아가기 전에 페이지를 종료한다면 이것이 실행 되지 말아야한다. 
+	public void stopTimer() {
+		 
+		backSplashTimer.stop();
+	}
+		
 }// End

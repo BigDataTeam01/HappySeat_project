@@ -27,6 +27,7 @@ public class Page03_SelectAge extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	BackSplashTimer backSplashTimer;
 	/*
 	 * Description : 연령대 선택화면
 	 * 				 1.SelectAge에서 연령대 버튼을 터치했을시 MovieSelect 화면으로 이동
@@ -45,6 +46,7 @@ public class Page03_SelectAge extends JDialog {
 	 * 
 	 *  Update 2024.01.14 by PDG
 	 *  		1. 버튼 전부다 새로 만듬. 
+	 *  		2. 페이지 종료후 타이머 돌지 않게 함. 
 	 */
 	
 	/**
@@ -69,6 +71,10 @@ public class Page03_SelectAge extends JDialog {
 			@Override
 			public void windowActivated(WindowEvent e) {
 				backSplashTimeEnd();
+			}
+			@Override
+			public void windowClosed(WindowEvent e) {
+				stopTimer();
 			}
 		});
 		setTitle("연령 선택");
@@ -352,7 +358,14 @@ public class Page03_SelectAge extends JDialog {
 	
 	// splash Class로 돌아가기
 	public void backSplashTimeEnd() {
-		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+		backSplashTimer = new BackSplashTimer(30, this);
 	}
+	// 만약에 내가 타이머가 다 돌아가기 전에 페이지를 종료한다면 이것이 실행 되지 말아야한다. 
+	public void stopTimer() {
+		 
+		backSplashTimer.stop();
+		
+	}
+
 
 }
