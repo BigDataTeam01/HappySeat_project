@@ -37,6 +37,7 @@ public class BackSplashTimer extends JDialog {
 
 	// 현재 창 닫기
 	public void dispose() {
+		jDialog.setVisible(false);
 		jDialog.dispose();
 	}
 

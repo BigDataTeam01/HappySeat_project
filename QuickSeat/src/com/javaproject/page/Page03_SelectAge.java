@@ -41,17 +41,10 @@ public class Page03_SelectAge extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-//	private static Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
-//	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-//	private static Page04_SelectMovie SelectMoviedialog = new Page04_SelectMovie();
-	
-	
-	private static Page03_SelectAge selectAgedialog = new Page03_SelectAge();
-	private static Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-	private static Page04_SelectMovie selectMoviedialog = new Page04_SelectMovie();
 
 	public static void main(String[] args) {
 		try {
+			Page03_SelectAge selectAgedialog = new Page03_SelectAge();
 			selectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			selectAgedialog.setVisible(true);
 		} catch (Exception e) {
@@ -227,27 +220,30 @@ public class Page03_SelectAge extends JDialog {
 
 	// 첫화면으로 가기
 	public void goToSelectMenu() {
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
-		selectAgedialog.setVisible(false);
-		selectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
 	}
 
 	// 전화면으로 가기
 	public void goToOrderCancle() {
+		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
-		selectAgedialog.setVisible(false);
-		selectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMenudialog.setVisible(true);
 	}
 
 	// 영화선택화면으로 가기
 	public void goToSelectMovie() {
+		Page04_SelectMovie selectMoviedialog = new Page04_SelectMovie();
 		int cust_age = ShareVar.selectedCustage;
 		System.out.println(cust_age);
 		dispose();
-		selectAgedialog.setVisible(false);
-		selectAgedialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+		this.setVisible(false);
+		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		selectMoviedialog.setVisible(true);
 	}
 	

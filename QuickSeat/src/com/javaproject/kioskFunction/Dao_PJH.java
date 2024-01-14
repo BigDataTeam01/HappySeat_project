@@ -7,11 +7,13 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.managerfunction.DtoWDH;
 
 public class Dao_PJH {
 	//Filed
@@ -35,9 +37,13 @@ public class Dao_PJH {
 	String cinema_branch;
 	String get_here;
 	FileInputStream location_map;
-	
-	
-	
+	int resv_cust_seq;
+	int resv_scr_code;
+	String resv_scr_movie_title;
+	String resv_scr_scroom_name;
+	String resv_date;	//++++++++++++++++++date 값 어떻게 받는지 확인필요(일단 스트링으로 받음)
+	int ticket_price;
+	int seat_order;
 	
 	//construct
 	public  Dao_PJH() {
@@ -252,9 +258,6 @@ public class Dao_PJH {
 						+ " from screen"
 						+ " where scr_movie_title ="
 						+ "'"+ ShareVar.selectedMovieTitle+"')"; 
-		System.out.println("asjdhiauhfiuahsfiuhasifuhaisu");
-						System.out.println(ShareVar.selectedMovieTitle);
-		System.out.println(fetchQuery);
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -301,6 +304,95 @@ public class Dao_PJH {
 		}
 		return dtoList;
 	}
+	// 상영코드 불러오기
+	public int scr_code_fetch() {
+		
+		int scr_code_fetch = 0; 
+		
+		String whereA = "select s.scr_code";
+		String whereB = " from screen as s, movie as m";
+		String whereC = " where s.scr_movie_title = m.movie_title and s.scr_movie_title = '" + ShareVar.selectedMovieTitle + "'"
+				+ " and s.scr_scroom_name = '"+ ShareVar.selectedScroomName + "'" + " and s.scr_start_time = '"+ ShareVar.selectedScrStarttime+"'"  ;
+		
+		System.out.println(whereA + whereB + whereC);
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			Statement stmt_mysql = conn_mysql.createStatement();
+
+			ResultSet rs = stmt_mysql.executeQuery(whereA + whereB + whereC);
+
+			while (rs.next()) {
+				scr_code_fetch = rs.getInt(1);
+
+
+			}
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return scr_code_fetch;
+	}
+	
+	
+	//선택된 영화 초기가격 불러옴. 
+	public int MoviePriceBeforeDiscount() {
+	    int moviePriceBeforeDiscount = 0;
+
+	    String fetchQuery = "SELECT movie_price_beforediscount FROM movie WHERE movie_title = '" + ShareVar.selectedMovieTitle + "'";
+
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+	        Statement stmt_mysql = conn_mysql.createStatement();
+	        ResultSet rs = stmt_mysql.executeQuery(fetchQuery);
+
+	        if (rs.next()) {
+	            moviePriceBeforeDiscount = rs.getInt("movie_price_beforediscount");
+	        }
+
+	        conn_mysql.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return moviePriceBeforeDiscount;
+	}
+	
+	public boolean movieInsertAction() {
+		PreparedStatement ps = null;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			
+			String A = "INSERT INTO `quick_seat`.`reserve` (`resv_cust_seq`, `resv_scr_code`, `resv_scr_movie_title`, `resv_scr_scroom_name`, `resv_date`, `pay_method`, `ticket_price`, `seat_order`) \\r\\n "    
+					+ " values (?,?,\" +ShareVar.selectedMovieTitle+ \",\"+ShareVar.selectedCienma+\",\"+\"선택된 시간이 들어갈 자리\"+\",\"+ShareVar.pay_method+ \",\"+ShareVar.totalPrice+\",\"+\"좌석번호가 들어갈 자리\"+\");\\r\\n";
+			
+			ps = conn_mysql.prepareStatement(A);
+			ps.setInt(1, resv_cust_seq);
+			ps.setInt(2, resv_scr_code);
+			ps.setString(3, resv_scr_movie_title);
+			ps.setString(4, resv_scr_scroom_name);
+			ps.setString(5, resv_date);
+			ps.setInt(6, ticket_price);
+			ps.setInt(7, seat_order);
+//			ps.setBinaryStream(8, poster);                           고객번호, 영화관 상영 코드 어떻게넣는지 확인필요@@@@@
+//			ps.setBinaryStream(8, poster);
+			ps.executeUpdate();
+			
+			conn_mysql.close();
+			
+		}catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
 	
 }
 

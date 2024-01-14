@@ -83,27 +83,46 @@ public class ShareVar {
 	public static String selectedMovieTitle = "";
 
 	// 상영하다 테이블 프라이머리 키 
-	public static int scr_code = 7;
+	public static int scr_code = 0;
 
 	// 관리자 페이지 차트 연도와 달 저장하기
 	public static String year = "";
 	public static String month = "";
-	
+
 	// 영화관 지도 이미지
 	public static String cinemaMapImageFileName = "";
-	
 
 	// 선택된 영화관
 	public static String selectedCienma = "입력이 안되었습니다";
-	
+
 	// 선택된 나이
 	public static int selectedCustage = 0;
 
-	
 	// 선택된 인원수
 	public static int sumOfPersonNumbers = 0;
 	
+	// 선택된 영화포스터
+	public static String posterFile = "";
 	
+	// 선택된 상영관 이륾
+	
+	public static String selectedScroomName ="";
+	
+	// 선택된 상영 영화 시작시간 
+	public static String selectedScrStarttime="";
+	
+
+	// 입력된 발권번호
+	public static String insertedOrderNum = "";
+
+	//인원선택 분류 어레이 
+	public static int[] personNumbers = new int[5];
+
+	// 구매방법(현금,카드 구분)
+	public static String pay_method = "";
+	
+	// 발권가격(할인된 티켓가격의 총 가격)
+	public static String totalPrice = "";
 	
 	// constructor
 	public ShareVar() {
@@ -121,7 +140,7 @@ public class ShareVar {
 		selectedMovieTitle = "선택된 영화 정보 입력이 안되었습니다";
 
 		// 상영하다 테이블 프라이머리 키
-		scr_code = 7;
+		scr_code = 0;
 
 		// 관리자 페이지 차트 연도와 달 저장하기
 		year = "";
@@ -138,6 +157,20 @@ public class ShareVar {
 		
 		// 선택된 인원수
 		sumOfPersonNumbers = 0;
+		
+		//입력된 발권번호숫자
+		insertedOrderNum = "";
+		
+		// 인원선택 분류 어레이 (어레이라 다 지우려고 for문 사용)
+        for (int i = 0; i < personNumbers.length; i++) {
+        	personNumbers[i] = 0;        	
+        }
+        
+     // 구매방법(현금,카드 구분)
+    	pay_method = "";
+    	
+    	// 발권가격(할인된 티켓가격의 총 가격)
+    	totalPrice = "";
 	}
 	
 	
