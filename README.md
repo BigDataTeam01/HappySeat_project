@@ -7,6 +7,10 @@
 3. Team Member : 박지환 , 박정민, 원도현, 이천영
 
 
+## Programs
+ <img src="https://img.shields.io/badge/JavaSwingt-3178C6?style=flat&logo=TypeScript&logoColor=white"/>
+
+
 ## Logo Design
 (ver2.0)
 <br>![image](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/d2cc524d-ff13-4e25-a9c8-d4caeb52ef0c)
