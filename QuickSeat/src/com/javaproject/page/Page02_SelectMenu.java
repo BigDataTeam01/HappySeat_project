@@ -82,10 +82,11 @@ public class Page02_SelectMenu extends JDialog {
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		
-///-----------------------------예매 내역 버튼------------------------------/////
+		///-----------------------------예매 내역 버튼------------------------------/////
 		// 새로도입하는 예매내역 버튼 만들기 !!
-		ImageIcon icon = new ImageIcon(Page02_SelectMenu.class.getResource("/com/javaproject/image/BtnResvCheck_image_1.png"));
-		ButtonInsertIcon btnResvCheck = new ButtonInsertIcon(icon);
+		ImageIcon iconResvCheck = new ImageIcon(
+				Page02_SelectMenu.class.getResource("/com/javaproject/image/BtnResvCheck_image_1.png"));
+		ButtonInsertIcon btnResvCheck = new ButtonInsertIcon(iconResvCheck);
 		btnResvCheck.setOpaque(false);
 		btnResvCheck.setContentAreaFilled(false);
 		btnResvCheck.setBorderPainted(false);
@@ -104,14 +105,53 @@ public class Page02_SelectMenu extends JDialog {
 				goToOrderCheck();
 			}
 		});
-		//lblResvCheck.setFont(new Font("배달의민족 도현", Font.PLAIN, 65));
-		lblResvCheck.setFont(new Font("배달의민족 도현", Font.PLAIN, 55));
+		
+
+
+		lblResvCheck.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 55));
 		lblResvCheck.setBounds(450, 438, 222, 62);
 		
 		contentPanel.add(lblResvCheck);
 		contentPanel.add(btnResvCheck);
-///-----------------------------예매 내역 버튼 END------------------------------/////		
+		///-----------------------------예매 내역 버튼 END------------------------------/////		
+		
+		
+		
+		///----------------------------- 영화 예매 버튼 START------------------------------/////
+		
+		//<< 버튼생성>>
+		ImageIcon iconMovieTicket = new ImageIcon(
+				Page02_SelectMenu.class.getResource("/com/javaproject/image/BtnMovieTicket.png"));
+		
 
+		ButtonInsertIcon btnMovieTicket = new ButtonInsertIcon(iconMovieTicket);
+		btnMovieTicket.setOpaque(false);
+		btnMovieTicket.setContentAreaFilled(false);
+		btnMovieTicket.setBorderPainted(false);
+		btnMovieTicket.setBounds(66, 200, 284, 228);
+		btnMovieTicket.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gotoMovieSelect();
+			}
+		});
+		contentPanel.add(btnMovieTicket);
+		
+		//<< 라벨 생성>>
+		JLabel lblMovieTicket = new JLabel("영화예매");
+		lblMovieTicket.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gotoMovieSelect();
+			}
+		});
+		
+		lblMovieTicket.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 55));
+		lblMovieTicket.setBounds(97, 438, 222, 62);
+		contentPanel.add(lblMovieTicket);
+		
+		///----------------------------- 영화 예매 버튼 END------------------------------/////
+		
 		// 페이지 타이틀
 		JLabel lbl_pageTitle = new JLabel("메뉴 선택");
 		lbl_pageTitle.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, ShareVar.kiosk_title_font_size));
@@ -119,22 +159,6 @@ public class Page02_SelectMenu extends JDialog {
 		lbl_pageTitle.setBounds(295, 10, 250, 100);
 
 		contentPanel.add(lbl_pageTitle);
-		// ********************타이틀 바 없애기**********************
-		//		setUndecorated(true);
-		//******************************************************
-		//영화예매 아이콘
-		JLabel BtnMoviePurchase = new JLabel("");
-		BtnMoviePurchase
-				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화예매Icon.png")));
-		BtnMoviePurchase.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				goToSelectAge();
-			}
-		});
-		BtnMoviePurchase.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		BtnMoviePurchase.setBounds(91, 200, 284, 319);
-		contentPanel.add(BtnMoviePurchase);
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
@@ -144,18 +168,17 @@ public class Page02_SelectMenu extends JDialog {
 		contentPanel.add(lbl_background);
 
 	}
-
-//--------------------------------Function------------------------------------
-	// 나이선택화면으로 가기
-	private void goToSelectAge() {
-//		private Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-//		private Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
-//		private Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
-		Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
-		dispose();
+	
+	// goto Movie ticket page
+	
+	private void gotoMovieSelect() {
+		Page03_SelectAge selectAge =new Page03_SelectAge();
+		
+		selectAge.setVisible(true);
 		this.setVisible(false);
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		SelectAgedialog.setVisible(true);
+		this.dispose();
+		
+		
 	}
 
 	// 예매,주문내역 확인페이지로 가기
