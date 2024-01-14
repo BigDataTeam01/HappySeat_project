@@ -54,7 +54,7 @@ public class AgeStatisticsChart extends JFrame {
 	 */
 	public AgeStatisticsChart() {
 		
-		setBounds(ShareVar.managerXlocation, ShareVar.managerYlocation, ShareVar.managerXsize, ShareVar.managerYsize);
+		setBounds(ShareVar.managerXlocation, ShareVar.managerYlocation+100, ShareVar.managerXsize, ShareVar.managerYsize);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

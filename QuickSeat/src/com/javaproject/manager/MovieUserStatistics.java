@@ -20,8 +20,13 @@ import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.Year;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class MovieUserStatistics extends JDialog {
 
@@ -42,14 +47,18 @@ public class MovieUserStatistics extends JDialog {
 	private JLabel lblNewLabel_2;
 	private JLabel lblNewLabel_1_1;
 	private JComboBox cbMonthlyRevenue;
-	private JComboBox cbDailyRevenue;
-	private JComboBox cbTypeStatistics;
-	private JComboBox cbAgeStatistics;
+	private JComboBox cbYearDailyRevenue;
+	private JComboBox cbYearTypeStatistics;
+	private JComboBox cbYearAgeStatistics;
 	private JButton btnMonthlyRevenue;
 	private JButton btnDailyRevenue;
 	private JButton btnAgeStatistics;
 	private JButton btnTypeStatistics;
+	private JComboBox cbMonthDailyRevenue;
+	private JComboBox cbMonthAgeStatistics;
+	private JComboBox cbMonthTypeStatistics;
 	private JLabel lblNewLabel_3;
+	private int startYear = 2020;
 
 	/**
 	 * Launch the application.
@@ -68,8 +77,16 @@ public class MovieUserStatistics extends JDialog {
 	 * Create the dialog.
 	 */
 	public MovieUserStatistics() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				addCbItemYear();
+				settingCbYearMonth();
+			}
+		});
 		setTitle("사용자 통계");
-		setBounds(ShareVar.managerXlocation, ShareVar.managerYlocation, ShareVar.managerXsize, ShareVar.managerYsize);
+		setBounds(ShareVar.managerXlocation + 100, ShareVar.managerYlocation, ShareVar.managerXsize,
+				ShareVar.managerYsize);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -79,13 +96,16 @@ public class MovieUserStatistics extends JDialog {
 		contentPanel.add(getLblNewLabel_2());
 		contentPanel.add(getLblNewLabel_1_1());
 		contentPanel.add(getCbMonthlyRevenue());
-		contentPanel.add(getCbDailyRevenue());
-		contentPanel.add(getCbTypeStatistics());
-		contentPanel.add(getCbAgeStatistics());
+		contentPanel.add(getCbYearDailyRevenue());
+		contentPanel.add(getCbYearTypeStatistics());
+		contentPanel.add(getCbYearAgeStatistics());
 		contentPanel.add(getBtnMonthlyRevenue());
 		contentPanel.add(getBtnDailyRevenue());
 		contentPanel.add(getBtnAgeStatistics());
 		contentPanel.add(getBtnTypeStatistics());
+		contentPanel.add(getCbMonthDailyRevenue());
+		contentPanel.add(getCbMonthAgeStatistics());
+		contentPanel.add(getCbMonthTypeStatistics());
 		contentPanel.add(getLblNewLabel_3());
 	}
 
@@ -133,40 +153,36 @@ public class MovieUserStatistics extends JDialog {
 		if (cbMonthlyRevenue == null) {
 			cbMonthlyRevenue = new JComboBox();
 			cbMonthlyRevenue.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
-			cbMonthlyRevenue.setModel(new DefaultComboBoxModel(new String[] { "2024년 매출" }));
 			cbMonthlyRevenue.setBounds(105, 150, 170, 40);
 		}
 		return cbMonthlyRevenue;
 	}
 
-	private JComboBox getCbDailyRevenue() {
-		if (cbDailyRevenue == null) {
-			cbDailyRevenue = new JComboBox();
-			cbDailyRevenue.setModel(new DefaultComboBoxModel(new String[] {"2024년 06월 매출", "2024년 07월 매출"}));
-			cbDailyRevenue.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
-			cbDailyRevenue.setBounds(480, 150, 210, 40);
+	private JComboBox getCbYearDailyRevenue() {
+		if (cbYearDailyRevenue == null) {
+			cbYearDailyRevenue = new JComboBox();
+			cbYearDailyRevenue.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
+			cbYearDailyRevenue.setBounds(465, 150, 90, 40);
 		}
-		return cbDailyRevenue;
+		return cbYearDailyRevenue;
 	}
 
-	private JComboBox getCbTypeStatistics() {
-		if (cbTypeStatistics == null) {
-			cbTypeStatistics = new JComboBox();
-			cbTypeStatistics.setModel(new DefaultComboBoxModel(new String[] {"2024년 07월 통계"}));
-			cbTypeStatistics.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
-			cbTypeStatistics.setBounds(480, 390, 210, 40);
+	private JComboBox getCbYearTypeStatistics() {
+		if (cbYearTypeStatistics == null) {
+			cbYearTypeStatistics = new JComboBox();
+			cbYearTypeStatistics.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
+			cbYearTypeStatistics.setBounds(480, 390, 90, 40);
 		}
-		return cbTypeStatistics;
+		return cbYearTypeStatistics;
 	}
 
-	private JComboBox getCbAgeStatistics() {
-		if (cbAgeStatistics == null) {
-			cbAgeStatistics = new JComboBox();
-			cbAgeStatistics.setModel(new DefaultComboBoxModel(new String[] {"2024년 07월 통계"}));
-			cbAgeStatistics.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
-			cbAgeStatistics.setBounds(90, 390, 210, 40);
+	private JComboBox getCbYearAgeStatistics() {
+		if (cbYearAgeStatistics == null) {
+			cbYearAgeStatistics = new JComboBox();
+			cbYearAgeStatistics.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
+			cbYearAgeStatistics.setBounds(90, 390, 90, 40);
 		}
-		return cbAgeStatistics;
+		return cbYearAgeStatistics;
 	}
 
 	private JButton getBtnMonthlyRevenue() {
@@ -225,9 +241,42 @@ public class MovieUserStatistics extends JDialog {
 		return btnTypeStatistics;
 	}
 
+	private JComboBox getCbMonthDailyRevenue() {
+		if (cbMonthDailyRevenue == null) {
+			cbMonthDailyRevenue = new JComboBox();
+			cbMonthDailyRevenue.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
+			cbMonthDailyRevenue.setModel(new DefaultComboBoxModel(new String[] { "01월 매출", "02월 매출", "03월 매출", "04월 매출",
+					"05월 매출", "06월 매출", "07월 매출", "08월 매출", "09월 매출", "10월 매출", "11월 매출", "12월 매출" }));
+			cbMonthDailyRevenue.setBounds(567, 150, 138, 40);
+		}
+		return cbMonthDailyRevenue;
+	}
+
+	private JComboBox getCbMonthAgeStatistics() {
+		if (cbMonthAgeStatistics == null) {
+			cbMonthAgeStatistics = new JComboBox();
+			cbMonthAgeStatistics.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
+			cbMonthAgeStatistics.setModel(new DefaultComboBoxModel(new String[] { "01월 현황", "02월 현황", "03월 현황",
+					"04월 현황", "05월 현황", "06월 현황", "07월 현황", "08월 현황", "09월 현황", "10월 현황", "11월 현황", "12월 현황" }));
+			cbMonthAgeStatistics.setBounds(192, 390, 138, 40);
+		}
+		return cbMonthAgeStatistics;
+	}
+
+	private JComboBox getCbMonthTypeStatistics() {
+		if (cbMonthTypeStatistics == null) {
+			cbMonthTypeStatistics = new JComboBox();
+			cbMonthTypeStatistics.setModel(new DefaultComboBoxModel(new String[] { "01월 현황", "02월 현황", "03월 현황",
+					"04월 현황", "05월 현황", "06월 현황", "07월 현황", "08월 현황", "09월 현황", "10월 현황", "11월 현황", "12월 현황" }));
+			cbMonthTypeStatistics.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
+			cbMonthTypeStatistics.setBounds(582, 390, 138, 40);
+		}
+		return cbMonthTypeStatistics;
+	}
+
 	private JLabel getLblNewLabel_3() {
 		if (lblNewLabel_3 == null) {
-			lblNewLabel_3 = new JLabel("New label");
+			lblNewLabel_3 = new JLabel("");
 			lblNewLabel_3.setIcon(new ImageIcon(
 					MovieUserStatistics.class.getResource("/com/javaproject/image/manager_background.png")));
 			lblNewLabel_3.setBounds(0, 0, 800, 572);
@@ -238,10 +287,10 @@ public class MovieUserStatistics extends JDialog {
 	// --- Field ---
 	// 월별 매출 현황에서 연도를 선택 후 차트보기를 눌르면 차트를 띄움
 	private void showMonthlyRevenue() {
-		
+
 		// 콤보박스에서 연도만 따와서 ShareVar.year에 넣어줌
 		ShareVar.year = cbMonthlyRevenue.getSelectedItem().toString().substring(2, 4);
-		
+
 		// 월별 매출 현황 차트를 띄워줌
 		MovieMonthSalesStatus movieMonthSalesStatus = new MovieMonthSalesStatus();
 		movieMonthSalesStatus.setVisible(true);
@@ -250,65 +299,72 @@ public class MovieUserStatistics extends JDialog {
 
 	// 일별 매출 현황에서 연도와 달을 선택 후 차트보기를 누르면 차트를 띄움
 	private void showDailyRevenue() {
-		
+
 		// 콤보박스에서 연도와 달만 따와서 ShareVar.year와 ShareVar.month를 넣어줌
-		ShareVar.year = cbDailyRevenue.getSelectedItem().toString().substring(2, 4);
-		ShareVar.month = cbDailyRevenue.getSelectedItem().toString().substring(6, 8);
-		
+		ShareVar.year = cbYearDailyRevenue.getSelectedItem().toString().substring(2, 4);
+		ShareVar.month = cbMonthDailyRevenue.getSelectedItem().toString().substring(0, 2);
+
 		// 일별 매출 현황 차트를 띄워줌
 		MovieDaySalesStatus movieDaySalesStatus = new MovieDaySalesStatus();
 		movieDaySalesStatus.setVisible(true);
-		
+
 	}
-	
+
 	// 연령별 사용자 통계에서 연도와 달을 선택 후 차트보기를 누르면 차트를 띄움
 	private void showAgeStatistics() {
-		
+
 		// 콤보박스에서 연도만 따와서 ShareVar.year에 넣어줌
-		ShareVar.year = cbAgeStatistics.getSelectedItem().toString().substring(2, 4);
-		ShareVar.month = cbAgeStatistics.getSelectedItem().toString().substring(6, 8);
-		
+		ShareVar.year = cbYearAgeStatistics.getSelectedItem().toString().substring(2, 4);
+		ShareVar.month = cbMonthAgeStatistics.getSelectedItem().toString().substring(0, 2);
+
 		// 연령별 사용자 통계를 띄워줌
 		AgeStatisticsChart movieMonthSalesStatus = new AgeStatisticsChart();
 		movieMonthSalesStatus.setVisible(true);
-		
-
-		// 통계 알고리즘 잘 나오는지 실험 완료
-//		DaoUserStatistics dao = new DaoUserStatistics();
-//		ArrayList<DtoWDH> dto = dao.ageTypePerMonth();
-//		
-//
-//		String ageDB = String.format("%02d", dto.get(0).getCust_age());
-//		System.out.println(dto.get(0).getCust_age());
-//		for (int i = 0; i <= 80; i+=10) {
-//			String age = String.format("%02d", i);
-//			int sumPeople = 0;
-//
-//			// 가져온 month와 현재 month가 일치할 경우 sumPeople에 인원 추가
-//			for (int j = 0; j < dto.size(); j++) {
-//				String ageDB = String.format("%02d", dto.get(j).getCust_age());
-//				if (ageDB.equals(age)) {
-//					sumPeople += dto.get(j).getAge_count();
-//					System.out.println(sumPeople);
-//				}
-//			}
-//		}
-
 
 	}
-	
+
 	// 유형별 사용자 통계에서 연도와 달을 선택 후 차트보기를 누르면 차트를 띄움
 	private void showTypeStatistics() {
-		
+
 		// 콤보박스에서 연도만 따와서 ShareVar.year에 넣어줌
-		ShareVar.year = cbTypeStatistics.getSelectedItem().toString().substring(2, 4);
-		ShareVar.month = cbDailyRevenue.getSelectedItem().toString().substring(6, 8);
-		
+		ShareVar.year = cbYearTypeStatistics.getSelectedItem().toString().substring(2, 4);
+		ShareVar.month = cbMonthDailyRevenue.getSelectedItem().toString().substring(0, 2);
+
 		// 유형별 사용자 통계를 띄워줌
 		TypeStatistics movieMonthSalesStatus = new TypeStatistics();
 		movieMonthSalesStatus.setVisible(true);
 
-		
+	}
+
+	// 월별 매출, 일별 매출, 연령별 통계, 타입별 통계의 년도 콤보박스를 2020년부터 현재 년도까지로 설정
+	private void addCbItemYear() {
+		// 현재 년도를 받아온 후 int값으로 변환
+		int currentYear = Integer.parseInt(Year.now().toString());
+		// 2020년부터 현재 년도까지 콤보박스에 추가
+		for (int i = startYear; i <= currentYear; i++) {
+			cbMonthlyRevenue.addItem(i + "년 매출");
+			cbYearDailyRevenue.addItem(i);
+			cbYearAgeStatistics.addItem(i);
+			cbYearTypeStatistics.addItem(i);
+		}
+	}
+
+	// 콤보박스들의 초기값을 현재 년도와 월로 설정
+	private void settingCbYearMonth() {
+		// 현재 년도와 월을 받아온 후 int값으로 변환
+		int currentYear = Integer.parseInt(Year.now().toString());
+		int currentMonth = LocalDate.now().getMonthValue();
+
+		// 현재 년도에서 2020을 빼서 index값을 설정 (index는 0부터 시작하므로)
+		cbMonthlyRevenue.setSelectedIndex(currentYear - startYear);
+		cbYearDailyRevenue.setSelectedIndex(currentYear - startYear);
+		cbYearAgeStatistics.setSelectedIndex(currentYear - startYear);
+		cbYearTypeStatistics.setSelectedIndex(currentYear - startYear);
+
+		// 현재 달을 index값으로 설정
+		cbMonthDailyRevenue.setSelectedIndex(currentMonth - 1);
+		cbMonthAgeStatistics.setSelectedIndex(currentMonth - 1);
+		cbMonthTypeStatistics.setSelectedIndex(currentMonth - 1);
 	}
 
 } // End

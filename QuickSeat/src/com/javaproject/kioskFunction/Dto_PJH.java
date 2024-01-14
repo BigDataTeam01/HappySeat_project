@@ -21,6 +21,11 @@ public class Dto_PJH {
 	String cinema_branch;
 	String get_here;
 	FileInputStream location_map;
+	String cust_type;
+	String discount_rate;
+	int ticket_price;
+	int moviePriceBeforeDiscount;
+	int ticket_number;
 	
 	
 	public Dto_PJH() {
@@ -57,6 +62,7 @@ public class Dto_PJH {
 		this.over_date = over_date;
 		this.rel_state = rel_state;
 		this.movie_run_time = movie_run_time;
+		
 	}
 	
 	//영화 상영관정보를 위해 모두 가져오는dto
@@ -65,6 +71,16 @@ public class Dto_PJH {
 		this.cinema_branch = cinema_branch;
 		this.get_here = get_here;
 	}
+	//영화가격을 위해 영화 할인전 가격을 가져오는 dto
+	  public Dto_PJH(String movie_title, int moviePriceBeforeDiscount) {
+	        this.movie_title = movie_title;
+	        this.moviePriceBeforeDiscount = moviePriceBeforeDiscount;
+	    }
+	//영화 예매번호를 db에서 긁어오기
+	  public Dto_PJH(int ticket_number) {
+		  super();
+		  this.ticket_number = ticket_number;
+	  }
 	
 	
 // getter&setter
@@ -195,6 +211,46 @@ public class Dto_PJH {
 
 	public void setLocation_map(FileInputStream location_map) {
 		this.location_map = location_map;
+	}
+
+	public String getCust_type() {
+		return cust_type;
+	}
+
+	public void setCust_type(String cust_type) {
+		this.cust_type = cust_type;
+	}
+
+	public String getDiscount_rate() {
+		return discount_rate;
+	}
+
+	public void setDiscount_rate(String discount_rate) {
+		this.discount_rate = discount_rate;
+	}
+
+	public int getTicket_price() {
+		return ticket_price;
+	}
+
+	public void setTicket_price(int ticket_price) {
+		this.ticket_price = ticket_price;
+	}
+
+	public int getMoviePriceBeforeDiscount() {
+		return moviePriceBeforeDiscount;
+	}
+
+	public void setMoviePriceBeforeDiscount(int moviePriceBeforeDiscount) {
+		this.moviePriceBeforeDiscount = moviePriceBeforeDiscount;
+	}
+
+	public int getTicket_number() {
+		return ticket_number;
+	}
+
+	public void setTicket_number(int ticket_number) {
+		this.ticket_number = ticket_number;
 	}
 
 	

@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.Dao_PJH;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -26,8 +27,15 @@ public class Page11_2_Card extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
 	/*
-	 * Description : 1. Card화면에서 결제방법 선택으로 가기 버튼을 터치했을시 SelectPayment화면으로 이동 Date :
-	 * 2024.01.06 (토요일) Author : 박정민,박지환
+	 * Description : 가드결제 화면 
+	 * 				1. Card화면에서 결제방법 선택으로 가기 버튼을 터치했을시 SelectPayment화면으로 이동 
+	 * 
+	 * Date :2024.01.06 (토요일) Author : 박정민,박지환
+	 * 
+	 * *  *  * Update 2024.01.13 by PJH:
+	 * 			1. Description 수정
+	 * 			2. 인원선택에서 받아온 어레이값으로  각 할인율 어레이를 활용해 각각의 금액을 만들고 그 값을 더해 총 구매금액 확인 구현
+	 * 			3. 앞에서 받아온 쉐어바의 값들은 db에 입력(구현중)
 	 * 
 	 */
 
@@ -36,8 +44,10 @@ public class Page11_2_Card extends JDialog {
 	 */
 
 	// private static SelectMenu selectMenu = new SelectMenu();
-
-	private JTextField textField;
+	//인원수 배열을 쉐어바에서 가져온다
+	  private Dao_PJH dao;	
+	  private JTextField textField;
+	
 
 	public static void main(String[] args) {
 		try {
@@ -53,6 +63,14 @@ public class Page11_2_Card extends JDialog {
 	 * Create the dialog.
 	 */
 	public Page11_2_Card() {
+		dao = new Dao_PJH();
+		// 인원선택에서 선택한 어레이로 각각의 할인율을 설정
+		int[] discountRates = { 10, 30, 30, 50, 30 }; // 각 할인율을 설정
+		int[] personNumbers = ShareVar.personNumbers;
+		// 다오에서  할인 전 영화 가격 가져오기
+		int moviePriceBeforeDiscount = dao.MoviePriceBeforeDiscount();
+		int discountedPrice = calculateDiscountedPrice(personNumbers, discountRates, moviePriceBeforeDiscount);
+
 		setTitle("카드 결제");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		getContentPane().setLayout(new BorderLayout());
@@ -102,6 +120,7 @@ public class Page11_2_Card extends JDialog {
 		textField.setBounds(161, 245, 180, 60);
 		contentPanel.add(textField);
 		textField.setColumns(10);
+		textField.setText(Integer.toString(discountedPrice));
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/InsertCard.png")));
@@ -113,6 +132,7 @@ public class Page11_2_Card extends JDialog {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				goToPaymentConfirm();
+				ShareVar.totalPrice= Integer.toString(discountedPrice);
 			}
 		});
 		lblNewLabel_4.setIcon(new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/cardAuthorization.png")));
@@ -147,12 +167,21 @@ public class Page11_2_Card extends JDialog {
 		dispose();
 		page12_PaymentConfirm.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		page12_PaymentConfirm.setVisible(true);
+		ShareVar.pay_method="카드";
 		
 	}
-	
-	
-	
-	
+
+	//할인가격계산해서 전체 가격 내보내기
+	private int calculateDiscountedPrice(int[] personNumbers, int[] discountRates, int moviePriceBeforeDiscount) {
+		// 할인된 가격을 초기화(안하면 포문에서 오류남)
+		int discountedPrice = 0;
+		for (int i = 0; i < personNumbers.length; i++) {
+			// 할인율계산(예:30프로할인-> 인원분류숫자*0.7)
+			discountedPrice += (1 - (double) discountRates[i] / 100) * personNumbers[i] * moviePriceBeforeDiscount;
+		}
+
+		return discountedPrice;
+	}
 	
 
 }// END

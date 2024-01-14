@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
@@ -36,9 +37,13 @@ public class Dao_PJH {
 	String cinema_branch;
 	String get_here;
 	FileInputStream location_map;
-	
-	
-	
+	int resv_cust_seq;
+	int resv_scr_code;
+	String resv_scr_movie_title;
+	String resv_scr_scroom_name;
+	String resv_date;	//++++++++++++++++++date 값 어떻게 받는지 확인필요(일단 스트링으로 받음)
+	int ticket_price;
+	int seat_order;
 	
 	//construct
 	public  Dao_PJH() {
@@ -334,8 +339,110 @@ public class Dao_PJH {
 	}
 	
 	
-}
+	//선택된 영화 초기가격 불러옴. 
+	public int MoviePriceBeforeDiscount() {
+	    int moviePriceBeforeDiscount = 0;
 
+	    String fetchQuery = "SELECT movie_price_beforediscount FROM movie WHERE movie_title = '" + ShareVar.selectedMovieTitle + "'";
+
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	        Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+	        Statement stmt_mysql = conn_mysql.createStatement();
+	        ResultSet rs = stmt_mysql.executeQuery(fetchQuery);
+
+	        if (rs.next()) {
+	            moviePriceBeforeDiscount = rs.getInt("movie_price_beforediscount");
+	        }
+
+	        conn_mysql.close();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+
+	    return moviePriceBeforeDiscount;
+	}
+	//선택한 영화정보 db에 입력하기
+	public boolean movieInsertAction() {
+		PreparedStatement ps = null;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			
+			String A = "INSERT INTO `quick_seat`.`reserve` (`resv_cust_seq`, `resv_scr_code`, `resv_scr_movie_title`, `resv_scr_scroom_name`, `resv_date`, `pay_method`, `ticket_price`, `seat_order`) \\r\\n "    
+					+ " values (?,?,\" +ShareVar.selectedMovieTitle+ \",\"+ShareVar.selectedCienma+\",\"+\"선택된 시간이 들어갈 자리\"+\",\"+ShareVar.pay_method+ \",\"+ShareVar.totalPrice+\",\"+\"좌석번호가 들어갈 자리\"+\");\\r\\n";
+			
+			ps = conn_mysql.prepareStatement(A);
+			ps.setInt(1, resv_cust_seq);
+			ps.setInt(2, resv_scr_code);
+			ps.setString(3, resv_scr_movie_title);
+			ps.setString(4, resv_scr_scroom_name);
+			ps.setString(5, resv_date);
+			ps.setInt(6, ticket_price);
+			ps.setInt(7, seat_order);
+//			ps.setBinaryStream(8, poster);                           고객번호, 영화관 상영 코드 어떻게넣는지 확인필요@@@@@
+//			ps.setBinaryStream(8, poster);
+			ps.executeUpdate();
+			
+			conn_mysql.close();
+			
+		}catch(Exception e) {
+			return false;
+		}
+		return true;
+	}
+	
+	public class MovieDAO {
+	    // 선택된 영화의 초기 가격을 불러오는 메서드
+	    public int fetchMoviePriceBeforeDiscount(String selectedMovieTitle) {
+	        int moviePriceBeforeDiscount = 0;
+
+	        String fetchQuery = "SELECT movie_price_beforediscount FROM movie WHERE movie_title = '" + selectedMovieTitle + "'";
+	        
+	        try {
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+	            Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+	            Statement stmt_mysql = conn_mysql.createStatement();
+	            ResultSet rs = stmt_mysql.executeQuery(fetchQuery);
+
+	            if (rs.next()) {
+	                moviePriceBeforeDiscount = rs.getInt("movie_price_beforediscount");
+	            }
+
+	            conn_mysql.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+
+	        return moviePriceBeforeDiscount;
+	    }
+	}
+
+		//db에서 발권번호 가지고 오기
+	  public String confirmReservedTicket() {
+	        String ticketNumber = null;
+
+	        String fetchQuery = "SELECT ticket_number FROM reserve";
+
+	        try {
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+	            Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+	            Statement stmt_mysql = conn_mysql.createStatement();
+	            ResultSet rs = stmt_mysql.executeQuery(fetchQuery);
+
+	            if (rs.next()) {
+	                ticketNumber = rs.getString("ticket_number");
+	            }
+
+	            conn_mysql.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+
+	        return ticketNumber;
+	    }
+	}
 	
 	
 	
