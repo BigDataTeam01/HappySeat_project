@@ -19,7 +19,11 @@
   <a href="https://github.com/ForrestDPark/QuickSeat_project/tree/main">
     <img src="https://img.shields.io/badge/Java%20-%23F7DF1E.svg?&style=for-the-badge&&logoColor=white"/>
   </a>
-
+<a>
+      <a href="#demo">
+    <img src="https://img.shields.io/badge/JavaSwing%20-%234FC08D.svg?&style=for-the-badge&&logoColor=white"/>
+  </a>
+</a>
 </p> 
 
 ## Logo Design
