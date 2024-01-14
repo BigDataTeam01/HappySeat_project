@@ -25,6 +25,7 @@ public class Dto_PJH {
 	String discount_rate;
 	int ticket_price;
 	int moviePriceBeforeDiscount;
+	int ticket_number;
 	
 	
 	public Dto_PJH() {
@@ -75,13 +76,18 @@ public class Dto_PJH {
 	        this.movie_title = movie_title;
 	        this.moviePriceBeforeDiscount = moviePriceBeforeDiscount;
 	    }
-	
+	//영화 예매번호를 db에서 긁어오기
+	  public Dto_PJH(int ticket_number) {
+		  super();
+		  this.ticket_number = ticket_number;
+	  }
 	
 	
 // getter&setter
 	public String getMovie_title() {
 		return movie_title;
 	}
+
 
 	public void setMovie_title(String movie_title) {
 		this.movie_title = movie_title;
@@ -237,6 +243,14 @@ public class Dto_PJH {
 
 	public void setMoviePriceBeforeDiscount(int moviePriceBeforeDiscount) {
 		this.moviePriceBeforeDiscount = moviePriceBeforeDiscount;
+	}
+
+	public int getTicket_number() {
+		return ticket_number;
+	}
+
+	public void setTicket_number(int ticket_number) {
+		this.ticket_number = ticket_number;
 	}
 
 	
