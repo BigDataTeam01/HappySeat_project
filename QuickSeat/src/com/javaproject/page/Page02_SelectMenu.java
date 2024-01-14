@@ -45,8 +45,12 @@ public class Page02_SelectMenu extends JDialog {
 	 * 
 	 * 
 	 * Update 2024.01.14 by PDG
-	 * 
+	 * 			0. 버튼에 아이콘 넣어주는 클래스 만듬. 이 클래스 사용하고 버튼의 사이즈를 꼭 이미지 사이즈에 맞출것. 안그러면 뒤에 검은 배경 생김. 
+	 * 			   그리고 생성자로 받아서 필렛또한 맞춰줄수 있다. 이페이지에서 필렛은 20 으로 맞춤. 
 	 * 		    1. 버튼 수정함. 
+	 * 			2. 영화 예매 버튼 만듬. 
+	 * 			3. 예매 내역 버튼 만듬
+	 * 			4. 라벨도 만들고 클릭시 이동가능하게 끔 만듬. 
 	 * 
 	 */
 	/**
@@ -86,10 +90,9 @@ public class Page02_SelectMenu extends JDialog {
 		// 새로도입하는 예매내역 버튼 만들기 !!
 		ImageIcon iconResvCheck = new ImageIcon(
 				Page02_SelectMenu.class.getResource("/com/javaproject/image/BtnResvCheck_image_1.png"));
-		ButtonInsertIcon btnResvCheck = new ButtonInsertIcon(iconResvCheck);
-		btnResvCheck.setOpaque(false);
-		btnResvCheck.setContentAreaFilled(false);
-		btnResvCheck.setBorderPainted(false);
+		
+		ButtonInsertIcon btnResvCheck = new ButtonInsertIcon(iconResvCheck,ShareVar.btnFillet);
+
 		btnResvCheck.setBounds(416, 200, 284, 228);
 		btnResvCheck.addMouseListener(new MouseAdapter() {
 			@Override
@@ -124,10 +127,8 @@ public class Page02_SelectMenu extends JDialog {
 				Page02_SelectMenu.class.getResource("/com/javaproject/image/BtnMovieTicket.png"));
 		
 
-		ButtonInsertIcon btnMovieTicket = new ButtonInsertIcon(iconMovieTicket);
-		btnMovieTicket.setOpaque(false);
-		btnMovieTicket.setContentAreaFilled(false);
-		btnMovieTicket.setBorderPainted(false);
+		ButtonInsertIcon btnMovieTicket = new ButtonInsertIcon(iconMovieTicket,ShareVar.btnFillet);
+
 		btnMovieTicket.setBounds(66, 200, 284, 228);
 		btnMovieTicket.addMouseListener(new MouseAdapter() {
 			@Override

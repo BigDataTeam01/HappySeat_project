@@ -25,17 +25,20 @@ public class ButtonInsertIcon extends JButton{
     private ImageIcon normalIcon;
     private ImageIcon pressedIcon;
     private ImageIcon brightenedIcon;
+    private int fillet ;
 	// Constructor
-	public ButtonInsertIcon(ImageIcon icon) {
+	public ButtonInsertIcon(ImageIcon icon, int iconFillet) {
 		// TODO Auto-generated constructor stub
 		super(icon); // JButton 의 생성자를 호출함. 
 		
 		this.btnIcon = icon ; // 생성자를 필드값에 다시 넣어줌. 
+		this.fillet = iconFillet ; // 생성자를 필드값에 다시 넣어줌. 
 		initIcons(); //초기화
 		
 		
 		 // 아이콘 설정은 생성자에서 수행
         setIcon(btnIcon);
+
     
 	}
 	
@@ -46,6 +49,9 @@ public class ButtonInsertIcon extends JButton{
 	
 	
     private void initIcons() {
+		setOpaque(false);
+		setContentAreaFilled(false);
+		setBorderPainted(false);
         // 일반 상태의 아이콘
     	normalIcon = btnIcon;
 
@@ -82,7 +88,7 @@ public class ButtonInsertIcon extends JButton{
 			//graphics.setColor(backgroundColor);
 		}
 		// 버튼시작_X 위치, Y위치, 폭, 높이, 모서리반지름x,y
-		graphics.fillRoundRect(0, 0, btnWidth, btnHeight, 20, 20);
+		graphics.fillRoundRect(0, 0, btnWidth, btnHeight, fillet, fillet);
 		
 		graphics.setComposite(AlphaComposite.SrcOver.derive(1.0f)); // 예시로 0.5로 투명도 설정
 

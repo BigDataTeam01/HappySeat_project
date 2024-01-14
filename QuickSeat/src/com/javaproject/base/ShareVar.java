@@ -73,6 +73,9 @@ public class ShareVar {
 	
 	public static Color btnFillColor = new Color(42, 93, 67);//#2a5d43ff = 42, 93, 67
 	public static Color btnTextColor = new Color(243, 192, 0);//#f3c000  = 243, 192, 0
+	
+	// KIOSK BUTTON FILLET
+	public static int btnFillet = 20;
 
 
 	public static int filename = 0;
