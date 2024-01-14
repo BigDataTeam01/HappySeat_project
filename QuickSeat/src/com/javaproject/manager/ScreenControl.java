@@ -35,6 +35,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import javax.swing.event.PopupMenuListener;
 import javax.swing.event.PopupMenuEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ScreenControl extends JDialog {
 
@@ -96,15 +98,24 @@ public class ScreenControl extends JDialog {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowActivated(WindowEvent e) {
-				cbYearAdd();
-				cbItemAdd();
-				screenTableInit();
-				screenSearchAction();
-				seatResvCodeSetting();
 			}
 
 			@Override
 			public void windowDeactivated(WindowEvent e) {
+			}
+
+			@Override
+			public void windowOpened(WindowEvent e) {
+				cbYearAdd();
+				cbItemAdd();
+				screenTableInit();
+				screenSearchAction();
+//				seatResvCodeSetting();
+
+			}
+
+			@Override
+			public void windowClosed(WindowEvent e) {
 				cbClear();
 			}
 		});
@@ -158,6 +169,10 @@ public class ScreenControl extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					screenTableInit();
 					screenSearchAction();
+					cbClear();
+					cbYearAdd();
+					cbItemAdd();
+					cbRunTimeInit();
 				}
 			});
 			rbInsert.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
@@ -390,6 +405,17 @@ public class ScreenControl extends JDialog {
 	private JTextField getTfRunTime() {
 		if (tfRunTime == null) {
 			tfRunTime = new JTextField();
+			tfRunTime.addKeyListener(new KeyAdapter() {
+				// tfRunTime에 숫자가 아닌 다른 문자열이 입력되면 없애기
+				@Override
+				public void keyTyped(KeyEvent e) {
+					char c = e.getKeyChar();  // 'e'는 키 이벤트를 나타내며, 'getKeyChar()' 메소드를 사용하여 입력된 문자를 가져옴
+
+					if (!Character.isDigit(c)) {  // 'isDigit' 메소드를 사용하여 입력된 문자가 숫자인지 확인
+					    e.consume();  // 'consume()' 메소드는 이벤트를 'not processed'하여 처리되지 않게 함(입력된 문자를 무시)
+					}
+				}
+			});
 			tfRunTime.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
 			tfRunTime.setColumns(10);
 			tfRunTime.setBounds(145, 431, 51, 26);
@@ -435,15 +461,16 @@ public class ScreenControl extends JDialog {
 			cbScroomSelect.addPopupMenuListener(new PopupMenuListener() {
 				public void popupMenuCanceled(PopupMenuEvent e) {
 				}
+
 				public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 					screenTableInit();
 					cbScroomSelectSetting();
 					cbScroomSelectAll();
 				}
+
 				public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 				}
 			});
-			cbScroomSelect.setModel(new DefaultComboBoxModel(new String[] {"전체"}));
 			cbScroomSelect.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 				}
@@ -460,7 +487,7 @@ public class ScreenControl extends JDialog {
 			innerTable.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					if(e.getButton()==1){
+					if (e.getButton() == 1) {
 						innerTableClick();
 					}
 				}
@@ -557,6 +584,7 @@ public class ScreenControl extends JDialog {
 			cbScroom.addItem(daoScreenControl.scroomItem().get(i));
 		}
 
+		cbScroomSelect.addItem("전체");
 		for (int i = 0; i < daoScreenControl.scroomItem().size(); i++) {
 			cbScroomSelect.addItem(daoScreenControl.scroomItem().get(i));
 		}
@@ -637,97 +665,87 @@ public class ScreenControl extends JDialog {
 		tfStartTime.setText(cbYear.getSelectedItem() + "-" + cbMonth.getSelectedItem() + "-" + cbDate.getSelectedItem()
 				+ " " + cbHour.getSelectedItem() + ":" + cbMinute.getSelectedItem() + ":00");
 	}
-	
+
 	// DaoScreenControl에서 가져온 DB의 값 들을 innerTable에 넣어주기
 	private void screenSearchAction() {
 		DaoScreenControl dao = new DaoScreenControl();
 		ArrayList<DtoWDH> dtoList = dao.innerTable();
-		
-		for(int i=0; i<dtoList.size(); i++) {
-			String[] qTxt = { dtoList.get(i).getScr_movie_title(),
-							  dtoList.get(i).getScr_scroom_name(),
-							  dtoList.get(i).getScr_start_time(),
-							  Integer.toString(dtoList.get(i).getRun_time()) + "분",
-							  dtoList.get(i).getRel_date(),
-							  dtoList.get(i).getOver_date(),
-							  dtoList.get(i).getRel_state() 
-			};
+
+		for (int i = 0; i < dtoList.size(); i++) {
+			String[] qTxt = { dtoList.get(i).getScr_movie_title(), dtoList.get(i).getScr_scroom_name(),
+					dtoList.get(i).getScr_start_time(), Integer.toString(dtoList.get(i).getRun_time()) + "분",
+					dtoList.get(i).getRel_date(), dtoList.get(i).getOver_date(), dtoList.get(i).getRel_state() };
 			outerTable.addRow(qTxt);
 		}
 	}
-	
+
 	// cbScroomSelect에서 전체 눌렀을 때
 	private void cbScroomSelectAll() {
-		if(cbScroomSelect.getSelectedItem().toString().equals("전체")) {
+		if (cbScroomSelect.getSelectedItem().toString().equals("전체")) {
 			screenTableInit();
 			screenSearchAction();
 		}
 	}
-	
-	// 등록을 클릭 했을 때 깨끗하게 만들기
-	
+
 	// innerTable의 Row를 click 했을 경우
 	private void innerTableClick() {
 		rbUpdate.setSelected(true);
-		
+
 		int i = innerTable.getSelectedRow();
-		
+
 		DaoScreenControl dao = new DaoScreenControl();
-		
+
 		ArrayList<DtoWDH> dto = dao.innerTable();
-		
-		if(!cbScroomSelect.getSelectedItem().toString().equals("전체")) {
-			
+
+		if (!cbScroomSelect.getSelectedItem().toString().equals("전체")) {
+
 			String scroom_name = cbScroomSelect.getSelectedItem().toString();
-			
+
 			dao = new DaoScreenControl(scroom_name);
-			
+
 			dto = dao.cbInnerTable();
-			
+
 		}
-		
+
 		cbScroom.setSelectedItem(dto.get(i).getScr_scroom_name());
 		cbMovieTitle.setSelectedItem(dto.get(i).getScr_movie_title());
 		tfStartTime.setText(dto.get(i).getScr_start_time());
 		tfRunTime.setText(Integer.toString(dto.get(i).getRun_time()));
-		
+
 		String year = tfStartTime.getText().substring(0, 4);
 		String month = tfStartTime.getText().substring(5, 7);
 		String date = tfStartTime.getText().substring(8, 10);
 		String hour = tfStartTime.getText().substring(11, 13);
 		String minute = tfStartTime.getText().substring(14, 16);
-		
+
 		cbYear.setSelectedItem(year);
 		cbMonth.setSelectedItem(month);
 		cbDate.setSelectedItem(date);
 		cbHour.setSelectedItem(hour);
 		cbMinute.setSelectedItem(minute);
 
-
-		
 	}
-	
-	
+
 	// 등록, 수정, 삭제 눌렀을 경우
 	private void rbSelect() {
-		if(rbInsert.isSelected() == true) {
+		if (rbInsert.isSelected() == true) {
 			insertScreenInformation();
 		}
-		if(rbUpdate.isSelected() == true) {
+		if (rbUpdate.isSelected() == true) {
 			updateScreenInformation();
 		}
-		if(rbDelete.isSelected() == true) {
+		if (rbDelete.isSelected() == true) {
 			deleteScreenInformation();
 		}
 		screenTableInit();
 		screenSearchAction();
 	}
-	
-	//수정
+
+	// 수정
 	private void updateScreenInformation() {
-		
+
 		int i = innerTable.getSelectedRow();
-		
+
 		DaoScreenControl dao = new DaoScreenControl();
 		ArrayList<DtoWDH> dto = dao.innerTable();
 
@@ -738,66 +756,54 @@ public class ScreenControl extends JDialog {
 		String scr_start_time = tfStartTime.getText(); // 상영시작시간
 		int run_time = Integer.parseInt(tfRunTime.getText()); // 상영시간
 		int scr_code = dto.get(i).getScr_code();
-		
-		DaoScreenControl daoScreenControl = new DaoScreenControl(scr_movie_title, 
-												scr_scroom_name, admin_admin_id, 
-												seat_resv_code, scr_start_time, 
-												run_time, scr_code);
+
+		DaoScreenControl daoScreenControl = new DaoScreenControl(scr_movie_title, scr_scroom_name, admin_admin_id,
+				seat_resv_code, scr_start_time, run_time, scr_code);
 		daoScreenControl.screenUpdate();
 
-		
 	}
 
-	//삭제
+	// 삭제
 	private void deleteScreenInformation() {
 		int i = innerTable.getSelectedRow();
-		
+
 		DaoScreenControl dao = new DaoScreenControl();
 		ArrayList<DtoWDH> dto = dao.innerTable();
-		
+
 		int scr_code = dto.get(i).getScr_code();
-		
+
 		DaoScreenControl daoScreenControl = new DaoScreenControl(scr_code);
-		
+
 		daoScreenControl.screenDelete();
 
 	}
-	
+
 	// innerTable위의 cbScreenSelect의 고른 상영관만 보여주기
 	private void cbScroomSelectSetting() {
-		
+
 		String scroom_name = cbScroomSelect.getSelectedItem().toString();
-		
+
 		DaoScreenControl dao = new DaoScreenControl(scroom_name);
-		
+
 		ArrayList<DtoWDH> dtoList = dao.cbInnerTable();
-		
-		for(int i=0; i<dtoList.size(); i++) {
-			String[] qTxt = { dtoList.get(i).getScr_movie_title(),
-							  dtoList.get(i).getScr_scroom_name(),
-							  dtoList.get(i).getScr_start_time(),
-							  Integer.toString(dtoList.get(i).getRun_time()) + "분",
-							  dtoList.get(i).getRel_date(),
-							  dtoList.get(i).getOver_date(),
-							  dtoList.get(i).getRel_state() 
-			};
+
+		for (int i = 0; i < dtoList.size(); i++) {
+			String[] qTxt = { dtoList.get(i).getScr_movie_title(), dtoList.get(i).getScr_scroom_name(),
+					dtoList.get(i).getScr_start_time(), Integer.toString(dtoList.get(i).getRun_time()) + "분",
+					dtoList.get(i).getRel_date(), dtoList.get(i).getOver_date(), dtoList.get(i).getRel_state() };
 			outerTable.addRow(qTxt);
 		}
 
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
-
+	// 상영시간을 고르는 ComboBox와 상영시간을 나타내는 TextField 초기화 하기
+	private void cbRunTimeInit() {
+		cbYear.setSelectedIndex(0);
+		cbMonth.setSelectedIndex(0);
+		cbDate.setSelectedIndex(0);
+		cbHour.setSelectedIndex(0);
+		cbMinute.setSelectedIndex(0);
+		tfRunTime.setText("");
+	}
+		
 } // End
