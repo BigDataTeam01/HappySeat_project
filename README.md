@@ -23,11 +23,11 @@
 3. Team Member : 박지환 , 박정민, 원도현, 이천영
 <br>
 
-# Team Rule
+# Team Culture
 
-1. 자주 도와달라고 하기!
-2. 도움요청 무시하지 않기!
-3. 짝코딩 지향하기!
+1. 자주 도와달라고 하자!
+2. 도움요청 무시하지 말자!
+3. 페어프로그램을 해보자!
 <br>
 
 # Develop Tool and Framework
