@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.BackSplashTimer;
 import com.javaproject.kioskFunction.Dao_PJH;
 import com.javaproject.kioskFunction.Dto_PJH;
 
@@ -46,8 +47,8 @@ public class Page05_MovieInformation extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
-	private static final String VIDEO_URL = "https://youtu.be/bLvqoHBptjg?si=nwLN3uBeu65fFt-q"; // 동영상 URL
-	
+	//private static final String VIDEO_URL = "https://youtu.be/bLvqoHBptjg?si=nwLN3uBeu65fFt-q"; // 동영상 URL
+	BackSplashTimer backSplashTimer;
 	/*
 	 * Description : 현재 상영중인 영화 목록을 보여주고 고객이 영화를 선택할수 있도록 하는 페이지
 	 * 
@@ -71,7 +72,10 @@ public class Page05_MovieInformation extends JDialog{
 	 * Update 2024.01.06 by PJH , PJM:
 	 * 			1. shareVar 에서 가져온 영화제목 으로 영화정보창에 보여주기(영화제목 , 개봉일 , 영화등급 , 상영시간 , 국가 , 줄거)
 	 * 			
+	 * Update 2024.01.15 by PDG
 	 * 
+	 *  		1. 페이지 종료후 타이머 돌지 않게 함. 
+	 *  		2. 타이머 안되어있어서 추가함. 
 	 */
 	
 	/**
@@ -162,6 +166,12 @@ public class Page05_MovieInformation extends JDialog{
 			@Override
 			public void windowActivated(WindowEvent e) {
 				showtest();
+				backSplashTimeEnd();
+			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				stopTimer();
 			}
 		});
 		setTitle("영화정보");
@@ -399,6 +409,19 @@ public class Page05_MovieInformation extends JDialog{
 		// System.out.println(ShareVar.filename);
 //		file.delete();
 
+	}
+	// splash Class로 돌아가기
+
+	public void backSplashTimeEnd() {
+		 backSplashTimer = new BackSplashTimer(ShareVar.backToSplashTime, this);
+
+	}
+	
+	// 만약에 내가 타이머가 다 돌아가기 전에 페이지를 종료한다면 이것이 실행 되지 말아야한다. 
+	public void stopTimer() {
+		 
+		backSplashTimer.stop();
+		
 	}
 	
 }// END

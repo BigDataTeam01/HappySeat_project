@@ -32,6 +32,7 @@ public class Page02_1_1_OrderCancel extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	BackSplashTimer backSplashTimer;
 	/*
 	 * Description : 영화티켓 취소 
 	 * 				 1. OrderCancle에서 을 첫화면 버튼을 터치했을시 MenuSelect 화면으로 이동
@@ -77,6 +78,11 @@ public class Page02_1_1_OrderCancel extends JDialog {
 				@Override
 				public void windowActivated(WindowEvent e) {
 					backSplashTimeEnd();
+				}
+				
+				@Override
+				public void windowClosed(WindowEvent e) {
+					stopTimer();
 				}
 			});
 		setTitle("예매 취소");
@@ -199,4 +205,11 @@ public class Page02_1_1_OrderCancel extends JDialog {
 	public void backSplashTimeEnd() {
 			BackSplashTimer backSplashTimer = new BackSplashTimer(ShareVar.backToSplashTime, this);
 		}
+	// 만약에 내가 타이머가 다 돌아가기 전에 페이지를 종료한다면 이것이 실행 되지 말아야한다. 
+	public void stopTimer() {
+		 
+		backSplashTimer.stop();
+		
+	}
+
 }
