@@ -9,13 +9,19 @@ import java.awt.RenderingHints;
 
 import javax.swing.*;
 
+import com.javaproject.page.Page02_SelectMenu;
+
 
 public class ButtonDesign_ver1 extends JButton{
 	
 	// Field
 	private Color backgroundColor =new Color(183, 216, 107);
+	private ImageIcon btnIcon = new ImageIcon(
+			Page02_SelectMenu.class.getResource("/com/javaproject/image/BtnResvCheck_image.png"));
 	
 	// Constructor
+
+	
 	// button 에 넣을 text 와 색깔을 생성자로 받는다. 
 	public ButtonDesign_ver1(String text_in_btn, Color btnColor) {
 		// TODO Auto-generated constructor stub
@@ -24,6 +30,10 @@ public class ButtonDesign_ver1 extends JButton{
 		this.backgroundColor = btnColor ; // 생성자를 필드값에 다시 넣어줌. 
 		init(); //초기화
 		
+		
+		 // 아이콘 설정은 생성자에서 수행
+
+    
 	}
 	
 	// Method
@@ -84,6 +94,7 @@ public class ButtonDesign_ver1 extends JButton{
 		graphics.drawString(getText(), textX, textY);
 		graphics.dispose();
 		super.paintComponent(g);
+		
 	
 	}
 	

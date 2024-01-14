@@ -23,7 +23,8 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
-import com.javaproject.page.Page02_1_0_OrderCheck.mybutton;
+import com.javaproject.kioskFunction.ButtonDesign_ver1;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -45,11 +46,15 @@ public class Page02_1_1_OrderCancel extends JDialog {
 	 * 			3. diaog -> static 
 	 * 			4. 배경 추가
 	 * 			5. 처음으로,이전으로,예매취소 버튼 Update
+	 * 
+	 * Update 2024. 01.14 by PDG
+	 * 			1. 구매 취소 버튼 수정. 
+	 * 			2. 페이지 구성이 제대로 안되어 있어서 하나하나 추가함. 
 	 */
 	/**
 	 * Launch the application.
 	 */
-	private mybutton btnNewButton;
+
 	
 	public static void main(String[] args) {
 		try {
@@ -61,48 +66,9 @@ public class Page02_1_1_OrderCancel extends JDialog {
 		}
 	}
 
-//////////////라운드 버튼박스를 만들기 위한 paintComponent 설정
+
 	
-	class mybutton extends JButton {
-	private Color backgroundColor = new Color(183, 216, 107);
 	
-	public mybutton(String text, Color bgColor) {
-		super(text);
-		this.backgroundColor = bgColor;
-		init();
-	}
-	private void init() {
-		setContentAreaFilled(false);
-		setOpaque(false);
-	}
-	
-	@Override
-	public void paintComponent(Graphics g) {
-		int width = getWidth();
-		int height = getHeight();
-		Graphics2D graphics = (Graphics2D) g;
-		graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		if (getModel().isArmed()) {
-			graphics.setColor(backgroundColor.darker());
-		} else if (getModel().isRollover()) {
-			graphics.setColor(backgroundColor.brighter());
-		} else {
-			graphics.setColor(backgroundColor);
-		}
-	
-		graphics.fillRoundRect(0, 0, width, height, 10, 10);
-		FontMetrics fontMetrics = graphics.getFontMetrics();
-		Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds();
-		int textX = (width - stringBounds.width) / 2;
-		int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent();
-	
-		graphics.setColor(getForeground());
-		graphics.setFont(getFont());
-		graphics.drawString(getText(), textX, textY);
-		graphics.dispose();
-		super.paintComponent(g);
-	}
-	}
 		/**
 		 * Create the dialog.
 	 */
@@ -113,7 +79,7 @@ public class Page02_1_1_OrderCancel extends JDialog {
 					backSplashTimeEnd();
 				}
 			});
-		setTitle("예매 확인");
+		setTitle("예매 취소");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 
 		getContentPane().setLayout(new BorderLayout());
@@ -186,7 +152,7 @@ public class Page02_1_1_OrderCancel extends JDialog {
 	}
 	
 	// 이전화면(예매확인)으로 가기
-		public void goToOredrCheck() {
+	public void goToOredrCheck() {
 			Page02_1_1_OrderCancel OrderCancledialog = new Page02_1_1_OrderCancel();
 			Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
 
@@ -213,28 +179,24 @@ public class Page02_1_1_OrderCancel extends JDialog {
 		selectMenudialog.setVisible(true);
 		
 	}
-	// 구매 버튼
-		private JButton getBtnNewButton() {
-			if (btnNewButton == null) {
-
-				btnNewButton = new mybutton("구매취소", new Color(183, 216, 107));
-				btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 60));
-				btnNewButton.setBounds(146, 450, 500, 100);
-				btnNewButton.addMouseListener(new MouseAdapter() {
-					@Override
-					public void mouseClicked(MouseEvent e) {
-						OrderCancleAction();
-					}
-				});
-
+	// 구매취소버튼
+	private JButton getBtnNewButton() {
+		ButtonDesign_ver1 customButton = new ButtonDesign_ver1("구 매 취 소", ShareVar.btnFillColor);
+		customButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
+		customButton.setForeground(ShareVar.btnTextColor);
+		customButton.setBounds(146, 450, 500, 100);
+		customButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(ShareVar.insertedOrderNum);
+				OrderCancleAction();
 			}
-			return btnNewButton;
+		});
+		return customButton;
+	}	
+	
+	// splash Class로 돌아가기
+	public void backSplashTimeEnd() {
+			BackSplashTimer backSplashTimer = new BackSplashTimer(ShareVar.backToSplashTime, this);
 		}
-		
-		// splash Class로 돌아가기
-		public void backSplashTimeEnd() {
-			BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
-		}
-
-		
 }
