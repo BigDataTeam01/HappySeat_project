@@ -63,7 +63,7 @@ HnG8N
 <br>
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=HnG8N&show_icons=true&theme=radical)
 <br>
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=cy0512&show_icons=true&theme=radical)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=lcy0512&show_icons=true&theme=radical)
 <br>
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=tom3017&show_icons=true&theme=radical)
 <br>
