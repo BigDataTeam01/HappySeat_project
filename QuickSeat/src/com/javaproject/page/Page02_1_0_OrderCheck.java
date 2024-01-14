@@ -19,6 +19,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
+import com.javaproject.kioskFunction.ButtonDesign_ver1;
 import com.javaproject.kioskFunction.Dao_PJH;
 
 import java.awt.event.MouseAdapter;
@@ -31,6 +32,7 @@ import java.awt.event.*;
 public class Page02_1_0_OrderCheck extends JDialog {
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	
 	/*
 	 * Description : 예매,주문내역 확인 화면
 	 * 				 1.OrderCheck 에서 발권된 발권번호를 입력 후 입력완료를 터치시 Page2_1_1_OrderCancel 화면으로 이동
@@ -55,12 +57,16 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	 * 			
 	 * 	 *  *  *  * Update 2024.01.14 by J.park:
 	 * 			1. 입력된 발권번호와 db의 발권번호를 비교해 번호가 같으면 쉐어바에 insertedOrderNum에 발권번호 저장
+	 * 
+	 *  Update 2024.1.14 by PDG
+	 *  
+	 *  		1. button 을 클래스페이지에서 받아서 생성하도록 바꿧어요.
 	 * 			
 	/**
 	 * Launch the application.
 	 */
-	private JTextField tfTicketNum;
-	private mybutton btnNewButton;
+	private JTextField tfTicketNum; //?
+
 	
 
 	public static void main(String[] args) {
@@ -74,50 +80,50 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	}
 
 //////////////라운드 버튼박스를 만들기 위한 paintComponent 설정
-
-	class mybutton extends JButton {
-		private Color backgroundColor = new Color(183, 216, 107);
-
-		public mybutton(String text, Color bgColor) {
-			super(text);
-			this.backgroundColor = bgColor;
-			init();
-		}
-
-		private void init() {
-			setContentAreaFilled(false);
-			setOpaque(false);
-		}
-
-		@Override
-		public void paintComponent(Graphics g) {
-			int width = getWidth();
-			int height = getHeight();
-			Graphics2D graphics = (Graphics2D) g;
-			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-			if (getModel().isArmed()) {
-				graphics.setColor(backgroundColor.darker());
-			} else if (getModel().isRollover()) {
-				graphics.setColor(backgroundColor.brighter());
-			} else {
-				graphics.setColor(backgroundColor);
-			}
-
-			graphics.fillRoundRect(0, 0, width, height, 10, 10);
-			FontMetrics fontMetrics = graphics.getFontMetrics();
-			Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds();
-			int textX = (width - stringBounds.width) / 2;
-			int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent();
-
-			graphics.setColor(getForeground());
-			graphics.setFont(getFont());
-			graphics.drawString(getText(), textX, textY);
-			graphics.dispose();
-			super.paintComponent(g);
-		}
-	}
-
-////
+//
+//	class mybutton extends JButton {
+//		private Color backgroundColor = new Color(183, 216, 107);
+//
+//		public mybutton(String text, Color bgColor) {
+//			super(text);
+//			this.backgroundColor = bgColor;
+//			init();
+//		}
+//
+//		private void init() {
+//			setContentAreaFilled(false);
+//			setOpaque(false);
+//		}
+//
+//		@Override
+//		public void paintComponent(Graphics g) {
+//			int width = getWidth();
+//			int height = getHeight();
+//			Graphics2D graphics = (Graphics2D) g;
+//			graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+//			if (getModel().isArmed()) {
+//				graphics.setColor(backgroundColor.darker());
+//			} else if (getModel().isRollover()) {
+//				graphics.setColor(backgroundColor.brighter());
+//			} else {
+//				graphics.setColor(backgroundColor);
+//			}
+//
+//			graphics.fillRoundRect(0, 0, width, height, 10, 10);
+//			FontMetrics fontMetrics = graphics.getFontMetrics();
+//			Rectangle stringBounds = fontMetrics.getStringBounds(this.getText(), graphics).getBounds();
+//			int textX = (width - stringBounds.width) / 2;
+//			int textY = (height - stringBounds.height) / 2 + fontMetrics.getAscent();
+//
+//			graphics.setColor(getForeground());
+//			graphics.setFont(getFont());
+//			graphics.drawString(getText(), textX, textY);
+//			graphics.dispose();
+//			super.paintComponent(g);
+//		}
+//	}
+//
+//////
 	/**
 	 * Create the dialog.
 	 */
@@ -367,21 +373,18 @@ public class Page02_1_0_OrderCheck extends JDialog {
 
 	// 입력완료 버튼
 	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-
-			btnNewButton = new mybutton("입력완료", new Color(183, 216, 107));
-			btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-			btnNewButton.setBounds(563, 331, 194, 133);
-			btnNewButton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					System.out.println(ShareVar.insertedOrderNum);
-					checkTicketNumberAndProceed();
-				}
-			});
-
-		}
-		return btnNewButton;
+		ButtonDesign_ver1 customButton = new ButtonDesign_ver1("입력완료", ShareVar.btnFillColor);
+		customButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
+		customButton.setForeground(ShareVar.btnTextColor);
+		customButton.setBounds(563, 331, 194, 133);
+		customButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				System.out.println(ShareVar.insertedOrderNum);
+				checkTicketNumberAndProceed();
+			}
+		});
+		return customButton;
 	}
 
 	// 티켓 번호 확인 및 처리
@@ -434,5 +437,4 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	public void backSplashTimeEnd() {
 		BackSplashTimer backSplashTimer = new BackSplashTimer(100, this);
 	}
-
 }// End
