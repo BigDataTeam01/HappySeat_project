@@ -100,7 +100,7 @@ public class MovieControl extends JDialog {
 			}
 		});
 		setTitle("영화 등록 및 수정");
-		setBounds(ShareVar.managerXlocation,ShareVar.managerYlocation,ShareVar.managerXsize,ShareVar.managerYsize);
+		setBounds(ShareVar.managerXlocation-100,ShareVar.managerYlocation-100,ShareVar.managerXsize,ShareVar.managerYsize);
 		getContentPane().setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("영화 등록 및 수정");
