@@ -4,11 +4,11 @@
 </p>
 
 # Navigation
-1. [Project Description](#Project Description)
-2. [Types](#types)
-3. [Color](#color)
-4. [Custom Color List](#custom-color-list)
-5. [Section](#section)
+1. [Project Description](#Project-Description)
+2. [Team Rule](#Team-Rule)
+3. [Develop Tool and Framework](#Develop-Tool-and-Framework)
+4. [Logo Design](#Logo-Design)
+5. [Goal of Developement](#Goal-of-Developement)
 6. [Reversal](#reversal)
 
 
