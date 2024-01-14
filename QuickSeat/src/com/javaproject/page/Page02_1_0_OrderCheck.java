@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -55,6 +56,7 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	 * 			
 	 * 	 *  *  *  * Update 2024.01.14 by J.park:
 	 * 			1. 입력된 발권번호와 db의 발권번호를 비교해 번호가 같으면 쉐어바에 insertedOrderNum에 발권번호 저장
+	 * 			2. 입력된 숫자 예외처리 syso로 확인하던거 showMessageDialog 처리
 	 * 			
 	/**
 	 * Launch the application.
@@ -384,11 +386,12 @@ public class Page02_1_0_OrderCheck extends JDialog {
 		return btnNewButton;
 	}
 
-	// 티켓 번호 확인 및 처리
+	// 티켓 번호 일치 불일치 확인, 빈값으로 넣었는지 확인 
 	private void checkTicketNumberAndProceed() {
 	    String inputTicketNum = tfTicketNum.getText();
 	    if (inputTicketNum != null && !inputTicketNum.isEmpty()) {
-	        // 데이터베이스에서 ticket_number와 일치하는 레코드 조회
+	        // 데이터베이스에서  고객이 작성한 ticket_number와 db에 있는 발권번호와 일치하는지 조회(밑에checkTicketNumberInDatabase애서 확인필요)
+	    	// 입력된 데이터가 있을 경우에 밑의  if (ticketNumberExists) 이 구문으로 넘어가고 입력된 데이터가 없다면 제일 밑의 else구문으로 넘어감
 	        boolean ticketNumberExists = checkTicketNumberInDatabase(inputTicketNum);
 
 	        if (ticketNumberExists) {
@@ -398,18 +401,17 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	            System.out.println("티켓 번호 확인 및 저장: " + ShareVar.insertedOrderNum);
 	            goToOrderCancle();
 	        } else {
-	            // 일치하지 않는 경우 메시지 또는 처리
-	            System.out.println("일치하지 않는 티켓 번호입니다.");
-	            // 일치하지 않을 때의 추가적인 처리를 여기에 추가할 수 있습니다.
+	            // 일치하지 않는 경우 다이얼로그
+	        	 JOptionPane.showMessageDialog(null, "일치하지 않는 티켓 번호입니다.");
 	        }
+	        
 	    } else {
-	        // 입력된 티켓 번호가 없을 경우 메시지 또는 처리
-	        System.out.println("티켓 번호를 입력하세요.");
-	        // 입력이 없을 때의 추가적인 처리를 여기에 추가할 수 있습니다.
+	        // 입력된 티켓 번호가 없을 경우 다이얼로그
+	    	JOptionPane.showMessageDialog(null, "티켓 번호를 입력하세요.");
 	    }
 	}
 
-	// 데이터베이스에서 ticket_number 확인
+	// 데이터베이스에서 ticket_number 확인(불린값으로 고객이 작성한 발권번호와 디비에 있는 발권번호 비교하하는 메소드)
 	private boolean checkTicketNumberInDatabase(String ticketNumber) {
 	    boolean result = false;
 
