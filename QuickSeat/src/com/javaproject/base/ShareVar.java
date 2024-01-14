@@ -131,6 +131,12 @@ public class ShareVar {
 	// 발권가격(할인된 티켓가격의 총 가격)
 	public static String totalPrice = "";
 	
+	
+	// 각 인원분류별 할인 후의 가격
+    public static int[] totalDiscountedPrice = new int[5];
+	
+	
+	
 	// constructor
 	public ShareVar() {
 		// TODO Auto-generated constructor stub
@@ -169,10 +175,17 @@ public class ShareVar {
 		insertedOrderNum = "";
 		
 		// 인원선택 분류 어레이 (어레이라 다 지우려고 for문 사용)
-        for (int i = 0; i < personNumbers.length; i++) {
-        	personNumbers[i] = 0;        	
-        }
-        
+		for (int i = 0; i < personNumbers.length; i++) {
+			personNumbers[i] = 0;        	
+		}
+
+		//  각 인원분류별 할인 후의 가격 (어레이라 다 지우려고 for문 사용)
+		for (int i = 0; i < personNumbers.length; i++) {
+			totalDiscountedPrice[i] = 0;        	
+		}
+
+
+
      // 구매방법(현금,카드 구분)
     	pay_method = "";
     	
