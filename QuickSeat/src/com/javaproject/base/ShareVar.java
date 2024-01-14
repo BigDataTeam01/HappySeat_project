@@ -1,5 +1,6 @@
 package com.javaproject.base;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
@@ -18,9 +19,17 @@ public class ShareVar {
 	 * Update 2024.01.06 by PDG: 1. sql DB server 로그인 정보 2. kiosk 사이즈 및 위치 3. kiosk
 	 * page title 사이즈 및 위치
 	 * 
+	 * Update 2024.01.14 by PDG 
+	 * 			1.  쓸데 없는 주석지우고 읽기편하게 함. 
+	 * 			2.  키오스크 버튼에 들어갈 공용 칼라 만듬. 
+	 * 
 	 */
-
-	public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	
+	// Field
+	
+	// DB 정보
+	//public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	public static String dbName = "jdbc:mysql://127.0.0.1:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static String dbUser = "root";
 	public static String dbPass = "qwer1234";
 
@@ -39,30 +48,26 @@ public class ShareVar {
 	// kosk page gui location
 	public static int kiosk_loc_x = 655;
 	public static int kiosk_loc_y = 250;
-	/*
-	 * 키오스크 규격 예시 setTitle("영화정보"); setBounds(ShareVar.kiosk_loc_x,
-	 * ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
-	 */
 
-	///// -------키오스크 페이지 타이틀
+	///// -------키오스크 페이지 타이틀 규격
+	
 	// kiosk title size
 	public static int kiosk_title_width = 250;
 	public static int kiosk_title_hight = 100;
+	
 	// kosk title location
 	public static int kiosk_title_loc_x = 295;
 	public static int kiosk_title_loc_y = 10;
 	public static int kiosk_title_font_size = 40;
+	
+	// kiosk font
 	public static String kiosk_title_font = "BM Dohyeon";
+	
+	// kiosk button color
+	
+	public static Color btnFillColor = new Color(42, 93, 67);//#2a5d43ff = 42, 93, 67
+	public static Color btnTextColor = new Color(243, 192, 0);//#f3c000  = 243, 192, 0
 
-	/*
-	 * 페이지 타이틀 예시 JLabel lbl_pageTitle = new JLabel("영화 선택");
-	 * lbl_pageTitle.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN,
-	 * ShareVar.kiosk_title_font_size));
-	 * 
-	 * lbl_pageTitle.setBounds(ShareVar.kiosk_title_loc_x,
-	 * ShareVar.kiosk_title_loc_y, ShareVar.kiosk_title_width,
-	 * ShareVar.kiosk_title_hight);
-	 */
 
 	public static int filename = 0;
 	public static int image = 0;
