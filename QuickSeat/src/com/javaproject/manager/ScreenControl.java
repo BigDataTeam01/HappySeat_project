@@ -120,7 +120,7 @@ public class ScreenControl extends JDialog {
 			}
 		});
 		setTitle("상영관 관리");
-		setBounds(ShareVar.managerXlocation, ShareVar.managerYlocation, ShareVar.managerXsize, ShareVar.managerYsize);
+		setBounds(ShareVar.managerXlocation-100, ShareVar.managerYlocation+100, ShareVar.managerXsize, ShareVar.managerYsize);
 		getContentPane().setLayout(null);
 		getContentPane().add(getLblNewLabel());
 		getContentPane().add(getRbInsert());
