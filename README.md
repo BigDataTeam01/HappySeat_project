@@ -67,19 +67,19 @@ https://app.asana.com/0/1206334215923724/1206334215923724
 <br>
 
 ## 팀원 깃 활동
-박동근
+박동근<br>
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ForrestDPark&show_icons=true&theme=radical)
 <br>
-원도현
+원도현<br>
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=HnG8N&show_icons=true&theme=radical)
 <br>
-이천영
+이천영<br>
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=lcy0512&show_icons=true&theme=radical)
 <br>
-박정민
+박정민<br>
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=tom3017&show_icons=true&theme=radical)
 <br>
-박지환
+박지환<br>
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=zlzlwn&show_icons=true&theme=radical)
 
 
