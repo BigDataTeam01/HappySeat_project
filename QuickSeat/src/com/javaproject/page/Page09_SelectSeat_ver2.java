@@ -243,7 +243,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					if(checkSelecte() == true) {
 						System.out.println("Db 업데이트 코드 : " + selectSeatCode);
-						changedSeatIndices(eorSeatCode);
+						ShareVar.selectedSeatSeq = changedSeatIndices(eorSeatCode);
 						updateSeatCodeAction();
 						goConfirmSeat();
 					}}});

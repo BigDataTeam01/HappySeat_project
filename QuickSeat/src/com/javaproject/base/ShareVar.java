@@ -1,6 +1,7 @@
 package com.javaproject.base;
 
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -123,6 +124,9 @@ public class ShareVar {
 	
 	// 발권가격(할인된 티켓가격의 총 가격)
 	public static String totalPrice = "";
+	
+	// 좌석 순번(어떤 좌석을 선택했는지에 대한 배열)
+	public static ArrayList<Integer> selectedSeatSeq;
 	
 	// constructor
 	public ShareVar() {
