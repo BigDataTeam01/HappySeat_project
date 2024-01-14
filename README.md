@@ -4,7 +4,7 @@
 </p>
 
 
-![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ForrestDPark&show_icons=true&theme=radical)
+
 
 
 ## Project Description
@@ -46,19 +46,28 @@ https://app.asana.com/0/1206334215923724/1206334215923724
 <br>
 
 
-## Page Font
-1. 배달의 민족 도현체( BM Dohyeon)
-
-
-
-
 ## Team Rule
 1. 자주 도와달라고 하기!
 2. 도움요청 무시하지 않기!
-3. TDD, 짝코딩 지향하기!
+3. 짝코딩 지향하기!
 <br>
 
 ## Teacher's Advice
 1. 엑셀 -> mySQL 들어가는  툴이 있음.
 2. jar chart 보여주는 jar 가 있음.
+
+HnG8N
+팀원 깃 활동
+
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ForrestDPark&show_icons=true&theme=radical)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=HnG8N&show_icons=true&theme=radical)
+
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=cy0512&show_icons=true&theme=radical)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=tom3017&show_icons=true&theme=radical)
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=zlzlwn&show_icons=true&theme=radical)
+
+
+
+
+
 
