@@ -2,7 +2,10 @@
 <p align='center'>
     <img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=header&text=%20Happy%20Seat&fontSize=90&animation=fadeIn&fontAlignY=38&desc=Enjoy%20your%20happy%20senior%20life!&descAlignY=61&descAlign=62"/>
 </p>
-  
+
+
+![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ForrestDPark&show_icons=true&theme=radical)
+
 
 ## Project Description
 
