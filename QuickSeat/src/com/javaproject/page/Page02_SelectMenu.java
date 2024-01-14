@@ -13,11 +13,14 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
+import com.javaproject.kioskFunction.ButtonDesign_ver1;
+import com.javaproject.kioskFunction.ButtonInsertIcon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JButton;
 
 public class Page02_SelectMenu extends JDialog {
 
@@ -38,6 +41,13 @@ public class Page02_SelectMenu extends JDialog {
 	 * 			5. 영화예매,예매내역 사진추가
 	 * 			6. 영화 예매을 터치했을시 SelectAge로,구매 내역을 터치했을시  OrderCheck로 가게 설정
 	 * 			7. Class 이름 변경(숫자
+	 * 
+	 * 
+	 * 
+	 * Update 2024.01.14 by PDG
+	 * 
+	 * 		    1. 버튼 수정함. 
+	 * 
 	 */
 	/**
 	 * Launch the application.
@@ -71,6 +81,36 @@ public class Page02_SelectMenu extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		
+///-----------------------------예매 내역 버튼------------------------------/////
+		// 새로도입하는 예매내역 버튼 만들기 !!
+		ImageIcon icon = new ImageIcon(Page02_SelectMenu.class.getResource("/com/javaproject/image/BtnResvCheck_image_1.png"));
+		ButtonInsertIcon btnResvCheck = new ButtonInsertIcon(icon);
+		btnResvCheck.setOpaque(false);
+		btnResvCheck.setContentAreaFilled(false);
+		btnResvCheck.setBorderPainted(false);
+		btnResvCheck.setBounds(416, 200, 284, 228);
+		btnResvCheck.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToOrderCheck();
+			}
+		});
+		
+		JLabel lblResvCheck = new JLabel("예매내역");
+		lblResvCheck.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToOrderCheck();
+			}
+		});
+		//lblResvCheck.setFont(new Font("배달의민족 도현", Font.PLAIN, 65));
+		lblResvCheck.setFont(new Font("배달의민족 도현", Font.PLAIN, 55));
+		lblResvCheck.setBounds(450, 438, 222, 62);
+		
+		contentPanel.add(lblResvCheck);
+		contentPanel.add(btnResvCheck);
+///-----------------------------예매 내역 버튼 END------------------------------/////		
 
 		// 페이지 타이틀
 		JLabel lbl_pageTitle = new JLabel("메뉴 선택");
@@ -95,19 +135,6 @@ public class Page02_SelectMenu extends JDialog {
 		BtnMoviePurchase.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
 		BtnMoviePurchase.setBounds(91, 200, 284, 319);
 		contentPanel.add(BtnMoviePurchase);
-		//예매내역 아이콘
-		JLabel BtnPurchaseList = new JLabel("");
-		BtnPurchaseList.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				goToOrderCheck();
-			}
-		});
-		BtnPurchaseList
-				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/예매내역Icon.png")));
-		BtnPurchaseList.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		BtnPurchaseList.setBounds(429, 200, 284, 319);
-		contentPanel.add(BtnPurchaseList);
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
@@ -144,6 +171,4 @@ public class Page02_SelectMenu extends JDialog {
 	public void backSplashTimeEnd() {
 		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
 	}
-
-
 }// End

@@ -26,13 +26,17 @@ public class ShareVar {
 	 */
 	
 	// Field
-	
-	// DB 정보
+	///////////////0-------------------------------- DB 정보 ------------------/////////////
+	//
 	//public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static String dbName = "jdbc:mysql://127.0.0.1:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static String dbUser = "root";
 	public static String dbPass = "qwer1234";
-
+	///////////////0---------------------------------스플레시 타임 정보------------------/////////////
+	
+	public static int backToSplashTime = 100 ; // 100 초후 스플래쉬로 돌아감. 
+	
+	///////////////0---------------------------------관리자 페이지 관련 정보 ------------------/////////////
 	// manager page gui siz
 	public static int managerXsize = 800;
 	public static int managerYsize = 600;
@@ -40,7 +44,9 @@ public class ShareVar {
 	// manager page gui location
 	public static int managerXlocation = 655;
 	public static int managerYlocation = 250;
-
+	
+	///////////////0---------------------------------키오스크 관련 정보 ------------------/////////////
+	
 	///// -------키오스크 페이지 규격
 	// kiosk page gui siz
 	public static int kiosk_width = 800;
@@ -76,11 +82,6 @@ public class ShareVar {
 	public static int poster_width = 380;
 	public static int poster_hight = 450;
 
-	/*
-	 * 포스터 규격 예시 lblPoster.setBounds(34, 101, ShareVar.poster_width,
-	 * ShareVar.poster_hight);
-	 */
-
 	// 관리자 아이디 저장공간
 	public static String managerID = "";
 
@@ -110,13 +111,11 @@ public class ShareVar {
 	public static String posterFile = "";
 	
 	// 선택된 상영관 이륾
-	
 	public static String selectedScroomName ="";
 	
 	// 선택된 상영 영화 시작시간 
 	public static String selectedScrStarttime="";
 	
-
 	// 입력된 발권번호
 	public static String insertedOrderNum = "";
 
