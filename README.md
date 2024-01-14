@@ -3,6 +3,10 @@
     <img src="https://capsule-render.vercel.app/api?type=waving&color=auto&height=300&section=header&text=%20Happy%20Seat&fontSize=90&animation=fadeIn&fontAlignY=38&desc=Enjoy%20your%20happy%20senior%20life!&descAlignY=61&descAlign=62"/>
 </p>
 
+## 목차
+
+1. # Project Description
+
 
 ## Project Description
 1. Project Title : 행복좌석 (Happy Seat) <= 신속좌석 (Quick Seat) 
@@ -52,16 +56,8 @@ https://app.asana.com/0/1206334215923724/1206334215923724
 ## ERD 
 ![image](https://github.com/ForrestDPark/QuickSeat_project/assets/149550771/050a7988-3d59-4cc4-b25c-0452ec3d7d4a)
 
-<br>
-
-
-
-## Teacher's Advice
-1. 엑셀 -> mySQL 들어가는  툴이 있음.
-2. jar chart 보여주는 jar 가 있음.
 
 <br>
-
 ## 팀원 깃 활동
 박동근<br>
 ![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ForrestDPark&show_icons=true&theme=radical)
