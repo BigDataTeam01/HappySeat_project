@@ -97,6 +97,7 @@ public class Page02_1_1_OrderCancel extends JDialog {
 			addWindowListener(new WindowAdapter() {
 				@Override
 				public void windowActivated(WindowEvent e) {
+					reserv_ticket();
 					backSplashTimeEnd();
 				}
 				
@@ -124,6 +125,7 @@ public class Page02_1_1_OrderCancel extends JDialog {
 		contentPanel.add(getLblscr_start_time());
 		contentPanel.add(getLblseat_code());
 		contentPanel.add(getLblscr_start_time_data());
+		contentPanel.add(getLblmovie_ticket_number_data());
 		contentPanel.add(getLblmovie_title_data());
 		contentPanel.add(getLblcinema_branch_data());
 		contentPanel.add(getLblscr_scroom_name_data());
@@ -177,7 +179,6 @@ public class Page02_1_1_OrderCancel extends JDialog {
 				Page05_MovieInformation.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_background.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_background);
-		contentPanel.add(getLblmovie_ticket_number_data());
 	}	private JLabel getLbl_movie_poster() {
 		if (lbl_movie_poster == null) {
 			lbl_movie_poster = new JLabel("");
@@ -319,10 +320,11 @@ public class Page02_1_1_OrderCancel extends JDialog {
 		ArrayList<Dto_orderCancel> dtolist = dao.reserv_ticket();
 		lblmovie_ticket_number_data.setText(ShareVar.insertedOrderNum.toString());
 		lblmovie_title_data.setText(dtolist.get(0).getMovie_title().toString());
+		lblseat_code_data.setText(dtolist.get(0).getSeat_order().toString());
 		lblcinema_branch_data.setText(dtolist.get(0).getCinema_branch());
 		lblscr_scroom_name_data.setText(dtolist.get(0).getScr_scroom_name());
 		lblscr_start_time_data.setText(dtolist.get(0).getScr_start_time());
-		imageInsert(lbl_movie_poster, ShareVar.filename);
+		imageInsert(lbl_movie_poster, 0);
 		
 		
 		
@@ -355,6 +357,7 @@ public class Page02_1_1_OrderCancel extends JDialog {
 		
 		poster.setHorizontalAlignment(SwingConstants.CENTER);
 		
+		
 		File file = new File(filePath);
 		// System.out.println(ShareVar.filename);
 //		file.delete();
@@ -386,4 +389,7 @@ public class Page02_1_1_OrderCancel extends JDialog {
 		}
 		return lblmovie_ticket_number_data;
 	}
+	
+	
+
 }
