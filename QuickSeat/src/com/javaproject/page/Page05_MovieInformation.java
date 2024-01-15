@@ -171,7 +171,7 @@ public class Page05_MovieInformation extends JDialog{
 			}
 			
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowDeactivated(WindowEvent e) {
 				stopTimer();
 			}
 		});

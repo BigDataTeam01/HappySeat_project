@@ -164,34 +164,39 @@ public class Page10_ConfirmSeat extends JDialog {
 	private JLabel getLblmovie_title() {
 		if (lblmovie_title == null) {
 			lblmovie_title = new JLabel("영화 :");
-			lblmovie_title.setBounds(423, 193, 30, 30);
+			lblmovie_title.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
+			lblmovie_title.setBounds(423, 193, 45, 30);
 		}
 		return lblmovie_title;
 	}
 	private JLabel getLblcinema_branch() {
 		if (lblcinema_branch == null) {
 			lblcinema_branch = new JLabel("장소 :");
-			lblcinema_branch.setBounds(423, 221, 30, 30);
+			lblcinema_branch.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
+			lblcinema_branch.setBounds(423, 221, 45, 30);
 		}
 		return lblcinema_branch;
 	}
 	private JLabel getLblscr_scroom_name() {
 		if (lblscr_scroom_name == null) {
 			lblscr_scroom_name = new JLabel("상영관 :");
-			lblscr_scroom_name.setBounds(423, 250, 45, 30);
+			lblscr_scroom_name.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
+			lblscr_scroom_name.setBounds(423, 250, 53, 30);
 		}
 		return lblscr_scroom_name;
 	}
 	private JLabel getLblscr_start_time() {
 		if (lblscr_start_time == null) {
 			lblscr_start_time = new JLabel("상영시간");
-			lblscr_start_time.setBounds(423, 280, 55, 30);
+			lblscr_start_time.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
+			lblscr_start_time.setBounds(423, 280, 64, 30);
 		}
 		return lblscr_start_time;
 	}
 	private JLabel getLblseat_code() {
 		if (lblseat_code == null) {
 			lblseat_code = new JLabel("좌석");
+			lblseat_code.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
 			lblseat_code.setBounds(423, 341, 200, 30);
 		}
 		return lblseat_code;
@@ -199,6 +204,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	private JLabel getLblscr_start_time_data() {
 		if (lblscr_start_time_data == null) {
 			lblscr_start_time_data = new JLabel("");
+			lblscr_start_time_data.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
 			lblscr_start_time_data.setBounds(423, 309, 200, 30);
 		}
 		return lblscr_start_time_data;
@@ -206,6 +212,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	private JLabel getLblseat_code_data() {
 		if (lblseat_code_data == null) {
 			lblseat_code_data = new JLabel("");
+			lblseat_code_data.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
 			lblseat_code_data.setBounds(423, 377, 200, 30);
 		}
 		return lblseat_code_data;
@@ -214,6 +221,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	private JLabel getLblmovie_title_data() {
 		if (lblmovie_title_data == null) {
 			lblmovie_title_data = new JLabel("");
+			lblmovie_title_data.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
 			lblmovie_title_data.setBounds(460, 193, 180, 30);
 		}
 		return lblmovie_title_data;
@@ -221,6 +229,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	private JLabel getLblcinema_branch_data() {
 		if (lblcinema_branch_data == null) {
 			lblcinema_branch_data = new JLabel("");
+			lblcinema_branch_data.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
 			lblcinema_branch_data.setBounds(460, 221, 180, 30);
 		}
 		return lblcinema_branch_data;
@@ -228,6 +237,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	private JLabel getLblscr_scroom_name_data() {
 		if (lblscr_scroom_name_data == null) {
 			lblscr_scroom_name_data = new JLabel("");
+			lblscr_scroom_name_data.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 14));
 			lblscr_scroom_name_data.setBounds(470, 250, 170, 30);
 		}
 		return lblscr_scroom_name_data;
@@ -266,8 +276,12 @@ public class Page10_ConfirmSeat extends JDialog {
 		Dao_confirmSeat dao = new Dao_confirmSeat();
 		ArrayList<Dto_confirmSeat> dtolist = dao.showMyTicket();
 		lblmovie_title_data.setText(dtolist.get(0).getMovie_title().toString());
-		lblcinema_branch_data.setText(dtolist.get(0).getCinema_branch());
-		lblscr_scroom_name_data.setText(dtolist.get(0).getScr_scroom_name());
+		String cinema_branch = dtolist.get(0).getCinema_branch();
+//		cinema_branch.substring(0, cinema_branch.length()-5);
+		lblcinema_branch_data.setText(cinema_branch.substring(0, cinema_branch.length()-5));
+		String scroom_name = dtolist.get(0).getScr_scroom_name();
+//		scroom_name.substring(scroom_name.length()-4);
+		lblscr_scroom_name_data.setText(scroom_name.substring(scroom_name.length()-4));
 		lblscr_start_time_data.setText(dtolist.get(0).getScr_start_time());
 		imageInsert(lbl_movie_poster, ShareVar.filename);
 		lblseat_code_data.setText(ShareVar.selectedSeatSeq.toString() + "석");

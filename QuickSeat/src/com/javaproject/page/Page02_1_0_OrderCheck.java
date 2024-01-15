@@ -92,7 +92,7 @@ public class Page02_1_0_OrderCheck extends JDialog {
 				backSplashTimeEnd();
 			}
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowDeactivated(WindowEvent e) {
 				stopTimer();
 			}
 			
