@@ -138,10 +138,16 @@ public class ShareVar {
 	public static int[] discountRates = {    0,	   50,	 	   50,		  50,	  50 }; 
 	
 	// 각 인원분류별 할인 후의 가격
-    public static int[] totalDiscountedPrice = new int[5];
+   // public static int[] totalDiscountedPrice = new int[5];
+    public static int[] totalDiscountedPriceArray = {1000,1000,2000,4000,5000};
+    
+    // 예시로 만들어보자. 
+    
     
     //
     public static ArrayList<Integer> selectedSeatSeq = new ArrayList<Integer>();
+    
+    public static String dbSeatCode = "";
 	
 	
 	
@@ -188,8 +194,8 @@ public class ShareVar {
 		}
 
 		//  각 인원분류별 할인 후의 가격 (어레이라 다 지우려고 for문 사용)
-		for (int i = 0; i < totalDiscountedPrice.length; i++) {
-			totalDiscountedPrice[i] = 0;        	
+		for (int i = 0; i < totalDiscountedPriceArray.length; i++) {
+			totalDiscountedPriceArray[i] = 0;        	
 		}
 		
 		selectedSeatSeq.removeAll(selectedSeatSeq);
