@@ -162,7 +162,7 @@ public class DaoUserStatistics {
 	// 유형들을 DB에서 가져오기
 	public ArrayList<String> typeArray() {
 		ArrayList<String> typeList = new ArrayList<String>();
-		String select = "select cust_type from customer group by cust_type";
+		String select = "select cust_type from customer where cust_type is not null group by cust_type";
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
