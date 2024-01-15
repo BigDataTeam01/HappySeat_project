@@ -2,7 +2,9 @@ package com.javaproject.manager;
 
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -114,8 +116,15 @@ public class MovieDaySalesStatus extends JFrame {
 		ArrayList<DtoWDH> dto = dao.pricePerDay();
 		
 		// 1주일 단위로 표 만들기
-		for(int i = 6; i >= 0; i--) {
-			int date = 17-i;
+		
+        LocalDate localDate = LocalDate.of(Integer.parseInt(ShareVar.year),Integer.parseInt(ShareVar.month), 1);
+        int daysInMonth = localDate.lengthOfMonth();
+//        System.out.println(Integer.parseInt(ShareVar.year));
+//        System.out.println(Integer.parseInt(ShareVar.month));
+//        System.out.println(daysInMonth);
+ 
+		for(int i = daysInMonth-1; i >= 0; i--) {
+			int date = daysInMonth-i;
 			String day = ShareVar.month + "-" + Integer.toString(date);
 			int sumPrice = 0;
 			
@@ -126,7 +135,7 @@ public class MovieDaySalesStatus extends JFrame {
 					sumPrice += dto.get(j).getTicket_price();
 				}
 			}
-			dataset.addValue(sumPrice, "이번년도", day);
+			dataset.addValue(sumPrice, "이번년도", Integer.toString(date));
 		}
 
 		return dataset;
