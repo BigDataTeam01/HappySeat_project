@@ -88,10 +88,9 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		public void run() {
 			getCurrentSeatCode();
 			loadSeat();
-			ShareVar.dbSeatCode = seatCode;
+			System.out.println("새로고침");
 			System.out.println("selectSeatCode : " + selectSeatCode);
 			System.out.println("seatCode : " + seatCode);
-			System.out.println("새로고침");
 		}
 	}
 
@@ -160,21 +159,19 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 			// 0 -> 1 , 즉 선택가능한 좌석을 선택을 하였을 때,
 			if (seatStatus[row][col]) {
-
-				// DB에서 불러온 코드와 사용자가 선택한 코드를 EOR, 변화 된 좌석은 1, 변화하지 않으면 0 
-				eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
-				// changeCount : 사용자가 선택을 한 좌석 갯수 
-				int changeCount = countSelecteSeat(eorSeatCode);
-				if (ShareVar.sumOfPersonNumbers < changeCount + 1 ) {
-					JOptionPane.showMessageDialog(null, ShareVar.sumOfPersonNumbers + "명을 초과할 수 없습니다.");
-					return;
-				}
 				seatArray[row][col].setIcon(new ImageIcon(
 						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/SelectedSeat.png")));
 
 				selectSeatCode.setCharAt(row * columnsOfSeats + col, '1');
 				
-
+				// DB에서 불러온 코드와 사용자가 선택한 코드를 EOR, 변화 된 좌석은 1, 변화하지 않으면 0 
+				eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
+//				// changeCount : 사용자가 선택을 한 좌석 갯수 
+//				int changeCount = countSelecteSeat(eorSeatCode);
+//				
+//				if (ShareVar.sumOfPersonNumbers > changeCount + 1 ) {
+//					JOptionPane.showMessageDialog(null, ShareVar.sumOfPersonNumbers + "명을 초과할 수 없습니다.");
+//				}
 			}
 			
 			// 1 -> 0, 내가 선택 한 좌석을 선택취소 하였을때 
@@ -250,10 +247,11 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					if(checkSelecte() == true) {
-						System.out.println("Db 업데이트 코드 : " + selectSeatCode);
+						timer.cancel();
 						ShareVar.selectedSeatSeq = changedSeatIndices(eorSeatCode);
 						updateSeatCodeAction();
 						goConfirmSeat();
+						System.out.println("Db 업데이트 코드 : " + selectSeatCode);
 						System.out.println("ShareVar 저장 : " + ShareVar.selectedSeatSeq);
 						System.out.println("ShareVar dbSeatCode : " + ShareVar.dbSeatCode);
 					}}});
@@ -263,6 +261,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	
 	// Functions
 	private void getCurrentSeatCode() {
+		ShareVar.dbSeatCode = seatCode;
 		Dao_pdg currentSeatCode = new Dao_pdg(ShareVar.scr_code);
 		StringBuilder fetchedSeatCode = new StringBuilder();
 
@@ -404,6 +403,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 
 	private ArrayList<Integer> changedSeatIndices(int eorCode) {
+		System.out.println(eorCode);
 	    ArrayList<Integer> changedIndices = new ArrayList<>();
 
 	    int index = 0;
@@ -418,5 +418,5 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 	    return changedIndices;
 	}
-
+	
 }// End
