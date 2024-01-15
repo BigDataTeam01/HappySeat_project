@@ -270,14 +270,7 @@ public class Page10_ConfirmSeat extends JDialog {
 		lblscr_scroom_name_data.setText(dtolist.get(0).getScr_scroom_name());
 		lblscr_start_time_data.setText(dtolist.get(0).getScr_start_time());
 		imageInsert(lbl_movie_poster, ShareVar.filename);
-		
-		
-		
-		
-		for(int i = 0; i < ShareVar.sumOfPersonNumbers; i++) {	 
-			lblseat_code_data.setText(ShareVar.selectedSeatSeq.toString() + "석");
-		}
-		
+		lblseat_code_data.setText(ShareVar.selectedSeatSeq.toString() + "석");
 		
 		
 	}
