@@ -9,6 +9,8 @@ import com.javaproject.managerfunction.DaoScreenControl;
 import com.javaproject.managerfunction.DtoWDH;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -67,7 +69,7 @@ public class ScreenControl extends JDialog {
 	private JTextField tfStartTime;
 	private JTextField tfRunTime;
 	private JLabel lblNewLabel_1_1_2_4_1;
-	private JButton btnNewButton;
+	private JButton btnComplete;
 	private JScrollPane scrollPane;
 	private JComboBox cbScroomSelect;
 	private JTable innerTable;
@@ -146,7 +148,7 @@ public class ScreenControl extends JDialog {
 		getContentPane().add(getTfStartTime());
 		getContentPane().add(getTfRunTime());
 		getContentPane().add(getLblNewLabel_1_1_2_4_1());
-		getContentPane().add(getBtnNewButton());
+		getContentPane().add(getBtnComplete());
 		getContentPane().add(getScrollPane());
 		getContentPane().add(getCbScroomSelect());
 		getContentPane().add(getLblNewLabel_3());
@@ -432,18 +434,19 @@ public class ScreenControl extends JDialog {
 		return lblNewLabel_1_1_2_4_1;
 	}
 
-	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new JButton("완료");
-			btnNewButton.addActionListener(new ActionListener() {
+	private JButton getBtnComplete() {
+		if (btnComplete == null) {
+			btnComplete = new JButton("완료");
+			btnComplete.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					rbSelect();
+					rbInsert.setSelected(true);
 				}
 			});
-			btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
-			btnNewButton.setBounds(115, 508, 121, 38);
+			btnComplete.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
+			btnComplete.setBounds(115, 508, 121, 38);
 		}
-		return btnNewButton;
+		return btnComplete;
 	}
 
 	private JScrollPane getScrollPane() {
@@ -605,36 +608,6 @@ public class ScreenControl extends JDialog {
 		cbMovieTitle.removeAllItems();
 	}
 
-	// DB의 screen Table에 들어갈 정보들 (좌석예약코드)
-	private void insertScreenInformation() {
-//		System.out.println(cbMovieTitle.getSelectedItem()); // 영화 제목
-		String scr_movie_title = cbMovieTitle.getSelectedItem().toString(); // 영화 제목
-//		System.out.println(cbScroom.getSelectedItem()); // 상영관 이름
-		String scr_scroom_name = cbScroom.getSelectedItem().toString(); // 상영관 이름
-//		System.out.println(ShareVar.managerID); // 관리자 ID
-		String admin_admin_id = ShareVar.managerID; // 관리자 ID
-//		System.out.println(seatResvCodeSetting()); // 좌석예약코드
-		String seat_resv_code = seatResvCodeSetting(); // 좌석예약코드
-//		System.out.println(tfStartTime.getText()); // 상영시작시간
-		String scr_start_time = tfStartTime.getText(); // 상영시작시간
-//		System.out.println(tfRunTime.getText()); // 상영시간
-		int run_time = Integer.parseInt(tfRunTime.getText()); // 상영시간
-
-		DaoScreenControl daoScreenControl = new DaoScreenControl(scr_movie_title, scr_scroom_name, admin_admin_id,
-				seat_resv_code, scr_start_time, run_time);
-		try {
-
-			if (tfRunTime.getText().length() == 0) {
-
-			} else {
-				daoScreenControl.screenInsert();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
 	// DB의 screening_room에서 total_seat을 가져 온 후 0을 total_seat의 개수만큼 적어줌
 	private String seatResvCodeSetting() {
 
@@ -741,6 +714,34 @@ public class ScreenControl extends JDialog {
 		screenSearchAction();
 	}
 
+	// DB의 screen Table에 등록(insert) (좌석예약코드)
+	private void insertScreenInformation() {
+//		System.out.println(cbMovieTitle.getSelectedItem()); // 영화 제목
+		String scr_movie_title = cbMovieTitle.getSelectedItem().toString(); // 영화 제목
+//		System.out.println(cbScroom.getSelectedItem()); // 상영관 이름
+		String scr_scroom_name = cbScroom.getSelectedItem().toString(); // 상영관 이름
+//		System.out.println(ShareVar.managerID); // 관리자 ID
+		String admin_admin_id = ShareVar.managerID; // 관리자 ID
+//		System.out.println(seatResvCodeSetting()); // 좌석예약코드
+		String seat_resv_code = seatResvCodeSetting(); // 좌석예약코드
+//		System.out.println(tfStartTime.getText()); // 상영시작시간
+		String scr_start_time = tfStartTime.getText(); // 상영시작시간
+//		System.out.println(tfRunTime.getText()); // 상영시간
+		try {
+			int run_time = Integer.parseInt(tfRunTime.getText()); // 상영시간
+			
+			DaoScreenControl daoScreenControl = new DaoScreenControl(scr_movie_title, scr_scroom_name, admin_admin_id,
+					seat_resv_code, scr_start_time, run_time);
+			
+			daoScreenControl.screenInsert();
+			
+			JOptionPane.showMessageDialog(null, "등록 되었습니다.");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "상영시간을 입력해 주세요.");
+		}
+
+	}
+
 	// 수정
 	private void updateScreenInformation() {
 
@@ -749,18 +750,25 @@ public class ScreenControl extends JDialog {
 		DaoScreenControl dao = new DaoScreenControl();
 		ArrayList<DtoWDH> dto = dao.innerTable();
 
+		int scr_code = dto.get(i).getScr_code();
 		String scr_movie_title = cbMovieTitle.getSelectedItem().toString(); // 영화 제목
 		String scr_scroom_name = cbScroom.getSelectedItem().toString(); // 상영관 이름
 		String admin_admin_id = ShareVar.managerID; // 관리자 ID
 		String seat_resv_code = seatResvCodeSetting(); // 좌석예약코드
 		String scr_start_time = tfStartTime.getText(); // 상영시작시간
-		int run_time = Integer.parseInt(tfRunTime.getText()); // 상영시간
-		int scr_code = dto.get(i).getScr_code();
 
-		DaoScreenControl daoScreenControl = new DaoScreenControl(scr_movie_title, scr_scroom_name, admin_admin_id,
-				seat_resv_code, scr_start_time, run_time, scr_code);
-		daoScreenControl.screenUpdate();
+		try {
+			int run_time = Integer.parseInt(tfRunTime.getText()); // 상영시간
 
+			DaoScreenControl daoScreenControl = new DaoScreenControl(scr_movie_title, scr_scroom_name, admin_admin_id,
+					seat_resv_code, scr_start_time, run_time, scr_code);
+
+			daoScreenControl.screenUpdate();
+
+			JOptionPane.showMessageDialog(null, "수정 되었습니다.");
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "상영시간을 입력해 주세요.");
+		}
 	}
 
 	// 삭제
@@ -774,7 +782,12 @@ public class ScreenControl extends JDialog {
 
 		DaoScreenControl daoScreenControl = new DaoScreenControl(scr_code);
 
-		daoScreenControl.screenDelete();
+		boolean result = daoScreenControl.screenDelete();
+		if (result == true) {
+			JOptionPane.showMessageDialog(null, "삭제 되었습니다.");
+		}else{
+			JOptionPane.showMessageDialog(null, "삭제 중 오류가 발생했습니다.");
+		}
 
 	}
 

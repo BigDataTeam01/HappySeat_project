@@ -73,7 +73,7 @@ public class ManagerLogin extends JDialog {
 		contentPanel.add(getBtnLogin());
 		
 		tfAdminNumber = new JTextField();
-		tfAdminNumber.setFont(new Font("배달의민족 도현", Font.PLAIN, 30));
+		tfAdminNumber.setFont(new Font("BM Dohyeon", Font.PLAIN, 30));
 		tfAdminNumber.setBounds(332, 140, 300, 60);
 		contentPanel.add(tfAdminNumber);
 		tfAdminNumber.setColumns(10);
