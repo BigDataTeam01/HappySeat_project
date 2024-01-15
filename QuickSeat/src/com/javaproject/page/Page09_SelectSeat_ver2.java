@@ -30,10 +30,9 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	
 	// Field
 	private Timer timer; // 좌석코드를 불러오는 주기.
-	
 	private static final long serialVersionUID = 1L;
 	private JButton[][] seatArray; // 생성되는 좌석들의 배열
-	private boolean[][] seatStatus; // 좌석들의 현재 상태( 예약됨 -> 1 , 비어있음 ->0)
+	private boolean[][] seatStatus;
 
 	private JPanel contentPanel = new JPanel();
 	private JLabel lbl_background;
@@ -46,8 +45,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	private static int eorSeatCode = 0;
 
 	int columnsOfSeats = 4; // column number
-	
-	
 	
 	public static void main(String[] args) {
 		try {
@@ -77,8 +74,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				timer = new Timer();
 				timer.scheduleAtFixedRate(new RemindTask(), 0, 1000);
 				backSplashTimeEnd();
-				ShareVar shareVar = new ShareVar();
-				shareVar.shareVarInint();
 			}
 			@Override
 			public void windowDeactivated(WindowEvent e) {
@@ -93,8 +88,9 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		public void run() {
 			getCurrentSeatCode();
 			loadSeat();
-			System.out.println(selectSeatCode);
-			System.out.println(seatCode);
+			ShareVar.dbSeatCode = seatCode;
+			System.out.println("selectSeatCode : " + selectSeatCode);
+			System.out.println("seatCode : " + seatCode);
 			System.out.println("새로고침");
 		}
 	}
@@ -164,6 +160,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 			// 0 -> 1 , 즉 선택가능한 좌석을 선택을 하였을 때,
 			if (seatStatus[row][col]) {
+
 				// DB에서 불러온 코드와 사용자가 선택한 코드를 EOR, 변화 된 좌석은 1, 변화하지 않으면 0 
 				eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
 				// changeCount : 사용자가 선택을 한 좌석 갯수 
@@ -172,11 +169,11 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 					JOptionPane.showMessageDialog(null, ShareVar.sumOfPersonNumbers + "명을 초과할 수 없습니다.");
 					return;
 				}
-
 				seatArray[row][col].setIcon(new ImageIcon(
 						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/SelectedSeat.png")));
 
 				selectSeatCode.setCharAt(row * columnsOfSeats + col, '1');
+				
 
 			}
 			
@@ -257,6 +254,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 						ShareVar.selectedSeatSeq = changedSeatIndices(eorSeatCode);
 						updateSeatCodeAction();
 						goConfirmSeat();
+						System.out.println("ShareVar 저장 : " + ShareVar.selectedSeatSeq);
+						System.out.println("ShareVar dbSeatCode : " + ShareVar.dbSeatCode);
 					}}});
 		}
 		return btnSeatConfirm;
