@@ -43,6 +43,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	private static StringBuilder seatCode = new StringBuilder("");
 	private static StringBuilder selectSeatCode = new StringBuilder("");
 	private static int eorSeatCode = 0;
+	private static int clickcount = 0;
 
 	int columnsOfSeats = 4; // column number
 	
@@ -154,6 +155,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 		@Override
 		public void actionPerformed(ActionEvent e) { // 좌석을 눌렀을 때 그에 맞게 좌석 코드를 바꾸는 기능 
+			
 			// 좌석 상태 토글
 			seatStatus[row][col] = !seatStatus[row][col];
 
@@ -166,12 +168,21 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				
 				// DB에서 불러온 코드와 사용자가 선택한 코드를 EOR, 변화 된 좌석은 1, 변화하지 않으면 0 
 				eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
-//				// changeCount : 사용자가 선택을 한 좌석 갯수 
-//				int changeCount = countSelecteSeat(eorSeatCode);
-//				
-//				if (ShareVar.sumOfPersonNumbers > changeCount + 1 ) {
-//					JOptionPane.showMessageDialog(null, ShareVar.sumOfPersonNumbers + "명을 초과할 수 없습니다.");
-//				}
+				
+				clickcount++;
+				
+				if(ShareVar.sumOfPersonNumbers < clickcount) {
+					JOptionPane.showMessageDialog(null, ShareVar.sumOfPersonNumbers + "명을 초과할 수 없습니다.");
+					
+					seatArray[row][col].setIcon(new ImageIcon(
+							Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotselectedSeat.png")));
+					
+					selectSeatCode.setCharAt(row * columnsOfSeats + col, '0');
+
+					eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
+				}
+				
+				
 			}
 			
 			// 1 -> 0, 내가 선택 한 좌석을 선택취소 하였을때 
@@ -179,6 +190,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				selectSeatCode.setCharAt(row * columnsOfSeats + col, '0');
 				seatArray[row][col].setIcon(new ImageIcon(
 						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotselectedSeat.png")));
+				
+				clickcount--;
 			}
 		}
 
@@ -248,9 +261,10 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					if(checkSelecte() == true) {
 						timer.cancel();
-						ShareVar.selectedSeatSeq = changedSeatIndices(eorSeatCode);
 						updateSeatCodeAction();
 						goConfirmSeat();
+						System.out.println(eorSeatCode);
+						ShareVar.selectedSeatSeq = changedSeatIndices(eorSeatCode);
 						System.out.println("Db 업데이트 코드 : " + selectSeatCode);
 						System.out.println("ShareVar 저장 : " + ShareVar.selectedSeatSeq);
 						System.out.println("ShareVar dbSeatCode : " + ShareVar.dbSeatCode);
@@ -403,7 +417,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 
 	private ArrayList<Integer> changedSeatIndices(int eorCode) {
-		System.out.println(eorCode);
+		System.out.println("changedSeatIndices의 eorCode : " + eorCode);
 	    ArrayList<Integer> changedIndices = new ArrayList<>();
 
 	    int index = 0;
