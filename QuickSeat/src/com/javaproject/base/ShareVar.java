@@ -124,7 +124,7 @@ public class ShareVar {
 	public static String insertedOrderNum = "";
 
 	//인원선택 분류 어레이 
-	public static int[] personNumbers = new int[5];
+	public static int[] personCategory = new int[5];
 
 	// 구매방법(현금,카드 구분)
 	public static String pay_method = "";
@@ -132,15 +132,24 @@ public class ShareVar {
 	// 발권가격(할인된 티켓가격의 총 가격)
 	public static String totalPrice = "";
 	
+	// 할인율 어레이
+	
+	// 각 할인율을 설정				      // 	일반  청소년		경로우대		유공자	장애인
+	public static int[] discountRates = {    0,	   50,	 	   50,		  50,	  50 }; 
 	
 	// 각 인원분류별 할인 후의 가격
-    public static int[] totalDiscountedPrice = new int[5];
+   // public static int[] totalDiscountedPrice = new int[5];
+    public static int[] totalDiscountedPriceArray = {1000,1000,2000,4000,5000};
+    
+    // 예시로 만들어보자. 
+    
     
     //
     public static ArrayList<Integer> selectedSeatSeq = new ArrayList<Integer>();
 	
-    // Db에서 불러온 영화에 대한 좌석 현황 Code
+     // Db에서 불러온 영화에 대한 좌석 현황 Code
     public static StringBuilder dbSeatCode = new StringBuilder("");
+	
 	
 	
 	// constructor
@@ -181,13 +190,13 @@ public class ShareVar {
 		insertedOrderNum = "";
 		
 		// 인원선택 분류 어레이 (어레이라 다 지우려고 for문 사용)
-		for (int i = 0; i < personNumbers.length; i++) {
-			personNumbers[i] = 0;        	
+		for (int i = 0; i < personCategory.length; i++) {
+			personCategory[i] = 0;        	
 		}
 
 		//  각 인원분류별 할인 후의 가격 (어레이라 다 지우려고 for문 사용)
-		for (int i = 0; i < personNumbers.length; i++) {
-			totalDiscountedPrice[i] = 0;        	
+		for (int i = 0; i < totalDiscountedPriceArray.length; i++) {
+			totalDiscountedPriceArray[i] = 0;        	
 		}
 		
 		selectedSeatSeq.removeAll(selectedSeatSeq);

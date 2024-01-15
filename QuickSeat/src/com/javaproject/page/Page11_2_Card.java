@@ -38,6 +38,12 @@ public class Page11_2_Card extends JDialog {
 	 * 			2. 인원선택에서 받아온 어레이값으로  각 할인율 어레이를 활용해 인원분류별 금액 합계 어래이 구현
 	 * 			3.	인원분류별 금액 합계어레이 값을 더해 총 구매금액 확인 구현
 	 * 			4. 앞에서 받아온 쉐어바의 값들은 db에 입력(구현중)
+	 * 			2. 인원선택 페이지에서 받아온 인원 분류 배열 * 할인율 배열 = 인원분류별 금액 합계 구현
+	 * 			3. 인원분류별 금액 합계 배열의 원소를 더해 총 구매금액 확인 구현
+	 * 
+	 * 
+	 *  Update 2024.01.15 by PJH, PDG
+	 * 			1. 2-3에서 추출된 결과값을 shareVar 에 넣었음. 이것을 인원분류와 총 구매금액을 사용자 엔터티에 입력)
 	 * 
 	 */
 
@@ -48,7 +54,7 @@ public class Page11_2_Card extends JDialog {
 	// private static SelectMenu selectMenu = new SelectMenu();
 	// 인원수 배열을 쉐어바에서 가져온다
 	private Dao_PJH dao;
-	private JTextField textField;
+	private JTextField tfPriceToPay;
 	private int[] discountedPrices; // 각 인원수별 할인된 금액을 저장할 배열
 
 	public static void main(String[] args) {
@@ -66,13 +72,18 @@ public class Page11_2_Card extends JDialog {
 	 */
 	public Page11_2_Card() {
 		dao = new Dao_PJH();
-		// 인원선택에서 선택한 어레이로 각각의 할인율을 설정
-		int[] discountRates = { 0, 50, 50, 50, 50 }; // 각 할인율을 설정
-		int[] personNumbers = ShareVar.personNumbers; // 인원선택에서 인원분류?(일반,청소년...) 가져오기
 		// 다오에서 할인 전 영화 가격 가져오기
-		int moviePriceBeforeDiscount = dao.MoviePriceBeforeDiscount();
+
+
+
+
+		int[] personNumbers = ShareVar.personCategory; // 인원선택에서 인원분류 array
+		int movieOriginalPrice = dao.MoviePriceBeforeDiscount();
+		
+		
+		
 		// 할인가격계산해서 전체 가격 내보내기
-		discountedPrices = calculateDiscountedPrices(personNumbers, discountRates, moviePriceBeforeDiscount);
+		discountedPrices = calculateDiscountedPrices(personNumbers, ShareVar.discountRates, moviePriceBeforeDiscount);
 		// totalDiscountedPrice 초기화(
 		ShareVar.totalDiscountedPrice = discountedPrices;
 
@@ -84,6 +95,10 @@ public class Page11_2_Card extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		
+		JButton btnCardConfirm = new JButton("New button");
+		btnCardConfirm.setBounds(487, 243, 285, 115);
+		contentPanel.add(btnCardConfirm);
 		// 화면 제목
 		JLabel lbl_pageTitle = new JLabel("카드 결제");
 		lbl_pageTitle.setFont(new Font("BM Dohyeon", Font.PLAIN, 50));
@@ -92,60 +107,68 @@ public class Page11_2_Card extends JDialog {
 
 		contentPanel.add(lbl_pageTitle);
 		// 첫화면으로 이전화면으로 버튼
-		JLabel lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.addMouseListener(new MouseAdapter() {
+		JLabel lblgoHome = new JLabel("");
+		lblgoHome.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				goToHome();
 			}
 		});
-		lblNewLabel_1.setIcon(
+		lblgoHome.setIcon(
 				new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/GoFirstPage.png")));
-		lblNewLabel_1.setBounds(628, 38, 172, 130);
-		contentPanel.add(lblNewLabel_1);
+		lblgoHome.setBounds(628, 38, 172, 130);
+		contentPanel.add(lblgoHome);
 
-		JLabel lblNewLabel_2 = new JLabel("");
-		lblNewLabel_2.addMouseListener(new MouseAdapter() {
+		JLabel lblGoBack = new JLabel("");
+		lblGoBack.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				goBack();
 			}
 		});
-		lblNewLabel_2
+		lblGoBack
 				.setIcon(new ImageIcon(Page11_0_SelectPayment.class.getResource("/com/javaproject/image/Backbtn.png")));
-		lblNewLabel_2.setBounds(11, 39, 161, 130);
-		contentPanel.add(lblNewLabel_2);
+		lblGoBack.setBounds(11, 39, 161, 130);
+		contentPanel.add(lblGoBack);
 
-		JLabel lblNewLabel = new JLabel("결제 금액");
-		lblNewLabel.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		lblNewLabel.setBounds(161, 166, 180, 100);
-		contentPanel.add(lblNewLabel);
+		JLabel lblPriceToPay = new JLabel("결제 금액");
+		lblPriceToPay.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
+		lblPriceToPay.setBounds(161, 166, 180, 100);
+		contentPanel.add(lblPriceToPay);
 
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBackground(new Color(255, 255, 204));
-		textField.setBounds(161, 245, 180, 60);
-		contentPanel.add(textField);
-		textField.setColumns(10);
-		textField.setText(Integer.toString(totalDiscountedPrice));
+		
+		
+		// 결제금액 TEXT FIELD 
+		
+		tfPriceToPay = new JTextField();
+		tfPriceToPay.setEditable(false);
+		tfPriceToPay.setBackground(new Color(255, 255, 204));
+		tfPriceToPay.setBounds(161, 245, 180, 60);
+		contentPanel.add(tfPriceToPay);
+		tfPriceToPay.setColumns(10);
+		// SHAREVAR 에서 최종 할인된 금액의 합계를 가져옵니다. 
+		tfPriceToPay.setText(Integer.toString(totalDiscountedPrice));
 
-		JLabel lblNewLabel_3 = new JLabel("");
-		lblNewLabel_3.setIcon(new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/InsertCard.png")));
-		lblNewLabel_3.setBounds(43, 312, 414, 249);
-		contentPanel.add(lblNewLabel_3);
+		
+		
+		JLabel lblImageCardInsert = new JLabel("");
+		lblImageCardInsert.setIcon(new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/InsertCard.png")));
+		lblImageCardInsert.setBounds(43, 312, 414, 249);
+		contentPanel.add(lblImageCardInsert);
 
-		JLabel lblNewLabel_4 = new JLabel("");
+		JLabel lblNewLabel_4 = new JLabel(""); // ㅠ향후 버튼 체인지 
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				goToPaymentConfirm();
+				
 				ShareVar.totalPrice = Integer.toString(totalDiscountedPrice);
 
 				// 사람분류 인원수 확인(배열안이 인트값이라서 하나씩 출력해야함)
 				System.out.print("총 할인 금액: [");
-				for (int i = 0; i < ShareVar.personNumbers.length; i++) {
-					System.out.print(ShareVar.personNumbers[i]);
-					if (i < ShareVar.personNumbers.length - 1) {
+				for (int i = 0; i < ShareVar.personCategory.length; i++) {
+					System.out.print(ShareVar.personCategory[i]);
+					if (i < ShareVar.personCategory.length - 1) {
 						System.out.print(", ");
 					}
 				}
@@ -153,9 +176,9 @@ public class Page11_2_Card extends JDialog {
 
 				// 사람분류 할인된 총 금액 출력(배열안이 인트값이라서 하나씩 출력해야함)
 				System.out.print("총 할인 금액: [");
-				for (int i = 0; i < ShareVar.totalDiscountedPrice.length; i++) {
-					System.out.print(ShareVar.totalDiscountedPrice[i]);
-					if (i < ShareVar.totalDiscountedPrice.length - 1) {
+				for (int i = 0; i < ShareVar.totalDiscountedPriceArray.length; i++) {
+					System.out.print(ShareVar.totalDiscountedPriceArray[i]);
+					if (i < ShareVar.totalDiscountedPriceArray.length - 1) {
 						System.out.print(", ");
 					}
 				}
@@ -217,27 +240,13 @@ public class Page11_2_Card extends JDialog {
 		int totalDiscountedPrice = 0;
 
 		for (int price : discountedPrices) {
+			
 			totalDiscountedPrice += price;
+			System.out.print("금액확인 :");
+			System.out.println(totalDiscountedPrice);
+			
 		}
 
 		return totalDiscountedPrice;
 	}
-    
-    // 저장
-//    ShareVar.discountedPrices = discountedPrices;
-//    ShareVar.totalDiscountedPrice = totalDiscountedPrice;
-    
-//	//할인가격계산해서 전체 가격 내보내기
-//	private int calculateDiscountedPrice(int[] personNumbers, int[] discountRates, int moviePriceBeforeDiscount) {
-//		// 할인된 가격을 초기화(안하면 포문에서 오류남)
-//		int discountedPrice = 0;
-//		for (int i = 0; i < personNumbers.length; i++) {
-//			// 할인율계산(예:30프로할인-> 인원분류숫자*0.7)
-//			discountedPrice += (1 - (double) discountRates[i] / 100) * personNumbers[i] * moviePriceBeforeDiscount;
-//		}
-//
-//		return discountedPrice;
-//	}
-	
-
 }// END
