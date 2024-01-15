@@ -109,6 +109,7 @@ public class ScreenControl extends JDialog {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				cbYearAdd();
+				cbDateSetting();
 				cbItemAdd();
 				screenTableInit();
 				screenSearchAction();
@@ -218,7 +219,7 @@ public class ScreenControl extends JDialog {
 		if (cbScroom == null) {
 			cbScroom = new JComboBox();
 			cbScroom.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbScroom.setBounds(131, 145, 105, 27);
+			cbScroom.setBounds(131, 145, 161, 27);
 		}
 		return cbScroom;
 	}
@@ -278,6 +279,8 @@ public class ScreenControl extends JDialog {
 			cbMonth = new JComboBox();
 			cbMonth.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					cbDate.removeAllItems();
+					cbDateSetting();
 					tfStartTimeSetting();
 				}
 			});
@@ -307,9 +310,6 @@ public class ScreenControl extends JDialog {
 				}
 			});
 			cbDate.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbDate.setModel(new DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08",
-					"09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24",
-					"25", "26", "27", "28", "29", "30", "31" }));
 			cbDate.setBounds(222, 288, 70, 27);
 		}
 		return cbDate;
@@ -441,6 +441,10 @@ public class ScreenControl extends JDialog {
 				public void actionPerformed(ActionEvent e) {
 					rbSelect();
 					rbInsert.setSelected(true);
+					cbClear();
+					cbYearAdd();
+					cbItemAdd();
+					cbRunTimeInit();
 				}
 			});
 			btnComplete.setFont(new Font("BM Dohyeon", Font.PLAIN, 20));
@@ -479,7 +483,7 @@ public class ScreenControl extends JDialog {
 				}
 			});
 			cbScroomSelect.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			cbScroomSelect.setBounds(339, 99, 105, 27);
+			cbScroomSelect.setBounds(339, 99, 161, 27);
 		}
 		return cbScroomSelect;
 	}
@@ -511,8 +515,8 @@ public class ScreenControl extends JDialog {
 		}
 		return lblNewLabel_3;
 	}
-	// --- Function ---
 
+	// --- Function ---
 	private void screenTableInit() { // Table 초기화
 		outerTable.addColumn("영화제목");
 		outerTable.addColumn("상영관");
@@ -530,7 +534,7 @@ public class ScreenControl extends JDialog {
 
 		colNo = 1;
 		col = innerTable.getColumnModel().getColumn(colNo);
-		width = 50;
+		width = 120;
 		col.setPreferredWidth(width);
 
 		colNo = 2;
@@ -578,6 +582,16 @@ public class ScreenControl extends JDialog {
 
 	}
 
+	// cbDate에 cbMonth에 맞는 숫자를 넣기 (6월은 30, 7월은 31)
+	private void cbDateSetting() {
+        LocalDate localDate = LocalDate.of(Integer.parseInt(cbYear.getSelectedItem().toString()), Integer.parseInt(cbMonth.getSelectedItem().toString()), 1);
+        int daysInMonth = localDate.lengthOfMonth();
+        for(int i = 1; i <= daysInMonth; i++) {
+        	cbDate.addItem(String.format("%02d", i));
+        }
+
+	}
+	
 	// 상영관 콤보박스(cbScroom, cbScroomSelect, cbMovieTitle)에 상영관 이름 넣기
 	private void cbItemAdd() {
 
@@ -819,4 +833,6 @@ public class ScreenControl extends JDialog {
 		tfRunTime.setText("");
 	}
 		
+	
+	
 } // End
