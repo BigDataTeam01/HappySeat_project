@@ -38,6 +38,12 @@ public class Page11_2_Card extends JDialog {
 	 * 			2. 인원선택에서 받아온 어레이값으로  각 할인율 어레이를 활용해 인원분류별 금액 합계 어래이 구현
 	 * 			3.	인원분류별 금액 합계어레이 값을 더해 총 구매금액 확인 구현
 	 * 			4. 앞에서 받아온 쉐어바의 값들은 db에 입력(구현중)
+	 * 			2. 인원선택 페이지에서 받아온 인원 분류 배열 * 할인율 배열 = 인원분류별 금액 합계 구현
+	 * 			3. 인원분류별 금액 합계 배열의 원소를 더해 총 구매금액 확인 구현
+	 * 
+	 * 
+	 *  Update 2024.01.15 by PJH, PDG
+	 * 			1. 2-3에서 추출된 결과값을 shareVar 에 넣었음. 이것을 인원분류와 총 구매금액을 사용자 엔터티에 입력)
 	 * 
 	 */
 
@@ -66,13 +72,15 @@ public class Page11_2_Card extends JDialog {
 	 */
 	public Page11_2_Card() {
 		dao = new Dao_PJH();
-		// 인원선택에서 선택한 어레이로 각각의 할인율을 설정
-		int[] discountRates = { 0, 50, 50, 50, 50 }; // 각 할인율을 설정
-		int[] personNumbers = ShareVar.personNumbers; // 인원선택에서 인원분류?(일반,청소년...) 가져오기
 		// 다오에서 할인 전 영화 가격 가져오기
+
+
+
+
+		int[] personNumbers = ShareVar.personCategory; // 인원선택에서 인원분류 array
 		int moviePriceBeforeDiscount = dao.MoviePriceBeforeDiscount();
 		// 할인가격계산해서 전체 가격 내보내기
-		discountedPrices = calculateDiscountedPrices(personNumbers, discountRates, moviePriceBeforeDiscount);
+		discountedPrices = calculateDiscountedPrices(personNumbers, ShareVar.discountRates, moviePriceBeforeDiscount);
 		// totalDiscountedPrice 초기화(
 		ShareVar.totalDiscountedPrice = discountedPrices;
 
@@ -143,9 +151,9 @@ public class Page11_2_Card extends JDialog {
 
 				// 사람분류 인원수 확인(배열안이 인트값이라서 하나씩 출력해야함)
 				System.out.print("총 할인 금액: [");
-				for (int i = 0; i < ShareVar.personNumbers.length; i++) {
-					System.out.print(ShareVar.personNumbers[i]);
-					if (i < ShareVar.personNumbers.length - 1) {
+				for (int i = 0; i < ShareVar.personCategory.length; i++) {
+					System.out.print(ShareVar.personCategory[i]);
+					if (i < ShareVar.personCategory.length - 1) {
 						System.out.print(", ");
 					}
 				}

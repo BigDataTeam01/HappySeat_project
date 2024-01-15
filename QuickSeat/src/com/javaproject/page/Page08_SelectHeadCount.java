@@ -52,6 +52,8 @@ public class Page08_SelectHeadCount extends JDialog {
 	 * 			
 	 *   *  *  *  * Update 2024.01.13 by J.park:
 	 * 			1. 쉐어바에 선택한 사람분류 어레이로 들어가게 설정
+	 * 
+	 * 			2. share 바 변수 변경했으니 그거에 맞게 적용해서 입력하도록 변경
 	 * 			
 	 */
 
@@ -60,11 +62,11 @@ public class Page08_SelectHeadCount extends JDialog {
 	 */
 
 	private mybutton btnNewButton;
-	private JTextField tfPersonNum1;
-	private JTextField tfPersonNum2;
-	private JTextField tfPersonNum3;
-	private JTextField tfPersonNum4;
-	private JTextField tfPersonNum5;
+	private JTextField tfPersonCategory1;
+	private JTextField tfPersonCategory2;
+	private JTextField tfPersonCategory3;
+	private JTextField tfPersonCategory4;
+	private JTextField tfPersonCategory5;
 	//인원선택 어레이에 저장
 	private JTextField[] tfPersonNumArray = new JTextField[5];
 	private ArrayList<Integer> personNums = new ArrayList<>(); // 어레이리스트 추가
@@ -180,14 +182,14 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonMinus1.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum1.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory1.getText());
 					if(currentValue>0) {
 						currentValue--;
-						tfPersonNum1.setText(String.valueOf(currentValue));
+						tfPersonCategory1.setText(String.valueOf(currentValue));
 					}
 				}
 			});
-			lblPersonMinus1.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus1.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonMinus1.setBounds(185, 210, 20, 20);
 			contentPanel.add(lblPersonMinus1);
 
@@ -195,14 +197,14 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonMinus2.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum2.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory2.getText());
 					if (currentValue > 0) {
 						currentValue--;
-						tfPersonNum2.setText(String.valueOf(currentValue));
+						tfPersonCategory2.setText(String.valueOf(currentValue));
 					}
 				}
 			});
-			lblPersonMinus2.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus2.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonMinus2.setBounds(574, 210, 20, 20);
 			contentPanel.add(lblPersonMinus2);
 
@@ -210,14 +212,14 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonMinus3.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum3.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory3.getText());
 					if (currentValue > 0) {
 						currentValue--;
-						tfPersonNum3.setText(String.valueOf(currentValue));
+						tfPersonCategory3.setText(String.valueOf(currentValue));
 					}
 				}
 			});
-			lblPersonMinus3.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus3.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonMinus3.setBounds(185, 300, 20, 20);
 			contentPanel.add(lblPersonMinus3);
 
@@ -225,14 +227,14 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonMinus4.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum4.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory4.getText());
 					if (currentValue > 0) {
 						currentValue--;
-						tfPersonNum4.setText(String.valueOf(currentValue));
+						tfPersonCategory4.setText(String.valueOf(currentValue));
 					}
 				}
 			});
-			lblPersonMinus4.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus4.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonMinus4.setBounds(574, 300, 20, 20);
 			contentPanel.add(lblPersonMinus4);
 
@@ -240,14 +242,14 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonMinus5.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum5.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory5.getText());
 					if (currentValue > 0) {
 						currentValue--;
-						tfPersonNum5.setText(String.valueOf(currentValue));
+						tfPersonCategory5.setText(String.valueOf(currentValue));
 					}
 				}
 			});
-			lblPersonMinus5.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonMinus5.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonMinus5.setBounds(185, 400, 20, 20);
 			contentPanel.add(lblPersonMinus5);
 
@@ -256,14 +258,14 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonPlus1.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum1.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory1.getText());
 
 					currentValue++;
 
-					tfPersonNum1.setText(String.valueOf(currentValue));
+					tfPersonCategory1.setText(String.valueOf(currentValue));
 				}
 			});
-			lblPersonPlus1.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus1.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonPlus1.setBounds(305, 210, 20, 20);
 			contentPanel.add(lblPersonPlus1);
 			
@@ -271,14 +273,14 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonPlus2.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum2.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory2.getText());
 
 					currentValue++;
 
-					tfPersonNum2.setText(String.valueOf(currentValue));
+					tfPersonCategory2.setText(String.valueOf(currentValue));
 				}
 			});
-			lblPersonPlus2.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus2.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonPlus2.setBounds(694, 210, 20, 20);
 			contentPanel.add(lblPersonPlus2);
 			
@@ -286,14 +288,14 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonPlus3.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum3.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory3.getText());
 
 					currentValue++;
 
-					tfPersonNum3.setText(String.valueOf(currentValue));
+					tfPersonCategory3.setText(String.valueOf(currentValue));
 				}
 			});
-			lblPersonPlus3.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus3.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonPlus3.setBounds(305, 300, 20, 20);
 			contentPanel.add(lblPersonPlus3);
 			
@@ -301,14 +303,14 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonPlus4.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum4.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory4.getText());
 
 					currentValue++;
 
-					tfPersonNum4.setText(String.valueOf(currentValue));
+					tfPersonCategory4.setText(String.valueOf(currentValue));
 				}
 			});
-			lblPersonPlus4.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus4.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonPlus4.setBounds(694, 300, 20, 20);
 			contentPanel.add(lblPersonPlus4);
 			
@@ -316,57 +318,57 @@ public class Page08_SelectHeadCount extends JDialog {
 			lblPersonPlus5.addMouseListener(new MouseAdapter() {
 				@Override
 				public void mouseClicked(MouseEvent e) {
-					int currentValue = Integer.parseInt(tfPersonNum5.getText());
+					int currentValue = Integer.parseInt(tfPersonCategory5.getText());
 
 					currentValue++;
 
-					tfPersonNum5.setText(String.valueOf(currentValue));
+					tfPersonCategory5.setText(String.valueOf(currentValue));
 				}
 			});
-			lblPersonPlus5.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
+			lblPersonPlus5.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
 			lblPersonPlus5.setBounds(305, 400, 20, 20);
 			contentPanel.add(lblPersonPlus5);
 			
 			//인원수 텍스트필드
-			tfPersonNum1 = new JTextField();
-			tfPersonNum1.setHorizontalAlignment(SwingConstants.CENTER);
-			tfPersonNum1.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
-			tfPersonNum1.setBounds(225, 200, 60, 40);
-			contentPanel.add(tfPersonNum1);
-			tfPersonNum1.setColumns(10);
-			tfPersonNum1.setText("0");
+			tfPersonCategory1 = new JTextField();
+			tfPersonCategory1.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonCategory1.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
+			tfPersonCategory1.setBounds(225, 200, 60, 40);
+			contentPanel.add(tfPersonCategory1);
+			tfPersonCategory1.setColumns(10);
+			tfPersonCategory1.setText("0");
 			
-			tfPersonNum2 = new JTextField();
-			tfPersonNum2.setHorizontalAlignment(SwingConstants.CENTER);
-			tfPersonNum2.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
-			tfPersonNum2.setColumns(10);
-			tfPersonNum2.setBounds(614, 200, 60, 40);
-			contentPanel.add(tfPersonNum2);
-			tfPersonNum2.setText("0");
+			tfPersonCategory2 = new JTextField();
+			tfPersonCategory2.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonCategory2.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
+			tfPersonCategory2.setColumns(10);
+			tfPersonCategory2.setBounds(614, 200, 60, 40);
+			contentPanel.add(tfPersonCategory2);
+			tfPersonCategory2.setText("0");
 			
-			tfPersonNum3 = new JTextField();
-			tfPersonNum3.setHorizontalAlignment(SwingConstants.CENTER);
-			tfPersonNum3.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
-			tfPersonNum3.setColumns(10);
-			tfPersonNum3.setBounds(225, 290, 60, 40);
-			contentPanel.add(tfPersonNum3);
-			tfPersonNum3.setText("0");
+			tfPersonCategory3 = new JTextField();
+			tfPersonCategory3.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonCategory3.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
+			tfPersonCategory3.setColumns(10);
+			tfPersonCategory3.setBounds(225, 290, 60, 40);
+			contentPanel.add(tfPersonCategory3);
+			tfPersonCategory3.setText("0");
 
-			tfPersonNum4 = new JTextField();
-			tfPersonNum4.setHorizontalAlignment(SwingConstants.CENTER);
-			tfPersonNum4.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
-			tfPersonNum4.setColumns(10);
-			tfPersonNum4.setBounds(614, 290, 60, 40);
-			contentPanel.add(tfPersonNum4);
-			tfPersonNum4.setText("0");
+			tfPersonCategory4 = new JTextField();
+			tfPersonCategory4.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonCategory4.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
+			tfPersonCategory4.setColumns(10);
+			tfPersonCategory4.setBounds(614, 290, 60, 40);
+			contentPanel.add(tfPersonCategory4);
+			tfPersonCategory4.setText("0");
 			
-			tfPersonNum5 = new JTextField();
-			tfPersonNum5.setHorizontalAlignment(SwingConstants.CENTER);
-			tfPersonNum5.setFont(new Font("배달의민족 도현", Font.PLAIN, 25));
-			tfPersonNum5.setColumns(10);
-			tfPersonNum5.setBounds(225, 390, 60, 40);
-			contentPanel.add(tfPersonNum5);
-			tfPersonNum5.setText("0");
+			tfPersonCategory5 = new JTextField();
+			tfPersonCategory5.setHorizontalAlignment(SwingConstants.CENTER);
+			tfPersonCategory5.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 25));
+			tfPersonCategory5.setColumns(10);
+			tfPersonCategory5.setBounds(225, 390, 60, 40);
+			contentPanel.add(tfPersonCategory5);
+			tfPersonCategory5.setText("0");
 			
 			//백그라운드 (총 5개)
 			JLabel PersonNumBackground1 = new JLabel("   일반");
@@ -490,46 +492,49 @@ public class Page08_SelectHeadCount extends JDialog {
 					//쉐어바에 들어갔는지 확인
 					 System.out.println(ShareVar.sumOfPersonNumbers);
 					 System.out.println("Stored values in ShareVar: " +
-		                        ShareVar.personNumbers[0] + ", " +
-		                        ShareVar.personNumbers[1] + ", " +
-		                        ShareVar.personNumbers[2] + ", " +
-		                        ShareVar.personNumbers[3] + ", " +
-		                        ShareVar.personNumbers[4]);
+		                        ShareVar.personCategory[0] + ", " +
+		                        ShareVar.personCategory[1] + ", " +
+		                        ShareVar.personCategory[2] + ", " +
+		                        ShareVar.personCategory[3] + ", " +
+		                        ShareVar.personCategory[4]);
 				}
 			});
-			
+//            System.out.println(ShareVar.sumOfPersonNumbers);
+	
 		}
 		return btnNewButton;
+		
 	}
 	
 	//선택한 숫자 더하기
 	 private void calculateAndStoreSum() {
-	            int sum = Integer.parseInt(tfPersonNum1.getText()) +
-	                      Integer.parseInt(tfPersonNum2.getText()) +
-	                      Integer.parseInt(tfPersonNum3.getText()) +
-	                      Integer.parseInt(tfPersonNum4.getText()) +
-	                      Integer.parseInt(tfPersonNum5.getText());
+	            int sum = Integer.parseInt(tfPersonCategory1.getText()) +
+	                      Integer.parseInt(tfPersonCategory2.getText()) +
+	                      Integer.parseInt(tfPersonCategory3.getText()) +
+	                      Integer.parseInt(tfPersonCategory4.getText()) +
+	                      Integer.parseInt(tfPersonCategory5.getText());
 
 	            // 텍스트필드에 들어간 인원수 합을 ShareVar에 저장
 	            ShareVar.sumOfPersonNumbers = sum;
-	   
+//	            System.out.println("---------------");
+//	            System.out.println(ShareVar.sumOfPersonNumbers);
 	    }
 	// +버튼 눌렀을때 텍스트필드에 1더하는 액션
 	 private void addAction() {
-		 int currentValue = Integer.parseInt(tfPersonNum5.getText());
+		 int currentValue = Integer.parseInt(tfPersonCategory5.getText());
 
 			currentValue++;
 
-			tfPersonNum5.setText(String.valueOf(currentValue));
+			tfPersonCategory5.setText(String.valueOf(currentValue));
 		 
 	 }
 	// 각 값들을 ShareVar에 저장
 	 private void storeValuesInShareVar() {
-	     ShareVar.personNumbers[0] = Integer.parseInt(tfPersonNum1.getText());
-	     ShareVar.personNumbers[1] = Integer.parseInt(tfPersonNum2.getText());
-	     ShareVar.personNumbers[2] = Integer.parseInt(tfPersonNum3.getText());
-	     ShareVar.personNumbers[3] = Integer.parseInt(tfPersonNum4.getText());
-	     ShareVar.personNumbers[4] = Integer.parseInt(tfPersonNum5.getText());
+	     ShareVar.personCategory[0] = Integer.parseInt(tfPersonCategory1.getText());
+	     ShareVar.personCategory[1] = Integer.parseInt(tfPersonCategory2.getText());
+	     ShareVar.personCategory[2] = Integer.parseInt(tfPersonCategory3.getText());
+	     ShareVar.personCategory[3] = Integer.parseInt(tfPersonCategory4.getText());
+	     ShareVar.personCategory[4] = Integer.parseInt(tfPersonCategory5.getText());
 	 }
 	 
 }// End
