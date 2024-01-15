@@ -45,8 +45,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	private static StringBuilder seatCode = new StringBuilder("");
 	// selectSeatCode -> 사용자가 선택한 좌석 현황 
 	private static StringBuilder selectSeatCode = new StringBuilder("");
-	// eorSeatCode -> seatCode ^ selectSeatCode (익스클루시브오어)
-	private static int eorSeatCode = 0;
+	// XORSeatCode -> seatCode ^ selectSeatCode (익스클루시브오어)
+	private static int xorSeatCode = 0;
 
 	int columnsOfSeats = 4; // column number
 	
@@ -173,8 +173,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				// 해당하는 좌석의 코드값을 '1'로 변경
 				selectSeatCode.setCharAt(row * columnsOfSeats + col, '1');
 				
-				// DB에서 불러온 코드와 사용자가 선택한 코드를 EOR, 변화 된 좌석은 1, 변화하지 않으면 0 
-				eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
+				// DB에서 불러온 코드와 사용자가 선택한 코드를 XOR, 변화 된 좌석은 1, 변화하지 않으면 0 
+				xorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
 				// 좌석을 누르게 되면 ClickCount++
 				ShareVar.clickCount++;
 				// 좌석이 선택되었다면 seatStatus = true
@@ -189,14 +189,13 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 					
 					// if절 위에서 selectCode를 '1'로 변경해주었으니, 다시 '0'으로 변경 
 					selectSeatCode.setCharAt(row * columnsOfSeats + col, '0');
-					eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
+					xorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
 					
 					// ClickCount가 곧 좌석을 선택한 수이기에 이것 또한 if절 위에서 더해주었으니 -- 해주어야 함.
 					ShareVar.clickCount--;
 					// 이것 또한 if절 위에서 true 값으로 변경되었으니 false로 다시 변경 
 					seatStatus[row][col] = false;
 				}
-				
 			}
 			
 			// 1 -> 0, 내가 선택 한 좌석을 선택취소 하였을때 
@@ -281,7 +280,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 						timer.cancel();
 						updateSeatCodeAction();
 						goConfirmSeat();
-						ShareVar.selectedSeatSeq = changedSeatIndices(eorSeatCode);
+						ShareVar.selectedSeatSeq = changedSeatIndices(xorSeatCode);
 					}}});
 		}
 		return btnSeatConfirm;
@@ -343,6 +342,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		// 좌석의 나머지 값, 전체좌석을 열로 나눈 나머지값. 
 		// 만약, 전체 좌석 수 12, 열 좌석 수 4 이면, 나머지는 없음.
 		// 하지만 전체 좌석 수 13, 열 좌석 수 4 이면, 나머지는 1이 됨.
+		// 14, 열좌석수 4이면, 나머지 2. 
 		int residueSeatRow = totalSeats % columnsOfSeats;
 		// 행, 전체 좌석수를 열로 나눈 후 나머지가 있다면 추가.
 		// 위의 예시로 한다면, 나머지가 0일때는 행을 3행으로 끝남. 따라서 4열 * 3행 = 총 12 좌석 수.
@@ -366,10 +366,10 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		for (int rowSeat = 0; rowSeat < rowsOfSeat; rowSeat++) {
 			// 내부 for문 열을 변경.
 			// 조건 : (생성되는 열 번호 < 전체 열) and (생성되는 행 번호 * 전체 열 + 생성되는 열 번호 < 전체 좌석 수)
-			// and 뒤에 있는 조건에 대한 설명 : 전체 열을 4로 했고, 전체 좌석 수를 13으로 했다면, 만들어지는 좌석이 13좌석보다 적어야 한다는 뜻. 
+			// and 뒤에 있는 조건에 대한 설명 : 전체 열을 4로 했고, 전체 좌석 수를 13으로 했다면, 만들어지는 좌석이 13좌석 이하여야 한다는 뜻. 
 			for (int colSeat = 0; (colSeat < columnsOfSeats)
 					&& (rowSeat * columnsOfSeats + colSeat < totalSeats); colSeat++) { // front seat colum is three
-				
+			
 				seatArray[rowSeat][colSeat] = new JButton();
 				seatArray[rowSeat][colSeat].addActionListener(new SeatButtonListener(rowSeat, colSeat));
 				
@@ -435,17 +435,17 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		}
 	}
 	
-	private int countSelecteSeat(int EORseat) { // 좌석상태가 몇 개 변하였는지 세는 Method  
+	private int countSelecteSeat(int XORseat) { // 좌석상태가 몇 개 변하였는지 세는 Method  
 		int count = 0;
-		while (EORseat > 0) {
-			count += (EORseat & 1);
-			EORseat = EORseat >> 1;
+		while (XORseat > 0) {
+			count += (XORseat & 1);
+			XORseat = XORseat >> 1;
 		}
 		return count;
 	}
 	
 	private boolean checkSelecte() { // 좌석을 인원 수대로 선택했는지 확인하는 Method.
-		int count = countSelecteSeat(eorSeatCode);
+		int count = countSelecteSeat(xorSeatCode);
 		boolean result = false;
 		// 선택한 좌석이 전체 인원보다 적을때. 
 		if(count < ShareVar.sumOfPersonNumbers) {
@@ -463,16 +463,16 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		BackSplashTimer backSplashTimer = new BackSplashTimer(300, this);
 	}
 
-	private ArrayList<Integer> changedSeatIndices(int eorCode) { // eorCode를 통해 어떤 좌석을 선택했는지를 ArrayList로 저장. 
+	private ArrayList<Integer> changedSeatIndices(int XORCode) { // XORCode를 통해 어떤 좌석을 선택했는지를 ArrayList로 저장. 
 	    ArrayList<Integer> changedIndices = new ArrayList<>();
 
 	    int index = 0;
-	    while (eorCode > 0) {
-	        if ((eorCode & 1) == 1) {
+	    while (XORCode > 0) {
+	        if ((XORCode & 1) == 1) {
 	            changedIndices.add(seatCode.length()-index);
 	        }
 
-	        eorCode = eorCode >> 1;
+	        XORCode = XORCode >> 1;
 	        index++;
 	    }
 
