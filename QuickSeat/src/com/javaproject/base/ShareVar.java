@@ -125,17 +125,17 @@ public class ShareVar {
 
 	//인원선택 분류 어레이 
 	public static int[] personCategory = new int[5];
-
+	
 	// 구매방법(현금,카드 구분)
 	public static String pay_method = "";
 	
 	// 발권가격(할인된 티켓가격의 총 가격)
-	public static String totalPrice = "";
+	public static int totalPrice = 0;
 	
 	// 할인율 어레이
 	
 	// 각 할인율을 설정				      // 	일반  청소년		경로우대		유공자	장애인
-	public static int[] discountRates = {    0,	   50,	 	   50,		  50,	  50 }; 
+	public static double[] discountRates = {    0.0,	   50.0,	 	   50.0,		  50.0,	  50.0 }; 
 	
 	// 각 인원분류별 할인 후의 가격
    // public static int[] totalDiscountedPrice = new int[5];
@@ -149,10 +149,29 @@ public class ShareVar {
 	
      // Db에서 불러온 영화에 대한 좌석 현황 Code
     public static StringBuilder dbSeatCode = new StringBuilder("");
+    
+    // 고객 시퀀스 불러오기
+ 	public static int cust_Seq = 0;
+ 	
+ 	//  하나 추가될때마다 sharvar.cust_age,cust_type,discount_rate 모두를 업데이트한다. 
 	
+ 	public static String cust_type = "";
+ 	
+ 	public static int cust_age = 0;
 	
-	
-	// constructor
+ 	public static double cust_discount_rate = 0;
+ 	
+ 	// 고객이 예매한 시간. 
+ 	public static String timeReserved ="";
+ 	
+ 	// 현재 추가되는 고객의 티켓에 대한 가격 이가격은 배열이아니다. !!!
+ 	public static int currentCutomersTicketPrice=0;
+ 	
+ 	public static int originalTicketPrice =0;
+
+ 	public static int currentSeatOrder= 0;
+ 	
+ 	// constructor
 	public ShareVar() {
 		// TODO Auto-generated constructor stub
 	}
@@ -207,7 +226,10 @@ public class ShareVar {
     	pay_method = "";
     	
     	// 발권가격(할인된 티켓가격의 총 가격)
-    	totalPrice = "";
+    	totalPrice = 0;
+    	
+    	// 고객 시퀀스 불러오기
+    	cust_Seq = 0;
 	}
 	
 	
