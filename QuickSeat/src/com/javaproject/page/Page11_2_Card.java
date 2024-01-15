@@ -164,7 +164,7 @@ public class Page11_2_Card extends JDialog {
 		tfPriceToPay.setColumns(10);
 		// SHAREVAR 에서 최종 할인된 금액의 합계를 가져옵니다. 
 		tfPriceToPay.setText(Integer.toString(ShareVar.totalPrice) );
-
+		System.out.println("총 가격: " + ShareVar.totalPrice);
 		
 		
 		JLabel lblImageCardInsert = new JLabel("");
@@ -184,17 +184,19 @@ public class Page11_2_Card extends JDialog {
 				dao.insertCustomerInfo();
 				
 				// 사람분류 인원수 확인(배열안이 인트값이라서 하나씩 출력해야함)
-				System.out.print("총 할인 금액: [");
+				System.out.print("사람 할인금액 어레이: [");
 				for (int i = 0; i < ShareVar.personCategory.length; i++) {
 					System.out.print(ShareVar.personCategory[i]);
 					if (i < ShareVar.personCategory.length - 1) {
 						System.out.print(", ");
 					}
 				}
+				
+				
 				System.out.println("]");
 
 				// 사람분류 할인된 총 금액 출력(배열안이 인트값이라서 하나씩 출력해야함)
-				System.out.print("총 할인 금액: [");
+				System.out.print("총 할인 금액어레이: [");
 				for (int i = 0; i < ShareVar.totalDiscountedPriceArray.length; i++) {
 					System.out.print(ShareVar.totalDiscountedPriceArray[i]);
 					if (i < ShareVar.totalDiscountedPriceArray.length - 1) {
@@ -255,7 +257,7 @@ public class Page11_2_Card extends JDialog {
 			
 			System.out.println(discountRatesArray[i]);
 			double ratedPrice = 1 - (double) (discountRatesArray[i] / 100.00);
-			finalPricesArray[i] = (int) (ratedPrice * originalPrice);
+			finalPricesArray[i] = (int) (ratedPrice * originalPrice)*personCategory[i];
 
 //			double ratedPrice = 1-(double) (discountRatesArray[i]/100.00);
 //			

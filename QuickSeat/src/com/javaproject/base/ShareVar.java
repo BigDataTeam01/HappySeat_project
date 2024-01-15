@@ -171,6 +171,8 @@ public class ShareVar {
 
  	public static int currentSeatOrder= 0;
  	
+ 	public static int clickCount= 0;
+ 	
  	// constructor
 	public ShareVar() {
 		// TODO Auto-generated constructor stub
@@ -179,6 +181,7 @@ public class ShareVar {
 	//Method
 	
 	public void shareVarInint() {
+		
 		System.out.println(" 초기화 됨 ");
 		// 관리자 아이디 저장공간
 		managerID = "메니저 아이디가 입력이 안되었습니다";
@@ -230,6 +233,8 @@ public class ShareVar {
     	
     	// 고객 시퀀스 불러오기
     	cust_Seq = 0;
+    	//좌석선택 클릭카운트
+    	clickCount= 0;
 	}
 	
 	

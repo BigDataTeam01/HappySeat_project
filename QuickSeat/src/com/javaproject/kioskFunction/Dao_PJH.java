@@ -532,7 +532,8 @@ public class Dao_PJH {
 						System.out.println("-------------=-=-=-=-=-");
 						System.out.println(ShareVar.originalTicketPrice);
 						System.out.println(ShareVar.discountRates[i]);
-						
+						System.out.println("원래 티켓 가격: " + ShareVar.originalTicketPrice);
+						System.out.println("할인율: " + ShareVar.discountRates[i]);
 						ShareVar.currentSeatOrder = i;
 						
 						//맨 마지막 고객의 cust_seq를 sharevar에 넣어준다
