@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 import com.javaproject.base.ShareVar;
 import com.javaproject.managerfunction.DtoWDH;
 
-public class Dao_confirmSeat {
+public class Dao_orderCancel {
 	
 	
 	private final String url_mysql = ShareVar.dbName;
@@ -40,11 +40,11 @@ public class Dao_confirmSeat {
 	
 	
 	//construct
-	public Dao_confirmSeat() {
+	public Dao_orderCancel() {
 		
 	}
 
-	public Dao_confirmSeat(String movie_title, FileInputStream poster, String cinema_branch,
+	public Dao_orderCancel(String movie_title, FileInputStream poster, String cinema_branch,
 			String scr_scroom_name, String scr_start_time) {
 		super();
 		this.movie_title = movie_title;
@@ -57,25 +57,29 @@ public class Dao_confirmSeat {
 	
 	//Method
 	
-	public ArrayList<Dto_confirmSeat> showMyTicket (){
-		ArrayList<Dto_confirmSeat> dto = new ArrayList<Dto_confirmSeat>();
+	public ArrayList<Dto_orderCancel> reserv_ticket (){
+		ArrayList<Dto_orderCancel> dto = new ArrayList<Dto_orderCancel>();
 
-		String select = "select m.movie_title , m.poster , s.scr_start_time , s.scr_scroom_name , r.cinema_branch ";
-		String from = " from screen as s, movie as m , screening_room as r";
-		String where = " where m.movie_title = s.scr_movie_title and s.scr_scroom_name = r.scroom_name and s.scr_movie_title = '" + ShareVar.selectedMovieTitle + "'";
-		
+		String where1 = "select m.movie_title , m.poster , s.scr_start_time , s.scr_scroom_name , r.cinema_branch , v.ticket_number, v.seat_order";
+		String where2 = " from screen as s, movie as m , screening_room as r , reserve as v "
+						+ "where m.movie_title = s.scr_movie_title" + " and ticket_number = " + ShareVar.insertedOrderNum + " and v.resv_scr_scroom_name = r.scroom_name"
+								+" and m.movie_title = v.resv_scr_movie_title"
+								+" and s.scr_code = v.resv_scr_code";
+		System.out.println(where1 + where2);
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			ResultSet rs = stmt_mysql.executeQuery(select + from + where);
+			ResultSet rs = stmt_mysql.executeQuery(where1 + where2);
 
 			while (rs.next()) {
 				String wkMovie_title = rs.getString(1);
 				String wkScr_start_time = rs.getString(3);
 				String wkScr_scroom_name = rs.getString(4);
 				String wkcinema_branch = rs.getString(5);
+				String wkreserv_ticket = rs.getString(6);
+				String wkseat_order = rs.getString(7);
 				
 				// file
 				Poster = Poster + 1;
@@ -88,9 +92,9 @@ public class Dao_confirmSeat {
 					output.write(buffer);
 				}
 
-				Dto_confirmSeat Dto_confirmSeat = new Dto_confirmSeat(wkMovie_title, poster, wkcinema_branch, wkScr_scroom_name, wkScr_start_time, wkScr_scroom_name, wkScr_start_time);
+				Dto_orderCancel dto_orderCancel = new Dto_orderCancel(wkMovie_title, poster, wkcinema_branch, wkScr_scroom_name, wkScr_start_time, wkScr_scroom_name, wkScr_start_time , wkreserv_ticket, wkseat_order);
 
-				dto.add(Dto_confirmSeat);
+				dto.add(dto_orderCancel);
 			}
 
 			conn_mysql.close();
@@ -101,28 +105,13 @@ public class Dao_confirmSeat {
 
 		return dto;
 	}
-
 	
-	public void revertSeatStatus() {
-		PreparedStatement ps = null;
+	private void deleteAction() {
 		
-		String where1 = "Update screen set seat_resv_code = '" + ShareVar.dbSeatCode + "'";
-		String where2 = " where scr_code = " + ShareVar.scr_code;
 		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
-			
-			ps = conn_mysql.prepareStatement(where1+where2);
-			ps.executeUpdate();
-			
-			conn_mysql.close();
-			
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "업데이트 중 문제발생");
-		}
+		
 	}
-	
+
 	
 	
 	

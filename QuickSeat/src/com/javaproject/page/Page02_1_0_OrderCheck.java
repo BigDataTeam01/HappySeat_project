@@ -22,6 +22,7 @@ import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
 import com.javaproject.kioskFunction.ButtonDesign_ver1;
 import com.javaproject.kioskFunction.Dao_PJH;
+import com.javaproject.kioskFunction.Dao_orderCancel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -91,7 +92,7 @@ public class Page02_1_0_OrderCheck extends JDialog {
 				backSplashTimeEnd();
 			}
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowDeactivated(WindowEvent e) {
 				stopTimer();
 			}
 			
@@ -337,6 +338,12 @@ public class Page02_1_0_OrderCheck extends JDialog {
 	// 입력완료 버튼
 	private JButton getBtnNewButton() {
 		ButtonDesign_ver1 customButton = new ButtonDesign_ver1("입력완료", ShareVar.btnFillColor);
+		customButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			 Dao_orderCancel Dao = new Dao_orderCancel();
+			 
+			}
+		});
 		customButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
 		customButton.setForeground(ShareVar.btnTextColor);
 		customButton.setBounds(563, 331, 194, 133);

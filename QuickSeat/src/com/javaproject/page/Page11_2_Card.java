@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
+import com.javaproject.kioskFunction.ButtonDesign_ver1;
 import com.javaproject.kioskFunction.Dao_PJH;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
@@ -111,9 +112,43 @@ public class Page11_2_Card extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
-		
-		JButton btnCardConfirm = new JButton("New button");
-		btnCardConfirm.setBounds(487, 243, 285, 115);
+
+		ButtonDesign_ver1 btnCardConfirm = new ButtonDesign_ver1("카드 결제", ShareVar.btnFillColor);
+		btnCardConfirm.setFont(new Font("BM Dohyeon", Font.PLAIN, 30));
+		btnCardConfirm.setForeground(ShareVar.btnTextColor);
+		btnCardConfirm.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				goToPaymentConfirm();
+
+				ShareVar.totalPrice = totalDiscountedPrice;
+
+				Dao_PJH dao = new Dao_PJH();
+				dao.insertCustomerInfo();
+
+				// 사람분류 인원수 확인(배열안이 인트값이라서 하나씩 출력해야함)
+				System.out.print("사람 할인금액 어레이: [");
+				for (int i = 0; i < ShareVar.personCategory.length; i++) {
+					System.out.print(ShareVar.personCategory[i]);
+					if (i < ShareVar.personCategory.length - 1) {
+						System.out.print(", ");
+					}
+				}
+
+				System.out.println("]");
+
+				// 사람분류 할인된 총 금액 출력(배열안이 인트값이라서 하나씩 출력해야함)
+				System.out.print("총 할인 금액어레이: [");
+				for (int i = 0; i < ShareVar.totalDiscountedPriceArray.length; i++) {
+					System.out.print(ShareVar.totalDiscountedPriceArray[i]);
+					if (i < ShareVar.totalDiscountedPriceArray.length - 1) {
+						System.out.print(", ");
+					}
+				}
+				System.out.println("]");
+
+			}
+		});
+		btnCardConfirm.setBounds(487, 436, 285, 115);
 		contentPanel.add(btnCardConfirm);
 		// 화면 제목
 		JLabel lbl_pageTitle = new JLabel("카드 결제");
@@ -163,48 +198,14 @@ public class Page11_2_Card extends JDialog {
 		contentPanel.add(tfPriceToPay);
 		tfPriceToPay.setColumns(10);
 		// SHAREVAR 에서 최종 할인된 금액의 합계를 가져옵니다. 
-		tfPriceToPay.setText(Integer.toString(totalDiscountedPrice));
-
+		tfPriceToPay.setText(Integer.toString(ShareVar.totalPrice) );
+		System.out.println("총 가격: " + ShareVar.totalPrice);
 		
 		
 		JLabel lblImageCardInsert = new JLabel("");
 		lblImageCardInsert.setIcon(new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/InsertCard.png")));
 		lblImageCardInsert.setBounds(43, 312, 414, 249);
 		contentPanel.add(lblImageCardInsert);
-
-		JLabel lblNewLabel_4 = new JLabel(""); // ㅠ향후 버튼 체인지 
-		lblNewLabel_4.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				goToPaymentConfirm();
-				
-				ShareVar.totalPrice = Integer.toString(totalDiscountedPrice);
-
-				// 사람분류 인원수 확인(배열안이 인트값이라서 하나씩 출력해야함)
-				System.out.print("총 할인 금액: [");
-				for (int i = 0; i < ShareVar.personCategory.length; i++) {
-					System.out.print(ShareVar.personCategory[i]);
-					if (i < ShareVar.personCategory.length - 1) {
-						System.out.print(", ");
-					}
-				}
-				System.out.println("]");
-
-				// 사람분류 할인된 총 금액 출력(배열안이 인트값이라서 하나씩 출력해야함)
-				System.out.print("총 할인 금액: [");
-				for (int i = 0; i < ShareVar.totalDiscountedPriceArray.length; i++) {
-					System.out.print(ShareVar.totalDiscountedPriceArray[i]);
-					if (i < ShareVar.totalDiscountedPriceArray.length - 1) {
-						System.out.print(", ");
-					}
-				}
-				System.out.println("]");
-			}
-		});
-		lblNewLabel_4.setIcon(
-				new ImageIcon(Page11_2_Card.class.getResource("/com/javaproject/image/cardAuthorization.png")));
-		lblNewLabel_4.setBounds(490, 456, 285, 115);
-		contentPanel.add(lblNewLabel_4);
 		// 키오스크 배경화면
 		JLabel lbl_backGround = new JLabel("");
 		lbl_backGround.setIcon(new ImageIcon(
@@ -239,7 +240,7 @@ public class Page11_2_Card extends JDialog {
 	}
 
 	// 각 인원수별 할인된 영화가격을 배열에 저장(
-	private int[] calcFinalPriceArray(int[] personCategory, int[] discountRatesArray, int originalPrice) {
+	private int[] calcFinalPriceArray(int[] personCategory, double[] discountRatesArray, int originalPrice) {
 		
 		
 		//인원수를 가져와서 그에 맞게 할인가 배열을 만들어줌. 
@@ -251,11 +252,13 @@ public class Page11_2_Card extends JDialog {
 			
 			
 			System.out.println(discountRatesArray[i]);
-			
-			double ratedPrice = 1-(double) (discountRatesArray[i]/100.00);
-			
-			
-			finalPricesArray[i] = (int) ratedPrice * originalPrice;
+			double ratedPrice = 1 - (double) (discountRatesArray[i] / 100.00);
+			finalPricesArray[i] = (int) (ratedPrice * originalPrice)*personCategory[i];
+
+//			double ratedPrice = 1-(double) (discountRatesArray[i]/100.00);
+//			
+//			
+//			finalPricesArray[i] = (int) ratedPrice * originalPrice;
 					
 
 		}
@@ -271,6 +274,8 @@ public class Page11_2_Card extends JDialog {
 			totalPrice += finalPricesArray[i];
 		}
 		System.out.println(String.format("total price : ",totalPrice ));
+		ShareVar.totalPrice= totalPrice;
 		return totalPrice;
+		
 	}
 }// END

@@ -17,6 +17,7 @@ import javax.swing.border.EmptyBorder;
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
 import com.javaproject.kioskFunction.ButtonInsertIcon;
+import com.javaproject.kioskFunction.Dao_PJH;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -47,6 +48,9 @@ public class Page03_SelectAge extends JDialog {
 	 *  Update 2024.01.14 by PDG
 	 *  		1. 버튼 전부다 새로 만듬. 
 	 *  		2. 페이지 종료후 타이머 돌지 않게 함. 
+	 *  
+	 *  Update 2024.01.15 by PDG,PJH
+	 *  		1.회원 연령대 선택시, customer 테이블에 다오로 insert
 	 */
 	
 	/**
@@ -73,7 +77,7 @@ public class Page03_SelectAge extends JDialog {
 				backSplashTimeEnd();
 			}
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowDeactivated(WindowEvent e) {
 				stopTimer();
 			}
 		});
@@ -109,7 +113,6 @@ public class Page03_SelectAge extends JDialog {
 		contentPanel.add(lbl_pageTitle);
 		
 		///////////////////// 버튼 새로 만듭니다. //////////////////
-		
 		//<<20이하 버튼생성>>
 		ImageIcon iconBtnUnder20 = new ImageIcon(
 				Page03_SelectAge.class.getResource("/com/javaproject/image/BtnUnder20.png"));
@@ -280,6 +283,7 @@ public class Page03_SelectAge extends JDialog {
 		Btn80.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ShareVar.selectedCustage=80;
+				
 				goToSelectMovie();
 			}
 		});
