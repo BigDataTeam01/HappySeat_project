@@ -130,7 +130,7 @@ public class MovieControl extends JDialog {
 		tfDistCompany.setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 		tfDistCompany.setHorizontalAlignment(SwingConstants.CENTER);
 		tfDistCompany.setColumns(10);
-		tfDistCompany.setBounds(106, 155, 93, 21);
+		tfDistCompany.setBounds(106, 155, 159, 21);
 		getContentPane().add(tfDistCompany);
 		
 		JLabel lblNewLabel_1_2 = new JLabel("장르  : ");
@@ -330,7 +330,7 @@ public class MovieControl extends JDialog {
 				}
 			});
 			btnInit.setFont(new Font("BM Dohyeon", Font.PLAIN, 12));
-			btnInit.setBounds(19, 52, 65, 23);
+			btnInit.setBounds(19, 52, 86, 23);
 		}
 		return btnInit;
 	}
@@ -449,12 +449,18 @@ public class MovieControl extends JDialog {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		
 		tfMovieTitle.setText(dto.getMovie_title());
+		tfMovieTitle.setCaretPosition(0);
 		tfDirector.setText(dto.getDirector());
+		tfDirector.setCaretPosition(0);
 		tfActor.setText(dto.getActor());
+		tfActor.setCaretPosition(0);
 		tfDistCompany.setText(dto.getDist_company());
+		tfDistCompany.setCaretPosition(0);
 		tfGenre.setText(dto.getGenre());
+		tfGenre.setCaretPosition(0);
 		cbFilmRating.setSelectedItem(dto.getFilm_rating());
 		tfMadeIn.setText(dto.getMade_in());
+		tfMadeIn.setCaretPosition(0);
 		tfRelDate.setText(dateFormat.format(dto.getRel_date()));
 		tfOverDate.setText(dateFormat.format(dto.getOver_date()));
 		cbRelState.setSelectedItem(dto.getRel_state()); 
