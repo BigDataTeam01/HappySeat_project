@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -56,29 +57,10 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		dialog.timer = new Timer();
-
-		// timer thread 를 생성
-//		TimerTask task = new TimerTask() {
-//			@Override
-//			public void run() { // 위에있는 run 을 오버라이드로 수정하는 코드
-//				// getCurrentSeatCode 메소드를 백그라운드에서 실행
-//				Thread backgroundThread = new Thread(new SeatUpdateRunnable(dialog)); // dialog 는 이페이지 전체임.
-//				backgroundThread.start(); // 스레드 시작
-//			}
-//		};
-		
-//		SwingUtilities.invokeLater(() -> {
-//		});
-		
-//		dialog.timer.scheduleAtFixedRate(task,0,2000); // 2초마다 실행 (예시)
 	}
 
-
 	public Page09_SelectSeat_ver2() {
-		System.out.println("1");
 		createSeat();
-		// setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		this.setTitle("좌석선택");
 		this.getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -95,6 +77,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				timer = new Timer();
 				timer.scheduleAtFixedRate(new RemindTask(), 0, 1000);
 				backSplashTimeEnd();
+				ShareVar shareVar = new ShareVar();
+				shareVar.shareVarInint();
 			}
 			@Override
 			public void windowDeactivated(WindowEvent e) {
@@ -270,6 +254,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					if(checkSelecte() == true) {
 						System.out.println("Db 업데이트 코드 : " + selectSeatCode);
+						ShareVar.selectedSeatSeq = changedSeatIndices(eorSeatCode);
 						updateSeatCodeAction();
 						goConfirmSeat();
 					}}});
@@ -419,5 +404,20 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		BackSplashTimer backSplashTimer = new BackSplashTimer(300, this);
 	}
 
+	private ArrayList<Integer> changedSeatIndices(int eorCode) {
+	    ArrayList<Integer> changedIndices = new ArrayList<>();
+
+	    int index = 0;
+	    while (eorCode > 0) {
+	        if ((eorCode & 1) == 1) {
+	            changedIndices.add(seatCode.length()-index);
+	        }
+
+	        eorCode = eorCode >> 1;
+	        index++;
+	    }
+
+	    return changedIndices;
+	}
 
 }// End
