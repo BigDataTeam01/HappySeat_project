@@ -153,36 +153,6 @@ public class DaoScreenControl {
 		return totalSeat;
 	}
 
-	// app에 입력된 값을 DB screen Table에 insert
-	public boolean screenInsert() {
-		PreparedStatement ps = null;
-
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
-
-			String insertA = "insert into screen (scr_movie_title, scr_scroom_name, admin_admin_id, seat_resv_code, scr_start_time, run_time)";
-			String insertB = " values (?, ?, ?, ?, ?, ?)";
-
-			ps = conn_mysql.prepareStatement(insertA + insertB);
-			ps.setString(1, scr_movie_title);
-			ps.setString(2, scr_scroom_name);
-			ps.setString(3, admin_admin_id);
-			ps.setString(4, seat_resv_code);
-			ps.setString(5, scr_start_time);
-			ps.setInt(6, run_time);
-			ps.executeUpdate();
-
-			conn_mysql.close();
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-		return true;
-
-	}
-
 	// Table에 값을 띄우기 위해 DB에서 data값을 가져옴
 	public ArrayList<DtoWDH> innerTable() {
 		ArrayList<DtoWDH> innerTableModel = new ArrayList<DtoWDH>();
@@ -226,10 +196,42 @@ public class DaoScreenControl {
 
 		return innerTableModel;
 	}
-	
+
+	// app에 입력된 값을 DB screen Table에 insert
+	public boolean screenInsert() {
+		PreparedStatement ps = null;
+		boolean result;
+
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+
+			String insertA = "insert into screen (scr_movie_title, scr_scroom_name, admin_admin_id, seat_resv_code, scr_start_time, run_time)";
+			String insertB = " values (?, ?, ?, ?, ?, ?)";
+
+			ps = conn_mysql.prepareStatement(insertA + insertB);
+			ps.setString(1, scr_movie_title);
+			ps.setString(2, scr_scroom_name);
+			ps.setString(3, admin_admin_id);
+			ps.setString(4, seat_resv_code);
+			ps.setString(5, scr_start_time);
+			ps.setInt(6, run_time);
+			ps.executeUpdate();
+
+			conn_mysql.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			result = false;
+		}
+		result = true;
+		return result;
+	}
+
 	// 수정
 	public boolean screenUpdate() {
 		PreparedStatement ps = null;
+		boolean result;
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -250,14 +252,16 @@ public class DaoScreenControl {
 			conn_mysql.close();
 
 		} catch (Exception e) {
-			return false;
+			result =  false;
 		}
-		return true;
-
+		result = true;
+		return result;
 	}
-	
+
+	// 삭제
 	public boolean screenDelete() {
 		PreparedStatement ps = null;
+		boolean result;
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -271,12 +275,13 @@ public class DaoScreenControl {
 			conn_mysql.close();
 
 		} catch (Exception e) {
-			return false;
+			result = false;
 		}
-		return true;
-
+		result = true;
+		return result;
 	}
 	
+	// 테이블 위의 상영관을 클릭했을 때 그 상영관만 보여주기
 	public ArrayList<DtoWDH> cbInnerTable() {
 		ArrayList<DtoWDH> innerTableModel = new ArrayList<DtoWDH>();
 
