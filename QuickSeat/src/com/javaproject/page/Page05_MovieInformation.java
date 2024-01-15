@@ -438,7 +438,7 @@ public class Page05_MovieInformation extends JDialog{
 	}
 	
 	public void goPlot() {
-		Page05_1_Movie_plot movie_plot = new Page05_1_Movie_plot();
+		Page05_1_Movie_Plot movie_plot = new Page05_1_Movie_Plot();
 		
 		movie_plot.setVisible(true);
 		
