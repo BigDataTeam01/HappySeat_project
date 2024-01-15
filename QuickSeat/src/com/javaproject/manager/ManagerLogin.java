@@ -1,7 +1,6 @@
 package com.javaproject.manager;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -10,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.managerfunction.DaoManagerLogin;
-import com.javaproject.managerfunction.DtoLCY;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,7 +18,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextField;
 import javax.swing.ImageIcon;
-import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import java.awt.Color;
 

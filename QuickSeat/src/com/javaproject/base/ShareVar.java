@@ -96,8 +96,8 @@ public class ShareVar {
 	public static int scr_code = 0;
 
 	// 관리자 페이지 차트 연도와 달 저장하기
-	public static String year = "";
-	public static String month = "";
+	public static String year = "2020";
+	public static String month = "01";
 
 	// 영화관 지도 이미지
 	public static String cinemaMapImageFileName = "";
@@ -150,7 +150,7 @@ public class ShareVar {
      // Db에서 불러온 영화에 대한 좌석 현황 Code
     public static StringBuilder dbSeatCode = new StringBuilder("");
 	
-	
+	public static int clickCount = 0;
 	
 	// constructor
 	public ShareVar() {
