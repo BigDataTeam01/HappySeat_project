@@ -143,7 +143,8 @@ public class ShareVar {
     //
     public static ArrayList<Integer> selectedSeatSeq = new ArrayList<Integer>();
 	
-	
+	 // Db에서 불러온 영화에 대한 좌석 현황 Code
+    public static StringBuilder dbSeatCode = new StringBuilder("");
 	
 	// constructor
 	public ShareVar() {
