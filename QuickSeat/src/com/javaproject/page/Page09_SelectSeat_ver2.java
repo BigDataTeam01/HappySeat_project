@@ -261,7 +261,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	
 	// Functions
 	private void getCurrentSeatCode() {
-		ShareVar.dbSeatCode = seatCode;
+		ShareVar.dbSeatCode = seatCode.toString();
 		Dao_pdg currentSeatCode = new Dao_pdg(ShareVar.scr_code);
 		StringBuilder fetchedSeatCode = new StringBuilder();
 
