@@ -53,9 +53,9 @@ public class Page11_2_Card extends JDialog {
 
 	// private static SelectMenu selectMenu = new SelectMenu();
 	// 인원수 배열을 쉐어바에서 가져온다
-	private Dao_PJH dao;
+	;
 	private JTextField tfPriceToPay;
-	private int[] discountedPrices; // 각 인원수별 할인된 금액을 저장할 배열
+
 
 	public static void main(String[] args) {
 		try {
@@ -71,24 +71,40 @@ public class Page11_2_Card extends JDialog {
 	 * Create the dialog.
 	 */
 	public Page11_2_Card() {
-		dao = new Dao_PJH();
+		Dao_PJH dao11 = new Dao_PJH();
+		
 		// 다오에서 할인 전 영화 가격 가져오기
 
 
 
 
-		int[] personNumbers = ShareVar.personCategory; // 인원선택에서 인원분류 array
-		int movieOriginalPrice = dao.MoviePriceBeforeDiscount();
+		int[] personCategory = ShareVar.personCategory; // 인원선택에서 인원분류 array
+		int movieOriginalPrice = dao11.fetchOriginalPrice();
 		
 		
 		
 		// 할인가격계산해서 전체 가격 내보내기
-		discountedPrices = calculateDiscountedPrices(personNumbers, ShareVar.discountRates, moviePriceBeforeDiscount);
+	
+		
+		int[] finalPriceArray =  calcFinalPriceArray(personCategory, ShareVar.discountRates, movieOriginalPrice);
+		System.out.println("-----------할인율 확인 -----------");
+		
+		// 사람분류 할인된 총 금액 출력(배열안이 인트값이라서 하나씩 출력해야함)
+		System.out.print("할인율 확인: [");
+		for (int i = 0; i < ShareVar.discountRates.length; i++) {
+			System.out.print(ShareVar.discountRates[i]);
+			if (i < ShareVar.discountRates.length - 1) {
+				System.out.print(", ");
+			}
+		}
+		System.out.println("]");
+		
+		
+		System.out.println(ShareVar.discountRates);
 		// totalDiscountedPrice 초기화(
-		ShareVar.totalDiscountedPrice = discountedPrices;
+		ShareVar.totalDiscountedPriceArray = finalPriceArray;
 
-		int totalDiscountedPrice = calculateTotalDiscountedPrice(discountedPrices);
-
+		int totalDiscountedPrice = calcTotalPrice(finalPriceArray) ;
 		setTitle("카드 결제");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		getContentPane().setLayout(new BorderLayout());
@@ -223,30 +239,38 @@ public class Page11_2_Card extends JDialog {
 	}
 
 	// 각 인원수별 할인된 영화가격을 배열에 저장(
-	private int[] calculateDiscountedPrices(int[] personNumbers, int[] discountRates, int moviePriceBeforeDiscount) {
-
-		int[] discountedPrices = new int[personNumbers.length];
-		for (int i = 0; i < personNumbers.length; i++) {
+	private int[] calcFinalPriceArray(int[] personCategory, int[] discountRatesArray, int originalPrice) {
+		
+		
+		//인원수를 가져와서 그에 맞게 할인가 배열을 만들어줌. 
+		int [] finalPricesArray = new int[personCategory.length]; 
+		
+		
+		for (int i = 0; i < finalPricesArray.length; i++) {
 			// 할인율계산(예:30프로할인-> 인원분류숫자*0.7)
-			discountedPrices[i] = (int) ((1 - (double) discountRates[i] / 100) * personNumbers[i]
-					* moviePriceBeforeDiscount);
-		}
+			
+			
+			System.out.println(discountRatesArray[i]);
+			
+			double ratedPrice = 1-(double) (discountRatesArray[i]/100.00);
+			
+			
+			finalPricesArray[i] = (int) ratedPrice * originalPrice;
+					
 
-		return discountedPrices;
+		}
+		return finalPricesArray;
 	}
 
 	// 각 인원수별 할인된 금액의 합계를 계산
-	private int calculateTotalDiscountedPrice(int[] discountedPrices) {
-		int totalDiscountedPrice = 0;
+	private int calcTotalPrice(int[] finalPricesArray) {
+		int totalPrice = 0;
 
-		for (int price : discountedPrices) {
+		for (int i=0; i<finalPricesArray.length;i++) {
 			
-			totalDiscountedPrice += price;
-			System.out.print("금액확인 :");
-			System.out.println(totalDiscountedPrice);
-			
+			totalPrice += finalPricesArray[i];
 		}
-
-		return totalDiscountedPrice;
+		System.out.println(String.format("total price : ",totalPrice ));
+		return totalPrice;
 	}
 }// END
