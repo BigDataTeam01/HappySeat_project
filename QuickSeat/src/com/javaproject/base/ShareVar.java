@@ -150,7 +150,7 @@ public class ShareVar {
      // Db에서 불러온 영화에 대한 좌석 현황 Code
     public static StringBuilder dbSeatCode = new StringBuilder("");
 	
-	
+	public static int clickCount = 0;
 	
 	// constructor
 	public ShareVar() {
