@@ -260,6 +260,7 @@ public class Dao_PJH {
 						+ " from screen"
 						+ " where scr_movie_title ="
 						+ "'"+ ShareVar.selectedMovieTitle+"')"; 
+		System.out.println(fetchQuery);
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");

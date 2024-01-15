@@ -112,7 +112,7 @@ public class Page04_SelectMovie extends JDialog {
 			}
 			
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowDeactivated(WindowEvent e) {
 				stopTimer();
 			}
 			

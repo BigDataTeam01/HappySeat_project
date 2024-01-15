@@ -1,4 +1,4 @@
-package com.javaproject.page;
+		package com.javaproject.page;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;

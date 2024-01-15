@@ -60,15 +60,16 @@ public class Dao_confirmSeat {
 	public ArrayList<Dto_confirmSeat> showMyTicket (){
 		ArrayList<Dto_confirmSeat> dto = new ArrayList<Dto_confirmSeat>();
 
-		String where1 = "select m.movie_title , m.poster , s.scr_start_time , s.scr_scroom_name , r.cinema_branch ";
-		String where2 = " from screen as s, movie as m , screening_room as r where m.movie_title = s.scr_movie_title and scr_movie_title = '" + ShareVar.selectedMovieTitle + "'";
+		String select = "select m.movie_title , m.poster , s.scr_start_time , s.scr_scroom_name , r.cinema_branch ";
+		String from = " from screen as s, movie as m , screening_room as r";
+		String where = " where m.movie_title = s.scr_movie_title and s.scr_scroom_name = r.scroom_name and s.scr_movie_title = '" + ShareVar.selectedMovieTitle + "'";
 		
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
 			Statement stmt_mysql = conn_mysql.createStatement();
 
-			ResultSet rs = stmt_mysql.executeQuery(where1 + where2);
+			ResultSet rs = stmt_mysql.executeQuery(select + from + where);
 
 			while (rs.next()) {
 				String wkMovie_title = rs.getString(1);
