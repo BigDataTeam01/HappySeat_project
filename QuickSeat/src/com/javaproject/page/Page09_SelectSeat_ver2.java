@@ -92,8 +92,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 			getCurrentSeatCode();
 			loadSeat();
 			System.out.println("새로고침");
-//			System.out.println("selectSeatCode : " + selectSeatCode);
-//			System.out.println("seatCode : " + seatCode);
+			System.out.println("selectSeatCode : " + selectSeatCode);
+			System.out.println("seatCode : " + seatCode);
 		}
 	}
 
@@ -173,7 +173,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				
 				clickcount++;
 				
-//				System.out.println("맨처음 : "+clickcount);
+				System.out.println("맨처음 : "+clickcount);
 				
 				if(ShareVar.sumOfPersonNumbers < clickcount) {
 					JOptionPane.showMessageDialog(null, ShareVar.sumOfPersonNumbers + "명을 초과할 수 없습니다.");
@@ -185,7 +185,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 					eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
 				
-//					System.out.println("if 안에 : "+clickcount);
+					System.out.println("if 안에 : "+clickcount);
 				}
 				
 			}
@@ -268,11 +268,11 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 						timer.cancel();
 						updateSeatCodeAction();
 						goConfirmSeat();
-//						System.out.println(eorSeatCode);
+						System.out.println(eorSeatCode);
 						ShareVar.selectedSeatSeq = changedSeatIndices(eorSeatCode);
-//						System.out.println("Db 업데이트 코드 : " + selectSeatCode);
-//						System.out.println("ShareVar 저장 : " + ShareVar.selectedSeatSeq);
-//						System.out.println("ShareVar dbSeatCode : " + ShareVar.dbSeatCode);
+						System.out.println("Db 업데이트 코드 : " + selectSeatCode);
+						System.out.println("ShareVar 저장 : " + ShareVar.selectedSeatSeq);
+						System.out.println("ShareVar dbSeatCode : " + ShareVar.dbSeatCode);
 					}}});
 		}
 		return btnSeatConfirm;
@@ -422,7 +422,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 
 	private ArrayList<Integer> changedSeatIndices(int eorCode) {
-//		System.out.println("changedSeatIndices의 eorCode : " + eorCode);
+		System.out.println("changedSeatIndices의 eorCode : " + eorCode);
 	    ArrayList<Integer> changedIndices = new ArrayList<>();
 
 	    int index = 0;

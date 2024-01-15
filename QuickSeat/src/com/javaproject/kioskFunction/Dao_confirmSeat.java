@@ -7,9 +7,12 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.managerfunction.DtoWDH;
@@ -99,7 +102,25 @@ public class Dao_confirmSeat {
 	}
 
 	
-	
+	public void revertSeatStatus() {
+		PreparedStatement ps = null;
+		
+		String where1 = "Update screen set seat_resv_code = '" + ShareVar.dbSeatCode + "'";
+		String where2 = " where scr_code = " + ShareVar.scr_code;
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+			
+			ps = conn_mysql.prepareStatement(where1+where2);
+			ps.executeUpdate();
+			
+			conn_mysql.close();
+			
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "업데이트 중 문제발생");
+		}
+	}
 	
 	
 	

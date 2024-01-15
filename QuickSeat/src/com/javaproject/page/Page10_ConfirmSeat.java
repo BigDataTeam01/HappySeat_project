@@ -240,16 +240,19 @@ public class Page10_ConfirmSeat extends JDialog {
 		SelectPaymentdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectPaymentdialog.setVisible(true);
 	}
-	// 처음으로 돌아가는 기능 구현
+	// 이전으로 돌아가는 기능 구현
 	private void goToBack() {
 		Page09_SelectSeat_ver2 SelectSeatdialog = new Page09_SelectSeat_ver2();
-
+		
+		Dao_confirmSeat dao = new Dao_confirmSeat();
+		dao.revertSeatStatus();
+		
 		dispose();
 		SelectSeatdialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		SelectSeatdialog.setVisible(true);
 		
 	}
-	// 이전으로 돌아가는 기능 구현
+	// 처음으로 돌아가는 기능 구현
 	private void goToHome() {
 		Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
 		dispose();
