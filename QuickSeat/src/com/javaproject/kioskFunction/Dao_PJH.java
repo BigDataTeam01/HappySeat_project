@@ -362,7 +362,7 @@ public class Dao_PJH {
 
 	    return moviePriceBeforeDiscount;
 	}
-	
+	//선택한 영화정보 db에 입력하기
 	public boolean movieInsertAction() {
 		PreparedStatement ps = null;
 		
@@ -393,9 +393,56 @@ public class Dao_PJH {
 		return true;
 	}
 	
-	
-}
+	public class MovieDAO {
+	    // 선택된 영화의 초기 가격을 불러오는 메서드
+	    public int fetchMoviePriceBeforeDiscount(String selectedMovieTitle) {
+	        int moviePriceBeforeDiscount = 0;
 
+	        String fetchQuery = "SELECT movie_price_beforediscount FROM movie WHERE movie_title = '" + selectedMovieTitle + "'";
+	        
+	        try {
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+	            Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+	            Statement stmt_mysql = conn_mysql.createStatement();
+	            ResultSet rs = stmt_mysql.executeQuery(fetchQuery);
+
+	            if (rs.next()) {
+	                moviePriceBeforeDiscount = rs.getInt("movie_price_beforediscount");
+	            }
+
+	            conn_mysql.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+
+	        return moviePriceBeforeDiscount;
+	    }
+	}
+
+		//db에서 발권번호 가지고 오기
+	  public String confirmReservedTicket() {
+	        String ticketNumber = null;
+
+	        String fetchQuery = "SELECT ticket_number FROM reserve";
+
+	        try {
+	            Class.forName("com.mysql.cj.jdbc.Driver");
+	            Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
+	            Statement stmt_mysql = conn_mysql.createStatement();
+	            ResultSet rs = stmt_mysql.executeQuery(fetchQuery);
+
+	            if (rs.next()) {
+	                ticketNumber = rs.getString("ticket_number");
+	            }
+
+	            conn_mysql.close();
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	        }
+
+	        return ticketNumber;
+	    }
+	}
 	
 	
 	

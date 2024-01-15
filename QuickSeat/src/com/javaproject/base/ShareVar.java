@@ -1,5 +1,6 @@
 package com.javaproject.base;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import javax.swing.ImageIcon;
@@ -18,12 +19,24 @@ public class ShareVar {
 	 * Update 2024.01.06 by PDG: 1. sql DB server 로그인 정보 2. kiosk 사이즈 및 위치 3. kiosk
 	 * page title 사이즈 및 위치
 	 * 
+	 * Update 2024.01.14 by PDG 
+	 * 			1.  쓸데 없는 주석지우고 읽기편하게 함. 
+	 * 			2.  키오스크 버튼에 들어갈 공용 칼라 만듬. 
+	 * 
 	 */
-
+	
+	// Field
+	///////////////0-------------------------------- DB 정보 ------------------/////////////
+	//
 	public static String dbName = "jdbc:mysql://192.168.50.103:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
+	//public static String dbName = "jdbc:mysql://127.0.0.1:3306/quick_seat?serverTimezone=UTC&characterEncoding=utf8&useSSL=FALSE";
 	public static String dbUser = "root";
 	public static String dbPass = "qwer1234";
-
+	///////////////0---------------------------------스플레시 타임 정보------------------/////////////
+	
+	public static int backToSplashTime = 100 ; // 100 초후 스플래쉬로 돌아감. 
+	
+	///////////////0---------------------------------관리자 페이지 관련 정보 ------------------/////////////
 	// manager page gui siz
 	public static int managerXsize = 800;
 	public static int managerYsize = 600;
@@ -31,7 +44,9 @@ public class ShareVar {
 	// manager page gui location
 	public static int managerXlocation = 655;
 	public static int managerYlocation = 250;
-
+	
+	///////////////0---------------------------------키오스크 관련 정보 ------------------/////////////
+	
 	///// -------키오스크 페이지 규격
 	// kiosk page gui siz
 	public static int kiosk_width = 800;
@@ -39,30 +54,29 @@ public class ShareVar {
 	// kosk page gui location
 	public static int kiosk_loc_x = 655;
 	public static int kiosk_loc_y = 250;
-	/*
-	 * 키오스크 규격 예시 setTitle("영화정보"); setBounds(ShareVar.kiosk_loc_x,
-	 * ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
-	 */
 
-	///// -------키오스크 페이지 타이틀
+	///// -------키오스크 페이지 타이틀 규격
+	
 	// kiosk title size
 	public static int kiosk_title_width = 250;
 	public static int kiosk_title_hight = 100;
+	
 	// kosk title location
 	public static int kiosk_title_loc_x = 295;
 	public static int kiosk_title_loc_y = 10;
 	public static int kiosk_title_font_size = 40;
+	
+	// kiosk font
 	public static String kiosk_title_font = "BM Dohyeon";
+	
+	// kiosk button color
+	
+	public static Color btnFillColor = new Color(42, 93, 67);//#2a5d43ff = 42, 93, 67
+	public static Color btnTextColor = new Color(243, 192, 0);//#f3c000  = 243, 192, 0
+	
+	// KIOSK BUTTON FILLET
+	public static int btnFillet = 20;
 
-	/*
-	 * 페이지 타이틀 예시 JLabel lbl_pageTitle = new JLabel("영화 선택");
-	 * lbl_pageTitle.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN,
-	 * ShareVar.kiosk_title_font_size));
-	 * 
-	 * lbl_pageTitle.setBounds(ShareVar.kiosk_title_loc_x,
-	 * ShareVar.kiosk_title_loc_y, ShareVar.kiosk_title_width,
-	 * ShareVar.kiosk_title_hight);
-	 */
 
 	public static int filename = 0;
 	public static int image = 0;
@@ -70,11 +84,6 @@ public class ShareVar {
 	///// -------포스터 이미지 규격
 	public static int poster_width = 380;
 	public static int poster_hight = 450;
-
-	/*
-	 * 포스터 규격 예시 lblPoster.setBounds(34, 101, ShareVar.poster_width,
-	 * ShareVar.poster_hight);
-	 */
 
 	// 관리자 아이디 저장공간
 	public static String managerID = "";
@@ -105,13 +114,11 @@ public class ShareVar {
 	public static String posterFile = "";
 	
 	// 선택된 상영관 이륾
-	
 	public static String selectedScroomName ="";
 	
 	// 선택된 상영 영화 시작시간 
 	public static String selectedScrStarttime="";
 	
-
 	// 입력된 발권번호
 	public static String insertedOrderNum = "";
 
@@ -123,6 +130,12 @@ public class ShareVar {
 	
 	// 발권가격(할인된 티켓가격의 총 가격)
 	public static String totalPrice = "";
+	
+	
+	// 각 인원분류별 할인 후의 가격
+    public static int[] totalDiscountedPrice = new int[5];
+	
+	
 	
 	// constructor
 	public ShareVar() {
@@ -162,10 +175,17 @@ public class ShareVar {
 		insertedOrderNum = "";
 		
 		// 인원선택 분류 어레이 (어레이라 다 지우려고 for문 사용)
-        for (int i = 0; i < personNumbers.length; i++) {
-        	personNumbers[i] = 0;        	
-        }
-        
+		for (int i = 0; i < personNumbers.length; i++) {
+			personNumbers[i] = 0;        	
+		}
+
+		//  각 인원분류별 할인 후의 가격 (어레이라 다 지우려고 for문 사용)
+		for (int i = 0; i < personNumbers.length; i++) {
+			totalDiscountedPrice[i] = 0;        	
+		}
+
+
+
      // 구매방법(현금,카드 구분)
     	pay_method = "";
     	
