@@ -18,6 +18,18 @@ public class Page01_Splash extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	
+	/*
+	 * Description: 스플래쉬 화면
+	 * Date: 2024.01.14
+	 * Author : D Forrest Park
+	 * 
+	 * Update 2024.01.14 by PDG
+	 * 	o	1. 행복좌석으로 바꿈
+	 * 	o	2. 전체적으로 프로그램 손봄. 
+	 * 
+	 * 
+	 */
 
 	/**
 	 * Launch the application.
@@ -52,11 +64,12 @@ public class Page01_Splash extends JDialog {
 			goMainAction();
 			}
 		});
-		lblNewLabel.setIcon(new ImageIcon(Page01_Splash.class.getResource("/com/javaproject/image/1. 스플레쉬(Page1_Splash).png")));
+		lblNewLabel.setIcon(new ImageIcon(Page01_Splash.class.getResource("/com/javaproject/image/HappySeatBackGround.png")));
 		lblNewLabel.setBounds(0, -28, 800, 600);
 		contentPanel.add(lblNewLabel);
 	}
 	
+	/// Functions
 	private void goMainAction() {
 		
 		Page02_SelectMenu selectMenue = new Page02_SelectMenu();

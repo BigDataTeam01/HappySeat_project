@@ -16,13 +16,18 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
+import com.javaproject.kioskFunction.ButtonInsertIcon;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Page03_SelectAge extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	BackSplashTimer backSplashTimer;
 	/*
 	 * Description : 연령대 선택화면
 	 * 				 1.SelectAge에서 연령대 버튼을 터치했을시 MovieSelect 화면으로 이동
@@ -37,7 +42,13 @@ public class Page03_SelectAge extends JDialog {
 	 * 			4. 배경 추가
 	 * 			5. 나이선택,이전화면,연령확인,첫화면 버튼추가
 	 * 			6. 처음으로,이전으로 버튼 변경
+	 * 
+	 * 
+	 *  Update 2024.01.14 by PDG
+	 *  		1. 버튼 전부다 새로 만듬. 
+	 *  		2. 페이지 종료후 타이머 돌지 않게 함. 
 	 */
+	
 	/**
 	 * Launch the application.
 	 */
@@ -60,6 +71,10 @@ public class Page03_SelectAge extends JDialog {
 			@Override
 			public void windowActivated(WindowEvent e) {
 				backSplashTimeEnd();
+			}
+			@Override
+			public void windowClosed(WindowEvent e) {
+				stopTimer();
 			}
 		});
 		setTitle("연령 선택");
@@ -92,8 +107,23 @@ public class Page03_SelectAge extends JDialog {
 		lbl_pageTitle.setBounds(295, 10, 250, 100);
 
 		contentPanel.add(lbl_pageTitle);
-		// 나이 버튼
-		JLabel BtnUnder20 = new JLabel("");
+		
+		///////////////////// 버튼 새로 만듭니다. //////////////////
+		
+		//<<20이하 버튼생성>>
+		ImageIcon iconBtnUnder20 = new ImageIcon(
+				Page03_SelectAge.class.getResource("/com/javaproject/image/BtnUnder20.png"));
+		
+
+		ButtonInsertIcon BtnUnder20 = new ButtonInsertIcon(iconBtnUnder20,ShareVar.btnFillet);
+		BtnUnder20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShareVar.selectedCustage=10;
+				goToSelectMovie();
+			}
+		});
+
+		BtnUnder20.setBounds(52, 192, 134, 105);
 		BtnUnder20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -101,14 +131,22 @@ public class Page03_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		BtnUnder20.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/BtnUnder20.png")));
-		BtnUnder20.setBounds(52, 192, 140, 110);
 		contentPanel.add(BtnUnder20);
-		BtnUnder20.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn10대 이하.png")));
-		BtnUnder20.setBounds(52, 192, 140, 110);
-		contentPanel.add(BtnUnder20);
+		
+		//<<20대 버튼생성>>
+		ImageIcon iconBtn20 = new ImageIcon(
+				Page03_SelectAge.class.getResource("/com/javaproject/image/Btn20대.png"));
+		
 
-		JLabel Btn20 = new JLabel("");
+		ButtonInsertIcon Btn20 = new ButtonInsertIcon(iconBtn20,ShareVar.btnFillet);
+		Btn20.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShareVar.selectedCustage=10;
+				goToSelectMovie();
+			}
+		});
+
+		Btn20.setBounds(240, 192, 134, 105);
 		Btn20.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -116,12 +154,22 @@ public class Page03_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-
-		Btn20.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn20대.png")));
-		Btn20.setBounds(240, 192, 140, 110);
 		contentPanel.add(Btn20);
+		
+		//<<30대 버튼생성>>
+		ImageIcon iconBtn30 = new ImageIcon(
+				Page03_SelectAge.class.getResource("/com/javaproject/image/Btn30대.png"));
+		
 
-		JLabel Btn30 = new JLabel("");
+		ButtonInsertIcon Btn30 = new ButtonInsertIcon(iconBtn30,ShareVar.btnFillet);
+		Btn30.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShareVar.selectedCustage=30;
+				goToSelectMovie();
+			}
+		});
+
+		Btn30.setBounds(427, 192, 134, 105);
 		Btn30.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -129,11 +177,23 @@ public class Page03_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn30.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn30대.png")));
-		Btn30.setBounds(427, 192, 140, 110);
 		contentPanel.add(Btn30);
+		
+		
+		//<<40대 버튼생성>>
+		ImageIcon iconBtn40 = new ImageIcon(
+				Page03_SelectAge.class.getResource("/com/javaproject/image/Btn40대.png"));
+		
 
-		JLabel Btn40 = new JLabel("");
+		ButtonInsertIcon Btn40 = new ButtonInsertIcon(iconBtn40,ShareVar.btnFillet);
+		Btn40.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShareVar.selectedCustage=40;
+				goToSelectMovie();
+			}
+		});
+
+		Btn40.setBounds(609, 192, 134, 105);
 		Btn40.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -141,11 +201,22 @@ public class Page03_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn40.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn40대.png")));
-		Btn40.setBounds(609, 192, 140, 110);
 		contentPanel.add(Btn40);
+		
+		//<<50대 버튼생성>>
+		ImageIcon iconBtn50 = new ImageIcon(
+				Page03_SelectAge.class.getResource("/com/javaproject/image/Btn50대.png"));
+		
 
-		JLabel Btn50 = new JLabel("");
+		ButtonInsertIcon Btn50 = new ButtonInsertIcon(iconBtn50,ShareVar.btnFillet);
+		Btn50.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShareVar.selectedCustage=50;
+				goToSelectMovie();
+			}
+		});
+
+		Btn50.setBounds(52, 365, 134, 105);
 		Btn50.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -153,11 +224,22 @@ public class Page03_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn50.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn50대.png")));
-		Btn50.setBounds(52, 365, 140, 110);
 		contentPanel.add(Btn50);
+		
+		//<<60대 버튼생성>>
+		ImageIcon iconBtn60 = new ImageIcon(
+				Page03_SelectAge.class.getResource("/com/javaproject/image/Btn60대.png"));
+		
 
-		JLabel Btn60 = new JLabel("");
+		ButtonInsertIcon Btn60 = new ButtonInsertIcon(iconBtn60,ShareVar.btnFillet);
+		Btn60.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShareVar.selectedCustage=60;
+				goToSelectMovie();
+			}
+		});
+
+		Btn60.setBounds(240, 365, 134, 105);
 		Btn60.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -165,11 +247,22 @@ public class Page03_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn60.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn60대.png")));
-		Btn60.setBounds(240, 365, 140, 110);
 		contentPanel.add(Btn60);
+		
+		//<<70대 버튼생성>>
+		ImageIcon iconBtn70 = new ImageIcon(
+				Page03_SelectAge.class.getResource("/com/javaproject/image/Btn70대.png"));
+		
 
-		JLabel Btn70 = new JLabel("");
+		ButtonInsertIcon Btn70 = new ButtonInsertIcon(iconBtn70,ShareVar.btnFillet);
+		Btn70.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShareVar.selectedCustage=70;
+				goToSelectMovie();
+			}
+		});
+
+		Btn70.setBounds(427, 365, 134, 105);
 		Btn70.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -177,21 +270,37 @@ public class Page03_SelectAge extends JDialog {
 				goToSelectMovie();
 			}
 		});
-		Btn70.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn70대.png")));
-		Btn70.setBounds(427, 365, 140, 110);
 		contentPanel.add(Btn70);
+		//<<80대 버튼생성>>
+		ImageIcon iconBtn80 = new ImageIcon(
+				Page03_SelectAge.class.getResource("/com/javaproject/image/Btn80대.png"));
+		
 
-		JLabel BtnOver80 = new JLabel("");
-		BtnOver80.addMouseListener(new MouseAdapter() {
+		ButtonInsertIcon Btn80 = new ButtonInsertIcon(iconBtn80,ShareVar.btnFillet);
+		Btn80.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ShareVar.selectedCustage=80;
+				goToSelectMovie();
+			}
+		});
+
+		Btn80.setBounds(615, 365, 134, 105);
+		Btn80.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				ShareVar.selectedCustage=80;
 				goToSelectMovie();
 			}
 		});
-		BtnOver80.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/Btn80대.png")));
-		BtnOver80.setBounds(615, 365, 140, 110);
-		contentPanel.add(BtnOver80);
+		contentPanel.add(Btn80);
+		
+
+
+
+
+
+
+
 		// 이전으로버튼
 		JLabel BtnBack = new JLabel("");
 		BtnBack.addMouseListener(new MouseAdapter() {
@@ -249,7 +358,14 @@ public class Page03_SelectAge extends JDialog {
 	
 	// splash Class로 돌아가기
 	public void backSplashTimeEnd() {
-		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+		backSplashTimer = new BackSplashTimer(30, this);
 	}
+	// 만약에 내가 타이머가 다 돌아가기 전에 페이지를 종료한다면 이것이 실행 되지 말아야한다. 
+	public void stopTimer() {
+		 
+		backSplashTimer.stop();
+		
+	}
+
 
 }

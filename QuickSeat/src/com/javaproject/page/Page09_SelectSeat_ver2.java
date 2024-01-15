@@ -18,15 +18,22 @@ import java.util.TimerTask;
 public class Page09_SelectSeat_ver2 extends JDialog {
 
 	/*
-	 * Description:
+	 * Description: 좌석 선택 페이지 
 	 * 
+	 * Author : 이천영 박동근
+	 * 
+	 * Date : 2024.01.10
+	 * 
+	 * Update 2024.01.14	 * 
 	 * 
 	 */
-
-	private Timer timer;
+	
+	// Field
+	private Timer timer; // 좌석코드를 불러오는 주기.
+	
 	private static final long serialVersionUID = 1L;
 	private JButton[][] seatArray; // 생성되는 좌석들의 배열
-	private boolean[][] seatStatus;
+	private boolean[][] seatStatus; // 좌석들의 현재 상태( 예약됨 -> 1 , 비어있음 ->0)
 
 	private JPanel contentPanel = new JPanel();
 	private JLabel lbl_background;
@@ -39,6 +46,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	private static int eorSeatCode = 0;
 
 	int columnsOfSeats = 4; // column number
+	
+	
 	
 	public static void main(String[] args) {
 		try {

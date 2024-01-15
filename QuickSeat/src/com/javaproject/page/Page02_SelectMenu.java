@@ -13,16 +13,20 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
+import com.javaproject.kioskFunction.ButtonDesign_ver1;
+import com.javaproject.kioskFunction.ButtonInsertIcon;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JButton;
 
 public class Page02_SelectMenu extends JDialog {
 
 	private static final long serialVersionUID = 1L;
 	private final JPanel contentPanel = new JPanel();
+	BackSplashTimer backSplashTimer;
 	/*
 	 * Description : 영화예매,예매내역 을 하기위한 메인페이지 
 	 * 				 1.SelectMenu에서 영화 예매을 터치했을시 SelectAge 화면으로 이동
@@ -38,6 +42,18 @@ public class Page02_SelectMenu extends JDialog {
 	 * 			5. 영화예매,예매내역 사진추가
 	 * 			6. 영화 예매을 터치했을시 SelectAge로,구매 내역을 터치했을시  OrderCheck로 가게 설정
 	 * 			7. Class 이름 변경(숫자
+	 * 
+	 * 
+	 * 
+	 * Update 2024.01.14 by PDG
+	 * 			0. 버튼에 아이콘 넣어주는 클래스 만듬. 이 클래스 사용하고 버튼의 사이즈를 꼭 이미지 사이즈에 맞출것. 안그러면 뒤에 검은 배경 생김. 
+	 * 			   그리고 생성자로 받아서 필렛또한 맞춰줄수 있다. 이페이지에서 필렛은 20 으로 맞춤. 
+	 * 		    1. 버튼 수정함. 
+	 * 			2. 영화 예매 버튼 만듬. 
+	 * 			3. 예매 내역 버튼 만듬
+	 * 			4. 라벨도 만들고 클릭시 이동가능하게 끔 만듬. 
+	 *  		5. 페이지 종료후 타이머 돌지 않게 함. 
+	 * 
 	 */
 	/**
 	 * Launch the application.
@@ -63,6 +79,12 @@ public class Page02_SelectMenu extends JDialog {
 			public void windowActivated(WindowEvent e) {
 				backSplashTimeEnd();
 			}
+			@Override
+			public void windowClosed(WindowEvent e) {
+				stopTimer();
+			}
+			
+			
 		});
 		setTitle("메뉴선택");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
@@ -71,7 +93,74 @@ public class Page02_SelectMenu extends JDialog {
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
+		
+		///-----------------------------예매 내역 버튼------------------------------/////
+		// 새로도입하는 예매내역 버튼 만들기 !!
+		ImageIcon iconResvCheck = new ImageIcon(
+				Page02_SelectMenu.class.getResource("/com/javaproject/image/BtnResvCheck_image_1.png"));
+		
+		ButtonInsertIcon btnResvCheck = new ButtonInsertIcon(iconResvCheck,ShareVar.btnFillet);
 
+		btnResvCheck.setBounds(416, 200, 284, 228);
+		btnResvCheck.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToOrderCheck();
+			}
+		});
+		
+		JLabel lblResvCheck = new JLabel("예매내역");
+		lblResvCheck.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goToOrderCheck();
+			}
+		});
+		
+
+
+		lblResvCheck.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 55));
+		lblResvCheck.setBounds(450, 438, 222, 62);
+		
+		contentPanel.add(lblResvCheck);
+		contentPanel.add(btnResvCheck);
+		///-----------------------------예매 내역 버튼 END------------------------------/////		
+		
+		
+		
+		///----------------------------- 영화 예매 버튼 START------------------------------/////
+		
+		//<< 버튼생성>>
+		ImageIcon iconMovieTicket = new ImageIcon(
+				Page02_SelectMenu.class.getResource("/com/javaproject/image/BtnMovieTicket.png"));
+		
+
+		ButtonInsertIcon btnMovieTicket = new ButtonInsertIcon(iconMovieTicket,ShareVar.btnFillet);
+
+		btnMovieTicket.setBounds(66, 200, 284, 228);
+		btnMovieTicket.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gotoMovieSelect();
+			}
+		});
+		contentPanel.add(btnMovieTicket);
+		
+		//<< 라벨 생성>>
+		JLabel lblMovieTicket = new JLabel("영화예매");
+		lblMovieTicket.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				gotoMovieSelect();
+			}
+		});
+		
+		lblMovieTicket.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, 55));
+		lblMovieTicket.setBounds(97, 438, 222, 62);
+		contentPanel.add(lblMovieTicket);
+		
+		///----------------------------- 영화 예매 버튼 END------------------------------/////
+		
 		// 페이지 타이틀
 		JLabel lbl_pageTitle = new JLabel("메뉴 선택");
 		lbl_pageTitle.setFont(new Font(ShareVar.kiosk_title_font, Font.PLAIN, ShareVar.kiosk_title_font_size));
@@ -79,35 +168,6 @@ public class Page02_SelectMenu extends JDialog {
 		lbl_pageTitle.setBounds(295, 10, 250, 100);
 
 		contentPanel.add(lbl_pageTitle);
-		// ********************타이틀 바 없애기**********************
-		//		setUndecorated(true);
-		//******************************************************
-		//영화예매 아이콘
-		JLabel BtnMoviePurchase = new JLabel("");
-		BtnMoviePurchase
-				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/영화예매Icon.png")));
-		BtnMoviePurchase.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				goToSelectAge();
-			}
-		});
-		BtnMoviePurchase.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		BtnMoviePurchase.setBounds(91, 200, 284, 319);
-		contentPanel.add(BtnMoviePurchase);
-		//예매내역 아이콘
-		JLabel BtnPurchaseList = new JLabel("");
-		BtnPurchaseList.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				goToOrderCheck();
-			}
-		});
-		BtnPurchaseList
-				.setIcon(new ImageIcon(Page05_MovieInformation.class.getResource("/com/javaproject/image/예매내역Icon.png")));
-		BtnPurchaseList.setFont(new Font("BM Dohyeon", Font.PLAIN, 40));
-		BtnPurchaseList.setBounds(429, 200, 284, 319);
-		contentPanel.add(BtnPurchaseList);
 
 		// 배경화면
 		JLabel lbl_background = new JLabel("", SwingConstants.CENTER);
@@ -117,18 +177,17 @@ public class Page02_SelectMenu extends JDialog {
 		contentPanel.add(lbl_background);
 
 	}
-
-//--------------------------------Function------------------------------------
-	// 나이선택화면으로 가기
-	private void goToSelectAge() {
-//		private Page02_SelectMenu selectMenudialog = new Page02_SelectMenu();
-//		private Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
-//		private Page02_1_0_OrderCheck OrderCheckdialog = new Page02_1_0_OrderCheck();
-		Page03_SelectAge SelectAgedialog = new Page03_SelectAge();
-		dispose();
+	
+	// goto Movie ticket page
+	
+	private void gotoMovieSelect() {
+		Page03_SelectAge selectAge =new Page03_SelectAge();
+		
+		selectAge.setVisible(true);
 		this.setVisible(false);
-		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-		SelectAgedialog.setVisible(true);
+		this.dispose();
+		
+		
 	}
 
 	// 예매,주문내역 확인페이지로 가기
@@ -142,8 +201,13 @@ public class Page02_SelectMenu extends JDialog {
 	
 	// splash Class로 돌아가기
 	public void backSplashTimeEnd() {
-		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+		backSplashTimer = new BackSplashTimer(30, this);
 	}
-
+	// 만약에 내가 타이머가 다 돌아가기 전에 페이지를 종료한다면 이것이 실행 되지 말아야한다. 
+	public void stopTimer() {
+		 
+		backSplashTimer.stop();
+		
+	}
 
 }// End

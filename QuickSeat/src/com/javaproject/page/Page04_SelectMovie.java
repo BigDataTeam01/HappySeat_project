@@ -53,6 +53,8 @@ public class Page04_SelectMovie extends JDialog {
 	 * 			  5. 이전버튼 다음버튼 실행에 따른 영화 정보 (영화포스터, 제목 , 영화등급, 장르) 변동 기능 구현
 	 * 
 	 *  
+	 *  Update 2024.01.15 by PDG
+	 *  			1. page 종료후에는 타이머 돌아가지 않게 함. 
 	 */			  
 
 	/**
@@ -80,6 +82,9 @@ public class Page04_SelectMovie extends JDialog {
 	private JLabel lbl_MovieGenre3;
 	private JLabel lbl_MovieRating4;
 	private JLabel lbl_MovieGenre4;
+	
+	
+	BackSplashTimer backSplashTimer;
 
 	public static void main(String[] args) {
 		try {
@@ -99,11 +104,18 @@ public class Page04_SelectMovie extends JDialog {
 			@Override
 			public void windowActivated(WindowEvent e) {
 
-				System.out.println("없어져볼께");
+//				System.out.println("없어져볼께");
 				lbl_PreviousMovie.setVisible(false);
 				getCurrentScreenMovies();
 				backSplashTimeEnd();
+				
 			}
+			
+			@Override
+			public void windowClosed(WindowEvent e) {
+				stopTimer();
+			}
+			
 		});
 		setFont(new Font("BM Dohyeon", Font.PLAIN, 13));
 		setTitle("영화 선택");
@@ -547,8 +559,17 @@ public class Page04_SelectMovie extends JDialog {
 	}
 	
 	// splash Class로 돌아가기
+
 	public void backSplashTimeEnd() {
-		BackSplashTimer backSplashTimer = new BackSplashTimer(30, this);
+		 backSplashTimer = new BackSplashTimer(ShareVar.backToSplashTime, this);
+
+	}
+	
+	// 만약에 내가 타이머가 다 돌아가기 전에 페이지를 종료한다면 이것이 실행 되지 말아야한다. 
+	public void stopTimer() {
+		 
+		backSplashTimer.stop();
+		
 	}
 
 		
