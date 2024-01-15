@@ -1,7 +1,11 @@
 package com.javaproject.manager;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Paint;
+import java.awt.Stroke;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -17,6 +21,7 @@ import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelPosition;
 import org.jfree.chart.labels.StandardCategoryItemLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.DefaultDrawingSupplier;
 import org.jfree.chart.renderer.category.BarRenderer;
 import org.jfree.chart.title.LegendTitle;
 import org.jfree.chart.title.TextTitle;
@@ -73,7 +78,19 @@ public class TypeStatistics extends JFrame {
 		Font titleFont = new Font("BM Dohyeon", Font.PLAIN, 20); // 원하는 폰트 및 스타일 설정
 		chartTitle.setFont(titleFont);
 
+		// CategoryPlot object 가져오기
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
+		
+		DefaultDrawingSupplier supplier = new DefaultDrawingSupplier(
+			    new Paint[] {Color.blue}, // 시리즈의 색상
+			    new Paint[] {Color.BLACK}, // 아웃라인의 색상
+			    new Stroke[] {new BasicStroke(1.0f)}, // 시리즈의 선 스타일
+			    new Stroke[] {new BasicStroke(1.0f)}, // 아웃라인의 선 스타일
+			    DefaultDrawingSupplier.DEFAULT_SHAPE_SEQUENCE // 아이템의 모양
+			);
+		
+		// plot에 DrawingSupplier를 설정하기
+		plot.setDrawingSupplier(supplier);
 
 		// 차트 렌더러(Renderer)를 가져와서 값 표시 설정, 바 위에 숫자를 추가해주기 위해 필요
 		BarRenderer renderer = (BarRenderer) plot.getRenderer();
