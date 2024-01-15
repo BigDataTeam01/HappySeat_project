@@ -156,7 +156,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	}
 	private JLabel getLbl_movie_poster() {
 		if (lbl_movie_poster == null) {
-			lbl_movie_poster = new JLabel("사진넣을곳");
+			lbl_movie_poster = new JLabel("");
 			lbl_movie_poster.setBounds(171, 181, 230, 240);
 		}
 		return lbl_movie_poster;
@@ -198,14 +198,14 @@ public class Page10_ConfirmSeat extends JDialog {
 	}
 	private JLabel getLblscr_start_time_data() {
 		if (lblscr_start_time_data == null) {
-			lblscr_start_time_data = new JLabel("상영시간 넣을공간");
+			lblscr_start_time_data = new JLabel("");
 			lblscr_start_time_data.setBounds(423, 309, 200, 30);
 		}
 		return lblscr_start_time_data;
 	}
 	private JLabel getLblseat_code_data() {
 		if (lblseat_code_data == null) {
-			lblseat_code_data = new JLabel("좌석넣을 공간");
+			lblseat_code_data = new JLabel("");
 			lblseat_code_data.setBounds(423, 377, 200, 30);
 		}
 		return lblseat_code_data;
@@ -213,21 +213,21 @@ public class Page10_ConfirmSeat extends JDialog {
 	
 	private JLabel getLblmovie_title_data() {
 		if (lblmovie_title_data == null) {
-			lblmovie_title_data = new JLabel("영화 :");
+			lblmovie_title_data = new JLabel("");
 			lblmovie_title_data.setBounds(460, 193, 180, 30);
 		}
 		return lblmovie_title_data;
 	}
 	private JLabel getLblcinema_branch_data() {
 		if (lblcinema_branch_data == null) {
-			lblcinema_branch_data = new JLabel("장소 :");
+			lblcinema_branch_data = new JLabel("");
 			lblcinema_branch_data.setBounds(460, 221, 180, 30);
 		}
 		return lblcinema_branch_data;
 	}
 	private JLabel getLblscr_scroom_name_data() {
 		if (lblscr_scroom_name_data == null) {
-			lblscr_scroom_name_data = new JLabel("상영관 :");
+			lblscr_scroom_name_data = new JLabel("");
 			lblscr_scroom_name_data.setBounds(470, 250, 170, 30);
 		}
 		return lblscr_scroom_name_data;
@@ -272,7 +272,7 @@ public class Page10_ConfirmSeat extends JDialog {
 		
 		
 		for(int i = 0; i < ShareVar.sumOfPersonNumbers; i++) {	 
-			lblseat_code_data.setText(ShareVar.selectedSeatSeq.get(i).toString());
+			lblseat_code_data.setText(ShareVar.selectedSeatSeq.toString() + "석");
 		}
 		
 		
@@ -288,7 +288,7 @@ public class Page10_ConfirmSeat extends JDialog {
 		// img 에 이미지를 담는다.
 		Image img = icon.getImage();
 		// 이미지 사이즈 조절
-		Image changeImg = img.getScaledInstance(319, 390, Image.SCALE_SMOOTH);
+		Image changeImg = img.getScaledInstance(220, 250, Image.SCALE_SMOOTH);
 		// 변경된 이미지를 다시 icon 에 담는다.
 		ImageIcon changeIcon = new ImageIcon(changeImg);
 		poster.setIcon(changeIcon);
