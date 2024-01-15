@@ -119,7 +119,7 @@ public class MovieMonthSalesStatus extends JFrame {
 			for (int j = 0; j < dto.size(); j++) {
 				String month1 = dto.get(j).getResv_date().substring(3, 5);	// DB에서 월만 가져옴
 				if (month1.equals(month)) {
-					sumPrice += dto.get(j).getTicket_price();				// 같을 경우 sumPrice에 티켓가격 추가
+					sumPrice += dto.get(j).getTicket_price() / 1000;				// 같을 경우 sumPrice에 티켓가격 추가
 				}
 			}
 			dataset.addValue(sumPrice, "이번년도", month + "월");
@@ -131,7 +131,7 @@ public class MovieMonthSalesStatus extends JFrame {
 	private JFreeChart createChart(CategoryDataset dataset) {
 		return ChartFactory.createBarChart("월별 매출 현황", // 차트 제목
 				"", // X 축 레이블
-				"만원", // Y 축 레이블
+				"천원", // Y 축 레이블
 				dataset // 데이터셋
 		);
 	}
