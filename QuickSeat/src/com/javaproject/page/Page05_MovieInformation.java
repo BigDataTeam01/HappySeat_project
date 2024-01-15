@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 import com.javaproject.base.ShareVar;
 import com.javaproject.kioskFunction.BackSplashTimer;
+import com.javaproject.kioskFunction.ButtonDesign_ver1;
 import com.javaproject.kioskFunction.Dao_PJH;
 import com.javaproject.kioskFunction.Dto_PJH;
 
@@ -195,6 +196,7 @@ public class Page05_MovieInformation extends JDialog{
 			}
 		});
 		contentPanel.add(getBtnNewButton());
+		contentPanel.add(getBtnNewButton_plot());
 
 		lblMovieTitle = new JLabel("영화 :");
 		lblMovieTitle.setFont(new Font("Lucida Grande", Font.PLAIN, 19));
@@ -286,7 +288,7 @@ public class Page05_MovieInformation extends JDialog{
 		
 		lblMovieDesc_data = new JLabel("");
 		lblMovieDesc_data.setFont(new Font("Lucida Grande", Font.PLAIN, 19));
-		lblMovieDesc_data.setBounds(403, 357, 350, 100);
+		lblMovieDesc_data.setBounds(469, 324, 320, 20);
 		contentPanel.add(lblMovieDesc_data);
 		
 		
@@ -309,23 +311,21 @@ public class Page05_MovieInformation extends JDialog{
 	
 
 	
-	/// Functions
-	
+	/// Functions	
 	private JButton getBtnNewButton() {
-		if (btnNewButton == null) {
-			btnNewButton = new mybutton("영화 선택",new Color(183, 216, 107));
-			btnNewButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 68));
-			btnNewButton.setBounds(436, 458, 292, 92);
-			btnNewButton.addMouseListener(new MouseAdapter() {
-				@Override
-				public void mouseClicked(MouseEvent e) {
-					goSelectCinema();
-				}
-			});
-			
+	ButtonDesign_ver1 customButton = new ButtonDesign_ver1("영화 선택", ShareVar.btnFillColor);
+	customButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 68));
+	customButton.setForeground(ShareVar.btnTextColor);
+	customButton.setBounds(436, 458, 292, 92);
+	customButton.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseClicked(MouseEvent e) {
+			goSelectCinema();
 		}
-		return btnNewButton;
-	}
+	});
+	return customButton;
+}
+	
 	// Go selectCinema
 	public void goSelectCinema() {
 		
@@ -410,6 +410,19 @@ public class Page05_MovieInformation extends JDialog{
 //		file.delete();
 
 	}
+	private JButton getBtnNewButton_plot() {
+		ButtonDesign_ver1 customButton = new ButtonDesign_ver1("줄거리보기", ShareVar.btnFillColor);
+		customButton.setFont(new Font("BM Dohyeon", Font.PLAIN, 18));
+		customButton.setForeground(ShareVar.btnTextColor);
+		customButton.setBounds(689, 356, 100, 60);
+		customButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				goPlot();
+			}
+		});
+		return customButton;
+	}
 	// splash Class로 돌아가기
 
 	public void backSplashTimeEnd() {
@@ -421,6 +434,13 @@ public class Page05_MovieInformation extends JDialog{
 	public void stopTimer() {
 		 
 		backSplashTimer.stop();
+		
+	}
+	
+	public void goPlot() {
+		Page05_1_Movie_Plot movie_plot = new Page05_1_Movie_Plot();
+		
+		movie_plot.setVisible(true);
 		
 	}
 	
