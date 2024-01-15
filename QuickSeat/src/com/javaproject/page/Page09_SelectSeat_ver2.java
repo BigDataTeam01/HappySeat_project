@@ -390,14 +390,14 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		}
 	}
 	
-	private int countSelecteSeat(int EORseat) { // 좌석상태가 몇 개 변하였는지 세는 Method  
-		int count = 0;
-		while (EORseat > 0) {
-			count += (EORseat & 1);
-			EORseat = EORseat >> 1;
-		}
-		return count;
-	}
+//	private int countSelecteSeat(int EORseat) { // 좌석상태가 몇 개 변하였는지 세는 Method  
+//		int count = 0;
+//		while (EORseat > 0) {
+//			count += (EORseat & 1);
+//			EORseat = EORseat >> 1;
+//		}
+//		return count;
+//	}
 	
 	private boolean checkSelecte() {
 		boolean result = false;
