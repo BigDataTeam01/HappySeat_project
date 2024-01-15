@@ -2,6 +2,7 @@ package com.javaproject.base;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -134,7 +135,12 @@ public class ShareVar {
 	
 	// 각 인원분류별 할인 후의 가격
     public static int[] totalDiscountedPrice = new int[5];
+    
+    //
+    public static ArrayList<Integer> selectedSeatSeq = new ArrayList<Integer>();
 	
+    // Db에서 불러온 영화에 대한 좌석 현황 Code
+    public static StringBuilder dbSeatCode = new StringBuilder("");
 	
 	
 	// constructor
@@ -183,6 +189,8 @@ public class ShareVar {
 		for (int i = 0; i < personNumbers.length; i++) {
 			totalDiscountedPrice[i] = 0;        	
 		}
+		
+		selectedSeatSeq.removeAll(selectedSeatSeq);
 
 
 

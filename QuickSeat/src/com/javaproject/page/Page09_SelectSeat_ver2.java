@@ -11,6 +11,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,10 +30,9 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	
 	// Field
 	private Timer timer; // 좌석코드를 불러오는 주기.
-	
 	private static final long serialVersionUID = 1L;
 	private JButton[][] seatArray; // 생성되는 좌석들의 배열
-	private boolean[][] seatStatus; // 좌석들의 현재 상태( 예약됨 -> 1 , 비어있음 ->0)
+	private boolean[][] seatStatus;
 
 	private JPanel contentPanel = new JPanel();
 	private JLabel lbl_background;
@@ -46,8 +46,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 	int columnsOfSeats = 4; // column number
 	
-	
-	
 	public static void main(String[] args) {
 		try {
 			Page09_SelectSeat_ver2 dialog = new Page09_SelectSeat_ver2();
@@ -56,29 +54,10 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-//		dialog.timer = new Timer();
-
-		// timer thread 를 생성
-//		TimerTask task = new TimerTask() {
-//			@Override
-//			public void run() { // 위에있는 run 을 오버라이드로 수정하는 코드
-//				// getCurrentSeatCode 메소드를 백그라운드에서 실행
-//				Thread backgroundThread = new Thread(new SeatUpdateRunnable(dialog)); // dialog 는 이페이지 전체임.
-//				backgroundThread.start(); // 스레드 시작
-//			}
-//		};
-		
-//		SwingUtilities.invokeLater(() -> {
-//		});
-		
-//		dialog.timer.scheduleAtFixedRate(task,0,2000); // 2초마다 실행 (예시)
 	}
 
-
 	public Page09_SelectSeat_ver2() {
-		System.out.println("1");
 		createSeat();
-		// setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		this.setTitle("좌석선택");
 		this.getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -109,8 +88,9 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		public void run() {
 			getCurrentSeatCode();
 			loadSeat();
-			System.out.println(selectSeatCode);
-			System.out.println(seatCode);
+			ShareVar.dbSeatCode = seatCode;
+			System.out.println("selectSeatCode : " + selectSeatCode);
+			System.out.println("seatCode : " + seatCode);
 			System.out.println("새로고침");
 		}
 	}
@@ -180,6 +160,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 			// 0 -> 1 , 즉 선택가능한 좌석을 선택을 하였을 때,
 			if (seatStatus[row][col]) {
+
 				// DB에서 불러온 코드와 사용자가 선택한 코드를 EOR, 변화 된 좌석은 1, 변화하지 않으면 0 
 				eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
 				// changeCount : 사용자가 선택을 한 좌석 갯수 
@@ -188,11 +169,11 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 					JOptionPane.showMessageDialog(null, ShareVar.sumOfPersonNumbers + "명을 초과할 수 없습니다.");
 					return;
 				}
-
 				seatArray[row][col].setIcon(new ImageIcon(
 						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/SelectedSeat.png")));
 
 				selectSeatCode.setCharAt(row * columnsOfSeats + col, '1');
+				
 
 			}
 			
@@ -270,8 +251,11 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				public void mouseClicked(MouseEvent e) {
 					if(checkSelecte() == true) {
 						System.out.println("Db 업데이트 코드 : " + selectSeatCode);
+						ShareVar.selectedSeatSeq = changedSeatIndices(eorSeatCode);
 						updateSeatCodeAction();
 						goConfirmSeat();
+						System.out.println("ShareVar 저장 : " + ShareVar.selectedSeatSeq);
+						System.out.println("ShareVar dbSeatCode : " + ShareVar.dbSeatCode);
 					}}});
 		}
 		return btnSeatConfirm;
@@ -419,5 +403,20 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 		BackSplashTimer backSplashTimer = new BackSplashTimer(300, this);
 	}
 
+	private ArrayList<Integer> changedSeatIndices(int eorCode) {
+	    ArrayList<Integer> changedIndices = new ArrayList<>();
+
+	    int index = 0;
+	    while (eorCode > 0) {
+	        if ((eorCode & 1) == 1) {
+	            changedIndices.add(seatCode.length()-index);
+	        }
+
+	        eorCode = eorCode >> 1;
+	        index++;
+	    }
+
+	    return changedIndices;
+	}
 
 }// End
