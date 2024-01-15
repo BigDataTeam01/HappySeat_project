@@ -26,6 +26,8 @@ import java.util.ArrayList;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Page10_ConfirmSeat extends JDialog {
 
@@ -72,6 +74,12 @@ public class Page10_ConfirmSeat extends JDialog {
 	 * Create the dialog.
 	 */
 	public Page10_ConfirmSeat() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowActivated(WindowEvent e) {
+				showMyTicket();
+			}
+		});
 		setTitle("좌석 확정");
 		setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		getContentPane().setLayout(new BorderLayout());
@@ -101,6 +109,9 @@ public class Page10_ConfirmSeat extends JDialog {
 		contentPanel.add(getLblscr_start_time_data());
 		contentPanel.add(getLblseat_code_data());
 		contentPanel.add(getLbl_movie_poster());
+		contentPanel.add(getLblmovie_title_data());
+		contentPanel.add(getLblcinema_branch_data());
+		contentPanel.add(getLblscr_scroom_name_data());
 		
 		JLabel lblNewLabel_3 = new JLabel("");
 		lblNewLabel_3.setIcon(new ImageIcon(Page10_ConfirmSeat.class.getResource("/com/javaproject/image/SeatConfirmBack.png")));
@@ -128,9 +139,6 @@ public class Page10_ConfirmSeat extends JDialog {
 				new ImageIcon(Page10_ConfirmSeat.class.getResource("/com/javaproject/image/[QuickSeat]kiosk_background.png")));
 		lbl_backGround.setBounds(0, 0, 800, 600);
 		contentPanel.add(lbl_backGround);
-		contentPanel.add(getLblmovie_title_data());
-		contentPanel.add(getLblcinema_branch_data());
-		contentPanel.add(getLblscr_scroom_name_data());
 	}
 	private JLabel getLblNewLabel() {
 		if (lblNewLabel == null) {
@@ -256,9 +264,16 @@ public class Page10_ConfirmSeat extends JDialog {
 		ArrayList<Dto_confirmSeat> dtolist = dao.showMyTicket();
 		lblmovie_title_data.setText(dtolist.get(0).getMovie_title().toString());
 		lblcinema_branch_data.setText(dtolist.get(0).getCinema_branch());
+		lblscr_scroom_name_data.setText(dtolist.get(0).getScr_scroom_name());
 		lblscr_start_time_data.setText(dtolist.get(0).getScr_start_time());
 		imageInsert(lbl_movie_poster, ShareVar.filename);
 		
+		
+		
+		
+		for(int i = 0; i < ShareVar.sumOfPersonNumbers; i++) {	 
+			lblseat_code_data.setText(ShareVar.selectedSeatSeq.get(i).toString());
+		}
 		
 		
 		
