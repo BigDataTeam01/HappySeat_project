@@ -243,7 +243,7 @@ public class Page10_ConfirmSeat extends JDialog {
 	// 이전으로 돌아가는 기능 구현
 	private void goToBack() {
 		Page09_SelectSeat_ver2 SelectSeatdialog = new Page09_SelectSeat_ver2();
-		
+		ShareVar.clickCount = ShareVar.selectedSeatSeq.size();
 		Dao_confirmSeat dao = new Dao_confirmSeat();
 		dao.revertSeatStatus();
 		

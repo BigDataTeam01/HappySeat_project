@@ -32,7 +32,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	private Timer timer; // 좌석코드를 불러오는 주기.
 	private static final long serialVersionUID = 1L;
 	private JButton[][] seatArray; // 생성되는 좌석들의 배열
-	private boolean[][] seatStatus;
+	private static boolean[][] seatStatus;
 
 	private JPanel contentPanel = new JPanel();
 	private JLabel lbl_background;
@@ -43,7 +43,6 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	private static StringBuilder seatCode = new StringBuilder("");
 	private static StringBuilder selectSeatCode = new StringBuilder("");
 	private static int eorSeatCode = 0;
-	private static int clickcount = 0;
 
 	int columnsOfSeats = 4; // column number
 	
@@ -59,7 +58,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 	}
 
 	public Page09_SelectSeat_ver2() {
-		clickcount = 0;
+//		ShareVar.clickCount = 0;
 		createSeat();
 		this.setBounds(ShareVar.kiosk_loc_x, ShareVar.kiosk_loc_y, ShareVar.kiosk_width, ShareVar.kiosk_hight);
 		this.setTitle("좌석선택");
@@ -160,6 +159,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 			
 			// 좌석 상태 토글
 			seatStatus[row][col] = !seatStatus[row][col];
+			System.out.println(seatStatus[row][col]);
 
 			// 0 -> 1 , 즉 선택가능한 좌석을 선택을 하였을 때,
 			if (seatStatus[row][col]) {
@@ -171,11 +171,12 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				// DB에서 불러온 코드와 사용자가 선택한 코드를 EOR, 변화 된 좌석은 1, 변화하지 않으면 0 
 				eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
 				
-				clickcount++;
+				ShareVar.clickCount++;
 				
-				System.out.println("맨처음 : "+clickcount);
+				System.out.println("맨처음 : "+ShareVar.clickCount);
+				seatStatus[row][col] = true;
 				
-				if(ShareVar.sumOfPersonNumbers < clickcount) {
+				if(ShareVar.sumOfPersonNumbers < ShareVar.clickCount) {
 					JOptionPane.showMessageDialog(null, ShareVar.sumOfPersonNumbers + "명을 초과할 수 없습니다.");
 					
 					seatArray[row][col].setIcon(new ImageIcon(
@@ -185,7 +186,10 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 
 					eorSeatCode = Integer.parseInt(seatCode.toString(), 2) ^ Integer.parseInt(selectSeatCode.toString(), 2);
 				
-					System.out.println("if 안에 : "+clickcount);
+					System.out.println("if 안에 : "+ShareVar.clickCount);
+					
+					ShareVar.clickCount--;
+					seatStatus[row][col] = false;
 				}
 				
 			}
@@ -196,7 +200,8 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				seatArray[row][col].setIcon(new ImageIcon(
 						Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotselectedSeat.png")));
 				
-				clickcount--;
+				ShareVar.clickCount--;
+				seatStatus[row][col] = false;
 			}
 		}
 
@@ -222,6 +227,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 				@Override
 				public void mouseClicked(MouseEvent e) {
 					goPreviousPage();
+					ShareVar.clickCount = 0;
 				}
 			});
 			lbl_previousPage.setIcon(
@@ -375,11 +381,13 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(
 							Page09_SelectSeat_ver2.class.getResource("/com/javaproject/image/NotSelectedSeat.png")));
 					seatArray[rowSeat][colSeat].setEnabled(true);
+					seatStatus[rowSeat][colSeat] = false;
 					try {
 						if (selectSeatCode.charAt(rowSeat * columnsOfSeats + colSeat) == '1') {
 							seatArray[rowSeat][colSeat].setIcon(new ImageIcon(Page09_SelectSeat_ver2.class
 									.getResource("/com/javaproject/image/SelectedSeat.png")));
 							seatArray[rowSeat][colSeat].setEnabled(true);
+							seatStatus[rowSeat][colSeat] = true;
 						}
 					} catch (Exception e) {
 						JOptionPane.showMessageDialog(null, "다시 시도해주세요. error : loadSeat");
@@ -390,6 +398,7 @@ public class Page09_SelectSeat_ver2 extends JDialog {
 					seatArray[rowSeat][colSeat].setIcon(new ImageIcon(Page09_SelectSeat_ver2.class
 							.getResource("/com/javaproject/image/alreadySelectedSeat70by70.png")));
 					seatArray[rowSeat][colSeat].setEnabled(false);
+					seatStatus[rowSeat][colSeat] = true;
 				}
 			}
 		}
