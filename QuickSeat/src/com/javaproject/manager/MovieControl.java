@@ -197,7 +197,7 @@ public class MovieControl extends JDialog {
 		getContentPane().add(lblNewLabel_1_6_1);
 		
 		tfPosterPath = new JTextField();
-		tfPosterPath.setFont(new Font("배달의민족 도현", Font.PLAIN, 14));
+		tfPosterPath.setFont(new Font("BM Dohyeon", Font.PLAIN, 14));
 		tfPosterPath.setHorizontalAlignment(SwingConstants.CENTER);
 		tfPosterPath.setColumns(10);
 		tfPosterPath.setBounds(245, 363, 105, 21);
@@ -558,7 +558,7 @@ public class MovieControl extends JDialog {
 		boolean result = dao.movieUpdateAction();
 		
 		if(result == true) {
-			JOptionPane.showMessageDialog(null, "영화 '"+ tfMovieTitle.getText().trim() + "'가 정상적으로 수정되었습니다.");
+			JOptionPane.showMessageDialog(null, "영화 '"+ tfMovieTitle.getText().trim() + "'이(가) 정상적으로 수정되었습니다.");
 		}
 		else {
 			JOptionPane.showMessageDialog(null, "입력 중 문제가 발생하였습니다.");
