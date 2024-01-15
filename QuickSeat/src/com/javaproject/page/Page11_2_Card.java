@@ -163,7 +163,7 @@ public class Page11_2_Card extends JDialog {
 		contentPanel.add(tfPriceToPay);
 		tfPriceToPay.setColumns(10);
 		// SHAREVAR 에서 최종 할인된 금액의 합계를 가져옵니다. 
-		tfPriceToPay.setText(Integer.toString(totalDiscountedPrice));
+		tfPriceToPay.setText(Integer.toString(ShareVar.totalPrice) );
 
 		
 		
@@ -172,14 +172,17 @@ public class Page11_2_Card extends JDialog {
 		lblImageCardInsert.setBounds(43, 312, 414, 249);
 		contentPanel.add(lblImageCardInsert);
 
-		JLabel lblNewLabel_4 = new JLabel(""); // ㅠ향후 버튼 체인지 
+		JLabel lblNewLabel_4 = new JLabel(""); // 향후 버튼 체인지 
 		lblNewLabel_4.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				goToPaymentConfirm();
 				
-				ShareVar.totalPrice = Integer.toString(totalDiscountedPrice);
-
+				ShareVar.totalPrice = totalDiscountedPrice;
+				
+				Dao_PJH dao = new Dao_PJH();
+				dao.insertCustomerInfo();
+				
 				// 사람분류 인원수 확인(배열안이 인트값이라서 하나씩 출력해야함)
 				System.out.print("총 할인 금액: [");
 				for (int i = 0; i < ShareVar.personCategory.length; i++) {
@@ -239,7 +242,7 @@ public class Page11_2_Card extends JDialog {
 	}
 
 	// 각 인원수별 할인된 영화가격을 배열에 저장(
-	private int[] calcFinalPriceArray(int[] personCategory, int[] discountRatesArray, int originalPrice) {
+	private int[] calcFinalPriceArray(int[] personCategory, double[] discountRatesArray, int originalPrice) {
 		
 		
 		//인원수를 가져와서 그에 맞게 할인가 배열을 만들어줌. 
@@ -251,11 +254,13 @@ public class Page11_2_Card extends JDialog {
 			
 			
 			System.out.println(discountRatesArray[i]);
-			
-			double ratedPrice = 1-(double) (discountRatesArray[i]/100.00);
-			
-			
-			finalPricesArray[i] = (int) ratedPrice * originalPrice;
+			double ratedPrice = 1 - (double) (discountRatesArray[i] / 100.00);
+			finalPricesArray[i] = (int) (ratedPrice * originalPrice);
+
+//			double ratedPrice = 1-(double) (discountRatesArray[i]/100.00);
+//			
+//			
+//			finalPricesArray[i] = (int) ratedPrice * originalPrice;
 					
 
 		}
@@ -271,6 +276,8 @@ public class Page11_2_Card extends JDialog {
 			totalPrice += finalPricesArray[i];
 		}
 		System.out.println(String.format("total price : ",totalPrice ));
+		ShareVar.totalPrice= totalPrice;
 		return totalPrice;
+		
 	}
 }// END
