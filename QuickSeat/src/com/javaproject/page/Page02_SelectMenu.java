@@ -80,7 +80,7 @@ public class Page02_SelectMenu extends JDialog {
 				backSplashTimeEnd();
 			}
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowDeactivated(WindowEvent e) {
 				stopTimer();
 			}
 			

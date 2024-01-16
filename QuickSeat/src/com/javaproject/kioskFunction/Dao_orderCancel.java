@@ -60,10 +60,12 @@ public class Dao_orderCancel {
 	public ArrayList<Dto_orderCancel> reserv_ticket (){
 		ArrayList<Dto_orderCancel> dto = new ArrayList<Dto_orderCancel>();
 
-		String where1 = "select m.movie_title , m.poster , s.scr_start_time , s.scr_scroom_name , r.cinema_branch , v.ticket_number ";
-		String where2 = " from screen as s, movie as m , screening_room as r , reserve as v"
-						+ "where m.movie_title = s.scr_movie_title and scr_movie_title = '" + ShareVar.selectedMovieTitle + "'" + " and ticket_number = " + ShareVar.insertedOrderNum;
-		
+		String where1 = "select m.movie_title , m.poster , s.scr_start_time , s.scr_scroom_name , r.cinema_branch , v.ticket_number, v.seat_order";
+		String where2 = " from screen as s, movie as m , screening_room as r , reserve as v "
+						+ "where m.movie_title = s.scr_movie_title" + " and ticket_number = " + ShareVar.insertedOrderNum + " and v.resv_scr_scroom_name = r.scroom_name"
+								+" and m.movie_title = v.resv_scr_movie_title"
+								+" and s.scr_code = v.resv_scr_code";
+		System.out.println(where1 + where2);
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
@@ -77,6 +79,7 @@ public class Dao_orderCancel {
 				String wkScr_scroom_name = rs.getString(4);
 				String wkcinema_branch = rs.getString(5);
 				String wkreserv_ticket = rs.getString(6);
+				String wkseat_order = rs.getString(7);
 				
 				// file
 				Poster = Poster + 1;
@@ -89,7 +92,7 @@ public class Dao_orderCancel {
 					output.write(buffer);
 				}
 
-				Dto_orderCancel dto_orderCancel = new Dto_orderCancel(wkMovie_title, poster, wkcinema_branch, wkScr_scroom_name, wkScr_start_time, wkScr_scroom_name, wkScr_start_time , wkreserv_ticket);
+				Dto_orderCancel dto_orderCancel = new Dto_orderCancel(wkMovie_title, poster, wkcinema_branch, wkScr_scroom_name, wkScr_start_time, wkScr_scroom_name, wkScr_start_time , wkreserv_ticket, wkseat_order);
 
 				dto.add(dto_orderCancel);
 			}
@@ -102,28 +105,13 @@ public class Dao_orderCancel {
 
 		return dto;
 	}
-
 	
-	public void revertSeatStatus() {
-		PreparedStatement ps = null;
+	private void deleteAction() {
 		
-		String where1 = "Update screen set seat_resv_code = '" + ShareVar.dbSeatCode + "'";
-		String where2 = " where scr_code = " + ShareVar.scr_code;
 		
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn_mysql = DriverManager.getConnection(url_mysql, id_mysql, pw_mysql);
-			
-			ps = conn_mysql.prepareStatement(where1+where2);
-			ps.executeUpdate();
-			
-			conn_mysql.close();
-			
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "업데이트 중 문제발생");
-		}
+		
 	}
-	
+
 	
 	
 	

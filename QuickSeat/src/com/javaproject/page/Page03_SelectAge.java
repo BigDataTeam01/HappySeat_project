@@ -77,7 +77,7 @@ public class Page03_SelectAge extends JDialog {
 				backSplashTimeEnd();
 			}
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowDeactivated(WindowEvent e) {
 				stopTimer();
 			}
 		});
