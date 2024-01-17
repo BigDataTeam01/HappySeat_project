@@ -51,7 +51,7 @@ public class MovieDaySalesStatus extends JFrame {
 
 	public MovieDaySalesStatus() {
 		
-		setBounds(ShareVar.managerXlocation+200, ShareVar.managerYlocation-100, ShareVar.managerXsize, ShareVar.managerYsize);
+		setBounds(ShareVar.managerXlocation+200, ShareVar.managerYlocation-100, ShareVar.managerXsize + 30, ShareVar.managerYsize);
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -125,17 +125,17 @@ public class MovieDaySalesStatus extends JFrame {
  
 		for(int i = daysInMonth-1; i >= 0; i--) {
 			int date = daysInMonth-i;
-			String day = ShareVar.month + "-" + Integer.toString(date);
+			String day = String.format("%02d", date);
 			int sumPrice = 0;
 			
 			// 가져온 day와 현재 day가 일치할 경우 sumPrice에 가격 추가
 			for(int j = 0; j < dto.size(); j++) {
-				String day1 = dto.get(j).getResv_date().substring(3,8);
+				String day1 = dto.get(j).getResv_date().substring(6,8);
 				if(day1.equals(day)) {
-					sumPrice += dto.get(j).getTicket_price();
+					sumPrice += dto.get(j).getTicket_price() / 1000;
 				}
 			}
-			dataset.addValue(sumPrice, "이번년도", Integer.toString(date));
+			dataset.addValue(sumPrice, "이번년도", day);
 		}
 
 		return dataset;
@@ -144,7 +144,7 @@ public class MovieDaySalesStatus extends JFrame {
 	private JFreeChart createChart(CategoryDataset dataset) {
 		return ChartFactory.createBarChart("일별 매출 현황", // 차트 제목
 				"", // X 축 레이블
-				"만원", // Y 축 레이블
+				"천원", // Y 축 레이블
 				dataset // 데이터셋
 		);
 	}

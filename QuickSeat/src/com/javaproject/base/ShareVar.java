@@ -43,8 +43,8 @@ public class ShareVar {
 	public static int managerYsize = 600;
 
 	// manager page gui location
-	public static int managerXlocation = 655;
-	public static int managerYlocation = 250;
+	public static int managerXlocation = 450;
+	public static int managerYlocation = 100;
 	
 	///////////////0---------------------------------키오스크 관련 정보 ------------------/////////////
 	
